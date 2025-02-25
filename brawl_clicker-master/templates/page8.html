@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Клубы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="up_text_top">
+    <p>Топ игроков</p>
+</div>
+
+<div class="tabs">
+    <button onclick="window.location.href='/page5'" class="tab-button active" id="coins-tab">По Монетам</button>
+    <button onclick="window.location.href='/page8'" class="tab-button" id="club-tab">По Клубам</button>
+</div>
+
+ <div class="friend-list">
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Клуб - монеты</div>
+    </div>
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Клуб - монеты</div>
+    </div>
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Клуб - монеты</div>
+    </div>
+  </div>
+
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+    {% include '_nav.html' %}
+</body>
+</html>

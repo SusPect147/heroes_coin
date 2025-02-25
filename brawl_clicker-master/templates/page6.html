@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Герои</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="heroes-page"> <!-- Добавлен класс friends-page -->
+
+
+<p id="score"><span id="currentScore">0</span></p>
+<div class="coin">
+    <img src="/static/images/coin.png" alt="Монеты" width="80">
+</div>
+
+<nav class="shop_menu">
+        <ul>
+            <li class="shop_menu-item">
+                <a href="/page3">Особое</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/page6">Герои</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/upgrade">Улучшения</a>
+            </li>
+        </ul>
+    </nav>
+
+
+<div class="character-preview">
+<div class="preview" id="preview">
+  <img src="/static/images/croco.png" alt="Preview">
+  <p id="preview-name">Character 1</p>
+  <p id="character-description">Description of Character 1</p>
+</div>
+
+<div class="menu_char">
+  <div class="character" data-id="1" data-name="Character 1" data-img="/static/images/croco.png" data-description="Каждый приглашенный друг дает +1000 монет">
+    <img src="/static/images/croco.png" alt="Character 1">
+    <p>Character 1</p>
+  </div>
+  <div class="character" data-id="2" data-name="Character 2" data-img="/static/images/cot.png" data-description="Кот играет на гитаре, удваивая количество получаемых монет на 5 мин">
+    <img src="/static/images/cot.png" alt="Character 2">
+    <p>Character 2</p>
+  </div>
+  <div class="character" data-id="3" data-name="Character 3" data-img="/static/images/groot.png" data-description="Восстанавливает энергию на 10% быстрее">
+    <img src="/static/images/groot.png" alt="Character 3">
+    <p>Character 3</p>
+  </div>
+  <div class="character" data-id="4" data-name="Character 4" data-img="/static/images/golem.png" data-description="Голем Базя позволяет крутить рулетку 2 раза">
+    <img src="/static/images/golem.png" alt="Character 4">
+    <p>Character 4</p>
+  </div>
+  <div class="character" data-id="5" data-name="Character 5" data-img="/static/images/fire.png" data-description="Fire is a blazing warrior full of passion.">
+    <img src="/static/images/fire.png" alt="Character 5">
+    <p>Character 5</p>
+  </div>
+  <div class="character" data-id="6" data-name="Character 6" data-img="/static/images/water.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/water.png" alt="Character 6">
+    <p>Character 6</p>
+  </div>
+      <div class="character" data-id="7" data-name="Character 7" data-img="/static/images/tor.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/tor.png" alt="Character 7">
+    <p>Character 7</p>
+  </div>
+  <div class="character" data-id="0" data-name="Character 8" data-img="/static/images/witch.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/witch.png" alt="Character 8">
+    <p>Character 8</p>
+  </div>
+  <div class="character" data-id="9" data-name="Character 9" data-img="/static/images/pumpkin.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/pumpkin.png" alt="Character 9">
+    <p>Character 9</p>
+  </div>
+      <div class="character" data-id="10" data-name="Character 10" data-img="/static/images/ananas.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/ananas.png" alt="Character 10">
+    <p>Character 10</p>
+  </div>
+      <div class="character" data-id="11" data-name="Character 11" data-img="/static/images/frog.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/frog.png" alt="Character 11">
+    <p>Character 11</p>
+  </div>
+      <div class="character" data-id="12" data-name="Character 12" data-img="/static/images/ninja.png" data-description="Water is calm and adaptable, flowing through challenges.">
+    <img src="/static/images/ninja.png" alt="Character 12">
+    <p>Character 12</p>
+  </div>
+</div>
+    </div>
+<button id="select-button">Выбрать</button>
+
+
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_heroes.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_box.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Друзья</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="friends-page"> <!-- Добавлен класс friends-page -->
+
+<div class="invite-container">
+    <div class="coin-stack">
+        <img src="/static/images/coin.png" alt="Coins" class="coins">
+    </div>
+    <div class="invite-text">
+        <div class="title">Пригласить друга</div>
+        <div class="reward">
+            <img src="/static/images/coin.png" alt="Coin" class="coin-icon">
+            <span class="reward-amount">+5,000</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="up_text">
+    <p>Список ваших друзей</p>
+</div>
+
+  <div class="friend-list">
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Ник - уровень</div>
+    </div>
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Ник - уровень</div>
+    </div>
+    <div class="friend-card">
+      <img src="/static/images/colt_av.png" alt="Avatar">
+      <div class="friend-info">Ник - уровень</div>
+    </div>
+  </div>
+
+
+<div class="invitation-container">
+  <div class="header">
+    <h1>Ваши друзья</h1>
+    <h2 class="friends-count">0 ДРУЗЕЙ</h2>
+    <button class="how-it-works">Доход с друзей</button>
+  </div>
+</div>
+
+
+    <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>

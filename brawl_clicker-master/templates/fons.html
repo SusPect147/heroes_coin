@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фоны</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="heroes-page"> <!-- Добавлен класс friends-page -->
+
+<div class="icon-container">
+    <img src="/static/images/icon.png" alt="Иконка" width="75">
+</div>
+<p id="nick">Максим</p>
+
+<p id="score"><span id="currentScore">0</span></p>
+<div class="coin">
+    <img src="/static/images/coin.png" alt="Монеты" width="80">
+</div>
+
+
+
+<div class="dropdown">
+    <img src="/static/images/menu.png" alt="Меню" id="menu-icon">
+
+    <!-- Выпадающее меню -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#item1">Язык</a>
+        <a href="#item2">Как играть</a>
+        <a href="#item3">Аирдроп</a>
+        <a href="#item4">Тех поддержка</a>
+    </div>
+</div>
+
+
+<div class="menu_p3">
+    <a href="/page3" class="item">
+        <button class="menu-button">Ящики</button>
+    </a>
+    <a href="/page6" class="item">
+        <button class="menu-button">Герои</button>
+    </a>
+    <a href="/page7" class="item">
+        <button class="menu-button">Фоны</button>
+    </a>
+</div>
+
+
+<div class="background-container">
+  <div class="background-preview" id="background-preview">
+    <img src="/static/images/fon_1.png" alt="Preview" id="preview-image">
+    <p id="background-preview-name">Background 1</p>
+  </div>
+
+  <div class="background-menu">
+    <div class="background-option" data-id="1" data-name="Background 1" data-img="/static/images/fon_1.png">
+      <p>Background 1</p>
+    </div>
+    <div class="background-option" data-id="2" data-name="Background 2" data-img="/static/images/fon_2.png">
+      <p>Background 2</p>
+    </div>
+    <div class="background-option" data-id="3" data-name="Background 3" data-img="/static/images/fon_3.png">
+      <p>Background 3</p>
+    </div>
+    <div class="background-option" data-id="4" data-name="Background 4" data-img="/static/images/fon_4.png">
+      <p>Background 4</p>
+    </div>
+    <div class="background-option" data-id="5" data-name="Background 5" data-img="/static/images/fon_5.png">
+      <p>Background 5</p>
+    </div>
+    <div class="background-option" data-id="6" data-name="Background 6" data-img="/static/images/fon_6.png">
+      <p>Background 6</p>
+    </div>
+    <div class="background-option" data-id="7" data-name="Background 7" data-img="/static/images/fon_7.png">
+      <p>Background 7</p>
+    </div>
+    <div class="background-option" data-id="8" data-name="Background 8" data-img="/static/images/fon_8.png">
+      <p>Background 8</p>
+    </div>
+  </div>
+
+  <div class="background-buttons">
+    <button id="background-select-button">Выбрать</button>
+    <button id="background-reset-button">Сбросить фон</button>
+  </div>
+</div>
+
+
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_heroes.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_box.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>

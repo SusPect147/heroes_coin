@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="shop-page"> <!-- Добавлен класс friends-page -->
+
+<p id="score"><span id="currentScore">0</span></p>
+<div class="coin">
+    <img src="/static/images/coin.png" alt="Монеты" width="80">
+</div>
+
+
+<nav class="shop_menu">
+        <ul>
+            <li class="shop_menu-item">
+                <a href="/page3">Особое</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/page6">Герои</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/upgrade">Улучшения</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+<div class="shop_container">
+    <!-- Первая строка -->
+    <div class="shop_box">
+        <div class="shop_discount">ЛУЧШЕЕ</div> <!-- Добавлено для метки -->
+        <div class="shop_icon">
+            <img src="/static/images/box_1.png" alt="Сундук">
+        </div>
+        <h1>Сундук героя</h1>
+        <h2>здесь новый перс</h2>
+        <div class="shop_price">
+            <img src="/static/images/coin.png" alt="coin"> <span>10000</span>
+        </div>
+    </div>
+    <div class="shop_box_2">
+        <div class="shop_icon">
+            <img src="/static/images/box_1.png" alt="Сундук">
+        </div>
+        <h1>Сундук героя</h1>
+        <h2>здесь новый перс</h2>
+        <div class="shop_price">
+            <img src="/static/images/stars.png" alt="coin"> <span>100</span>
+        </div>
+    </div>
+    <div class="shop_box_3">
+        <div class="shop_icon">
+            <img src="/static/images/box_3.png" alt="Сундук">
+        </div>
+        <h1>Сундук героя</h1>
+        <h2>здесь новый перс</h2>
+        <div class="shop_price">
+            <img src="/static/images/stars.png" alt="coin"> <span>100</span>
+        </div>
+    </div>
+
+    <!-- Вторая строка -->
+    <div class="shop_box_4">
+        <div class="shop_icon">
+            <img src="/static/images/box_3.png" alt="Сундук">
+        </div>
+        <h1>Сундук мастера</h1>
+        <h2>содержит редкий лут</h2>
+        <div class="shop_price">
+            <img src="/static/images/coin.png" alt="coin"> <span>20000</span>
+        </div>
+    </div>
+    <div class="shop_box_5">
+        <div class="shop_icon">
+            <img src="/static/images/box_3.png" alt="Сундук">
+        </div>
+        <h1>Сундук мастера</h1>
+        <h2>содержит редкий лут</h2>
+        <div class="shop_price">
+            <img src="/static/images/stars.png" alt="coin"> <span>200</span>
+        </div>
+    </div>
+    <div class="shop_box_6">
+        <div class="shop_icon">
+            <img src="/static/images/box_3.png" alt="Сундук">
+        </div>
+        <h1>Сундук мастера</h1>
+        <h2>содержит редкий лут</h2>
+        <div class="shop_price">
+            <img src="/static/images/stars.png" alt="coin"> <span>200</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_box.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>

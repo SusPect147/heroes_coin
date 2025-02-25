@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Скины_2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="heroes-page"> <!-- Добавлен класс friends-page -->
+
+<div class="icon-container">
+    <img src="/static/images/icon.png" alt="Иконка" width="75">
+</div>
+<p id="nick">Максим</p>
+
+
+<div class="image-container">
+    <div class="image-item">
+        <span class="image-text">0</span>
+        <img src="/static/images/coin.png" alt="Картинка 1">
+    </div>
+    <div class="image-item">
+        <span class="image-text_2">0</span>
+        <img src="/static/images/bling.png" alt="Картинка 2">
+    </div>
+</div>
+<p id="score"><span id="currentScore">0</span></p>
+<div class="coin">
+    <img src="/static/images/coin.png" alt="Монеты" width="80">
+</div>
+
+
+<div class="dropdown">
+    <img src="/static/images/menu.png" alt="Меню" id="menu-icon">
+
+    <!-- Выпадающее меню -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#item1">Язык</a>
+        <a href="#item2">Как играть</a>
+        <a href="#item3">Аирдроп</a>
+        <a href="#item4">Тех поддержка</a>
+    </div>
+</div>
+
+
+<div class="menu_p3">
+    <a href="/page3" class="item">
+        <img src="/static/images/button_menu.png" width="110" alt="Image 1" class="image">
+    </a>
+    <a href="/page6" class="item">
+        <img src="/static/images/button_menu_2.png" width="110" alt="Image 2" class="image">
+    </a>
+    <a href="/page7" class="item">
+        <img src="/static/images/button_menu.png" width="110" alt="Image 3" class="image">
+    </a>
+</div>
+
+<div class="preview" id="preview">
+    <img src="/static/images/croco.png" alt="Preview">
+    <p id="preview-name">Character 1</p>
+  </div>
+  <div class="menu_char">
+    <div class="character" data-id="1" data-name="Character 1" data-img="/static/images/croco.png">
+      <img src="/static/images/croco.png" alt="Character 1">
+      <p>Character 1</p>
+    </div>
+    <div class="character" data-id="2" data-name="Character 2" data-img="/static/images/cot.png">
+      <img src="/static/images/cot.png" alt="Character 2">
+      <p>Character 2</p>
+    </div>
+    <div class="character" data-id="3" data-name="Character 3" data-img="/static/images/groot.png">
+      <img src="/static/images/groot.png" alt="Character 3">
+      <p>Character 3</p>
+    </div>
+    <div class="character" data-id="4" data-name="Character 4" data-img="/static/images/golem.png">
+      <img src="/static/images/golem.png" alt="Character 4">
+      <p>Character 4</p>
+    </div>
+    <div class="character" data-id="5" data-name="Character 5" data-img="/static/images/fire.png">
+      <img src="/static/images/fire.png" alt="Character 5">
+      <p>Character 5</p>
+    </div>
+    <div class="character" data-id="6" data-name="Character 6" data-img="/static/images/water.png">
+      <img src="/static/images/water.png" alt="Character 6">
+      <p>Character 6</p>
+    </div>
+    <div class="character" data-id="7" data-name="Character 7" data-img="https://via.placeholder.com/200">
+      <img src="https://via.placeholder.com/80" alt="Character 7">
+      <p>Character 7</p>
+    </div>
+    <div class="character" data-id="8" data-name="Character 8" data-img="https://via.placeholder.com/200">
+      <img src="https://via.placeholder.com/80" alt="Character 8">
+      <p>Character 8</p>
+    </div>
+    <div class="character" data-id="9" data-name="Character 9" data-img="https://via.placeholder.com/200">
+      <img src="https://via.placeholder.com/80" alt="Character 9">
+      <p>Character 9</p>
+    </div>
+  </div>
+
+
+<div class="menu_rare">
+    <button onclick="window.location.href='/page6'" class="menu-button">Редкие</button>
+    <button onclick="window.location.href='/page9'" class="menu-button">Премиум</button>
+    <button onclick="window.location.href='/page10'" class="menu-button">Эксклюзив</button>
+</div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_heroes.js') }}"></script>
+  <script src="{{ url_for('static', filename='script_box.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>
