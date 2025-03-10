@@ -182,59 +182,59 @@ window.updateClickButtonImage = (imgSrc) => {
       case 1:
         progressLabel.innerText = 'Ледяной мир';
         clicksPerLevel = 5;
-        backgroundImage = '/static/images/ice.png'; // Укажите путь к фону Серебряной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/ice.png'; // Укажите путь к фону Серебряной лиги
         break;
       case 2:
         progressLabel.innerText = 'Адский мир';
         clicksPerLevel = 6;
-        backgroundImage = '/static/images/ad.png'; // Укажите путь к фону Золотой лиги
+        backgroundImage = 'brawl_clicker-master/static/images/ad.png'; // Укажите путь к фону Золотой лиги
         break;
       case 3:
         progressLabel.innerText = 'Китай';
         clicksPerLevel = 7;
-        backgroundImage = '/static/images/china.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/china.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 4:
         progressLabel.innerText = 'Водный мир';
         clicksPerLevel = 8;
-        backgroundImage = '/static/images/water_world.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/water_world.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 5:
         progressLabel.innerText = 'Мистика';
         clicksPerLevel = 8;
-        backgroundImage = '/static/images/mystical.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/mystical.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 6:
         progressLabel.innerText = 'Кубический мир';
         clicksPerLevel = 10;
-        backgroundImage = '/static/images/minecraft.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/minecraft.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 7:
         progressLabel.innerText = 'Тьма';
         clicksPerLevel = 11;
-        backgroundImage = '/static/images/dark.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/dark.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 8:
         progressLabel.innerText = 'Космос';
         clicksPerLevel = 12;
-        backgroundImage = '/static/images/cosmos.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/cosmos.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 9:
         progressLabel.innerText = 'Темнота';
         clicksPerLevel = 13;
-        backgroundImage = '/static/images/dark_2.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/dark_2.png'; // Укажите путь к фону Алмазной лиги
         break;
       case 10:
         progressLabel.innerText = 'НЛО';
         clicksPerLevel = 14;
-        backgroundImage = '/static/images/plat.png'; // Укажите путь к фону Алмазной лиги
+        backgroundImage = 'brawl_clicker-master/static/images/plat.png'; // Укажите путь к фону Алмазной лиги
         break;
       default:
         progressLabel.innerText = 'Деревня';
         leagueLevel = 0;
         clicksPerLevel = 5;
-        backgroundImage = '/static/images/hogwarts.png';
-        labelBackground = '/static/images/hogwarts.png'; // Путь для фона прогресса
+        backgroundImage = 'brawl_clicker-master/static/images/hogwarts.png';
+        labelBackground = 'brawl_clicker-master/static/images/hogwarts.png'; // Путь для фона прогресса
     }
 
   // Устанавливаем фон с нужным размером
@@ -246,7 +246,7 @@ window.updateClickButtonImage = (imgSrc) => {
     progressLabel.style.backgroundSize = 'cover'; // Растягиваем фон
     progressLabel.style.backgroundPosition = 'center'; // Центрируем фон
   // Смещаем фон только если выбран фон Hogwarts или Ice
-  if (backgroundImage === '/static/images/hogwarts.png' || backgroundImage === '/static/images/ice.png') {
+  if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
     body.style.backgroundPosition = 'center calc(50% - 12vh)'; // Смещаем вниз на 12vh
   } else {
     body.style.backgroundPosition = 'center'; // Центрируем фон для других изображений
@@ -518,7 +518,7 @@ function createSpark() {
     const currentBackground = document.body.style.backgroundImage;
 
     // Проверяем, установлен ли нужный фон
-    if (currentBackground !== 'url("/static/images/ad.png")') {
+    if (currentBackground !== 'url("brawl_clicker-master/static/images/ad.png")') {
         return; // Прерываем выполнение функции, если фон не совпадает
     }
 
@@ -621,7 +621,7 @@ function animateSnow() {
 
 // Проверка, должен ли идти снег
 function isSnowEnabled() {
-    return getComputedStyle(document.body).backgroundImage.includes('/static/images/ice.png');
+    return getComputedStyle(document.body).backgroundImage.includes('brawl_clicker-master/static/images/ice.png');
 }
 
 // Следим за изменением фона
