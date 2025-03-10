@@ -1,4 +1,4 @@
-const dragonImageSrc = "/static/images/dragon.png";
+const dragonImageSrc = "brawl_clicker-master/static/images/dragon.png";
 let currentScore = 0;
 const currentScoreElement = document.querySelector(".currentScore");
 let dragonInterval;
@@ -6,7 +6,7 @@ let activeDragon = null;
 
 // Функция проверки, установлен ли фон Китая
 function isChinaBackground() {
-    return localStorage.getItem("backgroundImage") === "/static/images/china.png";
+    return localStorage.getItem("backgroundImage") === "brawl_clicker-master/static/images/china.png";
 }
 
 // Функция для появления дракона
