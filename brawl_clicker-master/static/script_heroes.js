@@ -16,21 +16,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Список героев с ID
   const heroes = [
-    { id: "1", img: "/static/images/croco.png", name: "Character 1" },
-    { id: "2", img: "/static/images/cot.png", name: "Character 2" },
-    { id: "3", img: "/static/images/groot.png", name: "Character 3" },
-    { id: "4", img: "/static/images/golem.png", name: "Character 4" },
-    { id: "5", img: "/static/images/fire.png", name: "Character 5" },
-    { id: "6", img: "/static/images/water.png", name: "Character 6" },
-    { id: "7", img: "/static/images/tor.png", name: "Character 7" },
-    { id: "8", img: "/static/images/witch.png", name: "Character 8" },
-    { id: "9", img: "/static/images/angel.png", name: "Character 9" },
-    { id: "10", img: "/static/images/ananas.png", name: "Character 10" },
-    { id: "11", img: "/static/images/frog.png", name: "Character 11" },
-    { id: "12", img: "/static/images/leon.png", name: "Character 12" },
-    { id: "13", img: "/static/images/syth.png", name: "Character 13" },
-    { id: "14", img: "/static/images/cat.png", name: "Character 14" },
-    { id: "15", img: "/static/images/minion.png", name: "Character 15" },
+    { id: "1", img: "brawl_clicker-master/static/images/croco.png", name: "Character 1" },
+    { id: "2", img: "brawl_clicker-master/static/images/cot.png", name: "Character 2" },
+    { id: "3", img: "brawl_clicker-master/static/images/groot.png", name: "Character 3" },
+    { id: "4", img: "brawl_clicker-master/static/images/golem.png", name: "Character 4" },
+    { id: "5", img: "brawl_clicker-master/static/images/fire.png", name: "Character 5" },
+    { id: "6", img: "brawl_clicker-master/static/images/water.png", name: "Character 6" },
+    { id: "7", img: "brawl_clicker-master/static/images/tor.png", name: "Character 7" },
+    { id: "8", img: "brawl_clicker-master/static/images/witch.png", name: "Character 8" },
+    { id: "9", img: "brawl_clicker-master/static/images/angel.png", name: "Character 9" },
+    { id: "10", img: "brawl_clicker-master/static/images/ananas.png", name: "Character 10" },
+    { id: "11", img: "brawl_clicker-master/static/images/frog.png", name: "Character 11" },
+    { id: "12", img: "brawl_clicker-master/static/images/leon.png", name: "Character 12" },
+    { id: "13", img: "brawl_clicker-master/static/images/syth.png", name: "Character 13" },
+    { id: "14", img: "brawl_clicker-master/static/images/cat.png", name: "Character 14" },
+    { id: "15", img: "brawl_clicker-master/static/images/minion.png", name: "Character 15" },
   ];
 
   // Функция для блокировки персонажей
