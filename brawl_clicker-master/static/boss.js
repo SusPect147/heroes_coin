@@ -14,16 +14,16 @@ let timerInterval;
 let gameStarted = false;
 
 const bosses = [
-    { health: 100, image: '/static/images/boss1.png', bgColor: '/static/images/theme_7.png', level: 1 },
-    { health: 200, image: '/static/images/spider.png', bgColor: '/static/images/theme_8.png', level: 2 },
-    { health: 300, image: '/static/images/pumpkin.png', bgColor: '/static/images/theme_9.png', level: 3 },
-    { health: 400, image: '/static/images/drako.png', bgColor: '/static/images/theme_10.png', level: 4 },
-    { health: 500, image: '/static/images/boss5.png', bgColor: '#000', level: 5 },
-    { health: 600, image: '/static/images/boss6.png', bgColor: '#000', level: 6 },
-    { health: 700, image: '/static/images/boss7.png', bgColor: '#000', level: 7 },
-    { health: 800, image: '/static/images/boss8.png', bgColor: '#000', level: 8 },
-    { health: 900, image: '/static/images/boss9.png', bgColor: '#000', level: 9 },
-    { health: 1000, image: '/static/images/boss10.png', bgColor: '#000', level: 10 },
+    { health: 100, image: 'brawl_clicker-master/static/images/boss1.png', bgColor: 'brawl_clicker-master/static/images/theme_7.png', level: 1 },
+    { health: 200, image: 'brawl_clicker-master/static/images/spider.png', bgColor: 'brawl_clicker-master/static/images/theme_8.png', level: 2 },
+    { health: 300, image: 'brawl_clicker-master/static/images/pumpkin.png', bgColor: 'brawl_clicker-master/static/images/theme_9.png', level: 3 },
+    { health: 400, image: 'brawl_clicker-master/static/images/drako.png', bgColor: 'brawl_clicker-master/static/images/theme_10.png', level: 4 },
+    { health: 500, image: 'brawl_clicker-master/static/images/boss5.png', bgColor: '#000', level: 5 },
+    { health: 600, image: 'brawl_clicker-master/static/images/boss6.png', bgColor: '#000', level: 6 },
+    { health: 700, image: 'brawl_clicker-master/static/images/boss7.png', bgColor: '#000', level: 7 },
+    { health: 800, image: 'brawl_clicker-master/static/images/boss8.png', bgColor: '#000', level: 8 },
+    { health: 900, image: 'brawl_clicker-master/static/images/boss9.png', bgColor: '#000', level: 9 },
+    { health: 1000, image: 'brawl_clicker-master/static/images/boss10.png', bgColor: '#000', level: 10 },
 ];
 
 let currentBossIndex = 0;
