@@ -90,10 +90,6 @@ window.updateClickButtonImage = (imgSrc) => {
   clickButton.onclick = async (event) => {
     if (window.energy >= energyCost) {
       try {
-        const response = await fetch('/click', { method: 'POST' });
-        const data = await response.json();
-
-        if (data.success) {
           let score = parseInt(currentScoreElement.innerText) || 0;
 
           // Используем актуальное значение window.coinsPerClick
