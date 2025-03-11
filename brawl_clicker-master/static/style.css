@@ -180,7 +180,7 @@ height: 155vh;
   position: absolute;
   width: 40px; /* Размер монеты */
   height: 40px; /* Размер монеты */
-  background-image: url('/static/images/coin.png'); /* Путь к картинке монеты */
+  background-image: url('brawl_clicker-master/static/images/coin.png'); /* Путь к картинке монеты */
   background-size: contain;
   background-repeat: no-repeat;
   animation: flyUp 2s ease-out forwards; /* Анимация движения монеты */
@@ -199,7 +199,7 @@ height: 155vh;
 
 @font-face {
     font-family: 'Pusia-bold';
-    src: url('/static/fonts/pusia-bold.ttf') format('truetype');
+    src: url('brawl_clicker-master/static/fonts/pusia-bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -1547,7 +1547,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/ghost_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/ghost_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: ghostAnimation 1s ease-out forwards;
@@ -1573,7 +1573,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/leaf.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/leaf.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: fireAnimation 1s ease-out forwards;
@@ -1598,7 +1598,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/stone_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/stone_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: stoneAnimation 1s ease-out forwards;
@@ -1623,7 +1623,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/fire_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/fire_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: fireAnimation 1s ease-out forwards;
@@ -1648,7 +1648,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/water_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/water_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: waterAnimation 1s ease-out forwards;
@@ -1673,7 +1673,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/god_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/god_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: godAnimation 1s ease-out forwards;
@@ -1698,7 +1698,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/magic_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/magic_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: magicAnimation 1s ease-out forwards;
@@ -1723,7 +1723,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/heart_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/heart_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: heartAnimation 1s ease-out forwards;
@@ -1748,7 +1748,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/ananas_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/ananas_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: ananasAnimation 1s ease-out forwards;
@@ -1774,7 +1774,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/frog_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/frog_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: frogAnimation 1s ease-out forwards;
@@ -1800,7 +1800,7 @@ html, body {
   position: absolute;
   width: 50px; /* Ширина эффекта */
   height: 50px; /* Высота эффекта */
-  background: url('/static/images/dark_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/dark_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: darkAnimation 1s ease-out forwards;
@@ -1853,7 +1853,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/fish_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/fish_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: fishAnimation 1s ease-out forwards;
@@ -1878,7 +1878,7 @@ html, body {
   position: absolute;
   width: 30px; /* Ширина эффекта */
   height: 30px; /* Высота эффекта */
-  background: url('/static/images/star_effect.png') no-repeat center center;
+  background: url('brawl_clicker-master/static/images/star_effect.png') no-repeat center center;
   background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
   pointer-events: none;
   animation: minionAnimation 1s ease-out forwards;
@@ -1930,7 +1930,7 @@ html, body {
 
 .butterfly {
     position: absolute;
-    background-image: url('/static/images/batterfly.png'); /* Изображение бабочки */
+    background-image: url('brawl_clicker-master/static/images/batterfly.png'); /* Изображение бабочки */
     background-size: cover;
     width: 30px; /* Размер бабочки */
     height: 30px; /* Размер бабочки */
