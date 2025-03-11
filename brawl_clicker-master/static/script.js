@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.updateClickButtonImage = (imgSrc) => {
   const clickButton = document.getElementById('clickButton');
   if (clickButton) {
-    clickButton.src = imgSrc;
+    clickButton.src = `brawl_clicker-master/static/images/${imgSrc}`; // Уточните путь здесь, если imgSrc — это только имя файла
   }
 };
 
