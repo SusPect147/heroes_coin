@@ -9,6 +9,7 @@ app = Flask(__name__, template_folder='templates')
 score = 0
 
 
+
 @app.route('/')
 def home():
     return render_template('page1.html')
