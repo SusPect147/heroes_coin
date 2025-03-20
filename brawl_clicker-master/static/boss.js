@@ -7,7 +7,7 @@ const levelText = document.getElementById('level-text');
 const finalMessage = document.getElementById('final-message');
 
 let maxHealth = 100;
-let currentHealth = maxHealth;
+let currentHealth = maxHealth; 
 let totalTime = 10;
 let timeLeft = totalTime;
 let timerInterval;
