@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     clickButton.src = savedCharacterImg;
   }
 
-window.updateClickButtonImage = (imgSrc) => {
-  const clickButton = document.getElementById('clickButton');
-  if (clickButton) {
-    const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
-    clickButton.src = cleanSrc;
-  }
-};
+  window.updateClickButtonImage = (imgSrc) => {
+    const clickButton = document.getElementById('clickButton');
+    if (clickButton) {
+      const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
+      clickButton.src = cleanSrc;
+    }
+  };
 
   window.updateCoinsPerClick = (newCoinsPerClick) => {
     window.coinsPerClick = newCoinsPerClick;
