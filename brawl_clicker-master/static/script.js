@@ -45,12 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     clickButton.src = savedCharacterImg;
   }
 
-  window.updateClickButtonImage = (imgSrc) => {
-    const clickButton = document.getElementById('clickButton');
-    if (clickButton) {
-      clickButton.src = `brawl_clicker-master/static/images/${imgSrc}`;
-    }
-  };
+window.updateClickButtonImage = (imgSrc) => {
+  const clickButton = document.getElementById('clickButton');
+  if (clickButton) {
+    const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
+    clickButton.src = cleanSrc;
+  }
+};
 
   window.updateCoinsPerClick = (newCoinsPerClick) => {
     window.coinsPerClick = newCoinsPerClick;
@@ -305,7 +306,7 @@ function createWaterEffect(event) {
   const y = event.clientY;
   water.style.left = `${x - 25}px`;
   water.style.top = `${y - 25}px`;
-  water.style.backgroundImage = 'brawl_clicker-master/static/images/water.png';
+  water.style.backgroundImage = 'url("brawl_clicker-master/static/images/water.png")';
   document.body.appendChild(water);
   setTimeout(() => {
     water.remove();
