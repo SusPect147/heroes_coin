@@ -4,7 +4,7 @@ body {
     height: 95vh;
     flex-direction: column;
     background-size: cover; /* Растянуть изображение на весь контейнер */
-    background-position: center; /* Центровка изображения */
+    background-position: center; /* Центровка изображения */ 
     background-repeat: no-repeat; /* Запрет на повторение изображения */
 }
 html {
