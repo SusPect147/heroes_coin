@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Улучшения</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="up_page">
+
+<p id="score"><span id="currentScore">0</span></p>
+<div class="coin">
+    <img src="/static/images/coin.png" alt="Монеты" width="80">
+</div>
+
+<nav class="shop_menu">
+        <ul>
+            <li class="shop_menu-item">
+                <a href="/page3">Особое</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/page6">Герои</a>
+            </li>
+            <li class="shop_menu-item">
+                <a href="/upgrade">Улучшения</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+<div class="container_up">
+  <div class="item_up">
+    <div class="item-icon">🤖</div>
+    <div class="item-info">
+      <p class="item-title">Кликер-бот</p>
+      <p class="item-details">2,000 / 1ч • Уровень 1</p>
+    </div>
+    <div class="item-action">></div>
+  </div>
+  <div class="item_up2">
+    <div class="item-icon">⚔️</div>
+    <div class="item-info">
+      <p class="item-title">Клик</p>
+      <p class="item-details">1 • Уровень 1</p>
+    </div>
+    <div class="item-action">></div>
+  </div>
+<div class="item_up3">
+  <div class="item-icon">⚡</div>
+  <div class="item-info">
+    <p class="item-title">Запас энергии</p>
+    <p class="item-details_3">100 • Уровень 1</p>
+  </div>
+  <div class="item-action">></div>
+</div>
+  <div class="item_up4">
+    <div class="item-icon">🔄</div>
+    <div class="item-info">
+      <p class="item-title">Скорость перезарядки</p>
+      <p class="item-details">100 • Уровень 1</p>
+    </div>
+    <div class="item-action">></div>
+  </div>
+</div>
+
+
+<div class="background">
+    <!-- Слой затемнения -->
+    <div class="overlay" style="display: none;"></div>
+
+    <!-- Окно -->
+    <div class="container_up_buy" style="display: none;">
+        <!-- Кнопка закрытия -->
+        <button class="close-button">&times;</button>
+
+        <!-- Картинка сверху -->
+        <div class="top-image">
+            <img src="/static/images/croco.png" alt="Символ" />
+        </div>
+
+        <div class="character_up_buy"></div>
+        <h1 class="title">АКТИВИРОВАТЬ<br>КЛИКЕР БОТА</h1>
+        <p class="description">
+            Приобретите зелье автоматизации, чтобы<br>
+            играть, пока спите.<br>
+            Бот будет кликать за вас
+        </p>
+        <div class="price_up_buy">
+            <!-- Картинка монеты -->
+            <img class="coin-icon" src="/static/images/coin.png" alt="Монета" />
+            <span class="coin">2,000</span>
+        </div>
+        <button class="upgrade-button">КУПИТЬ</button>
+    </div>
+</div>
+
+
+<div class="background">
+    <!-- Слой затемнения -->
+    <div class="overlay" style="display: none;"></div>
+
+    <!-- Окно -->
+    <div class="container_up_buy_2" style="display: none;">
+        <!-- Кнопка закрытия -->
+        <button class="close-button_2">&times;</button>
+
+        <!-- Картинка сверху -->
+        <div class="top-image">
+            <img src="/static/images/croco.png" alt="Символ" />
+        </div>
+
+        <div class="character_up_buy"></div>
+        <h1 class="title">КЛИК<br>ПО ЭКРАНУ<br></h1>
+        <p class="description">
+            Прокачайте свой клик, чтобы<br>
+            зарабатывать больше монет
+        </p>
+        <div class="price_up_buy">
+            <!-- Картинка монеты -->
+            <img class="coin-icon" src="/static/images/coin.png" alt="Монета" />
+            <span class="coin_up">1000</span>
+        </div>
+        <button class="upgrade-button_2">УЛУЧШИТЬ</button>
+    </div>
+</div>
+
+
+
+<div class="background">
+    <!-- Слой затемнения -->
+    <div class="overlay_3" style="display: none;"></div>
+
+    <!-- Окно -->
+    <div class="container_up_buy_3" style="display: none;">
+        <!-- Кнопка закрытия -->
+        <button class="close-button_3">&times;</button>
+
+        <!-- Картинка сверху -->
+        <div class="top-image">
+            <img src="/static/images/croco.png" alt="Символ" />
+        </div>
+
+        <div class="character_up_buy"></div>
+        <h1 class="title">ЗАПАС<br>ЭНЕРГИИ</h1>
+        <p class="description">
+            Приобретите зелье энергии, чтобы<br>
+            увеличить ее запас
+        </p>
+        <div class="price_up_buy">
+            <!-- Картинка монеты -->
+            <img class="coin-icon" src="/static/images/coin.png" alt="Монета" />
+            <span class="coin_up3">2,000</span>
+        </div>
+        <button class="upgrade-button_3">УЛУЧШИТЬ</button>
+    </div>
+</div>
+
+<div class="background">
+    <!-- Слой затемнения -->
+    <div class="overlay" style="display: none;"></div>
+
+    <!-- Окно -->
+    <div class="container_up_buy_4" style="display: none;">
+        <!-- Кнопка закрытия -->
+        <button class="close-button_4">&times;</button>
+
+        <!-- Картинка сверху -->
+        <div class="top-image">
+            <img src="/static/images/croco.png" alt="Символ" />
+        </div>
+
+        <div class="character_up_buy"></div>
+        <h1 class="title">СКОРОСТЬ<br>ВОССТАНОВЛЕНИЯ<br>ЭНЕРГИИ</h1>
+        <p class="description">
+            Приобретите зелье восстановления, чтобы<br>
+            увеличить скорость восполнения энергии.<br>
+            Прокачайте навык до максимума!
+        </p>
+        <div class="price_up_buy">
+            <!-- Картинка монеты -->
+            <img class="coin-icon" src="/static/images/coin.png" alt="Монета" />
+            <span class="coin">2,000</span>
+        </div>
+        <button class="upgrade-button">УЛУЧШИТЬ</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='script_theme.js') }}"></script>
+<script src="{{ url_for('static', filename='script_up.js') }}"></script>
+<script src="{{ url_for('static', filename='script_up_energy.js') }}"></script>
+<script src="{{ url_for('static', filename='script_box.js') }}"></script>
+{% include '_nav.html' %}
+</body>
+</html>

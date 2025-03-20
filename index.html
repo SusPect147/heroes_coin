@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>Heroes</title>
+    <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
+</head>
+<body>
+
+<!-- Навигация -->
+<div class="navigation" id="menu">
+    <a href="#" class="nav-button active" data-page="play">
+        <figure>
+            <img src="brawl_clicker-master/static/images/play2.png" alt="Играть" width="15" height="15">
+            <figcaption>Играть</figcaption>
+        </figure>
+    </a>
+    <a href="#" class="nav-button" data-page="friends">
+        <figure>
+            <img src="brawl_clicker-master/static/images/friends_72.png" alt="Друзья" width="15" height="15">
+            <figcaption>Друзья</figcaption>
+        </figure>
+    </a>
+    <a href="#" class="nav-button" data-page="shop">
+        <figure>
+            <img src="brawl_clicker-master/static/images/shop2.png" alt="Магазин" width="15" height="15">
+            <figcaption>Магазин</figcaption>
+        </figure>
+    </a>
+    <a href="#" class="nav-button" data-page="quests">
+        <figure>
+            <img src="brawl_clicker-master/static/images/quests2.png" alt="Квесты" width="15" height="15">
+            <figcaption>Квесты</figcaption>
+        </figure>
+    </a>
+    <a href="#" class="nav-button" data-page="top">
+        <figure>
+            <img src="brawl_clicker-master/static/images/boss2.png" alt="Топ" width="15" height="15">
+            <figcaption>Босс</figcaption>
+        </figure>
+    </a>
+</div>
+
+<div id="content">
+    <!-- Играть -->
+    <div class="page" id="play" style="display:block;">
+        <!-- Элементы для первой секции -->
+<div class="score-container">
+    <div class="coin">
+        <img src="brawl_clicker-master/static/images/coin.png" alt="Монеты">
+    </div>
+    <div class="score">
+        <span class="score-background">
+            <span class="currentScore">0</span>
+        </span>
+    </div>
+</div>
+
+        <div id="coinContainer"></div> <!-- Контейнер для монет с анимацией -->
+
+        <img id="clickButton"> <!-- Добавляем src и курсор pointer -->
+        <div id="lightningEffect"></div>
+
+        <div class="shadow">
+            <img src="brawl_clicker-master/static/images/shadow.png" alt="Монеты" width="500" height="55">
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-label" id="progressLabel"></div>
+
+        <div class="energy-container">
+            <div class="energy-bar" id="energyBar"></div>
+            <div id="energyDisplay">100/100</div> <!-- Отображаем текущую энергию -->
+        </div>
+
+        <div class="dropdown">
+            <img src="brawl_clicker-master/static/images/menu.png" alt="Меню" id="menu-icon">
+
+            <!-- Выпадающее меню -->
+            <div class="dropdown-menu" id="dropdown-menu">
+                <a href="#item1">Язык</a>
+                <a href="#item2">Как играть</a>
+                <a href="#item3">Аирдроп</a>
+                <a href="#item4">Тех поддержка</a>
+            </div>
+        </div>
+    </div>
+
+ <canvas id="snowCanvas"></canvas>
+
+
+    <!-- Друзья -->
+    <div class="page" id="friends" style="display:none;height: 1000px;">
+        <div class="invitation-container">
+            <div class="header">
+                <h1>Ваши друзья</h1>
+                <h2 class="friends-count">0 ДРУЗЕЙ</h2>
+                <button class="how-it-works">Доход с друзей</button>
+            </div>
+        </div>
+        <div class="invite-container">
+            <div class="coin-stack">
+                <img src="brawl_clicker-master/static/images/coin.png" alt="Coins" class="coins">
+            </div>
+            <div class="invite-text">
+                <div class="title">Пригласить друга</div>
+                <div class="reward">
+                    <img src="brawl_clicker-master/static/images/coin.png" alt="Coin" class="coin-icon">
+                    <span class="reward-amount">+5,000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="up_text">
+            <p>Список ваших друзей</p>
+        </div>
+
+        <div class="friend-list">
+            <div class="friend-card">
+                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
+                <div class="friend-info">Ник - уровень</div>
+            </div>
+            <div class="friend-card">
+                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
+                <div class="friend-info">Ник - уровень</div>
+            </div>
+            <div class="friend-card">
+                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
+                <div class="friend-info">Ник - уровень</div>
+            </div>
+        </div>
+    </div>
+    <div class="background">
+        <!-- Слой затемнения -->
+        <div class="overlay_box1" style="display: none;"></div>
+        <!-- Окно -->
+        <div class="container_box_1" style="display: none;">
+            <!-- Кнопка закрытия -->
+            <button class="close-button_box1">×</button>
+
+            <!-- Картинка сверху -->
+            <div class="top-image">
+                <img src="brawl_clicker-master/static/images/box_1.png" alt="Символ"/>
+            </div>
+
+            <div class="character_up_buy"></div>
+            <h1 class="title">Сундук Героя</h1>
+            <p class="description">
+                Здесь можно выбить <br>
+                нового перса
+            </p>
+            <div class="price_up_buy">
+                <!-- Картинка монеты -->
+                <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
+                <span class="coin_up_box1">2,000</span>
+            </div>
+            <button class="upgrade-button_box1">КУПИТЬ</button>
+        </div>
+    </div>
+
+
+    <div class="background">
+        <div class="overlay_box1" style="display: none;"></div>
+        <!-- Окно для открытия коробки -->
+        <div class="container_box_11" style="display: none;">
+            <button class="close-button_box1">×</button>
+            <div class="character_up_buy"></div>
+            <h1 class="title">ВЫ ВЫБИЛИ ГЕРОЯ:</h1>
+            <div class="reward-image">
+                <img id="rewardImage" src="" alt="Герой"/>
+            </div>
+            <button class="close-reward-button">ЗАКРЫТЬ</button>
+        </div>
+    </div>
+    <!-- Магазин -->
+    <div class="page" id="shop" style="display:none;height: 1000px;">
+
+        <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
+            <div class="coin" style="margin-left: 10px;">
+                <img src="brawl_clicker-master/static/images/coin.png" alt="Монеты" width="80">
+            </div>
+            <p class="score" style="margin: 0; font-size: 20px;">
+                <span class="currentScore">0</span>
+            </p>
+        </div>
+
+
+        <nav class="shop_menu">
+            <ul>
+                <li class="shop_menu-item">
+                    <a href="#" onclick="loadContent('special')">Особое</a>
+                </li>
+                <li class="shop_menu-item">
+                    <a href="#" onclick="loadContent('heroes')">Герои</a>
+                </li>
+                <li class="shop_menu-item">
+                    <a href="#" onclick="loadContent('upgrades')">Улучшения</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Контейнер для содержимого -->
+        <div id="contentContainer">
+            <div id="special" class="content-section">
+                <div class="shop_container">
+                    <!-- Первая строка -->
+                    <div class="shop_box">
+                        <div class="shop_discount">ЛУЧШЕЕ</div> <!-- Добавлено для метки -->
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_1.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук героя</h1>
+                        <h2>здесь новый перс</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/coin.png" alt="coin"> <span>10000</span>
+                        </div>
+                    </div>
+                    <div class="shop_box_2">
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_1.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук героя</h1>
+                        <h2>здесь новый перс</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/stars.png" alt="coin"> <span>100</span>
+                        </div>
+                    </div>
+                    <div class="shop_box_3">
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_3.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук героя</h1>
+                        <h2>здесь новый перс</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/stars.png" alt="coin"> <span>100</span>
+                        </div>
+                    </div>
+
+                    <!-- Вторая строка -->
+                    <div class="shop_box_4">
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_3.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук мастера</h1>
+                        <h2>содержит редкий лут</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/coin.png" alt="coin"> <span>20000</span>
+                        </div>
+                    </div>
+                    <div class="shop_box_5">
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_3.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук мастера</h1>
+                        <h2>содержит редкий лут</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/stars.png" alt="coin"> <span>200</span>
+                        </div>
+                    </div>
+                    <div class="shop_box_6">
+                        <div class="shop_icon">
+                            <img src="brawl_clicker-master/static/images/box_3.png" alt="Сундук">
+                        </div>
+                        <h1>Сундук мастера</h1>
+                        <h2>содержит редкий лут</h2>
+                        <div class="shop_price">
+                            <img src="brawl_clicker-master/static/images/stars.png" alt="coin"> <span>200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Магазин герои -->
+        <div id="heroes" class="content-section" style="display:none; height: 190vh;">
+
+
+            <div class="character-preview">
+                <div class="preview" id="preview">
+                    <img src="brawl_clicker-master/static/images/croco.png" alt="Preview">
+
+                    <p id="character-description" style="display: none;">Description of Character 1</p>
+                </div>
+                <button id="select-button">Выбрать</button>
+                <div class="menu_char">
+                    <div class="character" data-id="1" data-name="Character 1" data-img="brawl_clicker-master/static/images/croco.png"
+                         data-description="Каждый приглашенный друг дает +1000 монет">
+                        <img src="brawl_clicker-master/static/images/croco.png" alt="Character 1">
+                        <p>Character 1</p>
+                    </div>
+                    <div class="character " data-id="2" data-name="Character 2" data-img="brawl_clicker-master/static/images/cot.png"
+                         data-description="Кот играет на гитаре, удваивая количество получаемых монет на 5 мин">
+                        <img src="brawl_clicker-master/static/images/cot.png" alt="Character 2">
+                        <p>Character 2</p>
+                    </div>
+                    <div class="character " data-id="3" data-name="Character 3"
+                         data-img="brawl_clicker-master/static/images/groot.png" data-description="Восстанавливает энергию на 10% быстрее">
+                        <img src="brawl_clicker-master/static/images/groot.png" alt="Character 3">
+                        <p>Character 3</p>
+                    </div>
+                    <div class="character " data-id="4" data-name="Character 4"
+                         data-img="brawl_clicker-master/static/images/golem.png"
+                         data-description="Голем Базя позволяет крутить рулетку 2 раза">
+                        <img src="brawl_clicker-master/static/images/golem.png" alt="Character 4">
+                        <p>Character 4</p>
+                    </div>
+                    <div class="character " data-id="5" data-name="Character 5" data-img="brawl_clicker-master/static/images/fire.png"
+                         data-description="Fire is a blazing warrior full of passion.">
+                        <img src="brawl_clicker-master/static/images/fire.png" alt="Character 5">
+                        <p>Character 5</p>
+                    </div>
+                    <div class="character " data-id="6" data-name="Character 6"
+                         data-img="brawl_clicker-master/static/images/water.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/water.png" alt="Character 6">
+                        <p>Character 6</p>
+                    </div>
+                    <div class="character " data-id="7" data-name="Character 7" data-img="brawl_clicker-master/static/images/tor.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/tor.png" alt="Character 7">
+                        <p>Character 7</p>
+                    </div>
+                    <div class="character " data-id="8" data-name="Character 8"
+                         data-img="brawl_clicker-master/static/images/witch.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/witch.png" alt="Character 8">
+                        <p>Character 8</p>
+                    </div>
+                    <div class="character " data-id="9" data-name="Character 9"
+                         data-img="brawl_clicker-master/static/images/angel.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/angel.png" alt="Character 9">
+                        <p>Character 9</p>
+                    </div>
+                    <div class="character " data-id="10" data-name="Character 10"
+                         data-img="brawl_clicker-master/static/images/ananas.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/ananas.png" alt="Character 10">
+                        <p>Character 10</p>
+                    </div>
+                    <div class="character " data-id="11" data-name="Character 11"
+                         data-img="brawl_clicker-master/static/images/frog.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/frog.png" alt="Character 11">
+                        <p>Character 11</p>
+                    </div>
+                    <div class="character " data-id="12" data-name="Character 12"
+                         data-img="brawl_clicker-master/static/images/leon.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/leon.png" alt="Character 12">
+                        <p>Character 12</p>
+                    </div>
+                    <div class="character" data-id="13" data-name="Character 13"
+                         data-img="brawl_clicker-master/static/images/syth.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/syth.png" alt="Character 13">
+                        <p>Character 13</p>
+                    </div>
+                    <div class="character " data-id="14" data-name="Character 14"
+                         data-img="brawl_clicker-master/static/images/cat.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/cat.png" alt="Character 14">
+                        <p>Character 14</p>
+                    </div>
+                    <div class="character " data-id="15" data-name="Character 15"
+                         data-img="brawl_clicker-master/static/images/minion.png"
+                         data-description="Water is calm and adaptable, flowing through challenges.">
+                        <img src="brawl_clicker-master/static/images/minion.png" alt="Character 15">
+                        <p>Character 15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Магазин улучшения -->
+        <div id="upgrades" class="content-section" style="display:none;">
+
+            <div class="container_up">
+                <div class="item_up1">
+                    <div class="item-icon">🤖</div>
+                    <div class="item-info">
+                        <p class="item-title">Кликер-бот</p>
+                        <p class="item-details_1">2,000 / 1ч • Уровень 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up2">
+                    <div class="item-icon">⚔️</div>
+                    <div class="item-info">
+                        <p class="item-title">Клик</p>
+                        <p class="item-details">1 • Уровень 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up3">
+                    <div class="item-icon">⚡</div>
+                    <div class="item-info">
+                        <p class="item-title">Запас энергии</p>
+                        <p class="item-details_3">100 • Уровень 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up4">
+                    <div class="item-icon">🔄</div>
+                    <div class="item-info">
+                        <p class="item-title">Скорость перезарядки</p>
+                        <p class="item-details_4">3 • Уровень 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+            </div>
+
+            <div class="background">
+                <!-- Слой затемнения -->
+                <div class="overlay_1" style="display: none;"></div>
+
+                <!-- Окно -->
+                <div class="container_up_buy_1" style="display: none;">
+                    <!-- Кнопка закрытия -->
+                    <button class="close-button_1">×</button>
+
+                    <!-- Картинка сверху -->
+                    <div class="top-image">
+                        <img src="brawl_clicker-master/static/images/bling.png" alt="Символ"/>
+                    </div>
+
+                    <div class="character_up_buy"></div>
+                    <h1 class="title">АКТИВИРОВАТЬ<br>КЛИКЕР БОТА</h1>
+                    <p class="description">
+                        Приобретите зелье автоматизации, чтобы<br>
+                        играть, пока спите.<br>
+                        Бот будет кликать за вас
+                    </p>
+                    <div class="price_up_buy">
+                        <!-- Картинка монеты -->
+                        <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
+                        <span class="coin_up1">2,000</span>
+                    </div>
+                    <button class="upgrade-button_1">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="background">
+                <!-- Слой затемнения -->
+                <div class="overlay" style="display: none;"></div>
+
+                <!-- Окно -->
+                <div class="container_up_buy_2" style="display: none;">
+                    <!-- Кнопка закрытия -->
+                    <button class="close-button_2">×</button>
+
+                    <!-- Картинка сверху -->
+                    <div class="top-image">
+                        <img src="brawl_clicker-master/static/images/croco.png" alt="Символ"/>
+                    </div>
+
+                    <div class="character_up_buy"></div>
+                    <h1 class="title">КЛИК<br>ПО ЭКРАНУ<br></h1>
+                    <p class="description">
+                        Прокачайте свой клик, чтобы<br>
+                        зарабатывать больше монет
+                    </p>
+                    <div class="price_up_buy">
+                        <!-- Картинка монеты -->
+                        <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
+                        <span class="coin_up">1000</span>
+                    </div>
+                    <button class="upgrade-button_2">УЛУЧШИТЬ</button>
+                </div>
+            </div>
+
+            <div class="background">
+                <!-- Слой затемнения -->
+                <div class="overlay_3" style="display: none;"></div>
+
+                <!-- Окно -->
+                <div class="container_up_buy_3" style="display: none;">
+                    <!-- Кнопка закрытия -->
+                    <button class="close-button_3">×</button>
+
+                    <!-- Картинка сверху -->
+                    <div class="top-image">
+                        <img src="brawl_clicker-master/static/images/croco.png" alt="Символ"/>
+                    </div>
+
+                    <div class="character_up_buy"></div>
+                    <h1 class="title">ЗАПАС<br>ЭНЕРГИИ</h1>
+                    <p class="description">
+                        Приобретите зелье энергии, чтобы<br>
+                        увеличить ее запас
+                    </p>
+                    <div class="price_up_buy">
+                        <!-- Картинка монеты -->
+                        <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
+                        <span class="coin_up3">2,000</span>
+                    </div>
+                    <button class="upgrade-button_3">УЛУЧШИТЬ</button>
+                </div>
+            </div>
+
+            <div class="background">
+                <!-- Слой затемнения -->
+                <div class="overlay_4" style="display: none;"></div>
+
+                <!-- Окно -->
+                <div class="container_up_buy_4" style="display: none;">
+                    <!-- Кнопка закрытия -->
+                    <button class="close-button_4">×</button>
+
+                    <!-- Картинка сверху -->
+                    <div class="top-image">
+                        <img src="brawl_clicker-master/static/images/croco.png" alt="Символ"/>
+                    </div>
+
+                    <div class="character_up_buy"></div>
+                    <h1 class="title">СКОРОСТЬ<br>ВОССТАНОВЛЕНИЯ<br>ЭНЕРГИИ</h1>
+                    <p class="description">
+                        Приобретите зелье восстановления, чтобы<br>
+                        увеличить скорость восполнения энергии.<br>
+                        Прокачайте навык до максимума!
+                    </p>
+                    <div class="price_up_buy">
+                        <!-- Картинка монеты -->
+                        <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
+                        <span class="coin_up4">2,000</span>
+                    </div>
+                    <button class="upgrade-button_4">УЛУЧШИТЬ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Квесты -->
+    <div class="page" id="quests" style="display:none;">
+
+        <div class="cards-container">
+            <div class="card-text">Выберите задание</div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Подписка на телеграм</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        50 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Подключи свой кошелек</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        100 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Пригласи 5 друзей</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        150 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+        </div>
+
+        <div class="cards-container2">
+            <div class="card-text">Задания партнеров</div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Доп задание</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        50 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Доп задание</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        100 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+
+            <div class="card">
+                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
+                <div class="card-content">
+                    <div class="card-title">Доп задание</div>
+                    <div class="card-amount">
+                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
+                        150 000
+                    </div>
+                </div>
+                <div class="card-arrow">></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Босс -->
+    <div class="page" id="top" style="display:none;">
+
+        <div id="timer" class="timer">Time Left: 10s</div>
+
+        <div id="health-bar" class="health-bar">
+            <div id="health-bar-inner" class="health-bar-inner"></div>
+        </div>
+
+        <img id="boss" class="boss" src="brawl_clicker-master/static/images/boss1.png" alt="Boss"/>
+        <div id="level-text" class="level-text">Уровень 1</div>
+
+        <button id="start-button">Нажми чтобы начать</button>
+        <button id="next-level-button">Нажми чтобы играть</button>
+
+        <div id="final-message" class="final-message">Вы победили всех боссов на данный момент</div>
+
+
+    </div>
+</div>
+
+
+    
+<script src="brawl_clicker-master/static/script_new.js"></script>
+<script src="brawl_clicker-master/static/script.js"></script>
+<script src="brawl_clicker-master/static/script_up.js"></script>
+<script src="brawl_clicker-master/static/script_up_energy.js"></script>
+<script src="brawl_clicker-master/static/script_up_recovery.js"></script>
+<script src="brawl_clicker-master/static/script_autoclicker.js"></script>
+<script src="brawl_clicker-master/static/script_heroes.js"></script>
+<script src="brawl_clicker-master/static/boss.js"></script>
+<script src="brawl_clicker-master/static/dragon.js"></script>
+</body>
+</html>
