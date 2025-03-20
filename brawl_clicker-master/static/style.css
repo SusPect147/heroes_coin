@@ -1281,7 +1281,7 @@ position: center
     width: 150px;
     height: 150px;
     margin: 0 auto 0px;
-    background: url('character.png') no-repeat center center;
+    background: url('brawl_clicker-master/static/images/character.png') no-repeat center center;
     background-size: contain;
 }
 
