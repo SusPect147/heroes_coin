@@ -2,7 +2,7 @@ const dragonImageSrc = "brawl_clicker-master/static/images/dragon.png";
 let currentScore = 0;
 const currentScoreElement = document.querySelector(".currentScore");
 let dragonInterval;
-let activeDragon = null;
+let activeDragon = null; 
 
 // Функция проверки, установлен ли фон Китая
 function isChinaBackground() {
