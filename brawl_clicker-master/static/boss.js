@@ -1,6 +1,7 @@
 const gameContainer = document.getElementById('game-container');
 const player = document.getElementById('player');
 const scoreElement = document.getElementById('score');
+const startButton = document.getElementById('start-button');
 
 let score = 0;
 let playerPosition = 180; // Начальная позиция игрока (по оси X)
@@ -68,8 +69,12 @@ function startGame() {
   gameOver = false;
   fallingCubes = [];
 
+  // Скрыть кнопку "Играть" при начале игры
+  startButton.style.display = 'none';
+
   gameInterval = setInterval(gameLoop, 1000 / 60); // 60 FPS
   cubeInterval = setInterval(spawnFallingCube, 1000); // Создаём новый кубик каждую секунду
 }
 
-startGame();
+// Обработчик события для кнопки "Играть"
+startButton.addEventListener('click', startGame);
