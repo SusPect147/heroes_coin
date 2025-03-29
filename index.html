@@ -621,11 +621,30 @@
     <!-- Босс -->
     <div class="page" id="top" style="display:none;">
 
- <div id="game-container">
-    <div id="player"></div>
-    <div id="score">Счёт: 0</div>
-    <button id="start-button">Играть</button>
-  </div>
+<!-- Игра 1: Лови монеты -->
+    <div id="startBanner" class="banner">Лови монеты: Нажми, чтобы начать!</div>
+    <div id="gameContainer" class="hidden">
+        <div id="score">Счёт: <span id="scoreValue">0</span></div>
+        <button id="exitButton" class="exit-btn">Выйти</button>
+        <div id="bag"></div>
+        <div id="gameOver" class="hidden">
+            <h2>Игра окончена!</h2>
+            <p>Счёт: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()">Начать заново</button>
+        </div>
+    </div>
+
+    <!-- Игра 2: Лопай шарики -->
+    <div id="startBanner2" class="banner">Лопай шарики: Нажми, чтобы начать!</div>
+    <div id="gameContainer2" class="hidden">
+        <div id="score2">Счёт: <span id="scoreValue2">0</span></div>
+        <div id="missed2">Пропущено: <span id="missedValue2">0</span></div>
+        <div id="gameOver2" class="hidden">
+            <h2>Игра окончена!</h2>
+            <p>Счёт: <span id="finalScore2">0</span></p>
+            <button onclick="restartGame2()">Начать заново</button>
+        </div>
+    </div>
 
 
     </div>
