@@ -782,8 +782,8 @@ function gameLoop3() {
         if (currentBoss === 3) {
             let dx = parseFloat(bullet.dataset.dx) || 0;
             let dy = parseFloat(bullet.dataset.dy) || 0;
-            bulletTop += dy;
-            bulletLeft += dx;
+            bulletTop += dy * 0.7; // Уменьшаем скорость по Y в 2 раза (было dy, стало dy * 0.5)
+            bulletLeft += dx * 0.7;
             if (bulletLeft <= 0 || bulletLeft >= gameContainer3.offsetWidth - bullet.offsetWidth) {
                 bullet.dataset.dx = -dx;
                 bulletLeft = bulletLeft <= 0 ? 0 : gameContainer3.offsetWidth - bullet.offsetWidth;
