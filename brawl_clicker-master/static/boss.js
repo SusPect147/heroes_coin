@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         exitButton.style.display = 'block';
     }
 
-    // Игра 2: Лопай шарики (без изменений)
+    // Игра 2: Лопай шарики
     const gameContainer2 = document.getElementById('gameContainer2');
     const scoreElement2 = document.getElementById('scoreValue2');
     const missedElement = document.getElementById('missedValue2');
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameActive2 = true;
         score2 = 0;
         missed = 0;
-        scoreElement2.textContent = score2;
+        scoreElement2VILLEtext = score2;
         missedElement.textContent = missed;
         balloons = [];
         gameOverScreen2.classList.add('hidden');
@@ -376,7 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cannon.style.left = `${cannonPosition}px`;
         boss.style.left = `${bossPosition}px`;
         boss.style.top = '50px';
-        gameContainer3.style.backgroundImage = "url('images/plat.png')";
+        const backgroundImagePlat = 'brawl_clicker-master/static/images/plat.png';
+        gameContainer3.style.backgroundImage = `url('${backgroundImagePlat}')`;
         boss.classList.remove('boss2', 'boss3', 'boss4', 'boss5', 'boss6', 'boss7');
         boss.classList.add('boss1');
         boss7CloneTimer = 300;
@@ -658,7 +659,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 2;
                         bossHealth = 150;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/dark.png')";
+                        const backgroundImageDark = 'brawl_clicker-master/static/images/dark.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImageDark}')`;
                         boss.classList.remove('boss1');
                         boss.classList.add('boss2');
                     } else if (currentBoss === 2) {
@@ -667,7 +669,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 3;
                         bossHealth = 200;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/ice4.png')";
+                        const backgroundImageIce4 = 'brawl_clicker-master/static/images/ice4.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImageIce4}')`;
                         boss.classList.remove('boss2');
                         boss.classList.add('boss3');
                         bossDirectionChangeInterval = setInterval(() => {
@@ -680,7 +683,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 4;
                         bossHealth = 250;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/rude.png')";
+                        const backgroundImageRude = 'brawl_clicker-master/static/images/rude.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImageRude}')`;
                         boss.classList.remove('boss3');
                         boss.classList.add('boss4');
                         boss4Pause = false;
@@ -693,7 +697,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 5;
                         bossHealth = 300;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/poison.png')";
+                        const backgroundImagePoison = 'brawl_clicker-master/static/images/poison.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImagePoison}')`;
                         boss.classList.remove('boss4');
                         boss.classList.add('boss5');
                         boss5TeleportTimer = 0;
@@ -705,7 +710,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 6;
                         bossHealth = 350;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/dark_3.png')";
+                        const backgroundImageDark3 = 'brawl_clicker-master/static/images/dark_3.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImageDark3}')`;
                         boss.classList.remove('boss5');
                         boss.classList.add('boss6');
                         boss6WaveTimer = 0;
@@ -719,7 +725,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentBoss = 7;
                         bossHealth = 5000;
                         bossHealthElement.textContent = bossHealth;
-                        gameContainer3.style.backgroundImage = "url('images/mystical.png')";
+                        const backgroundImageMystical = 'brawl_clicker-master/static/images/mystical.png';
+                        gameContainer3.style.backgroundImage = `url('${backgroundImageMystical}')`;
                         boss.classList.remove('boss6');
                         boss.classList.add('boss7');
                         boss7CloneTimer = 300;
