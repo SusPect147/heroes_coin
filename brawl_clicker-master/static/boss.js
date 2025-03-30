@@ -525,7 +525,7 @@ function spawnBossBullets() {
     setTimeout(spawnBossBullets,
         currentBoss === 1 ? 1500 : // Было 1000, замедляем стрельбу
         currentBoss === 2 ? 1800 : // Было 1200, замедляем стрельбу
-        currentBoss === 3 ? 1000 :
+        currentBoss === 3 ? 1300 :
         currentBoss === 4 ? 1500 :
         currentBoss === 5 ? 2000 :
         currentBoss === 6 ? 1500 :
