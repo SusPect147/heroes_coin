@@ -1,53 +1,44 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    height: 95vh;
+    min-height: 95vh;
     flex-direction: column;
-    background-size: cover; /* Растянуть изображение на весь контейнер */
-    background-position: center; /* Центровка изображения */ 
-    background-repeat: no-repeat; /* Запрет на повторение изображения */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("images/mystical.png");
 }
-html {
-    overflow: hidden; /* Убираем прокрутку */
-}
+
 #play {
-    overflow: hidden; /* Убираем прокрутку */
+    overflow: hidden;
 }
 
-#friends {
+#friends {}
 
-}
-
-#shop {
-
-}
+#shop {}
 
 #quests {
-height: 155vh;
+    height: 125vh;
 }
 
-#top {
+#top {}
 
-}
-
-/* Скрываем все страницы по умолчанию */
 .page {
-  display: none;
+    display: none;
 }
 
-  /* Стили для полос */
 .progress-container {
     position: fixed;
-    bottom: 480px;
+    bottom: 620px;
     left: 50%;
     transform: translateX(-50%);
-    width: 280px; /* Фиксированная ширина */
+    width: 280px;
     height: 20px;
     background-color: #fffce6;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 10px;
-    border: 2px solid #ffd700; /* Обводка контейнера */
+    border: 2px solid #ffd700;
 }
 
 .progress-bar {
@@ -57,203 +48,220 @@ height: 155vh;
     transition: width 0.3s;
 }
 
-/* Стиль для меток энергии */
 .energy-status span {
-  margin-bottom: 5px; /* Отступ между строками */
+    margin-bottom: 5px;
 }
- .progress-label {
-    position: fixed; /* Меняем на fixed для независимости от родителя */
+
+.progress-label {
+    display: none;
+    position: fixed;
     top: 25px;
     left: 50%;
     transform: translateX(-50%);
     font-weight: bold;
-    padding: 5px 10px; /* Отступы для удобства */
-    border-radius: 5px; /* Сглаживание углов */
-    background-color: rgba(255, 165, 0, 0.7); /* Полупрозрачный фон, чтобы фон мира был виден */
-    color: white; /* Белый текст */
-    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
-    font-size: 20px; /* Размер шрифта */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Легкая тень для выделения */
-    background-size: cover; /* Обеспечиваем правильное отображение фона */
-    background-position: center; /* Центрируем фон */
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 165, 0, 0.7);
+    color: white;
+    font-family: 'Pusia-bold', sans-serif;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-position: center;
     opacity: 100%;
 }
 
 #energyDisplay {
-   position: fixed;
-   bottom: 491px;    /* Контейнер будет располагаться снизу */
-   left: 50%;        /* Размещаем контейнер по центру */
-   transform: translateX(-50%); /* Смещаем контейнер, чтобы он был по центру */
-   display: flex;
-   flex-direction: column-reverse; /* Элементы будут располагаться снизу вверх */
-   color: white;     /* Белый текст */
-   font-family: 'Pusia-bold', sans-serif; /* Шрифт */
-   font-size: 20px;  /* Размер шрифта */
-   text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
+    position: fixed;
+    bottom: 131px;
+    left: 90%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column-reverse;
+    color: white;
+    font-family: 'Pusia-bold', sans-serif;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
-
 
 .navigation {
     position: fixed;
-    bottom: 0; /* Прикрепляем меню к нижней части экрана */
+    bottom: 0;
     left: 0;
-    width: 100%; /* На всю ширину экрана */
+    width: 100%;
     background-color: #2e2e3a;
-    display: flex; /* Flexbox для размещения элементов */
-    justify-content: space-around; /* Равномерное распределение пунктов меню */
-    padding: 0 0 10px 0; /* Отступ снизу (10px) */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень над меню */
-    z-index: 1000; /* Поверх остальных элементов */
-    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
+    display: flex;
+    justify-content: space-around;
+    padding: 0 0 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
 
-
-/* Стили для кнопок меню */
 .nav-button {
-    flex: 1; /* Равное пространство для каждого пункта */
+    flex: 1;
     text-align: center;
-    text-decoration: none; /* Убираем подчеркивание ссылок */
-    color: white; /* Белый цвет текста */
-    transition: all 0.3s ease; /* Плавный переход для анимации */
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-/* Стили для активного пункта меню */
 .navigation .nav-button.active {
-    background-color:  #f4bb0b; /* Цвет фона для активного пункта */
+    background-color: #f4bb0b;
 }
 
-
-/* Стили для фигур и изображений */
 .nav-button figure {
-    margin: 0; /* Убираем отступы */
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем иконки и текст */
-    gap: 0px; /* Расстояние между иконкой и подписью */
+    align-items: center;
+    gap: 0px;
 }
 
 .nav-button img {
-    width: 55px; /* Размер иконки */
-    height: 55px;
-    object-fit: contain; /* Сохраняем пропорции изображения */
-    transition: transform 0.3s ease; /* Анимация увеличения при наведении */
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
-/* Подписи к пунктам меню */
 .nav-button figcaption {
-    font-size: 14px; /* Размер шрифта подписи */
+    font-size: 14px;
     font-weight: 500;
-    margin-top: -5px; /* Поднимаем подпись чуть выше */
+    margin-top: -5px;
 }
 
 .nav-button:hover figcaption {
-    color: #ffd700; /* Золотистый цвет подписи */
+    color: #ffd700;
 }
 
 #clickButton {
     position: absolute;
-    bottom: 140px;
+    bottom: 185px;
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.5s ease;
-    width: 270px;
+    width: 330px;
     z-index: 1000;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.03);
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
 }
 
 #clickButton:active {
-    transform: scale(1.1) translateX(-50%);
+    transform: translateX(-50%) scale(1.1);
 }
 
 #coinContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Чтобы контейнер не блокировал клики */
-  overflow: hidden; /* Скрываем монеты, если они выходят за пределы */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
 }
 
 .coin_drop {
-  position: absolute;
-  width: 40px; /* Размер монеты */
-  height: 40px; /* Размер монеты */
-  background-image: url('brawl_clicker-master/static/images/coin.png'); /* Путь к картинке монеты */
-  background-size: contain;
-  background-repeat: no-repeat;
-  animation: flyUp 2s ease-out forwards; /* Анимация движения монеты */
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url("images/coin.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: flyUp 2s ease-out forwards;
 }
 
 @keyframes flyUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1); /* Начальная позиция монеты */
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-300px) scale(0.5); /* Монета летит вверх и исчезает */
-  }
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-300px) scale(0.5);
+    }
 }
 
 @font-face {
     font-family: 'Pusia-bold';
-    src: url('brawl_clicker-master/static/fonts/pusia-bold.ttf') format('truetype');
+    src: url("fonts/pusia-bold.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 .score-container {
     position: absolute;
-    top: 25%; /* Центрируем по вертикали */
-    left: 50%; /* Центрируем по горизонтали */
-    transform: translateX(-50%) translateY(-50%); /* Центрируем по обеим осям */
-    display: flex; /* Используем flexbox для удобного выравнивания */
-    align-items: center; /* Выравнивание по вертикали */
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    align-items: center;
 }
 
 .score {
-    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
-    font-size: 22px; /* Размер шрифта */
-    color: #ffd700; /* Цвет текста */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
-    margin: 0; /* Убираем стандартные отступы */
-    white-space: nowrap; /* Предотвращаем перенос текста */
+    font-family: 'Pusia-bold', sans-serif;
+    font-size: 22px;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    margin: 0;
+    white-space: nowrap;
 }
 
 .score-background {
-    display: inline-block; /* Оборачиваем счёт в блок, чтобы фон подстраивался */
-    padding: 0px 10px; /* Отступы вокруг текста */
-    padding-left: 20px; /* Увеличиваем отступ слева для фона */
-    background-color: black; /* Черный непрозрачный фон */
-    border-radius: 5px; /* Сглаживаем углы */
-    margin-left: 0px; /* Оставляем фон на месте */
+    display: inline-block;
+    padding: 0px 10px;
+    padding-left: 20px;
+    background-color: black;
+    border-radius: 5px;
+    margin-left: 0px;
 }
 
 .coin {
-    margin-left: 0; /* Убираем отступы между монеткой и числом */
-    z-index: 1000; /* Поверх остальных элементов */
+    margin-left: 0;
+    z-index: 1000;
 }
 
 .coin img {
     width: 45px;
     height: 45px;
-    vertical-align: middle; /* Выравниваем изображение по вертикали */
-    margin-right: -20px; /* Небольшой отступ от монетки к числу */
+    vertical-align: middle;
+    margin-right: -20px;
+}
+
+.coin2 {
+    margin-left: 0;
+    z-index: 1000;
+}
+
+.coin2 img {
+    width: 45px;
+    height: 45px;
+    vertical-align: middle;
+    margin-right: 0px;
 }
 
 .shadow {
     position: fixed;
-    bottom: 150px;        /* Отступ от нижнего края экрана */
-    left: 50%;            /* Размещение по центру */
-    transform: translateX(-50%); /* Смещение для точного центра */
-    width: 10px;          /* Еще меньшая ширина */
-    height: 10px;         /* Еще меньшая высота */
-    display: flex;        /* Для использования flexbox */
-    justify-content: center; /* Центрирование содержимого по горизонтали */
-    align-items: center;  /* Центрирование содержимого по вертикали */
-    opacity: 0.7;         /* 50% прозрачности */
+    bottom: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
 }
 
 .close-button {
@@ -271,217 +279,495 @@ height: 155vh;
 }
 
 .image-container img {
-    width: 50px; /* Ширина картинки */
-    height: 50px; /* Высота картинки */
+    width: 50px;
+    height: 50px;
 }
 
 .dropdown {
-            position: absolute; /* Для абсолютного позиционирования меню */
-            top: 10px;
-            right: 3px;
-        }
-        /* Стили для изображения */
-        .dropdown img {
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-        }
-
-        /* Выпадающее меню (изначально скрыто) */
-        .dropdown-menu {
-            position: absolute;
-            top: 60px; /* Смещение вниз от картинки */
-            right: 10px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для меню */
-            border-radius: 5px; /* Скругленные углы */
-            width: 150px; /* Ширина меню */
-            display: none; /* Скрываем меню */
-            flex-direction: column;
-            padding: 0;
-            z-index: 1000;
-        }
-
-        /* Стили для пунктов меню */
-        .dropdown-menu a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            display: block;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Ховер эффект для пунктов */
-        .dropdown-menu a:hover {
-            background-color: #3E5F8A;
-            color: white;
-        }
-
-        /* Показ меню при активном состоянии */
-        .dropdown-menu.active {
-            display: flex; /* Показываем меню */
-        }
-
-/* Друзья */
-/* Блок приглашения */
-.invitation-container {
-  background-color: #2e2e3a;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  border: 2px solid #d1a34a;
-  margin: 0 auto;
-  margin-top: 30px; /* Отступ сверху */
+    position: absolute;
+    top: 10px;
+    right: 3px;
 }
 
-/* Кнопка внутри блока приглашения */
+.dropdown img {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 150px;
+    display: none;
+    flex-direction: column;
+    padding: 0;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #3E5F8A;
+    color: white;
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.leaderboard-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.leaderboard-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.leaderboard-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.leaderboard-list {
+    margin-top: 20px;
+}
+
+.leader-item {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.roulette-icon {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.leaderboard-icon img,
+.roulette-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.leaderboard-section,
+.roulette-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.leaderboard-list,
+.roulette-content {
+    margin-top: 20px;
+}
+
+.leader-item {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spin-button {
+    position: absolute;
+    bottom: 130px;
+    width: 90%;
+    padding: 15px;
+    background: #ff5722;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.spin-button:hover {
+    background: #e64a19;
+}
+
+.spin-button.spinning {
+    background: #ffcc80;
+    cursor: not-allowed;
+}
+
+.chances-button {
+    position: absolute;
+    top: 20px;
+    right: 5%;
+    padding: 10px 20px;
+    background: #2196f3;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chances-button:hover {
+    background: #1976d2;
+}
+
+.chances-menu {
+    position: absolute;
+    top: 70px;
+    right: 5%;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    z-index: 10;
+}
+
+.chances-menu h3 {
+    margin-bottom: 10px;
+}
+
+.chances-menu p {
+    margin: 5px 0;
+}
+
+.tickets {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.earn-tickets-button {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    padding: 10px 20px;
+    background: #4caf50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.earn-tickets-button:hover {
+    background: #388e3c;
+}
+
+.earn-tickets-info {
+    position: absolute;
+    top: 120px;
+    left: 20px;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    z-index: 10;
+}
+
+.earn-tickets-info h3 {
+    margin-bottom: 10px;
+}
+
+.earn-tickets-info p {
+    margin: 5px 0;
+}
+
+.wheel-container {
+    position: absolute;
+    right: -250px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+}
+
+.arrow {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-right: 50px solid #fff;
+    z-index: 5;
+}
+
+.wheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: rotate(0deg);
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border: 5px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.section {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 50%;
+    transform-origin: 0 100%;
+    transform: rotate(calc(45deg * (var(--i) - 1)));
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-size: 40% 40%;
+    background-repeat: no-repeat;
+    background-position: 10% 20%;
+}
+
+.section:nth-child(1) {
+    background-color: #ffeb3b;
+    background-image: url("images/pineapple.png");
+}
+
+.section:nth-child(2) {
+    background-color: #e91e63;
+    background-image: url("images/angel.png");
+}
+
+.section:nth-child(3) {
+    background-color: #4caf50;
+    background-image: url("images/coins.png");
+}
+
+.section:nth-child(4) {
+    background-color: #2196f3;
+    background-image: url("images/coins.png");
+}
+
+.section:nth-child(5) {
+    background-color: #9c27b0;
+    background-image: url("images/coins.png");
+}
+
+.section:nth-child(6) {
+    background-color: #ff9800;
+    background-image: url("images/spin_3x.jpg");
+}
+
+.section:nth-child(7) {
+    background-color: #f44336;
+    background-image: url("images/coins.png");
+}
+
+.section:nth-child(8) {
+    background-color: #00bcd4;
+    background-image: url("images/gift.jpg");
+}
+
+.result {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    background: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    max-width: calc(100% - 300px);
+    z-index: 1;
+    word-wrap: break-word;
+}
+
+.invitation-container {
+    background-color: #2e2e3a;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    border: 2px solid #d1a34a;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
 .how-it-works {
-  background-color: #ffcc66;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  color: #543820;
-  margin-top: 15px;
-  display: block;
-  width: 100%;
+    background-color: #ffcc66;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #543820;
+    margin-top: 15px;
+    display: block;
+    width: 100%;
 }
 
 .how-it-works:hover {
-  background-color: #ffb84d;
+    background-color: #ffb84d;
 }
 
-/* Блок с бонусом */
 .invite-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #2e2e3a;
-  border-radius: 12px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #d1a34a;
-  width: 250px;
-  height: 85px;
-  margin: 0 auto;
-  margin-top: 20px; /* Отступ сверху */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2e2e3a;
+    border-radius: 12px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid #d1a34a;
+    width: 250px;
+    height: 85px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .coin-stack img {
-  width: 60px;
-  height: auto;
+    width: 60px;
+    height: auto;
 }
 
 .invite-text {
-  flex-grow: 1;
-  margin-left: 15px;
-  color: #ffcc66;
-  font-family: Arial, sans-serif;
+    flex-grow: 1;
+    margin-left: 15px;
+    color: #ffcc66;
+    font-family: Arial, sans-serif;
 }
 
 .invite-text .title {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .invite-text .reward {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  font-size: 18px;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .invite-text .reward img {
-  width: 24px;
-  height: auto;
-  margin-right: 5px;
+    width: 24px;
+    height: auto;
+    margin-right: 5px;
 }
 
 .invite-text .reward .reward-amount {
-  color: #FFD700;
+    color: #FFD700;
 }
 
-/* Заголовок */
 .up_text {
-  font-size: 26px;
-  text-align: center;
-  color: white;
-  font-family: 'Pusia-bold', sans-serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
-  margin-top: 30px;
+    font-size: 26px;
+    text-align: center;
+    color: white;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    margin-top: 30px;
 }
 
-/* Список друзей */
 .friend-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 250px;
-  margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 250px;
+    margin-top: 30px;
     margin: 0 auto;
 }
 
-/* Карточка друга */
 .friend-card {
-  display: flex;
-  align-items: center;
-  background-color: #2e2e3a;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  border: 2px solid #d1a34a;
+    display: flex;
+    align-items: center;
+    background-color: #2e2e3a;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    border: 2px solid #d1a34a;
 }
 
 .friend-card img {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    margin-right: 15px;
 }
 
 .friend-info {
-  font-size: 20px;
-  font-weight: bold;
-  color: #ffcc66;
-  font-family: 'Pusia-bold', sans-serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc66;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
 
-
-/* Страница Магазин */
 .shop_menu {
-    width: 85%; /* Уменьшенная ширина меню */
-    margin: 0px auto; /* Отступ сверху и центрирование по горизонтали */
-    background-color: #2e2e3a; /* Фон меню */
+    width: 85%;
+    margin: 0px auto;
+    background-color: #2e2e3a;
     border-radius: 10px;
     padding: 10px 10px;
-    border: 2px solid #d1a34a; /* Обводка контейнера */
+    border: 2px solid #d1a34a;
 }
 
-/* Список меню */
 .shop_menu ul {
     list-style: none;
     display: flex;
-    justify-content: space-around; /* Равномерное распределение пунктов */
+    justify-content: space-around;
     margin: 0;
     padding: 0;
 }
-/* Пункты меню */
+
 .shop_menu-item {
     position: relative;
 }
 
-/* Ссылка в меню */
 .shop_menu-item a {
     text-decoration: none;
-    color: #fff; /* Белый текст */
+    color: #fff;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
@@ -491,41 +777,37 @@ height: 155vh;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Эффект при наведении */
 .shop_menu-item a:hover {
-    background-color: #ffcc00; /* Жёлтый фон */
-    color: #333; /* Тёмный текст */
+    background-color: #ffcc00;
+    color: #333;
 }
 
-/* Дополнительные стили */
 .shop_menu-item a:active {
-    background-color: #ff9933; /* Оранжевый цвет при клике */
+    background-color: #ff9933;
 }
 
-/* Hover-эффекты */
 .menu-item a:hover {
-    color: #ffcc00; /* Цвет текста при наведении */
+    color: #ffcc00;
 }
 
 .menu-item.special a:hover {
-    color: #fff; /* Белый текст для "Особого" пункта при наведении */
+    color: #fff;
 }
 
 .shop_container {
     display: flex;
-    flex-wrap: wrap; /* Позволяет контейнерам переноситься */
-    justify-content: center; /* Центрируем контейнеры */
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: 20px; /* Расстояние между контейнерами */
-    max-width: 340px; /* Ограничиваем ширину контейнера (150px * 2 + 20px gap) */
-    margin: 20px auto; /* Центрируем контейнер по горизонтали */
+    gap: 20px;
+    max-width: 340px;
+    margin: 20px auto;
 }
 
-/* Настройки для коробок */
 .shop_box, .shop_box_2, .shop_box_3,
 .shop_box_4, .shop_box_5, .shop_box_6 {
-    width: 130px; /* Фиксированная ширина */
-    height: 180px; /* Фиксированная высота */
+    width: 150px;
+    height: 180px;
     background-color: #2e2e3a;
     border: 2px solid #d1a34a;
     text-align: center;
@@ -533,8 +815,6 @@ height: 155vh;
     transform: skew(-10deg);
     overflow: hidden;
 }
-
-
 
 .shop_box > *, .shop_box_2 > *, .shop_box_3 > *,
 .shop_box_4 > *, .shop_box_5 > *, .shop_box_6 > * {
@@ -586,49 +866,44 @@ h2 {
     vertical-align: middle;
 }
 
-/* Стили для метки "ЛУЧШЕЕ" */
 .shop_discount {
     position: absolute;
-    bottom: 10px; /* Отступ снизу */
-    left: 5px; /* Отступ слева */
-    background-color: #ff3b3b; /* Красный фон */
-    color: white; /* Белый текст */
-    font-size: 7px; /* Размер текста */
+    bottom: 10px;
+    left: 5px;
+    background-color: #ff3b3b;
+    color: white;
+    font-size: 7px;
     font-weight: bold;
-    padding: 5px 10px; /* Отступы внутри */
-    border-radius: 5px; /* Закругление углов */
-    transform: skew(10deg); /* Наклон для метки */
-    z-index: 10; /* Поверх других элементов */
+    padding: 5px 10px;
+    border-radius: 5px;
+    transform: skew(10deg);
+    z-index: 10;
 }
 
-
-/* Дополнительные стили для уникальных контейнеров */
 .shop_box_4 {
-    background-color: #3a4a2e; /* Уникальный цвет */
-    border-color: #8dc63f; /* Уникальная обводка */
+    background-color: #3a4a2e;
+    border-color: #8dc63f;
 }
 
 .shop_box_5 {
-    background-color: #4a2e3a; /* Уникальный цвет */
-    border-color: #c63f8d; /* Уникальная обводка */
+    background-color: #4a2e3a;
+    border-color: #c63f8d;
 }
 
 .shop_box_6 {
-    background-color: #2e3a4a; /* Уникальный цвет */
-    border-color: #3f8dc6; /* Уникальная обводка */
+    background-color: #2e3a4a;
+    border-color: #3f8dc6;
 }
 
-
-
 .image-container {
-    display: flex; /* Используем flexbox для центрирования */
-    justify-content: center; /* Центрируем по горизонтали */
-    margin-top: 20px; /* Отступ сверху */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 #mainImage {
-    width: 500px; /* Ширина основного изображения */
-    height: auto; /* Автоматическая высота для сохранения пропорций */
+    width: 500px;
+    height: auto;
 }
 
 .close-button_box1,
@@ -646,38 +921,35 @@ h2 {
     height: auto;
     margin: 10px 0;
 }
-/* Страница квесты */
-/* Контейнер для всех карточек */
+
 .cards-container {
     width: 100%;
-    max-width: 250px; /* Ограничиваем ширину */
-    margin: 0 auto; /* Центрируем */
-    margin-top: 30px; /* Устанавливаем расстояние между контейнерами */
+    max-width: 250px;
+    margin: 0 auto;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Расстояние между карточками */
+    gap: 15px;
     padding: 20px;
     background-color: #1e1e2d;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Контейнер для карточек 2 (с отступом сверху от первого контейнера) */
 .cards-container2 {
     width: 100%;
-    max-width: 250px; /* Ограничиваем ширину */
-    margin: 0 auto; /* Центрируем */
-    margin-top: 30px; /* Устанавливаем расстояние между контейнерами */
+    max-width: 250px;
+    margin: 0 auto;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Расстояние между карточками */
+    gap: 15px;
     padding: 20px;
     background-color: #1e1e2d;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Заголовок карточек */
 .card-text {
     text-align: center;
     font-size: 20px;
@@ -686,7 +958,6 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Стили для карточек */
 .card {
     display: flex;
     align-items: center;
@@ -700,24 +971,21 @@ h2 {
 }
 
 .card:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
 }
 
-/* Логотип слева */
 .card-logo {
     width: 40px;
     height: 40px;
     margin-right: 15px;
 }
 
-/* Контент внутри карточки */
 .card-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* Заголовок внутри карточки */
 .card-title {
     font-size: 16px;
     font-weight: bold;
@@ -725,7 +993,6 @@ h2 {
     margin-bottom: 5px;
 }
 
-/* Блок с количеством монет */
 .card-amount {
     display: flex;
     align-items: center;
@@ -734,29 +1001,25 @@ h2 {
     color: #f5c518;
 }
 
-/* Иконка монеты */
 .coin-icon {
     width: 20px;
     height: 20px;
     margin-right: 5px;
 }
 
-/* Стрелка справа */
 .card-arrow {
     font-size: 20px;
     color: #fff;
     margin-left: 10px;
 }
 
-/* Заголовок страницы */
 .leaderboard-title {
-position: center
+    position: center;
     color: white;
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-/* Кнопки для переключения между табами */
 .tabs {
     display: flex;
     justify-content: center;
@@ -783,255 +1046,286 @@ position: center
     background-color: #f39c12;
 }
 
-
-/* Страница Герои */
 .menu_char {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin: 30px auto; /* Центрируем контейнер с отступом сверху */
-    padding: 0 20px; /* Добавляем отступы справа и слева от контейнера */
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
+.character {
+    background: white;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+}
 
-    .character {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 8px;
-      text-align: center;
-    }
+.character2 {
+    background: purple;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+}
 
-    .character img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: -10px;
-    }
+.character img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: -10px;
+}
 
-    .character button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.character2 img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: -10px;
+}
 
-    .character button:hover {
-      background-color: #45a049;
-    }
+.character button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-    .selected {
-      border: 2px solid #4CAF50;
-    }
+.character2 button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-    .preview {
-      position: relative;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      text-align: center;
-    }
+.character button:hover {
+    background-color: #45a049;
+}
 
-    .preview img {
-      width: 200px;
-      height: 200px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+.selected {
+    border: 2px solid #4CAF50;
+}
+
+.char-1 {
+    background-color: #7FC7FF;
+}
+
+.char-6 {
+    background-color: #FF77FF;
+}
+
+.char-12 {
+    background: radial-gradient(circle at center, #fff5b3, #d4af37);
+    border: 2px solid #d1a34a;
+}
+
+.preview {
+    position: relative;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.preview img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: radial-gradient(circle at center, #fff5b3, #d4af37);
+    border: 2px solid #d1a34a;
+}
 
 #character-description {
-  position: absolute; /* Используем абсолютное позиционирование */
-  top: 20px; /* Отступ сверху */
-  left: 10px; /* Отступ слева */
-  font-size: 14px;
-  color: #555;
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  width: 170px;
-  z-index: 1000; /* Повышаем z-index, чтобы элемент был выше остальных */
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    font-size: 14px;
+    color: #555;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 170px;
+    z-index: 1000;
 }
 
-
 .character.selected-preview {
-  background-color:  #ffd700; /* Заливка желтым цветом */
-  border: none; /* Убираем рамку */
-  border-radius: 8px; /* Оставляем закругленные углы, если нужно */
-  padding: 5px; /* Добавляем отступы, чтобы выделение не перекрывало картинку */
+    background-color: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 5px;
 }
 
 .character.selected {
-  border: 2px solid #f4c01c;
-  border-radius: 8px;
+    border: 2px solid #f4c01c;
+    border-radius: 8px;
 }
 
 #select-button {
-  display: block;
-  position: relative; /* Изменено с absolute на relative */
-  top: 28px; /* Уменьшено значение top */
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background-color: #2e2e3a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
+    display: block;
+    position: relative;
+    top: -80px;
+    left: 80%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #2e2e3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
-
 
 #select-button:hover {
-  background-color: #45a049; /* Более темный зеленый при наведении */
+    background-color: #45a049;
 }
 
-
-/* Контейнер для всех элементов */
 .background-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Превью */
 .background-preview {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .background-preview img {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  border: 2px solid #ccc;
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #ccc;
 }
 
 .background-preview p {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-/* Меню для фонов */
 .background-menu {
-  display: grid; /* Используем grid, чтобы разместить кнопки в сетке */
-  grid-template-columns: repeat(4, 1fr); /* 4 кнопки в строку */
-  gap: 15px; /* Отступы между кнопками */
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 1200px; /* Максимальная ширина для контейнера */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* Кнопка выбора фона */
 .button-container {
-    position: relative; /* Устанавливаем относительное позиционирование для контейнера кнопок */
-    height: 100vh; /* Высота контейнера равна высоте вьюпорта */
+    position: relative;
+    height: 100vh;
 }
 
 .button {
-    padding: 10px 20px; /* Отступы внутри кнопок */
-    font-size: 16px; /* Размер шрифта */
-    cursor: pointer; /* Курсор при наведении */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-/* Улучшения*/
 .container_up {
-  max-width: 300px;
-  max-height: 400px;
-  margin: 0 auto;
-  padding: 0; /* Убираем внутренний отступ */
-  border-radius: 10px; /* Округление только для общего контейнера */
-  margin-top: 10px;
-  display: flex; /* Гибкая модель */
-  flex-direction: column; /* Элементы в столбик */
-  gap: 0px; /* Расстояние между элементами */
+    max-width: 400px;
+    max-height: 400px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
 }
 
 .item_up1,
 .item_up2,
 .item_up3,
 .item_up4 {
-  position: relative; /* Для использования псевдоэлементов */
-  padding: 15px 25px; /* Пространство внутри */
-  background-color: #2e2e3a; /* Фон элемента */
-  margin: 10px 0; /* Отступ между элементами */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 2px solid #d1a34a;
-  transform: skew(-10deg); /* Наклон для параллелограмма */
-  overflow: hidden;
+    position: relative;
+    padding: 15px 25px;
+    background-color: #2e2e3a;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #d1a34a;
+    transform: skew(-10deg);
+    overflow: hidden;
 }
 
 .item_up1 > *, .item_up2 > *, .item_up3 > *, .item_up4 > * {
-  transform: skew(10deg); /* Обратный наклон для внутренних элементов */
+    transform: skew(10deg);
 }
 
 .item-icon {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  background-color: #d1a34a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #d1a34a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .item-info {
-  flex-grow: 1;
-  margin-left: 15px; /* Чуть больше отступа для визуального баланса */
+    flex-grow: 1;
+    margin-left: 15px;
 }
 
 .item-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 5;
-  color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5;
+    color: white;
 }
 
 .item-details_1 {
-  font-size: 14px;
-  color: #d1a34a;
+    font-size: 14px;
+    color: #d1a34a;
 }
+
 .item-details {
-  font-size: 14px;
-  color: #d1a34a;
+    font-size: 14px;
+    color: #d1a34a;
 }
+
 .item-details_3 {
-  font-size: 14px;
-  color: #d1a34a;
+    font-size: 14px;
+    color: #d1a34a;
 }
+
 .item-details_4 {
-  font-size: 14px;
-  color: #d1a34a;
+    font-size: 14px;
+    color: #d1a34a;
 }
+
 .item-action {
-  font-size: 20px;
-  color: #d1a34a;
-  cursor: pointer;
+    font-size: 20px;
+    color: #d1a34a;
+    cursor: pointer;
 }
 
 .item-action:hover {
-  color: #ffd700;
+    color: #ffd700;
 }
 
-/* Общие стили окна */
 .container_up_buy_1 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1042,11 +1336,12 @@ position: center
     max-height: 500px;
     width: 90%;
     position: fixed;
-    bottom: 75px; /* Поднял выше */
+    bottom: 275px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
+
 .container_up_buy_2 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1057,11 +1352,12 @@ position: center
     max-height: 500px;
     width: 90%;
     position: fixed;
-    bottom: 75px; /* Поднял выше */
+    bottom: 275px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
+
 .container_up_buy_3 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1072,11 +1368,12 @@ position: center
     max-height: 500px;
     width: 90%;
     position: fixed;
-    bottom: 75px; /* Поднял выше */
+    bottom: 275px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
+
 .container_up_buy_4 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1087,11 +1384,12 @@ position: center
     max-height: 500px;
     width: 90%;
     position: fixed;
-    bottom: 75px; /* Поднял выше */
+    bottom: 275px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
+
 .container_box_1 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1100,13 +1398,14 @@ position: center
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     max-width: 400px;
     width: 90%;
-    height: 500px; /* Измените высоту здесь */
+    height: 300px;
     position: absolute;
-    bottom: 120px;
+    bottom: 275px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
+
 .container_box_11 {
     text-align: center;
     background-color: #2e2e3a;
@@ -1115,14 +1414,14 @@ position: center
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     max-width: 400px;
     width: 90%;
-    height: 500px; /* Измените высоту здесь */
+    height: 500px;
     position: absolute;
     bottom: 120px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 }
-/* Слой затемнения */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -1132,6 +1431,7 @@ position: center
     background: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
+
 .overlay_1 {
     position: fixed;
     top: 0;
@@ -1141,6 +1441,7 @@ position: center
     background: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
+
 .overlay_3 {
     position: fixed;
     top: 0;
@@ -1150,6 +1451,7 @@ position: center
     background: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
+
 .overlay_4 {
     position: fixed;
     top: 0;
@@ -1159,6 +1461,7 @@ position: center
     background: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
+
 .overlay_box1 {
     position: fixed;
     top: 0;
@@ -1168,7 +1471,7 @@ position: center
     background: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
-/* Кнопка закрытия */
+
 .close-button_1 {
     position: absolute;
     top: 10px;
@@ -1181,6 +1484,7 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+
 .close-button {
     position: absolute;
     top: 10px;
@@ -1193,6 +1497,7 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+
 .close-button_2 {
     position: absolute;
     top: 10px;
@@ -1205,6 +1510,7 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+
 .close-button_3 {
     position: absolute;
     top: 10px;
@@ -1217,6 +1523,7 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+
 .close-button_4 {
     position: absolute;
     top: 10px;
@@ -1229,6 +1536,7 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
+
 .close-button:hover {
     transform: scale(1.2);
 }
@@ -1245,21 +1553,18 @@ position: center
     z-index: 1000;
     transition: transform 0.3s ease;
 }
-/* Картинка сверху */
+
 .top-image {
     margin-bottom: 5px;
 }
 
-
 .top-image img {
     max-width: 100px;
     display: block;
-    margin: 0 auto; /* Центрирование изображения */
-    margin-bottom: -150px; /* Установите нужный отступ снизу */
+    margin: 0 auto;
+    margin-bottom: -150px;
 }
 
-
-/* Монета слева от текста */
 .price_up_buy {
     font-size: 24px;
     font-weight: bold;
@@ -1276,12 +1581,11 @@ position: center
     margin-right: 10px;
 }
 
-/* Остальные стили остаются такими же */
 .character_up_buy {
     width: 150px;
     height: 150px;
     margin: 0 auto 0px;
-    background: url('brawl_clicker-master/static/images/character.png') no-repeat center center;
+    background: url("images/character.png") no-repeat center center;
     background-size: contain;
 }
 
@@ -1289,14 +1593,14 @@ position: center
     font-size: 24px;
     line-height: 1.5;
     font-weight: bold;
-    margin: 10px 0; /* Установите небольшой верхний отступ для поднятия заголовка */
+    margin: 10px 0;
 }
 
 .description {
     font-size: 16px;
     line-height: 1.5;
     color: #c0c0c0;
-    margin: 5px 0; /* Установите небольшой верхний отступ, если необходимо */
+    margin: 5px 0;
 }
 
 .upgrade-button_1 {
@@ -1309,6 +1613,7 @@ position: center
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .upgrade-button {
     background-color: #ffaa00;
     border: none;
@@ -1319,6 +1624,7 @@ position: center
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .upgrade-button_2 {
     background-color: #ffaa00;
     border: none;
@@ -1329,6 +1635,7 @@ position: center
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .upgrade-button_3 {
     background-color: #ffaa00;
     border: none;
@@ -1339,6 +1646,7 @@ position: center
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .upgrade-button_4 {
     background-color: #ffaa00;
     border: none;
@@ -1362,19 +1670,18 @@ position: center
 }
 
 .upgrade-message {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background-color: #2e2e3a;
-  color: white;
-  border-radius: 5px;
-  font-size: 18px;
-  display: none;
-  z-index: 9999; /* Чтобы сообщение было поверх других элементов */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #2e2e3a;
+    color: white;
+    border-radius: 5px;
+    font-size: 18px;
+    display: none;
+    z-index: 9999;
 }
-
 
 #start-button {
     position: absolute;
@@ -1384,525 +1691,390 @@ position: center
     font-size: 1.5rem;
     padding: 15px 30px;
     cursor: pointer;
-    color: #000; /* Черный текст */
-    background: #fff; /* Белый фон */
-    border: 2px solid #000; /* Черная граница */
+    color: #000;
+    background: #fff;
+    border: 2px solid #000;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); /* Белая тень */
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
     width: 80%;
 }
 
 #start-button:hover {
     transform: translateX(-50%) scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3); /* Белая тень */
-}
-
-
-
-/* Сброс отступов для html и body */
-html, body {
-    margin: 0;  /* Убираем внешние отступы */
-    padding: 0; /* Убираем внутренние отступы */
-    height: 100%; /* Устанавливаем высоту 100% */
-    width: 100%; /* Устанавливаем ширину 100% */
-    overflow-x: hidden; /* Убираем горизонтальный скролл */
-}
-
-/* Босс */
-.boss {
-    position: absolute; /* Позиционирование относительно ближайшего предка с position: relative (или body) */
-    top: 30%; /* Позиция по вертикали в центре */
-    left: 20%; /* Позиция по горизонтали в центре */
-    transform: translate(-50%, -50%); /* Сдвиг на 50% ширины и высоты элемента */
-    width: 350px;
-    height: 350px;
-    cursor: pointer;
-    animation: growShrinkAnimation 1.5s infinite;
-    pointer-events: none;
-    transition: transform 0.3s, width 0.3s, height 0.3s;
-}
-
-/* Анимация для увеличения и уменьшения босса */
-@keyframes growShrinkAnimation {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Полоса здоровья */
-.health-bar {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 25px;
-    background-color: #333; /* Темно-серый фон */
-    border-radius: 20px;
-    overflow: hidden;
-    border: 2px solid #fff; /* Белая граница */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Белая тень */
-}
-
-.health-bar-inner {
-    width: 100%;
-    height: 100%;
-    background-color: orange; /* Белый цвет здоровья */
-    transition: width 0.2s, background-color 0.3s;
-}
-
-/* Таймер */
-.timer {
-    position: absolute;
-    top: 3%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    color: orange;
-    background: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Белая тень */
-    border: 1px solid #fff; /* Белая граница */
-    width: 70%;
-    text-align: center; /* Выравнивание текста по центру по горизонтали */
-    display: flex; /* Использование Flexbox */
-    align-items: center; /* Выравнивание по центру по вертикали */
-    justify-content: center; /* Выравнивание по центру по горизонтали */
-}
-
-/* Уровень */
-.level-text {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    color: orange; /* Белый текст */
-    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
-    font-size: 22px; /* Размер шрифта */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
-}
-
-/* Финальное сообщение */
-.final-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #fff; /* Белый текст */
-    text-align: center;
-    display: none;
-}
-
-/* Кнопка следующего уровня */
-#next-level-button {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    padding: 15px 30px;
-    cursor: pointer;
-    color: #000; /* Черный текст */
-    background: orange; /* Белый фон */
-    border: 2px solid #000; /* Черная граница */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); /* Белая тень */
-    transition: transform 0.3s, box-shadow 0.3s;
-    width: 80%;
-}
-
-#next-level-button:hover {
-    transform: translateX(-50%) scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3); /* Белая тень */
-}
-
-/* Анимация урона для босса */
-@keyframes bossDamage {
-    0% { transform: translate(0, 0); filter: brightness(1); }
-    30% { transform: translate(-2px, 2px); filter: brightness(0.8); }
-    60% { transform: translate(2px, -2px); filter: brightness(0.9); }
-    100% { transform: translate(0, 0); filter: brightness(1); }
-}
-
-.boss-hit {
-    animation: bossDamage 0.15s ease-in-out;
-}
-
-/* Фон для top */
-#top {
-    width: 100%;
-    height: 100vh; /* Высота на весь экран */
-    background-size: cover;
-    background-position: center;
-    transition: background 0.3s ease; /* Плавная смена фона */
-    margin: 0; /* Убираем внешние отступы */
-    padding: 0; /* Убираем внутренние отступы */
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
 .ghost-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/ghost_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: ghostAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/ghost_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: ghostAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes ghostAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 .leaf-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/leaf.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: fireAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/leaf.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: fireAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes leafAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .stone-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/stone_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: stoneAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/stone_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: stoneAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes stoneAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .fire-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/fire_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: fireAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/fire_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: fireAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes fireAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .water-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/water_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: waterAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/water_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: waterAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes waterAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .god-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/god_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: godAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/god_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: godAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes godAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .magic-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/magic_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: magicAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/magic_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: magicAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes magicAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
 
-}.heart-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/heart_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: heartAnimation 1s ease-out forwards;
-  z-index: 1000;
+.heart-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/heart_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: heartAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes heartAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .ananas-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/ananas_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: ananasAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/ananas_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: ananasAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes ananasAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 .frog-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/frog_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: frogAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/frog_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: frogAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes frogAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 .dark-effect {
-  position: absolute;
-  width: 50px; /* Ширина эффекта */
-  height: 50px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/dark_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: darkAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url("images/dark_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: darkAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes darkAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .red-effect {
-  position: absolute;
-  width: 25px;
-  height: 25px;
- background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(255, 99, 71, 0.4)); /* Яркий красный цвет */
-  box-shadow:
-    0 0 20px 5px rgba(255, 0, 0, 0.7), /* Яркий красный цвет для тени */
-    0 0 30px 10px rgba(255, 99, 71, 0.6); /* Более светлый красный цвет для второй тени */
-  border-radius: 50%;
-  pointer-events: none;
-  animation: redAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(255, 99, 71, 0.4));
+    box-shadow:
+        0 0 20px 5px rgba(255, 0, 0, 0.7),
+        0 0 30px 10px rgba(255, 99, 71, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: redAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes redAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .fish-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/fish_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: fishAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/fish_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: fishAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes fishAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
+
 .minion-effect {
-  position: absolute;
-  width: 30px; /* Ширина эффекта */
-  height: 30px; /* Высота эффекта */
-  background: url('brawl_clicker-master/static/images/star_effect.png') no-repeat center center;
-  background-size: contain; /* Сжимаем картинку, чтобы она не выходила за пределы */
-  pointer-events: none;
-  animation: minionAnimation 1s ease-out forwards;
-  z-index: 1000;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("images/star_effect.png") no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    animation: minionAnimation 1s ease-out forwards;
+    z-index: 1000;
 }
 
 @keyframes minionAnimation {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
-/* Эффекты фона */
+
 .spark {
     position: absolute;
-    width: 12px; /* Больше начальный размер */
+    width: 12px;
     height: 12px;
     background: radial-gradient(circle, rgba(255, 100, 0, 1) 10%, rgba(255, 0, 0, 1) 80%);
     border-radius: 50%;
@@ -1917,169 +2089,250 @@ html, body {
     100% { transform: translateY(-150px) scale(1.5); opacity: 0.8; }
 }
 
-/* Бабочкм */
 #butterfly-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Чтобы бабочки не блокировали клики */
+    pointer-events: none;
     z-index: 999;
 }
 
 .butterfly {
     position: absolute;
-    background-image: url('brawl_clicker-master/static/images/batterfly.png'); /* Изображение бабочки */
+    background-image: url("images/batterfly.png");
     background-size: cover;
-    width: 30px; /* Размер бабочки */
-    height: 30px; /* Размер бабочки */
+    width: 30px;
+    height: 30px;
     opacity: 0.8;
-    animation: flyButterfly 10s infinite linear; /* Плавная анимация */
+    animation: flyButterfly 10s infinite linear;
 }
 
-/* Анимация для полета бабочек */
 @keyframes flyButterfly {
     0% {
-        transform: translateX(-100px) translateY(30px); /* Начинаем слева, немного ниже */
+        transform: translateX(-100px) translateY(30px);
         opacity: 1;
     }
     25% {
-        transform: translateX(calc(25vw + 50px)) translateY(10vh); /* Перемещаем бабочку вправо и немного вверх */
+        transform: translateX(calc(25vw + 50px)) translateY(10vh);
         opacity: 1;
     }
     50% {
-        transform: translateX(calc(50vw + 100px)) translateY(20vh); /* Вверх, вправо */
+        transform: translateX(calc(50vw + 100px)) translateY(20vh);
         opacity: 1;
     }
     75% {
-        transform: translateX(calc(75vw + 150px)) translateY(10vh); /* Еще выше */
+        transform: translateX(calc(75vw + 150px)) translateY(10vh);
         opacity: 1;
     }
     100% {
-        transform: translateX(calc(100vw + 100px)) translateY(30px); /* Завершаем движение справа, чуть ниже */
-        opacity: 0; /* Бабочка исчезает */
+        transform: translateX(calc(100vw + 100px)) translateY(30px);
+        opacity: 0;
     }
 }
 
 canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-)
-
-
-html, body {
-    margin: 0;
-    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f8ff;
+    pointer-events: none;
 }
 
+
+/* Сброс отступов для html и body */
+html, body {
+    margin: 0;  /* Убираем внешние отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    height: 100%; /* Устанавливаем высоту 100% */
+    width: 100%; /* Устанавливаем ширину 100% */
+    overflow-x: hidden; /* Убираем горизонтальный скролл */
+}
+
+/* Мини игры */
 .banner-container {
-    display: flex;
-    justify-content: center;
-    gap: 50px; /* Расстояние между баннерами */
-    margin-bottom: 20px;
-}
-
-.banner {
-    font-size: 24px;
-    padding: 20px;
-    background-color: #ffcc00;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    width: 200px;
+    position: absolute;
+    top: 10%;
+    left: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s, background-color 0.3s;
+    margin-top: 100px; /* Дополнительный отступ сверху */
 }
 
-.banner:hover {
-    transform: scale(1.05);
-    background-color: #ffdb4d;
+/* Стили для баннеров */
+.banner {
+    display: flex;
+    align-items: center;
+    background-color: #2e2e3a;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid #d1a34a;
+    cursor: pointer;
+    width: 400px;
+    margin-bottom: 20px; /* Отступ между баннерами */
+}
+
+/* Убираем отступ у последнего баннера */
+.banner:last-child {
+    margin-bottom: 0;
 }
 
 .banner img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    margin-right: 15px;
 }
 
-#gameContainer, #gameContainer2 {
-    position: relative;
+.banner-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc66;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+}
+
+/* Общие стили для игровых контейнеров */
+#gameContainer, #gameContainer2, #gameContainer3 {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #f0f8ff;
     overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
-#score, #score2, #missed2 {
+/* Специфические стили для игр */
+#gameContainer {
+    background-image: url("images/dark_2.png"); /* Добавляем фоновое изображение */
+    background-size: cover; /* Растягиваем изображение на весь контейнер */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Убираем повторение */
+}
+
+#gameContainer2 {
+    background-image: url("images/ice2.png"); /* Добавляем фоновое изображение */
+    background-size: cover; /* Растягиваем изображение на весь контейнер */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Убираем повторение */
+}
+
+#gameContainer3 {
+    background-image: url("images/plat.png"); /* Добавляем фоновое изображение */
+    background-size: cover; /* Растягиваем изображение на весь контейнер */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Убираем повторение */
+}
+
+/* Скрытые элементы */
+.hidden {
+    display: none;
+}
+
+/* Счетчики и уровни */
+#score, #score2, #score3 {
     position: absolute;
     top: 10px;
     left: 10px;
     font-size: 20px;
+    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
+    font-size: 22px; /* Размер шрифта */
+    color: #ffd700; /* Цвет текста */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
+    white-space: nowrap; /* Предотвращаем перенос текста */
 }
 
-#exitButton, #exitButton2 {
+#level {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    top: 40px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
+    font-size: 22px; /* Размер шрифта */
+    color: #ffd700; /* Цвет текста */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
+    white-space: nowrap; /* Предотвращаем перенос текста */
 }
 
-#exitButton:hover, #exitButton2:hover {
-    background-color: #cc0000;
+#missed2 {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'Pusia-bold', sans-serif; /* Шрифт */
+    font-size: 22px; /* Размер шрифта */
+    color: #ffd700; /* Цвет текста */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Тень текста */
 }
 
+/* Элементы игры "Лови монеты" */
 #bag {
     position: absolute;
-    bottom: 100px;
-    width: 100px;
-    height: 100px;
-    background-color: #8b4513;
+    bottom: 70px;
+    width: 200px;
+    height: 200px;
+    background-image: url("images/bag.png"); /* Заменяем коричневый квадрат на изображение */
+    background-size: contain; /* Сохраняем пропорции изображения */
+    background-repeat: no-repeat; /* Убираем повторение */
+    background-position: center; /* Центрируем изображение */
     border-radius: 10px;
 }
 
-.coin {
+.coin3 {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: #ffd700;
+    width: 80px;
+    height: 80px;
+    background-image: url("images/coin.png"); /* Заменяем монеты на изображение */
+    background-size: contain; /* Сохраняем пропорции изображения */
+    background-repeat: no-repeat; /* Убираем повторение */
+    background-position: center; /* Центрируем изображение */
     border-radius: 50%;
 }
 
+/* Элементы игры "Лопай шарики" */
 .balloon {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s;
+    background-size: contain; /* Сохраняем пропорции изображения */
+    background-repeat: no-repeat; /* Убираем повторение */
+    background-position: center; /* Центрируем изображение */
 }
 
 .balloon:hover {
     transform: scale(1.1);
 }
 
-#gameOver, #gameOver2 {
+/* Разные картинки для шариков */
+.balloon-1 {
+    background-image: url("images/balloon1.png");
+}
+
+.balloon-2 {
+    background-image: url("images/balloon2.png");
+}
+
+.balloon-3 {
+    background-image: url("images/balloon3.png");
+}
+
+.balloon-4 {
+    background-image: url("images/balloon4.png");
+}
+
+.balloon-5 {
+    background-image: url("images/balloon5.png");
+}
+
+/* Экран "Game Over" */
+#gameOver, #gameOver2, #gameOver3 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -2089,9 +2342,200 @@ html, body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    z-index: 5;
 }
 
-.hidden {
-    display: none;
+#exitButton, #exitButton2, #exitButton3 {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center; /* Центрируем кнопку по горизонтали */
+    margin-top: auto; /* Прижимаем кнопку к низу контейнера */
+}
+
+#exitButton:hover, #exitButton2:hover, #exitButton3:hover {
+    background-color: #cc0000;
+}
+
+/* Элементы игры "Битва с боссом" */
+#cannon {
+    position: absolute;
+    bottom: 85px;
+    width: 120px;
+    height: 120px;
+    background-image: url("images/cannon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#bossHealth {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'Pusia-bold', sans-serif;
+    font-size: 22px;
+    color: #ff4444;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    white-space: nowrap;
+}
+
+#boss {
+    position: absolute;
+    top: 10px;
+    width: 220px;
+    height: 220px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.boss1 {
+    background-image: url("images/pumpkin.png");
+}
+
+.boss2 {
+    background-image: url("images/ghost_effect.png");
+    width: 220px; /* Второй босс крупнее */
+    height: 220px;
+}
+
+.boss-bullet {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.boss1-bullet {
+    background-image: url("images/fire_effect.png");
+}
+
+.boss2-bullet {
+    background-image: url("images/gast.png");
+    width: 60px; /* Пули второго босса крупнее */
+    height: 60px;
+}
+
+.boss3 {
+    background-image: url("images/coin_man.png");
+    width: 220px; /* Третий босс ещё крупнее */
+    height: 220px;
+}
+
+.boss3-bullet {
+    background-image: url("images/coin.png");
+    width: 55px;
+    height: 55px;
+}
+
+.boss4 {
+    background-image: url("images/troll.png");
+    width: 300px !important;
+    height: 300px !important;
+}
+
+.boss4-bullet {
+    background-image: url("images/stone_effect.png");
+    width: 220px;
+    height: 220px;
+    animation: spin 1.5s infinite linear;
+}
+
+.boss5 {
+    background-image: url("images/mag.png");
+    width: 300px !important;
+    height: 300px !important;
+}
+
+.boss5-beam {
+    background-image: url("images/green_fire.png");
+    width: 15px;
+    height: 70px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform-origin: center top;
+    border: 2px solid black;
+}
+
+.boss6 {
+    background-image: url("images/dark_groot.png");
+    width: 280px !important;
+    height: 280px !important;
+}
+
+.boss6-bullet {
+    background-image: url("images/star_effect2.png");
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.boss6-wave {
+    background: rgba(255, 0, 0, 0.3); /* Полупрозрачная красная волна */
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%); /* Центрируем волну */
+}
+
+.boss6-fast-bullet {
+    background-image: url("images/fire_effect.png");
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.boss7 {
+    background-image: url("images/loki.png");
+    width: 150px;
+    height: 150px;
+}
+
+.boss7-bullet {
+    background-image: url("images/fire_effect.png");
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.boss7-clone {
+    background-image: url("images/loki.png"); /* Укажите путь к вашей картинке */
+    background-size: cover; /* Растягивает изображение, чтобы оно заполнило элемент */
+    background-position: center; /* Центрирует изображение */
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border-radius: 50%; /* Оставляем круглую форму, если нужно */
+}
+
+.boss7-clone-bullet {
+    background-image: url("images/fire_effect.png");
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.player-bullet {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url("images/stone_effect.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
 }
 
