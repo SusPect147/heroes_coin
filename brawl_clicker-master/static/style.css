@@ -2440,21 +2440,21 @@ html, body {
 
 .boss4 {
     background-image: url("images/troll.png");
-    width: 210px !important; /* 300px * 0.7 = 210px */
-    height: 210px !important;
+    width: 175px !important; /* 300px * 0.7 = 210px */
+    height: 175px !important;
 }
 
 .boss4-bullet {
     background-image: url("images/stone_effect.png");
-    width: 145px; /* 220px * 0.7 = 154px */
-    height: 145px;
+    width: 140px; /* 220px * 0.7 = 154px */
+    height: 140px;
     animation: spin 1.5s infinite linear;
 }
 
 .boss5 {
     background-image: url("images/mag.png");
-    width: 210px !important; /* 300px * 0.7 = 210px */
-    height: 210px !important;
+    width: 200px !important; /* 300px * 0.7 = 210px */
+    height: 200px !important;
 }
 
 .boss5-beam {
