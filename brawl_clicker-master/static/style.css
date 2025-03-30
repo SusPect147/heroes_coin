@@ -29,7 +29,7 @@ body {
 
 .progress-container {
     position: fixed;
-    bottom: 620px;
+    bottom: 570px;
     left: 50%;
     transform: translateX(-50%);
     width: 280px;
@@ -93,7 +93,7 @@ body {
     background-color: #2e2e3a;
     display: flex;
     justify-content: space-around;
-    padding: 5px 0 10px 0; /* Уменьшены отступы: сверху 5px вместо 10px, снизу 10px вместо 15px */
+    padding: 0px 0 5px 0; /* Уменьшены отступы: сверху 5px вместо 10px, снизу 10px вместо 15px */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     font-family: 'Pusia-bold', sans-serif;
@@ -2389,8 +2389,8 @@ html, body {
 #boss {
     position: absolute;
     top: 0px;
-    width: 200px;
-    height: 200px;
+    width: 140px; /* 200px * 0.7 = 140px */
+    height: 140px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -2402,14 +2402,14 @@ html, body {
 
 .boss2 {
     background-image: url("images/ghost_effect.png");
-    width: 220px; /* Второй босс крупнее */
-    height: 220px;
+    width: 154px; /* 220px * 0.7 = 154px */
+    height: 154px;
 }
 
 .boss-bullet {
     position: absolute;
-    width: 55px;
-    height: 55px;
+    width: 38px; /* 55px * 0.7 ≈ 38px */
+    height: 38px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -2422,45 +2422,45 @@ html, body {
 
 .boss2-bullet {
     background-image: url("images/gast.png");
-    width: 60px; /* Пули второго босса крупнее */
-    height: 60px;
+    width: 42px; /* 60px * 0.7 = 42px */
+    height: 42px;
 }
 
 .boss3 {
     background-image: url("images/coin_man.png");
-    width: 220px; /* Третий босс ещё крупнее */
-    height: 220px;
+    width: 154px; /* 220px * 0.7 = 154px */
+    height: 154px;
 }
 
 .boss3-bullet {
     background-image: url("images/coin.png");
-    width: 55px;
-    height: 55px;
+    width: 38px; /* 55px * 0.7 ≈ 38px */
+    height: 38px;
 }
 
 .boss4 {
     background-image: url("images/troll.png");
-    width: 300px !important;
-    height: 300px !important;
+    width: 210px !important; /* 300px * 0.7 = 210px */
+    height: 210px !important;
 }
 
 .boss4-bullet {
     background-image: url("images/stone_effect.png");
-    width: 220px;
-    height: 220px;
+    width: 154px; /* 220px * 0.7 = 154px */
+    height: 154px;
     animation: spin 1.5s infinite linear;
 }
 
 .boss5 {
     background-image: url("images/mag.png");
-    width: 300px !important;
-    height: 300px !important;
+    width: 210px !important; /* 300px * 0.7 = 210px */
+    height: 210px !important;
 }
 
 .boss5-beam {
     background-image: url("images/green_fire.png");
-    width: 15px;
-    height: 70px;
+    width: 10px; /* 15px * 0.7 ≈ 10px */
+    height: 49px; /* 70px * 0.7 = 49px */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -2470,14 +2470,14 @@ html, body {
 
 .boss6 {
     background-image: url("images/dark_groot.png");
-    width: 280px !important;
-    height: 280px !important;
+    width: 196px !important; /* 280px * 0.7 = 196px */
+    height: 196px !important;
 }
 
 .boss6-bullet {
     background-image: url("images/star_effect2.png");
-    width: 35px;
-    height: 35px;
+    width: 24px; /* 35px * 0.7 ≈ 24px */
+    height: 24px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -2492,8 +2492,8 @@ html, body {
 
 .boss6-fast-bullet {
     background-image: url("images/fire_effect.png");
-    width: 40px;
-    height: 40px;
+    width: 28px; /* 40px * 0.7 = 28px */
+    height: 28px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -2501,42 +2501,41 @@ html, body {
 
 .boss7 {
     background-image: url("images/loki.png");
-    width: 150px;
-    height: 150px;
+    width: 105px; /* 150px * 0.7 = 105px */
+    height: 105px;
 }
 
 .boss7-bullet {
     background-image: url("images/fire_effect.png");
-    width: 25px;
-    height: 25px;
+    width: 17px; /* 25px * 0.7 ≈ 17px */
+    height: 17px;
     border-radius: 50%;
 }
 
 .boss7-clone {
-    background-image: url("images/loki.png"); /* Укажите путь к вашей картинке */
-    background-size: cover; /* Растягивает изображение, чтобы оно заполнило элемент */
-    background-position: center; /* Центрирует изображение */
-    width: 60px;
-    height: 60px;
+    background-image: url("images/loki.png");
+    background-size: cover;
+    background-position: center;
+    width: 42px; /* 60px * 0.7 = 42px */
+    height: 42px;
     position: absolute;
-    border-radius: 50%; /* Оставляем круглую форму, если нужно */
+    border-radius: 50%;
 }
 
 .boss7-clone-bullet {
     background-image: url("images/fire_effect.png");
-    width: 20px;
-    height: 20px;
+    width: 14px; /* 20px * 0.7 = 14px */
+    height: 14px;
     border-radius: 50%;
 }
 
 .player-bullet {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 28px; /* 40px * 0.7 = 28px */
+    height: 28px;
     background-image: url("images/stone_effect.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 5px;
 }
-
