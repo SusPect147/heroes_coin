@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ) {
                 bullet.remove();
                 playerBullets.splice(index, 1);
-                bossHealth -= 50;
+                bossHealth -= 10;
                 score3 += 1;
                 totalCoins += 1;
                 currentScoreElement.textContent = totalCoins;

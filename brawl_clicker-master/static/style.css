@@ -2172,7 +2172,7 @@ html, body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 2px solid #d1a34a;
     cursor: pointer;
-    width: 400px;
+    width: 200px;
     margin-bottom: 20px; /* Отступ между баннерами */
 }
 
@@ -2274,8 +2274,8 @@ html, body {
 #bag {
     position: absolute;
     bottom: 70px;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background-image: url("images/bag.png"); /* Заменяем коричневый квадрат на изображение */
     background-size: contain; /* Сохраняем пропорции изображения */
     background-repeat: no-repeat; /* Убираем повторение */
@@ -2285,8 +2285,8 @@ html, body {
 
 .coin3 {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background-image: url("images/coin.png"); /* Заменяем монеты на изображение */
     background-size: contain; /* Сохраняем пропорции изображения */
     background-repeat: no-repeat; /* Убираем повторение */
@@ -2365,9 +2365,9 @@ html, body {
 /* Элементы игры "Битва с боссом" */
 #cannon {
     position: absolute;
-    bottom: 85px;
-    width: 120px;
-    height: 120px;
+    bottom: 70px;
+    width: 100px;
+    height: 100px;
     background-image: url("images/cannon.png");
     background-size: contain;
     background-repeat: no-repeat;
