@@ -618,7 +618,7 @@
         </div>
     </div>
 
-    <!-- Мини игры -->
+    <!--Мини игры -->
     <div class="page" id="top" style="display:none;">
 
 <!-- Контейнер для баннеров -->
@@ -634,6 +634,13 @@
             <img src="brawl_clicker-master/static/images/stars.png" alt="Banner 2">
             <span class="banner-text">Tap balloon</span>
         </div>
+
+        <!-- Игра 3: Боссы -->
+<div class="banner" id="startBanner3">
+    <img src="brawl_clicker-master/static/images/bomb.png" alt="Box">
+    <span class="banner-text">Boss Fights</span>
+</div>
+    </div>
 
     <!-- Игровые контейнеры -->
     <div id="gameContainer" class="hidden">
@@ -656,9 +663,20 @@
         </div>
     </div>
 
+<!-- Игра 3: Битва с боссом -->
+<div id="gameContainer3" class="hidden">
+    <div id="score3">Score: <span id="scoreValue3">0</span></div>
+    <div id="bossHealth">HP Boss: <span id="bossHealthValue">100</span></div>
+    <div id="boss"></div>
+    <div id="cannon"></div>
+    <div id="gameOver3" class="hidden">
+        <h2 id="gameOverMessage3">Game Over!</h2>
+        <p>Score: <span id="finalScore3">0</span></p>
+        <button id="exitButton3">Quit</button>
+    </div>
+</div>
 
-</div>
-</div>
+    </div>
 </div>
 
     
