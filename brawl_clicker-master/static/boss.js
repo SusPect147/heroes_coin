@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let spawnInterval;
     let isDraggingBag = false;
 
+    // Проверка на существование элементов
+    if (!gameContainer || !bag || !scoreElement || !gameOverScreen || !finalScoreElement || !exitButton) {
+        console.error("One or more DOM elements for Game 1 are missing. Please check your HTML.");
+        return;
+    }
+
     exitButton.style.display = 'none';
 
     banner.addEventListener('click', () => {
@@ -36,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Управление мышью
     gameContainer.addEventListener('mousedown', (e) => {
+        if (!gameActive) return; // Предотвращаем управление после завершения игры
         isDraggingBag = true;
         moveBag(e.clientX);
     });
 
     document.addEventListener('mousemove', (e) => {
-        if (isDraggingBag) {
-            moveBag(e.clientX);
-        }
+        if (!gameActive || !isDraggingBag) return; // Предотвращаем движение после завершения
+        moveBag(e.clientX);
     });
 
     document.addEventListener('mouseup', () => {
@@ -52,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Управление сенсорным экраном
     gameContainer.addEventListener('touchstart', (e) => {
+        if (!gameActive) return; // Предотвращаем управление после завершения игры
         e.preventDefault();
         isDraggingBag = true;
         moveBag(e.touches[0].clientX);
     });
 
     gameContainer.addEventListener('touchmove', (e) => {
+        if (!gameActive || !isDraggingBag) return; // Предотвращаем движение после завершения
         e.preventDefault();
-        if (isDraggingBag) {
-            moveBag(e.touches[0].clientX);
-        }
+        moveBag(e.touches[0].clientX);
     });
 
     gameContainer.addEventListener('touchend', () => {
@@ -78,11 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
         bag.style.left = `${bagPosition}px`;
     }
 
-    exitButton.addEventListener('click', () => {
+    exitButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // Предотвращаем всплытие события, чтобы не срабатывало управление мешком
+        endGame(); // Завершаем игру полностью
         gameContainer.classList.add('hidden');
         banner.classList.remove('hidden');
         banner2.classList.remove('hidden');
         banner3.classList.remove('hidden');
+        exitButton.style.display = 'none'; // Скрываем кнопку после выхода
     });
 
     function startGame() {

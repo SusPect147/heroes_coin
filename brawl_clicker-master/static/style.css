@@ -93,7 +93,7 @@ body {
     background-color: #2e2e3a;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0 15px 0; /* Увеличены отступы */
+    padding: 5px 0 10px 0; /* Уменьшены отступы: сверху 5px вместо 10px, снизу 10px вместо 15px */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     font-family: 'Pusia-bold', sans-serif;
@@ -106,7 +106,7 @@ body {
     text-decoration: none;
     color: white;
     transition: all 0.3s ease;
-    padding: 5px; /* Добавлен внутренний отступ */
+    padding: 3px; /* Уменьшен внутренний отступ с 5px до 3px */
 }
 
 .navigation .nav-button.active {
@@ -118,7 +118,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px; /* Увеличен промежуток между иконкой и текстом */
+    gap: 3px; /* Уменьшен промежуток между иконкой и текстом с 5px до 3px */
 }
 
 .nav-button img {
@@ -127,9 +127,9 @@ body {
 }
 
 .nav-button figcaption {
-    font-size: 16px; /* Увеличен размер шрифта */
+    font-size: 14px; /* Уменьшен размер шрифта с 16px до 14px */
     font-weight: 500;
-    margin-top: 0; /* Убран отрицательный отступ */
+    margin-top: 0;
 }
 
 .nav-button:hover figcaption {
