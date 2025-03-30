@@ -2446,8 +2446,8 @@ html, body {
 
 .boss4-bullet {
     background-image: url("images/stone_effect.png");
-    width: 154px; /* 220px * 0.7 = 154px */
-    height: 154px;
+    width: 145px; /* 220px * 0.7 = 154px */
+    height: 145px;
     animation: spin 1.5s infinite linear;
 }
 

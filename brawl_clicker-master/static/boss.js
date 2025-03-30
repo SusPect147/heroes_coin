@@ -545,12 +545,12 @@ function gameLoop3() {
         if (bossPosition <= 0 || bossPosition >= gameContainer3.offsetWidth - boss.offsetWidth) {
             bossDirection *= -1;
         }
-    } else if (currentBoss === 3) {
+    } else if (currentBoss === 2.5) {
         bossPosition += bossSpeed * bossDirection;
         if (bossPosition <= 0 || bossPosition >= gameContainer3.offsetWidth - boss.offsetWidth) {
             bossDirection *= -1;
         }
-    } else if (currentBoss === 4) {
+    } else if (currentBoss === 3) {
         const targetPosition = cannonPosition + cannon.offsetWidth / 2 - boss.offsetWidth / 2;
         const diff = targetPosition - bossPosition;
         bossPosition += diff * 0.01;
@@ -559,7 +559,7 @@ function gameLoop3() {
             bossPosition = gameContainer3.offsetWidth - boss.offsetWidth;
         }
         boss4BulletTimer--;
-    } else if (currentBoss === 5) {
+    } else if (currentBoss === 4) {
         boss5TeleportTimer--;
         if (boss5TeleportTimer <= 0) {
             bossPosition = Math.random() * (gameContainer3.offsetWidth - boss.offsetWidth);
@@ -570,7 +570,7 @@ function gameLoop3() {
             boss5TeleportTimer = 180;
         }
         boss5Angle += 0.02;
-    } else if (currentBoss === 6) {
+    } else if (currentBoss === 5) {
         boss6SineOffset += 0.02;
         bossPosition = (gameContainer3.offsetWidth - boss.offsetWidth) / 2 + Math.sin(boss6SineOffset) * 150;
         if (bossPosition < 0) bossPosition = 0;
