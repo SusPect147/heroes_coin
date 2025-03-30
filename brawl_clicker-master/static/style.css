@@ -2172,7 +2172,7 @@ html, body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 2px solid #d1a34a;
     cursor: pointer;
-    width: 200px;
+    width: 250px;
     margin-bottom: 20px; /* Отступ между баннерами */
 }
 
@@ -2365,9 +2365,9 @@ html, body {
 /* Элементы игры "Битва с боссом" */
 #cannon {
     position: absolute;
-    bottom: 70px;
-    width: 100px;
-    height: 100px;
+    bottom: 80px;
+    width: 110px;
+    height: 110px;
     background-image: url("images/cannon.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -2388,9 +2388,9 @@ html, body {
 
 #boss {
     position: absolute;
-    top: 10px;
-    width: 220px;
-    height: 220px;
+    top: 0px;
+    width: 200px;
+    height: 200px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
