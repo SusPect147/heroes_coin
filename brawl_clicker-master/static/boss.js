@@ -652,7 +652,7 @@ function gameLoop3() {
         ) {
             bullet.remove();
             playerBullets.splice(index, 1);
-            bossHealth -= 10;
+            bossHealth -= 40;
             score3 += 1;
             totalCoins += 1;
             currentScoreElement.textContent = totalCoins;
@@ -792,7 +792,7 @@ function gameLoop3() {
             bullet.style.left = `${bulletLeft}px`;
         } else if (currentBoss === 4) {
             const angle = parseFloat(bullet.dataset.angle) || 0;
-            const speed = 3;
+            const speed = 2.5;
             bulletTop += speed;
             bulletLeft += (angle / 30) * speed;
             bullet.style.top = `${bulletTop}px`;

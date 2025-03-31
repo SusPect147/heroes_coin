@@ -2276,8 +2276,8 @@ html, body {
 #bag {
     position: absolute;
     bottom: 70px;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     background-image: url("images/bag.png"); /* Заменяем коричневый квадрат на изображение */
     background-size: contain; /* Сохраняем пропорции изображения */
     background-repeat: no-repeat; /* Убираем повторение */
@@ -2390,7 +2390,7 @@ html, body {
 
 #boss {
     position: absolute;
-    top: 0px;
+    top: -20px;
     width: 150px; /* 200px * 0.7 = 140px */
     height: 150px;
     background-size: contain;
