@@ -652,7 +652,7 @@ function gameLoop3() {
         ) {
             bullet.remove();
             playerBullets.splice(index, 1);
-            bossHealth -= 40;
+            bossHealth -= 30;
             score3 += 1;
             totalCoins += 1;
             currentScoreElement.textContent = totalCoins;
