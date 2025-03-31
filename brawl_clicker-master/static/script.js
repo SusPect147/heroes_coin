@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(recoverEnergy, 50);
 
-  clickButton.onclick = (event) => {
+  // Функция для обработки клика/касания
+  function handleTap(event) {
     if (window.energy >= energyCost) {
       try {
         let score = parseInt(currentScoreElement.innerText) || 0;
@@ -95,38 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
 
         const selectedCharacter = localStorage.getItem('selectedCharacter');
-
-        if (selectedCharacter === "1") {
-          spawnCoinDrop(event);
-        } else if (selectedCharacter === "2") {
-          createGhostEffect(event);
-        } else if (selectedCharacter === "3") {
-          createLeafEffect(event);
-        } else if (selectedCharacter === "4") {
-          createStoneEffect(event);
-        } else if (selectedCharacter === "5") {
-          createFireEffect(event);
-        } else if (selectedCharacter === "6") {
-          createWaterEffect(event);
-        } else if (selectedCharacter === "7") {
-          createGodEffect(event);
-        } else if (selectedCharacter === "8") {
-          createMagicEffect(event);
-        } else if (selectedCharacter === "9") {
-          createHeartEffect(event);
-        } else if (selectedCharacter === "10") {
-          createAnanasEffect(event);
-        } else if (selectedCharacter === "11") {
-          createFrogEffect(event);
-        } else if (selectedCharacter === "12") {
-          createRedEffect(event);
-        } else if (selectedCharacter === "13") {
-          createDarkEffect(event);
-        } else if (selectedCharacter === "14") {
-          createFishEffect(event);
-        } else if (selectedCharacter === "15") {
-          createMinionEffect(event);
-        }
+        spawnEffect(selectedCharacter, event);
 
         if (progress === maxProgress) {
           updateLeague();
@@ -138,7 +108,62 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Ошибка при обновлении счета:", error);
       }
     }
+  }
+
+  // Функция для вызова эффектов
+  function spawnEffect(selectedCharacter, event) {
+    const effects = {
+      "1": spawnCoinDrop,
+      "2": createGhostEffect,
+      "3": createLeafEffect,
+      "4": createStoneEffect,
+      "5": createFireEffect,
+      "6": createWaterEffect,
+      "7": createGodEffect,
+      "8": createMagicEffect,
+      "9": createHeartEffect,
+      "10": createAnanasEffect,
+      "11": createFrogEffect,
+      "12": createRedEffect,
+      "13": createDarkEffect,
+      "14": createFishEffect,
+      "15": createMinionEffect
+    };
+    if (effects[selectedCharacter]) {
+      effects[selectedCharacter](event);
+    }
+  }
+
+  // Обработчик для мыши
+  clickButton.onclick = (event) => {
+    handleTap(event);
+    clickButton.classList.add('active');
+    setTimeout(() => clickButton.classList.remove('active'), 300);
   };
+
+  // Обработчик для мультитапа (касаний)
+  clickButton.addEventListener('touchstart', (event) => {
+    event.preventDefault(); // Предотвращаем прокрутку
+    const touches = event.touches;
+    for (let i = 0; i < touches.length; i++) {
+      const touch = touches[i];
+      const rect = clickButton.getBoundingClientRect();
+      if (
+        touch.clientX >= rect.left &&
+        touch.clientX <= rect.right &&
+        touch.clientY >= rect.top &&
+        touch.clientY <= rect.bottom
+      ) {
+        const tapEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        };
+        handleTap(tapEvent);
+      }
+    }
+    clickButton.classList.add('active');
+    setTimeout(() => clickButton.classList.remove('active'), 300);
+  });
 
   function updateScore(newScore) {
     const scoreElements = document.querySelectorAll('.currentScore');
@@ -240,11 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     coinContainer.appendChild(coin);
     coin.addEventListener('animationend', () => coin.remove());
   }
-
-  clickButton.addEventListener('click', () => {
-    clickButton.classList.add('active');
-    setTimeout(() => clickButton.classList.remove('active'), 300);
-  });
 });
 
 function createGhostEffect(event) {
@@ -429,113 +449,3 @@ function createMinionEffect(event) {
     minion.remove();
   }, 1000);
 }
-
-function createSpark() {
-  const currentBackground = document.body.style.backgroundImage;
-  if (currentBackground !== 'url("brawl_clicker-master/static/images/ad.png")') {
-    return;
-  }
-  let spark = document.createElement("div");
-  spark.classList.add("spark");
-  document.body.appendChild(spark);
-  let size = Math.random() * 2 + 6;
-  spark.style.width = size + "px";
-  spark.style.height = size + "px";
-  let colors = ["#FFD700"];
-  let glowColor = colors[Math.floor(Math.random() * colors.length)];
-  spark.style.background = `radial-gradient(circle, ${glowColor} 10%, rgba(255, 0, 0, 1) 80%)`;
-  spark.style.boxShadow = `0px 0px 50px ${glowColor}, 0px 0px 100px ${glowColor}`;
-  spark.style.left = Math.random() * window.innerWidth + "px";
-  spark.style.top = window.innerHeight + "px";
-  let duration = Math.random() * 1.5 + 1.5;
-  spark.style.animationDuration = duration + "s";
-  setTimeout(() => spark.remove(), duration * 1000);
-}
-
-setInterval(createSpark, 500);
-
-const canvas = document.getElementById("snowCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const snowflakes = [];
-const numFlakes = 100;
-let animationFrameId = null;
-
-class Snowflake {
-  constructor() {
-    this.reset();
-  }
-
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.radius = Math.random() * 3 + 1;
-    this.speed = Math.random() * 1 + 0.2;
-    this.wind = Math.random() * 0.5 - 0.25;
-  }
-
-  update() {
-    this.y += this.speed;
-    this.x += this.wind;
-    if (this.y > canvas.height) {
-      this.y = -this.radius;
-      this.x = Math.random() * canvas.width;
-    }
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-    ctx.closePath();
-  }
-}
-
-for (let i = 0; i < numFlakes; i++) {
-  snowflakes.push(new Snowflake());
-}
-
-function animateSnow() {
-  if (!isSnowEnabled()) {
-    cancelAnimationFrame(animationFrameId);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    return;
-  }
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  snowflakes.forEach(flake => {
-    flake.update();
-    flake.draw();
-  });
-  animationFrameId = requestAnimationFrame(animateSnow);
-}
-
-function isSnowEnabled() {
-  return getComputedStyle(document.body).backgroundImage.includes('brawl_clicker-master/static/images/ice.png');
-}
-
-const observer = new MutationObserver(() => {
-  if (isSnowEnabled()) {
-    if (!animationFrameId) {
-      animateSnow();
-    }
-  } else {
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-});
-
-observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-
-if (isSnowEnabled()) {
-  animateSnow();
-}
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  snowflakes.forEach(flake => flake.reset());
-});
