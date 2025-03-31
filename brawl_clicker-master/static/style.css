@@ -141,10 +141,11 @@ body {
     bottom: 185px;
     left: 50%;
     transform: translateX(-50%);
-    transition: transform 0.5s ease;
+    transition: transform 0.1s ease; /* Уменьшаем время для быстрой реакции */
     width: 330px;
     z-index: 1000;
     animation: pulse 2s ease-in-out infinite;
+    cursor: pointer; /* Указываем, что элемент кликабелен */
 }
 
 @keyframes pulse {
@@ -161,6 +162,7 @@ body {
 
 #clickButton:active {
     transform: translateX(-50%) scale(1.1);
+    animation: none; /* Отключаем анимацию при нажатии */
 }
 
 #coinContainer {
@@ -2389,8 +2391,8 @@ html, body {
 #boss {
     position: absolute;
     top: 0px;
-    width: 140px; /* 200px * 0.7 = 140px */
-    height: 140px;
+    width: 150px; /* 200px * 0.7 = 140px */
+    height: 150px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -2402,8 +2404,8 @@ html, body {
 
 .boss2 {
     background-image: url("images/ghost_effect.png");
-    width: 154px; /* 220px * 0.7 = 154px */
-    height: 154px;
+    width: 164px; /* 220px * 0.7 = 154px */
+    height: 164px;
 }
 
 .boss-bullet {
@@ -2428,8 +2430,8 @@ html, body {
 
 .boss3 {
     background-image: url("images/coin_man.png");
-    width: 154px; /* 220px * 0.7 = 154px */
-    height: 154px;
+    width: 164px; /* 220px * 0.7 = 154px */
+    height: 164px;
 }
 
 .boss3-bullet {
@@ -2440,8 +2442,8 @@ html, body {
 
 .boss4 {
     background-image: url("images/troll.png");
-    width: 175px !important; /* 300px * 0.7 = 210px */
-    height: 175px !important;
+    width: 185px !important; /* 300px * 0.7 = 210px */
+    height: 185px !important;
 }
 
 .boss4-bullet {
