@@ -148,18 +148,6 @@ body {
     cursor: pointer; /* Указываем, что элемент кликабелен */
 }
 
-@keyframes pulse {
-    0% {
-        transform: translateX(-50%) scale(1);
-    }
-    50% {
-        transform: translateX(-50%) scale(1.1);
-    }
-    100% {
-        transform: translateX(-50%) scale(1);
-    }
-}
-
 #clickButton:active {
     transform: translateX(-50%) scale(1.1);
     animation: none; /* Отключаем анимацию при нажатии */
