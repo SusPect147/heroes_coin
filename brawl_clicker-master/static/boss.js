@@ -172,103 +172,102 @@ document.addEventListener('DOMContentLoaded', () => {
         exitButton.style.display = 'block';
     }
 
-    // Игра 2: Собирай монеты
-const gameContainer2 = document.getElementById('gameContainer2');
-const scoreElement2 = document.getElementById('scoreValue2');
-const missedElement = document.getElementById('missedValue2');
-const gameOverScreen2 = document.getElementById('gameOver2');
-const finalScoreElement2 = document.getElementById('finalScore2');
-const exitButton2 = document.getElementById('exitButton2');
+    // Игра 2: Лопай шарики
+    const gameContainer2 = document.getElementById('gameContainer2');
+    const scoreElement2 = document.getElementById('scoreValue2');
+    const missedElement = document.getElementById('missedValue2');
+    const gameOverScreen2 = document.getElementById('gameOver2');
+    const finalScoreElement2 = document.getElementById('finalScore2');
+    const exitButton2 = document.getElementById('exitButton2');
 
-let score2 = 0;
-let missed = 0;
-let gameActive2 = false;
-let coins = [];
-const maxMissed = 3;
-let spawnInterval2;
+    let score2 = 0;
+    let missed = 0;
+    let gameActive2 = false;
+    let balloons = [];
+    const maxMissed = 3;
+    let spawnInterval2;
 
-gameOverScreen2.classList.add('hidden');
-
-banner2.addEventListener('click', () => {
-    banner2.classList.add('hidden');
-    banner.classList.add('hidden');
-    banner3.classList.add('hidden');
-    gameContainer2.classList.remove('hidden');
-    startGame2();
-});
-
-exitButton2.addEventListener('click', () => {
-    gameContainer2.classList.add('hidden');
-    banner.classList.remove('hidden');
-    banner2.classList.remove('hidden');
-    banner3.classList.remove('hidden');
-});
-
-function startGame2() {
-    gameActive2 = true;
-    score2 = 0;
-    missed = 0;
-    scoreElement2.textContent = score2;
-    missedElement.textContent = missed;
-    coins = [];
     gameOverScreen2.classList.add('hidden');
-    spawnCoins();
-}
 
-function spawnCoins() {
-    if (!gameActive2) return;
-    const spawnCount = Math.min(Math.floor(score2 / 10) + 1, 3); // До 3 монет одновременно
-    for (let i = 0; i < spawnCount; i++) {
-        spawnCoin();
-    }
-    const interval = Math.max(1000 - score2 * 50, 300); // Ускоряем появление
-    spawnInterval2 = setTimeout(spawnCoins, interval);
-}
-
-function spawnCoin() {
-    if (!gameActive2) return;
-    const coin = document.createElement('div');
-    coin.classList.add('coin');
-    const coinWidth = 60; // Меньший размер для монет
-    const coinHeight = 60;
-    const navBarHeight = 40;
-
-    coin.style.left = `${Math.random() * (gameContainer2.offsetWidth - coinWidth)}px`;
-    const maxTop = gameContainer2.offsetHeight - coinHeight - navBarHeight;
-    coin.style.top = `${Math.random() * maxTop}px`;
-
-    gameContainer2.appendChild(coin);
-    coins.push(coin);
-
-    setTimeout(() => {
-        if (coin.parentElement && gameActive2) {
-            coin.remove();
-            coins = coins.filter(c => c !== coin);
-            missed++;
-            missedElement.textContent = missed;
-            if (missed >= maxMissed) endGame2();
-        }
-    }, 2000 - Math.min(score2 * 50, 1500)); // Ускоряем исчезновение
-
-    coin.addEventListener('click', () => {
-        coin.remove();
-        coins = coins.filter(c => c !== coin);
-        score2++;
-        totalCoins += 1;
-        currentScoreElement.textContent = totalCoins;
-        localStorage.setItem('totalCoins', totalCoins);
-        scoreElement2.textContent = score2;
+    banner2.addEventListener('click', () => {
+        banner2.classList.add('hidden');
+        banner.classList.add('hidden');
+        banner3.classList.add('hidden');
+        gameContainer2.classList.remove('hidden');
+        startGame2();
     });
-}
 
-function endGame2() {
-    gameActive2 = false;
-    clearTimeout(spawnInterval2);
-    coins.forEach(coin => coin.remove());
-    coins = [];
-    finalScoreElement2.textContent = score2;
-    gameOverScreen2.classList.remove('hidden');
-}
+    exitButton2.addEventListener('click', () => {
+        gameContainer2.classList.add('hidden');
+        banner.classList.remove('hidden');
+        banner2.classList.remove('hidden');
+        banner3.classList.remove('hidden');
+    });
+
+    function startGame2() {
+        gameActive2 = true;
+        score2 = 0;
+        missed = 0;
+        scoreElement2VILLEtext = score2;
+        missedElement.textContent = missed;
+        balloons = [];
+        gameOverScreen2.classList.add('hidden');
+        spawnBalloons();
+    }
+
+    function spawnBalloons() {
+        if (!gameActive2) return;
+        spawnBalloon();
+        const interval = 2000 - Math.min(score2 * 80, 1000);
+        spawnInterval2 = setTimeout(spawnBalloons, interval);
+    }
+
+    function spawnBalloon() {
+        if (!gameActive2) return;
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        const randomBalloonType = Math.floor(Math.random() * 5) + 1;
+        balloon.classList.add(`balloon-${randomBalloonType}`);
+        const balloonWidth = 100;
+        const balloonHeight = 100;
+        const navBarHeight = 40;
+
+        balloon.style.left = `${Math.random() * (gameContainer2.offsetWidth - balloonWidth)}px`;
+        const maxTop = gameContainer2.offsetHeight - balloonHeight - navBarHeight;
+        balloon.style.top = `${Math.random() * maxTop}px`;
+
+        gameContainer2.appendChild(balloon);
+        balloons.push(balloon);
+
+        setTimeout(() => {
+            if (balloon.parentElement && gameActive2) {
+                balloon.remove();
+                balloons = balloons.filter(b => b !== balloon);
+                missed++;
+                missedElement.textContent = missed;
+                if (missed >= maxMissed) endGame2();
+            }
+        }, 3000 - Math.min(score2 * 80, 2500));
+
+        balloon.addEventListener('click', () => {
+            balloon.remove();
+            balloons = balloons.filter(b => b !== balloon);
+            score2++;
+            totalCoins += 1;
+            currentScoreElement.textContent = totalCoins;
+            localStorage.setItem('totalCoins', totalCoins);
+            scoreElement2.textContent = score2;
+        });
+    }
+
+    function endGame2() {
+        gameActive2 = false;
+        clearTimeout(spawnInterval2);
+        balloons.forEach(balloon => balloon.remove());
+        balloons = [];
+        finalScoreElement2.textContent = score2;
+        gameOverScreen2.classList.remove('hidden');
+    }
 
 // Игра 3: Битва с боссами
 const gameContainer3 = document.getElementById('gameContainer3');
