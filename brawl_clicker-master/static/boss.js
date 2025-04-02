@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 coin.remove();
                 coins.splice(index, 1);
                 score++;
-                totalCoins += 1;
+                totalCoins += window.coinsPerPoint; // Используем улучшение
                 currentScoreElement.textContent = totalCoins;
                 localStorage.setItem('totalCoins', totalCoins);
                 scoreElement.textContent = score;
@@ -270,7 +270,7 @@ function spawnCircle() {
         circle.remove();
         circles = circles.filter(c => c !== circle);
         score2++;
-        totalCoins += 1;
+        totalCoins += window.coinsPerPoint; // Используем улучшение
         currentScoreElement.textContent = totalCoins;
         localStorage.setItem('totalCoins', totalCoins);
         scoreElement2.textContent = score2;
@@ -672,7 +672,7 @@ function gameLoop3() {
             playerBullets.splice(index, 1);
             bossHealth -= 30;
             score3 += 1;
-            totalCoins += 1;
+            totalCoins += window.coinsPerPoint;
             currentScoreElement.textContent = totalCoins;
             localStorage.setItem('totalCoins', totalCoins);
             scoreElement3.textContent = score3;

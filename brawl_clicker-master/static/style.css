@@ -1350,7 +1350,8 @@ h2 {
 .item_up1,
 .item_up2,
 .item_up3,
-.item_up4 {
+.item_up4,
+.item_up5 { /* Добавлен .item_up5 */
     position: relative;
     padding: 15px 25px;
     background-color: #2e2e3a;
@@ -1363,7 +1364,7 @@ h2 {
     overflow: hidden;
 }
 
-.item_up1 > *, .item_up2 > *, .item_up3 > *, .item_up4 > * {
+.item_up1 > *, .item_up2 > *, .item_up3 > *, .item_up4 > *, .item_up5 > * { /* Добавлен .item_up5 */
     transform: skew(10deg);
 }
 
@@ -1388,26 +1389,15 @@ h2 {
 .item-title {
     font-size: 16px;
     font-weight: bold;
-    margin: 5;
+    margin: 5px 0; /* Исправлен отступ */
     color: white;
 }
 
-.item-details_1 {
-    font-size: 14px;
-    color: #d1a34a;
-}
-
-.item-details {
-    font-size: 14px;
-    color: #d1a34a;
-}
-
-.item-details_3 {
-    font-size: 14px;
-    color: #d1a34a;
-}
-
-.item-details_4 {
+.item-details_1,
+.item-details,
+.item-details_3,
+.item-details_4,
+.item-details_5 { /* Добавлен .item-details_5 */
     font-size: 14px;
     color: #d1a34a;
 }
@@ -1518,43 +1508,17 @@ h2 {
     z-index: 999;
 }
 
-.overlay {
+.overlay_1,
+.overlay,
+.overlay_3,
+.overlay_4,
+.overlay_5 { /* Добавлен .overlay_5 */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-.overlay_1 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-.overlay_3 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-.overlay_4 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 998;
 }
 
@@ -1568,73 +1532,27 @@ h2 {
     z-index: 998;
 }
 
-.close-button_1 {
+.close-button_1,
+.close-button_2,
+.close-button_3,
+.close-button_4,
+.close-button_5 { /* Добавлен .close-button_5 */
     position: absolute;
     top: 10px;
     right: 10px;
     background: none;
     border: none;
     font-size: 24px;
-    color: #fff;
+    color: #d1a34a;
     cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.close-button_2 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.close-button_3 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.close-button_4 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.close-button:hover {
-    transform: scale(1.2);
+.close-button_1:hover,
+.close-button_2:hover,
+.close-button_3:hover,
+.close-button_4:hover,
+.close-button_5:hover { /* Добавлен .close-button_5:hover */
+    color: #ffd700;
 }
 
 .close-button_box1 {
@@ -1699,59 +1617,28 @@ h2 {
     margin: 5px 0;
 }
 
-.upgrade-button_1 {
-    background-color: #ffaa00;
+.upgrade-button_1,
+.upgrade-button_2,
+.upgrade-button_3,
+.upgrade-button_4,
+.upgrade-button_5 { /* Добавлен .upgrade-button_5 */
+    background-color: #d1a34a;
+    color: #2e2e3a;
     border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
     padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-top: 15px;
 }
 
-.upgrade-button {
-    background-color: #ffaa00;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upgrade-button_2 {
-    background-color: #ffaa00;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upgrade-button_3 {
-    background-color: #ffaa00;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upgrade-button_4 {
-    background-color: #ffaa00;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.upgrade-button_1:hover,
+.upgrade-button_2:hover,
+.upgrade-button_3:hover,
+.upgrade-button_4:hover,
+.upgrade-button_5:hover { /* Добавлен .upgrade-button_5:hover */
+    background-color: #ffd700;
 }
 
 .upgrade-button_box1 {
