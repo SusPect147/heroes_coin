@@ -182,8 +182,8 @@ const exitButton2 = document.getElementById('exitButton2');
 let score2 = 0;
 let missed = 0;
 let gameActive2 = false;
-let circles = []; // Заменил balloons на circles
-const maxMissed = 3;
+let circles = [];
+const maxMissed = 5; // Увеличил максимум пропущенных до 5
 let spawnInterval2;
 
 gameOverScreen2.classList.add('hidden');
@@ -207,32 +207,43 @@ function startGame2() {
     gameActive2 = true;
     score2 = 0;
     missed = 0;
-    scoreElement2.textContent = score2; // Исправил VILLEtext на textContent
+    scoreElement2.textContent = score2;
     missedElement.textContent = missed;
     circles = [];
     gameOverScreen2.classList.add('hidden');
-    spawnCircles(); // Заменил spawnBalloons на spawnCircles
+    spawnCircles();
 }
 
 function spawnCircles() {
     if (!gameActive2) return;
-    spawnCircle(); // Заменил spawnBalloon на spawnCircle
-    const interval = 2000 - Math.min(score2 * 80, 1000);
+
+    // Количество кругов зависит от счета: 1 + score2/10 (округляем вниз)
+    const circleCount = Math.min(1 + Math.floor(score2 / 10), 8); // Максимум 8 кругов
+
+    for (let i = 0; i < circleCount; i++) {
+        spawnCircle();
+    }
+
+    // Уменьшаем интервал появления с увеличением счета
+    const interval = Math.max(1500 - score2 * 50, 500); // От 1500мс до 500мс
     spawnInterval2 = setTimeout(spawnCircles, interval);
 }
 
 function spawnCircle() {
     if (!gameActive2) return;
     const circle = document.createElement('div');
-    circle.classList.add('circle'); // Заменил balloon на circle
+    circle.classList.add('circle');
 
-    // Массив возможных цветов
     const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.backgroundColor = randomColor;
 
-    const circleSize = 80; // Размер круга
+    // Случайный размер от 60 до 100px
+    const circleSize = 60 + Math.random() * 40;
     const navBarHeight = 40;
+
+    circle.style.width = `${circleSize}px`;
+    circle.style.height = `${circleSize}px`;
 
     circle.style.left = `${Math.random() * (gameContainer2.offsetWidth - circleSize)}px`;
     const maxTop = gameContainer2.offsetHeight - circleSize - navBarHeight;
@@ -241,6 +252,8 @@ function spawnCircle() {
     gameContainer2.appendChild(circle);
     circles.push(circle);
 
+    // Время жизни круга уменьшается с увеличением счета
+    const lifetime = Math.max(3000 - score2 * 80, 1000); // От 3000мс до 1000мс
     setTimeout(() => {
         if (circle.parentElement && gameActive2) {
             circle.remove();
@@ -249,7 +262,7 @@ function spawnCircle() {
             missedElement.textContent = missed;
             if (missed >= maxMissed) endGame2();
         }
-    }, 3000 - Math.min(score2 * 80, 2500));
+    }, lifetime);
 
     circle.addEventListener('click', () => {
         circle.remove();
