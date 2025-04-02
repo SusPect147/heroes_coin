@@ -2,6 +2,28 @@ document.addEventListener("DOMContentLoaded", function() {
   const menuButtons = document.querySelectorAll(".nav-button");
   const pages = document.querySelectorAll(".page");
 
+  // Предзагрузка всех изображений
+  function preloadImages() {
+    // Собираем все изображения со страницы
+    const images = document.querySelectorAll("img");
+    const imageSources = Array.from(images).map(img => img.src);
+
+    // Можно также вручную указать пути к изображениям, если они не все в HTML
+    const additionalImages = [
+      "path/to/background1.jpg",
+      "path/to/background2.jpg",
+      // Добавь свои фоны или картинки для мини-игр
+    ];
+
+    // Объединяем списки
+    const allImages = [...imageSources, ...additionalImages];
+
+    // Предзагружаем изображения
+    allImages.forEach(src => {
+      const img = new Image(); // Создаем объект изображения
+      img.src = src; // Присваиваем источник, что запускает загрузку
+    });
+  }
 
   // Восстановление значений из localStorage (при загрузке страницы)
   function initializeScore() {
@@ -45,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function() {
       activePage.style.display = "block"; // Показываем нужную страницу
     });
   });
+
+  // Вызываем предзагрузку изображений и инициализацию счета при загрузке
+  preloadImages();
+  initializeScore();
 });
 
 // Менюшка
