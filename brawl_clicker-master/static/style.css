@@ -2123,14 +2123,6 @@ h2 {
     }
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
 
 
 /* Сброс отступов для html и body */
@@ -2285,41 +2277,17 @@ html, body {
 }
 
 /* Элементы игры "Лопай шарики" */
-.balloon {
-    position: absolute;
-    width: 100px;
-    height: 100px;
+.circle {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
+    position: absolute;
     cursor: pointer;
     transition: transform 0.2s;
-    background-size: contain; /* Сохраняем пропорции изображения */
-    background-repeat: no-repeat; /* Убираем повторение */
-    background-position: center; /* Центрируем изображение */
 }
 
-.balloon:hover {
+.circle:hover {
     transform: scale(1.1);
-}
-
-/* Разные картинки для шариков */
-.balloon-1 {
-    background-image: url("images/balloon1.png");
-}
-
-.balloon-2 {
-    background-image: url("images/balloon2.png");
-}
-
-.balloon-3 {
-    background-image: url("images/balloon3.png");
-}
-
-.balloon-4 {
-    background-image: url("images/balloon4.png");
-}
-
-.balloon-5 {
-    background-image: url("images/balloon5.png");
 }
 
 /* Экран "Game Over" */
