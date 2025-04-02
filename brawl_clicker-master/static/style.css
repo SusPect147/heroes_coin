@@ -220,7 +220,7 @@ body {
 
 .coin {
     margin-left: 0;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .coin img {
@@ -232,7 +232,7 @@ body {
 
 .coin2 {
     margin-left: 0;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .coin2 img {
