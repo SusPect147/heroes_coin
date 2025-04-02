@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         finalScoreElement.textContent = score;
         gameOverScreen.classList.remove('hidden');
         exitButton.style.display = 'block';
+        window.incrementMinigamesPlayed();
     }
 
 // Игра 2: Лопай шарики
@@ -283,6 +284,7 @@ function endGame2() {
     circles = [];
     finalScoreElement2.textContent = score2;
     gameOverScreen2.classList.remove('hidden');
+    window.incrementMinigamesPlayed();
 }
 
 // Игра 3: Битва с боссами
@@ -964,6 +966,7 @@ function endGame3(victory) {
         localStorage.setItem('totalCoins', totalCoins);
         currentScoreElement.textContent = totalCoins;
     }
+    window.incrementMinigamesPlayed();
 }
 
 exitButton3.addEventListener('click', () => {

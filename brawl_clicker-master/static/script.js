@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Функция подписки на Telegram
   function subscribeToTelegram() {
-    window.open('https://t.me/your_channel', '_blank'); // Замени на ссылку на твой канал
+    window.open('https://t.me/heroes_coin', '_blank'); // Замени на ссылку на твой канал
     isSubscribedToTelegram = true;
     localStorage.setItem('isSubscribedToTelegram', 'true');
     updateConditionsDisplay();
