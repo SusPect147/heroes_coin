@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         exitButton.style.display = 'block';
     }
 
+// Игра 2: Лопай шарики
 const gameContainer2 = document.getElementById('gameContainer2');
 const scoreElement2 = document.getElementById('scoreValue2');
 const missedElement = document.getElementById('missedValue2');
@@ -183,7 +184,7 @@ let score2 = 0;
 let missed = 0;
 let gameActive2 = false;
 let circles = [];
-const maxMissed = 5; // Увеличил максимум пропущенных до 5
+const maxMissed = 5;
 let spawnInterval2;
 
 gameOverScreen2.classList.add('hidden');
@@ -217,15 +218,14 @@ function startGame2() {
 function spawnCircles() {
     if (!gameActive2) return;
 
-    // Количество кругов зависит от счета: 1 + score2/10 (округляем вниз)
-    const circleCount = Math.min(1 + Math.floor(score2 / 10), 8); // Максимум 8 кругов
+    const circleCount = Math.min(1 + Math.floor(score2 / 10), 8);
 
     for (let i = 0; i < circleCount; i++) {
         spawnCircle();
     }
 
-    // Уменьшаем интервал появления с увеличением счета
-    const interval = Math.max(1500 - score2 * 50, 500); // От 1500мс до 500мс
+    // Замедляем ускорение: уменьшаем влияние score2
+    const interval = Math.max(1500 - score2 * 20, 800); // От 1500мс до 800мс
     spawnInterval2 = setTimeout(spawnCircles, interval);
 }
 
@@ -238,7 +238,6 @@ function spawnCircle() {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.backgroundColor = randomColor;
 
-    // Случайный размер от 60 до 100px
     const circleSize = 60 + Math.random() * 40;
     const navBarHeight = 40;
 
@@ -252,8 +251,7 @@ function spawnCircle() {
     gameContainer2.appendChild(circle);
     circles.push(circle);
 
-    // Время жизни круга уменьшается с увеличением счета
-    const lifetime = Math.max(3000 - score2 * 80, 1000); // От 3000мс до 1000мс
+    const lifetime = Math.max(3000 - score2 * 80, 1000);
     setTimeout(() => {
         if (circle.parentElement && gameActive2) {
             circle.remove();
