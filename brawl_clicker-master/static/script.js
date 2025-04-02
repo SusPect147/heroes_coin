@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressLabel = document.querySelector('#progressLabel');
   const energyDisplay = document.querySelector('#energyDisplay');
   const coinContainer = document.querySelector('#coinContainer');
+  const conditionsModal = document.getElementById('conditionsModal');
+  const closeModal = document.getElementById('closeModal');
+  const subscribeButton = document.getElementById('subscribeButton');
 
   let progress = 0;
   const maxProgress = 100;
@@ -17,10 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.energyRecoveryRate = parseInt(localStorage.getItem('energyRecoveryRate'), 10) || 5;
   window.coinsPerClick = 1;
 
+  // Переменные для условий
+  let minigamesPlayed = parseInt(localStorage.getItem('minigamesPlayed')) || 0;
+  let isSubscribedToTelegram = localStorage.getItem('isSubscribedToTelegram') === 'true';
+
   const savedCoinsPerClick = localStorage.getItem('coinsPerClick');
-  if (savedCoinsPerClick) {
-    window.coinsPerClick = parseInt(savedCoinsPerClick, 10);
-  }
+  if (savedCoinsPerClick) window.coinsPerClick = parseInt(savedCoinsPerClick, 10);
 
   const savedLeagueLevel = localStorage.getItem('leagueLevel');
   if (savedLeagueLevel !== null) {
@@ -41,109 +46,117 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const savedCharacterImg = localStorage.getItem('selectedCharacterImg');
-  if (savedCharacterImg) {
-    clickButton.src = savedCharacterImg;
+  if (savedCharacterImg) clickButton.src = savedCharacterImg;
+
+  // Обновление интерфейса условий
+  function updateConditionsDisplay() {
+    const coins = parseInt(currentScoreElement.innerText) || 0;
+    document.getElementById('coinsCondition').innerHTML = `Набрать 1000 монет: <span>${coins}/1000</span>`;
+    document.getElementById('minigamesCondition').innerHTML = `Сыграть в мини-игры 5 раз: <span>${minigamesPlayed}/5</span>`;
+    document.getElementById('telegramCondition').innerHTML = `Подписаться на Telegram: ${
+      isSubscribedToTelegram ? 'Выполнено' : '<button id="subscribeButton">Подписаться</button>'
+    }`;
+    if (!isSubscribedToTelegram) {
+      document.getElementById('subscribeButton').addEventListener('click', subscribeToTelegram);
+    }
   }
 
+  // Функция подписки на Telegram
+  function subscribeToTelegram() {
+    window.open('https://t.me/your_channel', '_blank'); // Замени на ссылку на твой канал
+    isSubscribedToTelegram = true;
+    localStorage.setItem('isSubscribedToTelegram', 'true');
+    updateConditionsDisplay();
+  }
+
+  // Показать модальное окно
+  function showConditionsModal() {
+    updateConditionsDisplay();
+    conditionsModal.style.display = 'flex';
+  }
+
+  // Закрыть модальное окно
+  closeModal.addEventListener('click', () => {
+    conditionsModal.style.display = 'none';
+  });
+
   window.updateClickButtonImage = (imgSrc) => {
-    const clickButton = document.getElementById('clickButton');
-    if (clickButton) {
-      const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
-      clickButton.src = cleanSrc;
-    }
+    const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
+    clickButton.src = cleanSrc;
   };
 
   window.updateCoinsPerClick = (newCoinsPerClick) => {
     window.coinsPerClick = newCoinsPerClick;
     localStorage.setItem('coinsPerClick', newCoinsPerClick);
     const coinsPerClickDisplay = document.getElementById('coinsPerClickDisplay');
-    if (coinsPerClickDisplay) {
-      coinsPerClickDisplay.textContent = `Монет за клик: ${window.coinsPerClick}`;
-    }
+    if (coinsPerClickDisplay) coinsPerClickDisplay.textContent = `Монет за клик: ${window.coinsPerClick}`;
   };
 
   window.updateEnergyRecoveryRate = (newRate) => {
     window.energyRecoveryRate = newRate;
     localStorage.setItem('energyRecoveryRate', newRate);
     const energyRecoveryRateDisplay = document.getElementById('energyRecoveryRateDisplay');
-    if (energyRecoveryRateDisplay) {
-      energyRecoveryRateDisplay.textContent = `Скорость восстановления энергии: ${newRate}`;
-    }
+    if (energyRecoveryRateDisplay) energyRecoveryRateDisplay.textContent = `Скорость восстановления энергии: ${newRate}`;
   };
 
   function recoverEnergy() {
-    const recoveryRate = window.energyRecoveryRate;
-    window.energy = Math.min(window.energy + recoveryRate / 10, window.maxEnergy);
+    window.energy = Math.min(window.energy + window.energyRecoveryRate / 10, window.maxEnergy);
     energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
   }
 
   setInterval(recoverEnergy, 50);
 
-  // Функция для обработки клика/касания
   function handleTap(event) {
     if (window.energy >= energyCost) {
-      try {
-        let score = parseInt(currentScoreElement.innerText) || 0;
-        score += window.coinsPerClick;
-        updateScore(score);
+      let score = parseInt(currentScoreElement.innerText) || 0;
+      score += window.coinsPerClick;
+      updateScore(score);
 
-        const progressIncrement = (maxProgress / clicksPerLevel) * window.coinsPerClick;
-        progress = Math.min(progress + progressIncrement, maxProgress);
-        progressBar.style.width = `${progress}%`;
-        localStorage.setItem('currentProgress', progress);
+      const progressIncrement = (maxProgress / clicksPerLevel) * window.coinsPerClick;
+      progress = Math.min(progress + progressIncrement, maxProgress);
+      progressBar.style.width = `${progress}%`;
+      localStorage.setItem('currentProgress', progress);
 
-        window.energy = Math.max(window.energy - energyCost, 0);
-        energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
+      window.energy = Math.max(window.energy - energyCost, 0);
+      energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
 
-        const selectedCharacter = localStorage.getItem('selectedCharacter');
-        spawnEffect(selectedCharacter, event);
+      const selectedCharacter = localStorage.getItem('selectedCharacter');
+      spawnEffect(selectedCharacter, event);
 
-        if (progress === maxProgress) {
-          updateLeague();
-          progress = 0;
-          progressBar.style.width = '0%';
-          localStorage.setItem('currentProgress', 0);
-        }
-      } catch (error) {
-        console.error("Ошибка при обновлении счета:", error);
+      if (progress === maxProgress) {
+        checkAndUpdateLeague();
       }
     }
   }
 
-  // Функция для вызова эффектов
-  function spawnEffect(selectedCharacter, event) {
-    const effects = {
-      "1": spawnCoinDrop,
-      "2": createGhostEffect,
-      "3": createLeafEffect,
-      "4": createStoneEffect,
-      "5": createFireEffect,
-      "6": createWaterEffect,
-      "7": createGodEffect,
-      "8": createMagicEffect,
-      "9": createHeartEffect,
-      "10": createAnanasEffect,
-      "11": createFrogEffect,
-      "12": createRedEffect,
-      "13": createDarkEffect,
-      "14": createFishEffect,
-      "15": createMinionEffect
-    };
-    if (effects[selectedCharacter]) {
-      effects[selectedCharacter](event);
+  function checkAndUpdateLeague() {
+    const coins = parseInt(currentScoreElement.innerText) || 0;
+    const conditionsMet = coins >= 1000 && minigamesPlayed >= 5 && isSubscribedToTelegram;
+
+    if (leagueLevel === 0 && !conditionsMet) {
+      showConditionsModal();
+    } else {
+      updateLeague();
+      progress = 0;
+      progressBar.style.width = '0%';
+      localStorage.setItem('currentProgress', 0);
     }
   }
 
-  // Обработчик для мыши
+  // Пример функции для увеличения счетчика мини-игр (вызывай ее, когда игрок завершает мини-игру)
+  window.incrementMinigamesPlayed = () => {
+    minigamesPlayed++;
+    localStorage.setItem('minigamesPlayed', minigamesPlayed);
+  };
+
   clickButton.onclick = (event) => {
     handleTap(event);
     clickButton.classList.add('active');
     setTimeout(() => clickButton.classList.remove('active'), 300);
   };
 
-  // Обработчик для мультитапа (касаний)
   clickButton.addEventListener('touchstart', (event) => {
-    event.preventDefault(); // Предотвращаем прокрутку
+    event.preventDefault();
     const touches = event.touches;
     for (let i = 0; i < touches.length; i++) {
       const touch = touches[i];
@@ -154,10 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         touch.clientY >= rect.top &&
         touch.clientY <= rect.bottom
       ) {
-        const tapEvent = {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        };
+        const tapEvent = { clientX: touch.clientX, clientY: touch.clientY };
         handleTap(tapEvent);
       }
     }
@@ -167,9 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateScore(newScore) {
     const scoreElements = document.querySelectorAll('.currentScore');
-    scoreElements.forEach((element) => {
-      element.innerText = newScore;
-    });
+    scoreElements.forEach((element) => element.innerText = newScore);
     localStorage.setItem('currentScore', newScore);
   }
 
@@ -257,6 +265,27 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('backgroundImage', backgroundImage);
   }
 
+  function spawnEffect(selectedCharacter, event) {
+    const effects = {
+      "1": spawnCoinDrop,
+      "2": createGhostEffect,
+      "3": createLeafEffect,
+      "4": createStoneEffect,
+      "5": createFireEffect,
+      "6": createWaterEffect,
+      "7": createGodEffect,
+      "8": createMagicEffect,
+      "9": createHeartEffect,
+      "10": createAnanasEffect,
+      "11": createFrogEffect,
+      "12": createRedEffect,
+      "13": createDarkEffect,
+      "14": createFishEffect,
+      "15": createMinionEffect
+    };
+    if (effects[selectedCharacter]) effects[selectedCharacter](event);
+  }
+
   function spawnCoinDrop(event) {
     const coin = document.createElement('div');
     coin.classList.add('coin_drop');
@@ -266,6 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
     coin.addEventListener('animationend', () => coin.remove());
   }
 });
+
+// Оставшиеся функции эффектов остаются без изменений (createGhostEffect, createLeafEffect и т.д.)
 
 function createGhostEffect(event) {
   const ghost = document.createElement('div');
