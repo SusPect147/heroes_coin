@@ -218,14 +218,15 @@ function startGame2() {
 function spawnCircles() {
     if (!gameActive2) return;
 
-    const circleCount = Math.min(1 + Math.floor(score2 / 10), 8);
+    // Сразу появляется от 2 до 5 кругов
+    const circleCount = Math.min(2 + Math.floor(score2 / 15), 5); // Начинаем с 2, максимум 5
 
     for (let i = 0; i < circleCount; i++) {
         spawnCircle();
     }
 
-    // Замедляем ускорение: уменьшаем влияние score2
-    const interval = Math.max(1500 - score2 * 20, 800); // От 1500мс до 800мс
+    // Плавное ускорение: от 2500мс до 700мс
+    const interval = Math.max(2500 - score2 * 25, 700);
     spawnInterval2 = setTimeout(spawnCircles, interval);
 }
 
@@ -239,19 +240,21 @@ function spawnCircle() {
     circle.style.backgroundColor = randomColor;
 
     const circleSize = 60 + Math.random() * 40;
-    const navBarHeight = 40;
+    const navBarHeight = 40; // Восстановил отступ сверху
+    const bottomMargin = 20; // Добавил небольшой отступ снизу
 
     circle.style.width = `${circleSize}px`;
     circle.style.height = `${circleSize}px`;
 
+    // Рандомное положение с учетом отступов сверху и снизу
     circle.style.left = `${Math.random() * (gameContainer2.offsetWidth - circleSize)}px`;
-    const maxTop = gameContainer2.offsetHeight - circleSize - navBarHeight;
-    circle.style.top = `${Math.random() * maxTop}px`;
+    const maxTop = gameContainer2.offsetHeight - circleSize - navBarHeight - bottomMargin;
+    circle.style.top = `${navBarHeight + Math.random() * maxTop}px`;
 
     gameContainer2.appendChild(circle);
     circles.push(circle);
 
-    const lifetime = Math.max(3000 - score2 * 80, 1000);
+    const lifetime = Math.max(3000 - score2 * 50, 1000);
     setTimeout(() => {
         if (circle.parentElement && gameActive2) {
             circle.remove();
