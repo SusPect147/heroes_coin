@@ -1208,6 +1208,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    position: relative; /* Добавляем позиционирование для контроля дочерних элементов */
 }
 
 
@@ -1262,11 +1263,9 @@ h2 {
 
 .preview {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 200px; /* Фиксируем ширину превью */
+    margin: 10px auto 20px; /* 10px сверху от меню, 20px снизу до кнопки, auto для центрирования */
     text-align: center;
-    margin-bottom: 20px;
-    margin-top: 10px; /* Добавляем отступ сверху от меню */
 }
 
 .preview img {
@@ -1276,6 +1275,7 @@ h2 {
     object-fit: cover;
     background: radial-gradient(circle at center, #fff5b3, #d4af37);
     border: 2px solid #d1a34a;
+    display: block; /* Убираем возможные смещения из-за inline */
 }
 
 #character-description {
@@ -1306,10 +1306,6 @@ h2 {
 
 #select-button {
     display: block;
-    position: relative;
-    top: -80px;
-    left: 80%;
-    transform: translateX(-50%);
     padding: 10px 20px;
     background-color: #2e2e3a;
     color: white;
@@ -1319,6 +1315,8 @@ h2 {
     font-size: 16px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
+    margin: 0 auto; /* Центрируем кнопку */
+    position: relative; /* Убираем абсолютное позиционирование, если не нужно */
 }
 
 #select-button:hover {
