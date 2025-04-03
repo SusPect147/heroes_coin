@@ -1154,6 +1154,11 @@ h2 {
     border-radius: 10px;
     padding: 8px;
     text-align: center;
+    display: flex; /* Добавляем flex */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    justify-content: center; /* Центрируем по вертикали */
+    align-items: center; /* Центрируем по горизонтали */
+    height: 120px; /* Фиксируем высоту блока, чтобы изображение не выходило за пределы */
 }
 
 .character2 {
@@ -1169,7 +1174,7 @@ h2 {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: -10px;
+    margin-bottom: 5px; /* Заменяем отрицательный отступ на небольшой положительный для расстояния до текста */
 }
 
 .character2 img {
