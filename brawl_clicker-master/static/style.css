@@ -839,6 +839,7 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
 
+/* Также скорректируем shop_menu для уверенности в позиционировании */
 .shop_menu {
     width: 85%;
     margin: 0px auto;
@@ -846,6 +847,7 @@ body {
     border-radius: 10px;
     padding: 10px 10px;
     border: 2px solid #d1a34a;
+    position: relative;
 }
 
 .shop_menu ul {
@@ -1141,15 +1143,17 @@ h2 {
     background-color: #f39c12;
 }
 
+/* Убедимся, что menu_char занимает правильную ширину */
 .menu_char {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin: 30px auto;
     padding: 0 20px;
-    align-content: center; /* Центрирует элементы грида по вертикали */
+    align-content: center;
     width: 100%;
-    max-width: 960px; /* Ограничьте ширину, если нужно */
+    max-width: 960px;
+    box-sizing: border-box; /* Учитываем padding в ширине */
 }
 
 .character {
@@ -1161,7 +1165,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 120px; /* Гибкая высота */
+    min-height: 120px;
 }
 
 .character2 {
@@ -1177,8 +1181,9 @@ h2 {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Отступ между картинкой и текстом */
 }
+
 
 #heroes {
     display: flex;
@@ -1186,8 +1191,17 @@ h2 {
     justify-content: center;
     align-items: center;
     height: 190vh;
-    overflow-y: auto; /* Прокрутка, если контента слишком много */
+    overflow-y: auto; /* Только вертикальная прокрутка */
+    overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
+    padding-bottom: 40px; /* Добавляем 40px снизу после последнего элемента */
 }
+
+
+.character p {
+    margin: 0; /* Убираем лишние отступы */
+    font-size: 14px;
+}
+
 
 .character-preview {
     display: flex;
@@ -1251,7 +1265,8 @@ h2 {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    margin-bottom: 20px; /* Отступ снизу для разделения */
+    margin-bottom: 20px;
+    margin-top: 10px; /* Добавляем отступ сверху от меню */
 }
 
 .preview img {
