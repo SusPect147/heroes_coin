@@ -1147,6 +1147,9 @@ h2 {
     gap: 10px;
     margin: 30px auto;
     padding: 0 20px;
+    align-content: center; /* Центрирует элементы грида по вертикали */
+    width: 100%;
+    max-width: 960px; /* Ограничьте ширину, если нужно */
 }
 
 .character {
@@ -1154,11 +1157,11 @@ h2 {
     border-radius: 10px;
     padding: 8px;
     text-align: center;
-    display: flex; /* Добавляем flex */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    justify-content: center; /* Центрируем по вертикали */
-    align-items: center; /* Центрируем по горизонтали */
-    height: 120px; /* Фиксируем высоту блока, чтобы изображение не выходило за пределы */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px; /* Гибкая высота */
 }
 
 .character2 {
@@ -1174,8 +1177,25 @@ h2 {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 5px; /* Заменяем отрицательный отступ на небольшой положительный для расстояния до текста */
+    margin-bottom: 5px;
 }
+
+#heroes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 190vh;
+    overflow-y: auto; /* Прокрутка, если контента слишком много */
+}
+
+.character-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 
 .character2 img {
     width: 80px;
@@ -1228,10 +1248,10 @@ h2 {
 
 .preview {
     position: relative;
-    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    margin-bottom: 20px; /* Отступ снизу для разделения */
 }
 
 .preview img {
