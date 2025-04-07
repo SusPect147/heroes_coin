@@ -1694,4 +1694,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     observer.observe(coinContainer, { childList: true, subtree: true });
+    // Функция для переключения содержимого в магазине
+function loadContent(section) {
+    // Находим все разделы магазина
+    const contents = document.querySelectorAll('#shop .content-section');
+    
+    // Скрываем все разделы
+    contents.forEach(content => {
+        content.style.display = 'none';
+    });
+
+    // Показываем выбранный раздел
+    const targetContent = document.getElementById(section);
+    if (targetContent) {
+        targetContent.style.display = 'block';
+    } else {
+        console.error(`Section with id "${section}" not found`);
+    }
+
+    // Обновляем активный пункт меню (опционально)
+    const menuItems = document.querySelectorAll('.shop_menu-item a');
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('onclick') === `loadContent('${section}')`) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// Устанавливаем начальный раздел магазина при его открытии
+document.querySelector('.nav-button[data-page="shop"]').addEventListener('click', () => {
+    loadContent('special'); // По умолчанию показываем раздел "special"
+});
+
+// Устанавливаем начальный раздел при загрузке страницы, если магазин открыт по умолчанию
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('shop').style.display === 'block') {
+        loadContent('special');
+    }
+});
 });
