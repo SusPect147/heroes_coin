@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Функция подписки на Telegram
   function subscribeToTelegram() {
-    window.open('https://t.me/heroes_coin', '_blank'); // Замени на ссылку на твой канал
+    window.open('https://t.me/heroes_coin', '_blank');
     isSubscribedToTelegram = true;
     localStorage.setItem('isSubscribedToTelegram', 'true');
     updateConditionsDisplay();
@@ -143,37 +143,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Пример функции для увеличения счетчика мини-игр (вызывай ее, когда игрок завершает мини-игру)
+  // Пример функции для увеличения счетчика мини-игр
   window.incrementMinigamesPlayed = () => {
     minigamesPlayed++;
     localStorage.setItem('minigamesPlayed', minigamesPlayed);
   };
 
-  clickButton.onclick = (event) => {
-    handleTap(event);
-    clickButton.classList.add('active');
-    setTimeout(() => clickButton.classList.remove('active'), 300);
-  };
+  // Обработчики событий для анимации
+  if (clickButton) {
+    // Для компьютера (мышь)
+    clickButton.addEventListener('mousedown', (event) => {
+      clickButton.classList.add('active');
+      handleTap(event); // Вызываем handleTap при нажатии мыши
+    });
 
-  clickButton.addEventListener('touchstart', (event) => {
-    event.preventDefault();
-    const touches = event.touches;
-    for (let i = 0; i < touches.length; i++) {
-      const touch = touches[i];
-      const rect = clickButton.getBoundingClientRect();
-      if (
-        touch.clientX >= rect.left &&
-        touch.clientX <= rect.right &&
-        touch.clientY >= rect.top &&
-        touch.clientY <= rect.bottom
-      ) {
-        const tapEvent = { clientX: touch.clientX, clientY: touch.clientY };
-        handleTap(tapEvent);
+    clickButton.addEventListener('mouseup', () => {
+      clickButton.classList.remove('active');
+    });
+
+    // Для мобильных устройств (касание)
+    clickButton.addEventListener('touchstart', (event) => {
+      event.preventDefault(); // Предотвращаем стандартное поведение (например, прокрутку)
+      clickButton.classList.add('active');
+      const touches = event.touches;
+      for (let i = 0; i < touches.length; i++) {
+        const touch = touches[i];
+        const rect = clickButton.getBoundingClientRect();
+        if (
+          touch.clientX >= rect.left &&
+          touch.clientX <= rect.right &&
+          touch.clientY >= rect.top &&
+          touch.clientY <= rect.bottom
+        ) {
+          const tapEvent = { clientX: touch.clientX, clientY: touch.clientY };
+          handleTap(tapEvent); // Вызываем handleTap при касании
+        }
       }
-    }
-    clickButton.classList.add('active');
-    setTimeout(() => clickButton.classList.remove('active'), 300);
-  });
+    });
+
+    clickButton.addEventListener('touchend', () => {
+      clickButton.classList.remove('active');
+    });
+  } else {
+    console.error("Element with ID 'clickButton' not found.");
+  }
 
   function updateScore(newScore) {
     const scoreElements = document.querySelectorAll('.currentScore');
@@ -296,8 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Оставшиеся функции эффектов остаются без изменений (createGhostEffect, createLeafEffect и т.д.)
-
+// Оставшиеся функции эффектов остаются без изменений
 function createGhostEffect(event) {
   const ghost = document.createElement('div');
   ghost.classList.add('ghost-effect');

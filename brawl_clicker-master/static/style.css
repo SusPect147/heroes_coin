@@ -144,10 +144,11 @@ body {
     transition: transform 0.1s ease; /* Уменьшаем время для быстрой реакции */
     width: 330px;
     z-index: 1000;
-    cursor: pointer; /* Указываем, что элемент кликабелен */
+    cursor: pointer; /* Для компьютера */
+    -webkit-tap-highlight-color: transparent; /* Убираем подсветку при касании на мобильных */
 }
 
-#clickButton:active {
+#clickButton.active {
     transform: translateX(-50%) scale(1.1);
 }
 
