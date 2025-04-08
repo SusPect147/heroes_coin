@@ -144,7 +144,6 @@ body {
     transition: transform 0.1s ease; /* Уменьшаем время для быстрой реакции */
     width: 330px;
     z-index: 1000;
-    animation: pulse 2s ease-in-out infinite;
     cursor: pointer; /* Указываем, что элемент кликабелен */
 }
 
