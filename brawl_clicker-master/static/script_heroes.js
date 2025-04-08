@@ -16,8 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Список героев с ID
   const heroes = [
-    { id: "1", img: "brawl_clicker-master/static/images/croco.png", name: "Character 1" },
-    { id: "2", img: "brawl_clicker-master/static/images/cot.png", name: "Character 2" },
+    { id: "1", img: "images/croco.png", name: "Character 1" },
+    { id: "2", img: "images/cot.png", name: "Character 2" },
     { id: "3", img: "brawl_clicker-master/static/images/groot.png", name: "Character 3" },
     { id: "4", img: "brawl_clicker-master/static/images/golem.png", name: "Character 4" },
     { id: "5", img: "brawl_clicker-master/static/images/fire.png", name: "Character 5" },
