@@ -2502,6 +2502,18 @@ html, body {
     background-position: center;
 }
 
+.boss6-shard {
+    background-image: url("images/stone_effect.png"); /* Укажите путь к изображению осколка, если есть */
+    background-color: #ff4500; /* Яркий оранжево-красный цвет, если изображения нет */
+    width: 20px; /* Размер осколка */
+    height: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    border-radius: 50%; /* Для круглой формы */
+    box-shadow: 0 0 5px rgba(255, 69, 0, 0.8); /* Добавим свечение для видимости */
+}
 .boss7 {
     background-image: url("images/loki.png");
     width: 105px; /* 150px * 0.7 = 105px */
