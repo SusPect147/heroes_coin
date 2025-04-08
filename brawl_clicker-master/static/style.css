@@ -150,7 +150,6 @@ body {
 
 #clickButton:active {
     transform: translateX(-50%) scale(1.1);
-    animation: none; /* Отключаем анимацию при нажатии */
 }
 
 #coinContainer {
