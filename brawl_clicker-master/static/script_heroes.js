@@ -1,8 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
   const characters = document.querySelectorAll('.character');
   const preview = document.getElementById('preview');
-  const previewImg = preview.querySelector('img');
-  const characterDescription = document.getElementById('character-description');
+  const previewImg = preview ? preview.querySelector('img') : null;
   const selectButton = document.getElementById('select-button');
 
   const shopBox = document.querySelector('.shop_box');
@@ -14,10 +13,32 @@ window.addEventListener('DOMContentLoaded', () => {
   const upgradeButtonBox1 = document.querySelector('.upgrade-button_box1');
   const rewardImage = document.getElementById('rewardImage');
 
+  // Проверка на наличие всех необходимых элементов
+  if (!characters.length) {
+    console.error("No elements with class 'character' found.");
+    return;
+  }
+  if (!preview) {
+    console.error("Element with ID 'preview' not found.");
+    return;
+  }
+  if (!previewImg) {
+    console.error("Image element inside 'preview' not found.");
+    return;
+  }
+  if (!selectButton) {
+    console.error("Element with ID 'select-button' not found.");
+    return;
+  }
+  if (!shopBox || !overlayBox1 || !containerBox1 || !containerBox11 || !closeButtonBox1 || !closeRewardButton || !upgradeButtonBox1 || !rewardImage) {
+    console.error("One or more DOM elements for shop/reward are missing. Please check your HTML.");
+    return;
+  }
+
   // Список героев с ID
   const heroes = [
-    { id: "1", img: "images/croco.png", name: "Character 1" },
-    { id: "2", img: "images/cot.png", name: "Character 2" },
+    { id: "1", img: "brawl_clicker-master/static/images/croco.png", name: "Character 1" },
+    { id: "2", img: "brawl_clicker-master/static/images/cot.png", name: "Character 2" },
     { id: "3", img: "brawl_clicker-master/static/images/groot.png", name: "Character 3" },
     { id: "4", img: "brawl_clicker-master/static/images/golem.png", name: "Character 4" },
     { id: "5", img: "brawl_clicker-master/static/images/fire.png", name: "Character 5" },
@@ -35,17 +56,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Функция для блокировки персонажей
   function lockSpecificCharacters() {
-    // Массив персонажей, которых нужно заблокировать
-    const charactersToLock = [
-
-    ];
-
-    // Проходим по каждому из персонажей в массиве и блокируем их
+    const charactersToLock = [];
     charactersToLock.forEach(hero => {
       const character = document.querySelector(`.character[data-id="${hero.id}"]`);
       if (character) {
-        character.classList.add('locked'); // Добавляем класс 'locked'
-        character.setAttribute('data-locked', 'true'); // Добавляем атрибут блокировки
+        character.classList.add('locked');
+        character.setAttribute('data-locked', 'true');
       }
     });
   }
@@ -54,8 +70,8 @@ window.addEventListener('DOMContentLoaded', () => {
   function unlockCharacter(characterId) {
     const character = document.querySelector(`.character[data-id="${characterId}"]`);
     if (character) {
-      character.classList.remove('locked'); // Убираем класс 'locked'
-      character.removeAttribute('data-locked'); // Убираем атрибут блокировки
+      character.classList.remove('locked');
+      character.removeAttribute('data-locked');
     }
   }
 
@@ -83,17 +99,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // Открытие сундука
   upgradeButtonBox1.addEventListener('click', () => {
     containerBox1.style.display = 'none';
-
-    // Выбираем случайного персонажа
     const randomHero = heroes[Math.floor(Math.random() * heroes.length)];
-
-    // Показываем окно с выпавшим героем
     containerBox11.style.display = 'block';
     rewardImage.src = randomHero.img;
     rewardImage.alt = 'Выпавший герой';
-
-    // Разблокировка персонажа после выпадения
-    unlockCharacter(randomHero.id);  // Разблокируем персонажа
+    unlockCharacter(randomHero.id);
   });
 
   // Закрытие окна с выпавшим героем
@@ -108,10 +118,24 @@ window.addEventListener('DOMContentLoaded', () => {
   characters.forEach(character => {
     character.addEventListener('click', () => {
       const imgSrc = character.getAttribute('data-img');
-      const description = character.getAttribute('data-description');
+
+      // Отладка: проверяем, что получаем атрибут
+      console.log(`Clicked character: data-img=${imgSrc}`);
+
+      if (!imgSrc) {
+        console.error("Character is missing 'data-img' attribute:", character);
+        return;
+      }
 
       previewImg.src = imgSrc;
-      characterDescription.textContent = description;
+
+      // Отладка: проверяем, что изображение загружается
+      previewImg.onerror = () => {
+        console.error(`Failed to load image: ${imgSrc}`);
+      };
+      previewImg.onload = () => {
+        console.log(`Image loaded successfully: ${imgSrc}`);
+      };
 
       if (currentPreviewCharacter) {
         currentPreviewCharacter.classList.remove('selected-preview');
@@ -134,14 +158,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const imgSrc = currentPreviewCharacter.getAttribute('data-img');
-    const name = currentPreviewCharacter.getAttribute('data-name'); // Эта переменная не используется
-    const description = currentPreviewCharacter.getAttribute('data-description');
+    const name = currentPreviewCharacter.getAttribute('data-name');
     const characterId = currentPreviewCharacter.getAttribute('data-id');
 
     localStorage.setItem('selectedCharacter', characterId);
     localStorage.setItem('selectedCharacterImg', imgSrc);
-    localStorage.setItem('selectedCharacterName', name); // И эта тоже
-    localStorage.setItem('selectedCharacterDescription', description);
+    localStorage.setItem('selectedCharacterName', name);
 
     if (selectedCharacter) {
       selectedCharacter.classList.remove('selected');
