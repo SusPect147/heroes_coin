@@ -485,7 +485,7 @@ function spawnBossBullets() {
             bullet.classList.add('boss-bullet', 'boss5-beam');
             bullet.style.left = `${bossPosition + boss.offsetWidth / 2}px`;
             bullet.style.top = `${parseFloat(boss.style.top) + boss.offsetHeight}px`;
-            bullet.dataset.angle = baseAngle + (i - 1.5) * 28;
+            bullet.dataset.angle = baseAngle + (i - 1.5) * 30;
             bullet.dataset.speed = 2.5;
             gameContainer3.appendChild(bullet);
             bossBullets.push(bullet);
