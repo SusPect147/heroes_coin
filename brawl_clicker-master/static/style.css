@@ -2331,7 +2331,7 @@ html, body {
     width: 100px;
     height: 20px;
     background-color: blue;
-    bottom: 30px; /* Отступ от нижней части экрана */
+    bottom: 50px; /* Отступ от нижней части экрана */
     left: 50%; /* Центрируем по горизонтали */
     transform: translateX(-50%);
 }
@@ -2402,19 +2402,7 @@ html, body {
 #exitButton:hover, #exitButton2:hover, #exitButton3:hover {
     background-color: #cc0000;
 }
-#exitButton2 {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+
 /* Элементы игры "Битва с боссом" */
 #cannon {
     position: absolute;
