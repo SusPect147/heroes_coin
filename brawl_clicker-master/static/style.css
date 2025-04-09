@@ -2326,13 +2326,11 @@ html, body {
 }
 
 /* Элементы игры "Аэрохоккей" */
-#playerPaddle {
+.paddle {
     position: absolute;
-    bottom: 20px;
     width: 100px;
     height: 20px;
-    background-color: #00f;
-    border-radius: 5px;
+    background-color: blue;
 }
 
 #computerPaddle {
