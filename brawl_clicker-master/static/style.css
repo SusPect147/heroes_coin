@@ -1018,6 +1018,19 @@ h2 {
     margin: 10px 0;
 }
 
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.item-icon-image {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
 .cards-container {
     width: 100%;
     max-width: 250px;
