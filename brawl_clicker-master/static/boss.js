@@ -176,248 +176,248 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Игра 2: Аэрохоккей
-    const gameContainer2 = document.getElementById('gameContainer2');
-    const paddle = document.getElementById('paddle');
-    const computerPaddle = document.getElementById('computerPaddle');
-    const puck = document.getElementById('puck');
-    const playerScoreElement = document.getElementById('playerScore');
-    const computerScoreElement = document.getElementById('computerScore');
-    const levelElement = document.getElementById('levelValue');
-    const gameOverScreen2 = document.getElementById('gameOver2');
-    const finalPlayerScore = document.getElementById('finalPlayerScore');
-    const finalComputerScore = document.getElementById('finalComputerScore');
-    const exitButton2 = document.getElementById('exitButton2');
+// Игра 2: Аэрохоккей
+const gameContainer2 = document.getElementById('gameContainer2');
+const paddle = document.getElementById('paddle');
+const computerPaddle = document.getElementById('computerPaddle');
+const puck = document.getElementById('puck');
+const playerScoreElement = document.getElementById('playerScore');
+const computerScoreElement = document.getElementById('computerScore');
+const levelElement = document.getElementById('levelValue');
+const gameOverScreen2 = document.getElementById('gameOver2');
+const finalPlayerScore = document.getElementById('finalPlayerScore');
+const finalComputerScore = document.getElementById('finalComputerScore');
+const exitButton2 = document.getElementById('exitButton2');
 
-    let gameActive2 = false;
-    let playerScore = 0;
-    let computerScore = 0;
-    let level = 1;
-    let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 10 : 0;
-    let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 10 : 0;
-    let puckSpeedX = 7;
-    let puckSpeedY = 7;
-    let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-    let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-    let computerSpeed = 0.05;
-    let timeSinceLastGoal = 0;
-    let speedMultiplier = 1;
-    const maxSpeed = 20;
-    const minSpeed = 3;
-    const speedBoost = 1.1;
-    let lastPaddleHit = null;
+let gameActive2 = false;
+let playerScore = 0;
+let computerScore = 0;
+let level = 1;
+let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 10 : 0;
+let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 10 : 0;
+let puckSpeedX = 3; // Снижено с 7 до 3
+let puckSpeedY = 3; // Снижено с 7 до 3
+let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
+let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
+let computerSpeed = 0.02; // Снижено с 0.05 до 0.02 для более медленного движения компьютера
+let timeSinceLastGoal = 0;
+let speedMultiplier = 1;
+const maxSpeed = 15; // Снижено с 20 до 15
+const minSpeed = 2; // Снижено с 3 до 2
+const speedBoost = 1.05; // Снижено с 1.1 до 1.05 для меньшего ускорения
+let lastPaddleHit = null;
 
-    // Проверка элементов для 2-й игры
-    if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
-        console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
-    } else {
-        banner2.addEventListener('click', () => {
-            banner.classList.add('hidden');
-            banner2.classList.add('hidden');
-            banner3.classList.add('hidden');
-            gameContainer2.classList.remove('hidden');
-            startGame2();
-        });
+// Проверка элементов для 2-й игры
+if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
+    console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
+} else {
+    banner2.addEventListener('click', () => {
+        banner.classList.add('hidden');
+        banner2.classList.add('hidden');
+        banner3.classList.add('hidden');
+        gameContainer2.classList.remove('hidden');
+        startGame2();
+    });
 
-        gameContainer2.addEventListener('mousemove', (e) => {
-            const rect = gameContainer2.getBoundingClientRect();
-            paddleX = e.clientX - rect.left - paddle.offsetWidth / 2;
-            if (paddleX < 0) paddleX = 0;
-            if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
-                paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
-            }
-            paddle.style.left = `${paddleX}px`;
-        });
+    gameContainer2.addEventListener('mousemove', (e) => {
+        const rect = gameContainer2.getBoundingClientRect();
+        paddleX = e.clientX - rect.left - paddle.offsetWidth / 2;
+        if (paddleX < 0) paddleX = 0;
+        if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
+            paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
+        }
+        paddle.style.left = `${paddleX}px`;
+    });
 
-        // Поддержка сенсорного управления
-        gameContainer2.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const rect = gameContainer2.getBoundingClientRect();
-            paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
-            if (paddleX < 0) paddleX = 0;
-            if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
-                paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
-            }
-            paddle.style.left = `${paddleX}px`;
-        });
+    // Поддержка сенсорного управления
+    gameContainer2.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const rect = gameContainer2.getBoundingClientRect();
+        paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
+        if (paddleX < 0) paddleX = 0;
+        if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
+            paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
+        }
+        paddle.style.left = `${paddleX}px`;
+    });
 
-        gameContainer2.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const rect = gameContainer2.getBoundingClientRect();
-            paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
-            if (paddleX < 0) paddleX = 0;
-            if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
-                paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
-            }
-            paddle.style.left = `${paddleX}px`;
-        });
+    gameContainer2.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const rect = gameContainer2.getBoundingClientRect();
+        paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
+        if (paddleX < 0) paddleX = 0;
+        if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
+            paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
+        }
+        paddle.style.left = `${paddleX}px`;
+    });
 
-        exitButton2.addEventListener('click', () => {
-            endGame2();
-            gameContainer2.classList.add('hidden');
-            banner.classList.remove('hidden');
-            banner2.classList.remove('hidden');
-            banner3.classList.remove('hidden');
-        });
+    exitButton2.addEventListener('click', () => {
+        endGame2();
+        gameContainer2.classList.add('hidden');
+        banner.classList.remove('hidden');
+        banner2.classList.add('hidden');
+        banner3.classList.remove('hidden');
+    });
 
-        function startGame2() {
-            gameActive2 = true;
-            playerScore = 0;
-            computerScore = 0;
-            level = 1;
-            playerScoreElement.textContent = playerScore;
-            computerScoreElement.textContent = computerScore;
-            levelElement.textContent = level;
-            puckX = gameContainer2.offsetWidth / 2 - 10;
-            puckY = gameContainer2.offsetHeight / 2 - 10;
-            puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1);
-            puckSpeedY = 7 * (Math.random() > 0.5 ? 1 : -1);
-            paddleX = gameContainer2.offsetWidth / 2 - 50;
-            computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-            computerSpeed = 0.05;
-            timeSinceLastGoal = 0;
-            speedMultiplier = 1;
-            lastPaddleHit = null;
-            gameOverScreen2.classList.add('hidden');
-            exitButton2.classList.remove('hidden');
-            gameLoop2();
+    function startGame2() {
+        gameActive2 = true;
+        playerScore = 0;
+        computerScore = 0;
+        level = 1;
+        playerScoreElement.textContent = playerScore;
+        computerScoreElement.textContent = computerScore;
+        levelElement.textContent = level;
+        puckX = gameContainer2.offsetWidth / 2 - 10;
+        puckY = gameContainer2.offsetHeight / 2 - 10;
+        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1); // Снижено с 7 до 3
+        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1); // Снижено с 7 до 3
+        paddleX = gameContainer2.offsetWidth / 2 - 50;
+        computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
+        computerSpeed = 0.02; // Снижено с 0.05 до 0.02
+        timeSinceLastGoal = 0;
+        speedMultiplier = 1;
+        lastPaddleHit = null;
+        gameOverScreen2.classList.add('hidden');
+        exitButton2.classList.remove('hidden');
+        gameLoop2();
+    }
+
+    function gameLoop2() {
+        if (!gameActive2) return;
+
+        timeSinceLastGoal++;
+        if (timeSinceLastGoal % 300 === 0) {
+            speedMultiplier += 0.05;
+            if (speedMultiplier > 2) speedMultiplier = 2;
         }
 
-        function gameLoop2() {
-            if (!gameActive2) return;
+        puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier;
+        puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier;
+        puck.style.left = `${puckX}px`;
+        puck.style.top = `${puckY}px`;
 
-            timeSinceLastGoal++;
-            if (timeSinceLastGoal % 300 === 0) {
-                speedMultiplier += 0.05;
-                if (speedMultiplier > 2) speedMultiplier = 2;
-            }
+        const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
+        if (speed > maxSpeed) {
+            const scale = maxSpeed / speed;
+            puckSpeedX *= scale;
+            puckSpeedY *= scale;
+        }
+        if (speed < minSpeed && speed > 0) {
+            const scale = minSpeed / speed;
+            puckSpeedX *= scale;
+            puckSpeedY *= scale;
+        }
 
-            puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier;
-            puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier;
-            puck.style.left = `${puckX}px`;
-            puck.style.top = `${puckY}px`;
+        if (puckX <= 0 || puckX >= gameContainer2.offsetWidth - puck.offsetWidth) {
+            puckSpeedX = -puckSpeedX;
+        }
 
-            const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
-            if (speed > maxSpeed) {
-                const scale = maxSpeed / speed;
-                puckSpeedX *= scale;
-                puckSpeedY *= scale;
-            }
-            if (speed < minSpeed && speed > 0) {
-                const scale = minSpeed / speed;
-                puckSpeedX *= scale;
-                puckSpeedY *= scale;
-            }
+        if (puckY <= 0) {
+            playerScore++;
+            level++;
+            totalCoins += window.coinsPerPoint || 1;
+            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+            localStorage.setItem('totalCoins', totalCoins);
+            playerScoreElement.textContent = playerScore;
+            levelElement.textContent = level;
+            resetPuck();
+            timeSinceLastGoal = 0;
+            speedMultiplier = 1;
+        } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
+            computerScore++;
+            computerScoreElement.textContent = computerScore;
+            resetPuck();
+            timeSinceLastGoal = 0;
+            speedMultiplier = 1;
+        }
 
-            if (puckX <= 0 || puckX >= gameContainer2.offsetWidth - puck.offsetWidth) {
-                puckSpeedX = -puckSpeedX;
-            }
+        const puckRect = puck.getBoundingClientRect();
+        const paddleRect = paddle.getBoundingClientRect();
+        const computerPaddleRect = computerPaddle.getBoundingClientRect();
 
-            if (puckY <= 0) {
-                playerScore++;
-                level++;
-                totalCoins += window.coinsPerPoint || 1;
-                if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-                localStorage.setItem('totalCoins', totalCoins);
-                playerScoreElement.textContent = playerScore;
-                levelElement.textContent = level;
-                resetPuck();
-                timeSinceLastGoal = 0;
-                speedMultiplier = 1;
-            } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
-                computerScore++;
-                computerScoreElement.textContent = computerScore;
-                resetPuck();
-                timeSinceLastGoal = 0;
-                speedMultiplier = 1;
-            }
+        if (
+            puckRect.bottom >= paddleRect.top &&
+            puckRect.top <= paddleRect.bottom &&
+            puckRect.right >= paddleRect.left &&
+            puckRect.left <= paddleRect.right &&
+            lastPaddleHit !== 'player'
+        ) {
+            puckSpeedY = -Math.abs(puckSpeedY);
+            puckSpeedX *= speedBoost;
+            puckSpeedY *= speedBoost;
+            lastPaddleHit = 'player';
+        }
 
-            const puckRect = puck.getBoundingClientRect();
-            const paddleRect = paddle.getBoundingClientRect();
-            const computerPaddleRect = computerPaddle.getBoundingClientRect();
+        if (
+            puckRect.bottom >= computerPaddleRect.top &&
+            puckRect.top <= computerPaddleRect.bottom &&
+            puckRect.right >= computerPaddleRect.left &&
+            puckRect.left <= computerPaddleRect.right &&
+            lastPaddleHit !== 'computer'
+        ) {
+            puckSpeedY = Math.abs(puckSpeedY);
+            puckSpeedX *= speedBoost;
+            puckSpeedY *= speedBoost;
+            lastPaddleHit = 'computer';
+        }
 
-            if (
+        if (
+            !(
                 puckRect.bottom >= paddleRect.top &&
                 puckRect.top <= paddleRect.bottom &&
                 puckRect.right >= paddleRect.left &&
-                puckRect.left <= paddleRect.right &&
-                lastPaddleHit !== 'player'
-            ) {
-                puckSpeedY = -Math.abs(puckSpeedY);
-                puckSpeedX *= speedBoost;
-                puckSpeedY *= speedBoost;
-                lastPaddleHit = 'player';
-            }
-
-            if (
+                puckRect.left <= paddleRect.right
+            ) &&
+            !(
                 puckRect.bottom >= computerPaddleRect.top &&
                 puckRect.top <= computerPaddleRect.bottom &&
                 puckRect.right >= computerPaddleRect.left &&
-                puckRect.left <= computerPaddleRect.right &&
-                lastPaddleHit !== 'computer'
-            ) {
-                puckSpeedY = Math.abs(puckSpeedY);
-                puckSpeedX *= speedBoost;
-                puckSpeedY *= speedBoost;
-                lastPaddleHit = 'computer';
-            }
-
-            if (
-                !(
-                    puckRect.bottom >= paddleRect.top &&
-                    puckRect.top <= paddleRect.bottom &&
-                    puckRect.right >= paddleRect.left &&
-                    puckRect.left <= paddleRect.right
-                ) &&
-                !(
-                    puckRect.bottom >= computerPaddleRect.top &&
-                    puckRect.top <= computerPaddleRect.bottom &&
-                    puckRect.right >= computerPaddleRect.left &&
-                    puckRect.left <= computerPaddleRect.right
-                )
-            ) {
-                lastPaddleHit = null;
-            }
-
-            const targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 50;
-            computerPaddleX += (targetX - computerPaddleX) * (computerSpeed + level * 0.03);
-            if (computerPaddleX < 0) computerPaddleX = 0;
-            if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
-                computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
-            }
-            computerPaddle.style.left = `${computerPaddleX}px`;
-
-            if (computerScore >= 5) {
-                endGame2();
-            }
-
-            requestAnimationFrame(gameLoop2);
-        }
-
-        function resetPuck() {
-            puckX = gameContainer2.offsetWidth / 2 - 10;
-            puckY = gameContainer2.offsetHeight / 2 - 10;
-            puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
-            puckSpeedY = 7 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
+                puckRect.left <= computerPaddleRect.right
+            )
+        ) {
             lastPaddleHit = null;
         }
 
-        function endGame2() {
-            gameActive2 = false;
-            finalPlayerScore.textContent = playerScore;
-            finalComputerScore.textContent = computerScore;
-            gameOverScreen2.classList.remove('hidden');
-            if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+        const targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 50;
+        computerPaddleX += (targetX - computerPaddleX) * (computerSpeed + level * 0.03);
+        if (computerPaddleX < 0) computerPaddleX = 0;
+        if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
+            computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
+        }
+        computerPaddle.style.left = `${computerPaddleX}px`;
+
+        if (computerScore >= 5) {
+            endGame2();
         }
 
-        function restartGame2() {
-            endGame2();
-            gameOverScreen2.classList.add('hidden');
-            startGame2();
-        }
+        requestAnimationFrame(gameLoop2);
     }
+
+    function resetPuck() {
+        puckX = gameContainer2.offsetWidth / 2 - 10;
+        puckY = gameContainer2.offsetHeight / 2 - 10;
+        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Снижено с 7 до 3
+        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Снижено с 7 до 3
+        lastPaddleHit = null;
+    }
+
+    function endGame2() {
+        gameActive2 = false;
+        finalPlayerScore.textContent = playerScore;
+        finalComputerScore.textContent = computerScore;
+        gameOverScreen2.classList.remove('hidden');
+        if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+    }
+
+    function restartGame2() {
+        endGame2();
+        gameOverScreen2.classList.add('hidden');
+        startGame2();
+    }
+}
 
     // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');

@@ -2331,6 +2331,9 @@ html, body {
     width: 100px;
     height: 20px;
     background-color: blue;
+    bottom: 30px; /* Отступ от нижней части экрана */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%);
 }
 
 #computerPaddle {
