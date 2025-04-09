@@ -643,7 +643,7 @@
                 <span class="banner-text">Earn coins</span>
             </div>
 
-            <!-- Игра 2: Лопай шарики -->
+            <!-- Игра 2: Аэрохоккей -->
             <div class="banner" id="startBanner2">
                 <img src="brawl_clicker-master/static/images/stars.png" alt="Banner 2">
                 <span class="banner-text">Tap balloon</span>
@@ -667,21 +667,23 @@
             </div>
         </div>
 
-        <div id="gameContainer2" class="game-container hidden">
-            <div id="airHockeyField">
-                <div id="playerPaddle" class="paddle"></div>
-                <div id="computerPaddle" class="paddle"></div>
-                <div id="puck" class="puck"></div>
-                <div id="scoreDisplay">
-                    <span id="playerScore">0</span> : <span id="computerScore">0</span>
-                </div>
-            </div>
-            <div id="gameOver2" class="game-over hidden">
-                <p>Игра окончена!</p>
-                <p>Счёт: <span id="finalScore2"></span></p>
-            </div>
-            <button id="exitButton2">Выйти</button>
+  <div id="gameContainer2" class="game-container hidden">
+    <div id="airHockeyField">
+        <div id="playerPaddle" class="paddle"></div>
+        <div id="computerPaddle" class="paddle"></div>
+        <div id="puck" class="puck"></div>
+        <div id="scoreDisplay">
+            <span id="playerScore">0</span> : <span id="computerScore">0</span>
         </div>
+        <!-- Добавляем элемент для уровня -->
+        <div id="levelValue">Level: 1</div>
+    </div>
+    <div id="gameOver2" class="game-over hidden">
+        <p>Игра окончена!</p>
+        <p>Счёт: <span id="finalPlayerScore">0</span> : <span id="finalComputerScore">0</span></p>
+    </div>
+    <button id="exitButton2">Выйти</button>
+</div>
 
         <!-- Игра 3: Битва с боссом -->
         <div id="gameContainer3" class="hidden">

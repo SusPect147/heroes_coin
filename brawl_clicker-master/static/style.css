@@ -2319,7 +2319,14 @@ html, body {
 }
 
 /* Элементы игры "Аэроххокей" */
-#paddle {
+#airHockeyField {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Элементы игры "Аэрохоккей" */
+#playerPaddle {
     position: absolute;
     bottom: 20px;
     width: 100px;
@@ -2345,6 +2352,26 @@ html, body {
     border-radius: 50%;
 }
 
+#scoreDisplay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #ffd700;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+}
+
+#levelValue {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-size: 20px;
+    font-family: 'Pusia-bold', sans-serif;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+}
 /* Экран "Game Over" */
 #gameOver, #gameOver2, #gameOver3 {
     position: absolute;
