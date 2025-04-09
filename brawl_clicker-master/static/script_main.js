@@ -492,3 +492,12 @@ function createMinionEffect(event) {
     minion.remove();
   }, 1000);
 }
+
+const tg = window.Telegram.WebApp;
+
+    // Применяем режим полного экрана для мини-приложения
+    window.Telegram.WebApp.expand();
+    window.Telegram.WebApp.requestFullscreen();
+
+    // Убедитесь, что Web App готов
+    tg.ready();
