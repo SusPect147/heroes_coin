@@ -195,22 +195,25 @@ let computerScore = 0;
 let level = 1;
 let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 10 : 0;
 let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 10 : 0;
-let puckSpeedX = 3; // Снижено с 7 до 3
-let puckSpeedY = 3; // Снижено с 7 до 3
+let puckSpeedX = 3; // Оставляем сниженную скорость шайбы
+let puckSpeedY = 3; // Оставляем сниженную скорость шайбы
 let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
 let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.02; // Снижено с 0.05 до 0.02 для более медленного движения компьютера
+let computerSpeed = 0.05; // Возвращаем исходную скорость компьютера (было 0.02, теперь 0.05)
 let timeSinceLastGoal = 0;
 let speedMultiplier = 1;
-const maxSpeed = 15; // Снижено с 20 до 15
-const minSpeed = 2; // Снижено с 3 до 2
-const speedBoost = 1.05; // Снижено с 1.1 до 1.05 для меньшего ускорения
+const maxSpeed = 15;
+const minSpeed = 2;
+const speedBoost = 1.05;
 let lastPaddleHit = null;
 
 // Проверка элементов для 2-й игры
 if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
     console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
 } else {
+    // Скрываем кнопку выхода изначально, как в 1-й игре
+    exitButton2.style.display = 'none';
+
     banner2.addEventListener('click', () => {
         banner.classList.add('hidden');
         banner2.classList.add('hidden');
@@ -254,12 +257,14 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         paddle.style.left = `${paddleX}px`;
     });
 
-    exitButton2.addEventListener('click', () => {
+    exitButton2.addEventListener('click', (e) => {
+        e.stopPropagation(); // Предотвращаем всплытие события, как в 1-й игре
         endGame2();
         gameContainer2.classList.add('hidden');
         banner.classList.remove('hidden');
-        banner2.classList.add('hidden');
+        banner2.classList.remove('hidden');
         banner3.classList.remove('hidden');
+        exitButton2.style.display = 'none'; // Скрываем кнопку при выходе, как в 1-й игре
     });
 
     function startGame2() {
@@ -272,16 +277,16 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         levelElement.textContent = level;
         puckX = gameContainer2.offsetWidth / 2 - 10;
         puckY = gameContainer2.offsetHeight / 2 - 10;
-        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1); // Снижено с 7 до 3
-        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1); // Снижено с 7 до 3
+        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1);
+        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.02; // Снижено с 0.05 до 0.02
+        computerSpeed = 0.05; // Возвращаем исходную скорость компьютера
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
         lastPaddleHit = null;
         gameOverScreen2.classList.add('hidden');
-        exitButton2.classList.remove('hidden');
+        exitButton2.style.display = 'none'; // Убеждаемся, что кнопка скрыта во время игры
         gameLoop2();
     }
 
@@ -399,8 +404,8 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
     function resetPuck() {
         puckX = gameContainer2.offsetWidth / 2 - 10;
         puckY = gameContainer2.offsetHeight / 2 - 10;
-        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Снижено с 7 до 3
-        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Снижено с 7 до 3
+        puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
+        puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         lastPaddleHit = null;
     }
 
@@ -409,6 +414,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         finalPlayerScore.textContent = playerScore;
         finalComputerScore.textContent = computerScore;
         gameOverScreen2.classList.remove('hidden');
+        exitButton2.style.display = 'block'; // Показываем кнопку на экране "Game Over", как в 1-й игре
         if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
     }
 

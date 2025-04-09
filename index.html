@@ -669,20 +669,19 @@
 
 <div id="gameContainer2" class="game-container hidden">
     <div id="airHockeyField">
-        <div id="paddle" class="paddle"></div> <!-- Изменено с playerPaddle на paddle -->
+        <div id="paddle" class="paddle"></div>
         <div id="computerPaddle" class="paddle"></div>
         <div id="puck" class="puck"></div>
         <div id="scoreDisplay">
             <span id="playerScore">0</span> : <span id="computerScore">0</span>
         </div>
-        <!-- Добавляем элемент для уровня -->
         <div id="levelValue">Level: 1</div>
     </div>
     <div id="gameOver2" class="game-over hidden">
         <p>Игра окончена!</p>
         <p>Счёт: <span id="finalPlayerScore">0</span> : <span id="finalComputerScore">0</span></p>
+        <button id="exitButton2">Выйти</button> <!-- Перемещаем кнопку внутрь #gameOver2 -->
     </div>
-                <button id="exitButton2" class="exit-btn">Quit</button>
 </div>
 
         <!-- Игра 3: Битва с боссом -->
