@@ -195,11 +195,11 @@ let computerScore = 0;
 let level = 1;
 let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 10 : 0;
 let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 10 : 0;
-let puckSpeedX = 3; // Оставляем сниженную скорость шайбы
-let puckSpeedY = 3; // Оставляем сниженную скорость шайбы
+let puckSpeedX = 3;
+let puckSpeedY = 3;
 let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
 let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.05; // Возвращаем исходную скорость компьютера (было 0.02, теперь 0.05)
+let computerSpeed = 0.07; // Увеличиваем скорость компьютера с 0.05 до 0.07
 let timeSinceLastGoal = 0;
 let speedMultiplier = 1;
 const maxSpeed = 15;
@@ -211,7 +211,6 @@ let lastPaddleHit = null;
 if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
     console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
 } else {
-    // Скрываем кнопку выхода изначально, как в 1-й игре
     exitButton2.style.display = 'none';
 
     banner2.addEventListener('click', () => {
@@ -258,13 +257,13 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
     });
 
     exitButton2.addEventListener('click', (e) => {
-        e.stopPropagation(); // Предотвращаем всплытие события, как в 1-й игре
+        e.stopPropagation();
         endGame2();
         gameContainer2.classList.add('hidden');
         banner.classList.remove('hidden');
         banner2.classList.remove('hidden');
         banner3.classList.remove('hidden');
-        exitButton2.style.display = 'none'; // Скрываем кнопку при выходе, как в 1-й игре
+        exitButton2.style.display = 'none';
     });
 
     function startGame2() {
@@ -281,12 +280,12 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.05; // Возвращаем исходную скорость компьютера
+        computerSpeed = 0.07; // Увеличиваем скорость компьютера
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
         lastPaddleHit = null;
         gameOverScreen2.classList.add('hidden');
-        exitButton2.style.display = 'none'; // Убеждаемся, что кнопка скрыта во время игры
+        exitButton2.style.display = 'none';
         gameLoop2();
     }
 
@@ -386,8 +385,37 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
             lastPaddleHit = null;
         }
 
-        const targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 50;
-        computerPaddleX += (targetX - computerPaddleX) * (computerSpeed + level * 0.03);
+        // Улучшенная логика движения компьютера
+        let targetX;
+
+        // Проверяем, движется ли шайба к воротам компьютера (вверх, puckSpeedY < 0)
+        if (puckSpeedY < 0) {
+            // Предсказываем будущую позицию шайбы
+            // Рассчитываем, сколько времени потребуется шайбе, чтобы достичь верхней части поля (y = 0)
+            const timeToTop = puckY / Math.abs(puckSpeedY); // Время до достижения верха
+            let predictedPuckX = puckX + puckSpeedX * timeToTop; // Предсказываем позицию X
+
+            // Учитываем отскоки от стен
+            while (predictedPuckX < 0 || predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                if (predictedPuckX < 0) {
+                    predictedPuckX = -predictedPuckX; // Отскок от левой стены
+                } else if (predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                    predictedPuckX = 2 * (gameContainer2.offsetWidth - puck.offsetWidth) - predictedPuckX; // Отскок от правой стены
+                }
+            }
+
+            // Цель — предсказанная позиция шайбы с небольшой случайной погрешностью
+            targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 20; // Уменьшаем случайность с 50 до 20
+        } else {
+            // Если шайба движется вниз (к игроку), компьютер возвращается к центру
+            targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
+        }
+
+        // Адаптивная скорость: увеличиваем скорость компьютера с ростом уровня
+        const adaptiveSpeed = computerSpeed + level * 0.05; // Увеличиваем скорость на 0.05 за каждый уровень
+        computerPaddleX += (targetX - computerPaddleX) * adaptiveSpeed;
+
+        // Ограничиваем движение компьютера
         if (computerPaddleX < 0) computerPaddleX = 0;
         if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
             computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
@@ -414,7 +442,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         finalPlayerScore.textContent = playerScore;
         finalComputerScore.textContent = computerScore;
         gameOverScreen2.classList.remove('hidden');
-        exitButton2.style.display = 'block'; // Показываем кнопку на экране "Game Over", как в 1-й игре
+        exitButton2.style.display = 'block';
         if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
     }
 
