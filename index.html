@@ -374,53 +374,58 @@
             </div>
         </div>
 
-<!-- Магазин улучшения -->
-<div id="upgrades" class="content-section" style="display:none;">
-    <div class="container_up">
-        <div class="item_up1">
-            <div class="item-icon">
-                <img src="brawl_clicker-master/static/images/autoclick.png" alt="Autoclick Icon" width="60" height="60">
-            </div>
-            <div class="item-info">
-                <p class="item-title">Auto-click</p>
-                <p class="item-details_1">2,000 / 1h • Level 1</p>
-            </div>
-            <div class="item-action">></div>
-        </div>
-        <div class="item_up2">
-            <div class="item-icon">
-                <img src="brawl_clicker-master/static/images/click_button.png" alt="Click Icon" width="60" height="60">
-            </div>
-            <div class="item-info">
-                <p class="item-title">Click</p>
-                <p class="item-details">1 • Level 1</p>
-            </div>
-            <div class="item-action">></div>
-        </div>
-        <div class="item_up3">
-            <div class="item-icon">
-                <img src="brawl_clicker-master/static/images/energy_new.png" alt="Energy Icon" width="60" height="60">
-            </div>
-            <div class="item-info">
-                <p class="item-title">Запас энергии</p>
-                <p class="item-details_3">100 • Level 1</p>
-            </div>
-            <div class="item-action">></div>
-        </div>
-        <div class="item_up4">
-            <div class="item-icon">
-                <img src="brawl_clicker-master/static/images/test.png" alt="Recharge Speed Icon" width="60" height="60">
-            </div>
-            <div class="item-info">
-                <p class="item-title">Скорость перезарядки</p>
-                <p class="item-details_4">3 • Уровень 1</p>
-            </div>
-            <div class="item-action">></div>
-        </div>
+        <!-- Магазин улучшения -->
+        <div id="upgrades" class="content-section" style="display:none;">
+            <div class="container_up">
+                <div class="item_up1">
+                    <div class="item-icon">
+                        <img src="brawl_clicker-master/static/images/autoclick.png" alt="Autoclick Icon" width="60"
+                             height="60">
+                    </div>
+                    <div class="item-info">
+                        <p class="item-title">Auto-click</p>
+                        <p class="item-details_1">2,000 / 1h • Level 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up2">
+                    <div class="item-icon">
+                        <img src="brawl_clicker-master/static/images/click_button.png" alt="Click Icon" width="60"
+                             height="60">
+                    </div>
+                    <div class="item-info">
+                        <p class="item-title">Click</p>
+                        <p class="item-details">1 • Level 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up3">
+                    <div class="item-icon">
+                        <img src="brawl_clicker-master/static/images/energy_new.png" alt="Energy Icon" width="60"
+                             height="60">
+                    </div>
+                    <div class="item-info">
+                        <p class="item-title">Запас энергии</p>
+                        <p class="item-details_3">100 • Level 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
+                <div class="item_up4">
+                    <div class="item-icon">
+                        <img src="brawl_clicker-master/static/images/test.png" alt="Recharge Speed Icon" width="60"
+                             height="60">
+                    </div>
+                    <div class="item-info">
+                        <p class="item-title">Скорость перезарядки</p>
+                        <p class="item-details_4">3 • Уровень 1</p>
+                    </div>
+                    <div class="item-action">></div>
+                </div>
                 <!-- Новое улучшение -->
                 <div class="item_up5">
                     <div class="item-icon">
-                        <img src="brawl_clicker-master/static/images/bag.png" alt="Coin for score" width="60" height="60">
+                        <img src="brawl_clicker-master/static/images/bag.png" alt="Coin for score" width="60"
+                             height="60">
                     </div>
                     <div class="item-info">
                         <p class="item-title">Монеты за очко</p>
@@ -661,14 +666,20 @@
             </div>
         </div>
 
-        <div id="gameContainer2" class="hidden">
-            <div id="score2">Score: <span id="scoreValue2">0</span></div>
-            <div id="missed2">Missed: <span id="missedValue2">0</span></div>
-            <div id="gameOver2" class="hidden">
-                <h2>Game over!</h2>
-                <p>Score: <span id="finalScore2">0</span></p>
-                <button id="exitButton2" class="exit-btn">Quit</button>
+        <div id="gameContainer2" class="game-container hidden">
+            <div id="airHockeyField">
+                <div id="playerPaddle" class="paddle"></div>
+                <div id="computerPaddle" class="paddle"></div>
+                <div id="puck" class="puck"></div>
+                <div id="scoreDisplay">
+                    <span id="playerScore">0</span> : <span id="computerScore">0</span>
+                </div>
             </div>
+            <div id="gameOver2" class="game-over hidden">
+                <p>Игра окончена!</p>
+                <p>Счёт: <span id="finalScore2"></span></p>
+            </div>
+            <button id="exitButton2">Выйти</button>
         </div>
 
         <!-- Игра 3: Битва с боссом -->

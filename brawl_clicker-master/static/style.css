@@ -142,7 +142,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.3s ease; /* Уменьшаем время для быстрой реакции */
-    width: 330px;
+    width: 300px;
     z-index: 1000;
     cursor: pointer; /* Для компьютера */
     -webkit-tap-highlight-color: transparent; /* Убираем подсветку при касании на мобильных */
@@ -2318,19 +2318,60 @@ html, body {
     border-radius: 50%;
 }
 
-/* Элементы игры "Лопай шарики" */
-.circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    position: absolute;
-    cursor: pointer;
-    transition: transform 0.2s;
+/* Элементы игры "Аэроххокей" */
+#airHockeyField {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: #e0e0e0;
+    border: 2px solid #333;
+    overflow: hidden;
 }
 
-.circle:hover {
-    transform: scale(1.1);
+.paddle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
 }
+
+#playerPaddle {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff; /* Синяя бита игрока */
+}
+
+#computerPaddle {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4d4d; /* Красная бита компьютера */
+}
+
+.puck {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #000;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#scoreDisplay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
 
 /* Экран "Game Over" */
 #gameOver, #gameOver2, #gameOver3 {
