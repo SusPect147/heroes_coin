@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 // Игра 2: Аэрохоккей против компьютера
+// Игра 2: Аэрохоккей против компьютера
 const gameContainer2 = document.getElementById('gameContainer2');
 const playerPaddle = document.getElementById('playerPaddle');
 const computerPaddle = document.getElementById('computerPaddle');
@@ -192,8 +193,10 @@ let puckVelocity = { x: 0, y: 0 };
 let playerPaddlePosition = { x: 0 };
 let computerPaddlePosition = { x: 0 };
 let isDraggingPaddle = false;
-const maxSpeed = 12; // Увеличиваем максимальную скорость шайбы
-const friction = 0.995; // Уменьшаем трение, чтобы шайба дольше сохраняла скорость
+const maxSpeed = 20; // Увеличиваем максимальную скорость шайбы
+const minSpeed = 3; // Минимальная скорость шайбы
+const friction = 1; // Убираем трение (шайба не замедляется)
+const speedBoost = 1.1; // Ускорение после отскока от биты (10%)
 let lastPaddleHit = null; // Для предотвращения многократных столкновений с одной битой
 
 // Проверка на существование элементов
@@ -277,8 +280,8 @@ function startGame2() {
         y: gameContainer2.offsetHeight / 2 - puck.offsetHeight / 2
     };
     puckVelocity = {
-        x: (Math.random() > 0.5 ? 1 : -1) * 5, // Увеличиваем начальную скорость с 3 до 5
-        y: (Math.random() > 0.5 ? 1 : -1) * 5
+        x: (Math.random() > 0.5 ? 1 : -1) * 7, // Увеличиваем начальную скорость с 5 до 7
+        y: (Math.random() > 0.5 ? 1 : -1) * 7
     };
     puck.style.left = `${puckPosition.x}px`;
     puck.style.top = `${puckPosition.y}px`;
@@ -300,14 +303,23 @@ function gameLoop2() {
     puckPosition.x += puckVelocity.x;
     puckPosition.y += puckVelocity.y;
 
-    // Применяем трение (слегка замедляем шайбу)
+    // Применяем трение (если friction < 1)
     puckVelocity.x *= friction;
     puckVelocity.y *= friction;
 
-    // Ограничиваем скорость шайбы
+    // Вычисляем текущую скорость шайбы
     const speed = Math.sqrt(puckVelocity.x * puckVelocity.x + puckVelocity.y * puckVelocity.y);
+
+    // Ограничиваем максимальную скорость шайбы
     if (speed > maxSpeed) {
         const scale = maxSpeed / speed;
+        puckVelocity.x *= scale;
+        puckVelocity.y *= scale;
+    }
+
+    // Обеспечиваем минимальную скорость шайбы
+    if (speed < minSpeed && speed > 0) {
+        const scale = minSpeed / speed;
         puckVelocity.x *= scale;
         puckVelocity.y *= scale;
     }
@@ -351,7 +363,10 @@ function gameLoop2() {
         lastPaddleHit !== 'player' // Проверяем, что это новое столкновение
     ) {
         puckVelocity.y = -Math.abs(puckVelocity.y); // Отскок вверх
-        puckVelocity.x += (puckPosition.x - (playerPaddlePosition.x + playerPaddle.offsetWidth / 2)) * 0.1; // Возвращаем влияние биты на 0.1
+        puckVelocity.x += (puckPosition.x - (playerPaddlePosition.x + playerPaddle.offsetWidth / 2)) * 0.1;
+        // Ускоряем шайбу после отскока
+        puckVelocity.x *= speedBoost;
+        puckVelocity.y *= speedBoost;
         lastPaddleHit = 'player'; // Запоминаем, что шайба ударилась о биту игрока
     }
 
@@ -365,7 +380,10 @@ function gameLoop2() {
         lastPaddleHit !== 'computer' // Проверяем, что это новое столкновение
     ) {
         puckVelocity.y = Math.abs(puckVelocity.y); // Отскок вниз
-        puckVelocity.x += (puckPosition.x - (computerPaddlePosition.x + computerPaddle.offsetWidth / 2)) * 0.1; // Возвращаем влияние биты на 0.1
+        puckVelocity.x += (puckPosition.x - (computerPaddlePosition.x + computerPaddle.offsetWidth / 2)) * 0.1;
+        // Ускоряем шайбу после отскока
+        puckVelocity.x *= speedBoost;
+        puckVelocity.y *= speedBoost;
         lastPaddleHit = 'computer'; // Запоминаем, что шайба ударилась о биту компьютера
     }
 
@@ -389,7 +407,7 @@ function gameLoop2() {
 
     // Движение биты компьютера (ИИ)
     const targetX = puckPosition.x - computerPaddle.offsetWidth / 2;
-    computerPaddlePosition.x += (targetX - computerPaddlePosition.x) * 0.05; // Плавное движение
+    computerPaddlePosition.x += (targetX - computerPaddlePosition.x) * 0.1; // Увеличиваем скорость ИИ
     if (computerPaddlePosition.x < 0) computerPaddlePosition.x = 0;
     if (computerPaddlePosition.x > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
         computerPaddlePosition.x = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
@@ -409,8 +427,8 @@ function resetPuck() {
         y: gameContainer2.offsetHeight / 2 - puck.offsetHeight / 2
     };
     puckVelocity = {
-        x: (Math.random() > 0.5 ? 1 : -1) * 5, // Увеличиваем начальную скорость с 3 до 5
-        y: (Math.random() > 0.5 ? 1 : -1) * 5
+        x: (Math.random() > 0.5 ? 1 : -1) * 7, // Увеличиваем начальную скорость с 5 до 7
+        y: (Math.random() > 0.5 ? 1 : -1) * 7
     };
     puck.style.left = `${puckPosition.x}px`;
     puck.style.top = `${puckPosition.y}px`;
