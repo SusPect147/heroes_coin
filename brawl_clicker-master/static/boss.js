@@ -24,12 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let spawnInterval;
     let isDraggingBag = false;
 
-    // Проверка на существование элементов
-    if (!gameContainer || !bag || !scoreElement || !gameOverScreen || !finalScoreElement || !exitButton) {
-        console.error("One or more DOM elements for Game 1 are missing. Please check your HTML.");
-        return;
-    }
-
     exitButton.style.display = 'none';
 
     banner.addEventListener('click', () => {
@@ -173,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.incrementMinigamesPlayed();
     }
 
-    // Игра 2: Аэрохоккей (заменяем на вашу версию)
+    // Игра 2: Аэрохоккей
     const gameContainer2 = document.getElementById('gameContainer2');
     const paddle = document.getElementById('paddle');
     const computerPaddle = document.getElementById('computerPaddle');
@@ -192,23 +186,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let level = 1;
     let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 10 : 0;
     let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 10 : 0;
-    let puckSpeedX = 7; // Увеличиваем начальную скорость
+    let puckSpeedX = 7;
     let puckSpeedY = 7;
     let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
     let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
     let computerSpeed = 0.05;
     let timeSinceLastGoal = 0;
     let speedMultiplier = 1;
-    const maxSpeed = 20; // Максимальная скорость шайбы
-    const minSpeed = 3; // Минимальная скорость шайбы
-    const speedBoost = 1.1; // Ускорение после отскока от биты (10%)
-    let lastPaddleHit = null; // Для предотвращения многократных столкновений
-
-    // Проверка на существование элементов
-    if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
-        console.error("One or more DOM elements for Game 2 are missing. Please check your HTML.");
-        return;
-    }
+    const maxSpeed = 20;
+    const minSpeed = 3;
+    const speedBoost = 1.1;
+    let lastPaddleHit = null;
 
     banner2.addEventListener('click', () => {
         banner.classList.add('hidden');
@@ -228,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         paddle.style.left = `${paddleX}px`;
     });
 
-    // Добавляем поддержку сенсорного управления
     gameContainer2.addEventListener('touchstart', (e) => {
         e.preventDefault();
         const touch = e.touches[0];
@@ -271,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         levelElement.textContent = level;
         puckX = gameContainer2.offsetWidth / 2 - 10;
         puckY = gameContainer2.offsetHeight / 2 - 10;
-        puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1); // Увеличиваем начальную скорость
+        puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1);
         puckSpeedY = 7 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
@@ -287,46 +274,37 @@ document.addEventListener('DOMContentLoaded', () => {
     function gameLoop2() {
         if (!gameActive2) return;
 
-        // Увеличение времени без голов
         timeSinceLastGoal++;
         if (timeSinceLastGoal % 300 === 0) {
             speedMultiplier += 0.05;
             if (speedMultiplier > 2) speedMultiplier = 2;
         }
 
-        // Движение шайбы
         puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier;
         puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier;
         puck.style.left = `${puckX}px`;
         puck.style.top = `${puckY}px`;
 
-        // Вычисляем текущую скорость шайбы
         const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
-
-        // Ограничиваем максимальную скорость шайбы
         if (speed > maxSpeed) {
             const scale = maxSpeed / speed;
             puckSpeedX *= scale;
             puckSpeedY *= scale;
         }
-
-        // Обеспечиваем минимальную скорость шайбы
         if (speed < minSpeed && speed > 0) {
             const scale = minSpeed / speed;
             puckSpeedX *= scale;
             puckSpeedY *= scale;
         }
 
-        // Отскок от стен
         if (puckX <= 0 || puckX >= gameContainer2.offsetWidth - puck.offsetWidth) {
             puckSpeedX = -puckSpeedX;
         }
 
-        // Голы
         if (puckY <= 0) {
             playerScore++;
-            level++; // Уровень повышается при каждом голе игрока
-            totalCoins += window.coinsPerPoint; // Начисляем монеты за гол
+            level++;
+            totalCoins += window.coinsPerPoint;
             currentScoreElement.textContent = totalCoins;
             localStorage.setItem('totalCoins', totalCoins);
             playerScoreElement.textContent = playerScore;
@@ -342,7 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
             speedMultiplier = 1;
         }
 
-        // Столкновение с шайбами
         const puckRect = puck.getBoundingClientRect();
         const paddleRect = paddle.getBoundingClientRect();
         const computerPaddleRect = computerPaddle.getBoundingClientRect();
@@ -355,7 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lastPaddleHit !== 'player'
         ) {
             puckSpeedY = -Math.abs(puckSpeedY);
-            // Ускоряем шайбу после отскока
             puckSpeedX *= speedBoost;
             puckSpeedY *= speedBoost;
             lastPaddleHit = 'player';
@@ -369,13 +345,11 @@ document.addEventListener('DOMContentLoaded', () => {
             lastPaddleHit !== 'computer'
         ) {
             puckSpeedY = Math.abs(puckSpeedY);
-            // Ускоряем шайбу после отскока
             puckSpeedX *= speedBoost;
             puckSpeedY *= speedBoost;
             lastPaddleHit = 'computer';
         }
 
-        // Сбрасываем lastPaddleHit, если шайба больше не касается ни одной биты
         if (
             !(
                 puckRect.bottom >= paddleRect.top &&
@@ -393,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lastPaddleHit = null;
         }
 
-        // Движение компьютера
         const targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 50;
         computerPaddleX += (targetX - computerPaddleX) * (computerSpeed + level * 0.03);
         if (computerPaddleX < 0) computerPaddleX = 0;
@@ -402,7 +375,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         computerPaddle.style.left = `${computerPaddleX}px`;
 
-        // Проверка конца игры (только если компьютер выиграл)
         if (computerScore >= 5) {
             endGame2();
         }
@@ -413,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetPuck() {
         puckX = gameContainer2.offsetWidth / 2 - 10;
         puckY = gameContainer2.offsetHeight / 2 - 10;
-        puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Увеличиваем начальную скорость
+        puckSpeedX = 7 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         puckSpeedY = 7 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         lastPaddleHit = null;
     }
@@ -442,12 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitButton3 = document.getElementById('exitButton3');
     const boss = document.getElementById('boss');
     const cannon = document.getElementById('cannon');
-
-    if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 ||
-        !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon) {
-        console.error("One or more DOM elements are missing. Please check your HTML.");
-        throw new Error("Required DOM elements not found.");
-    }
 
     let score3 = 0;
     let gameActive3 = false;
@@ -486,7 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
         startGame3();
     });
 
-    // Управление мышью
     gameContainer3.addEventListener('mousedown', (e) => {
         if (!gameActive3) return;
         isDraggingCannon = true;
@@ -502,7 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isDraggingCannon = false;
     });
 
-    // Управление сенсорным экраном
     gameContainer3.addEventListener('touchstart', (e) => {
         if (!gameActive3) return;
         e.preventDefault();
