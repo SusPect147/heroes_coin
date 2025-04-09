@@ -192,8 +192,8 @@ let puckVelocity = { x: 0, y: 0 };
 let playerPaddlePosition = { x: 0 };
 let computerPaddlePosition = { x: 0 };
 let isDraggingPaddle = false;
-const maxSpeed = 6; // Максимальная скорость шайбы
-const friction = 0.99; // Коэффициент трения (слегка замедляет шайбу)
+const maxSpeed = 12; // Увеличиваем максимальную скорость шайбы
+const friction = 0.995; // Уменьшаем трение, чтобы шайба дольше сохраняла скорость
 let lastPaddleHit = null; // Для предотвращения многократных столкновений с одной битой
 
 // Проверка на существование элементов
@@ -277,8 +277,8 @@ function startGame2() {
         y: gameContainer2.offsetHeight / 2 - puck.offsetHeight / 2
     };
     puckVelocity = {
-        x: (Math.random() > 0.5 ? 1 : -1) * 3,
-        y: (Math.random() > 0.5 ? 1 : -1) * 3
+        x: (Math.random() > 0.5 ? 1 : -1) * 5, // Увеличиваем начальную скорость с 3 до 5
+        y: (Math.random() > 0.5 ? 1 : -1) * 5
     };
     puck.style.left = `${puckPosition.x}px`;
     puck.style.top = `${puckPosition.y}px`;
@@ -351,7 +351,7 @@ function gameLoop2() {
         lastPaddleHit !== 'player' // Проверяем, что это новое столкновение
     ) {
         puckVelocity.y = -Math.abs(puckVelocity.y); // Отскок вверх
-        puckVelocity.x += (puckPosition.x - (playerPaddlePosition.x + playerPaddle.offsetWidth / 2)) * 0.05; // Уменьшаем влияние на горизонтальную скорость
+        puckVelocity.x += (puckPosition.x - (playerPaddlePosition.x + playerPaddle.offsetWidth / 2)) * 0.1; // Возвращаем влияние биты на 0.1
         lastPaddleHit = 'player'; // Запоминаем, что шайба ударилась о биту игрока
     }
 
@@ -365,7 +365,7 @@ function gameLoop2() {
         lastPaddleHit !== 'computer' // Проверяем, что это новое столкновение
     ) {
         puckVelocity.y = Math.abs(puckVelocity.y); // Отскок вниз
-        puckVelocity.x += (puckPosition.x - (computerPaddlePosition.x + computerPaddle.offsetWidth / 2)) * 0.05; // Уменьшаем влияние на горизонтальную скорость
+        puckVelocity.x += (puckPosition.x - (computerPaddlePosition.x + computerPaddle.offsetWidth / 2)) * 0.1; // Возвращаем влияние биты на 0.1
         lastPaddleHit = 'computer'; // Запоминаем, что шайба ударилась о биту компьютера
     }
 
@@ -409,8 +409,8 @@ function resetPuck() {
         y: gameContainer2.offsetHeight / 2 - puck.offsetHeight / 2
     };
     puckVelocity = {
-        x: (Math.random() > 0.5 ? 1 : -1) * 3,
-        y: (Math.random() > 0.5 ? 1 : -1) * 3
+        x: (Math.random() > 0.5 ? 1 : -1) * 5, // Увеличиваем начальную скорость с 3 до 5
+        y: (Math.random() > 0.5 ? 1 : -1) * 5
     };
     puck.style.left = `${puckPosition.x}px`;
     puck.style.top = `${puckPosition.y}px`;
