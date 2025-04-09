@@ -501,3 +501,59 @@ const tg = window.Telegram.WebApp;
 
     // Убедитесь, что Web App готов
     tg.ready();
+// Получаем данные пользователя (если доступны)
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
+        } else {
+            console.log('Данные пользователя недоступны.');
+        }
+
+        // Функция распознавания устройства
+        function detectDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = Telegram.WebApp.platform || 'unknown'; // Платформа из Telegram Web App
+            let deviceInfo = {
+                deviceType: 'unknown',
+                os: 'unknown',
+                telegramPlatform: platform
+            };
+
+            // Определяем тип устройства
+            if (/mobile|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent)) {
+                deviceInfo.deviceType = 'mobile';
+            } else if (/tablet|ipad/i.test(userAgent)) {
+                deviceInfo.deviceType = 'tablet';
+            } else {
+                deviceInfo.deviceType = 'desktop';
+            }
+
+            // Определяем операционную систему
+            if (/android/i.test(userAgent)) {
+                deviceInfo.os = 'Android';
+            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+                deviceInfo.os = 'iOS';
+            } else if (/win/i.test(userAgent)) {
+                deviceInfo.os = 'Windows';
+            } else if (/mac/i.test(userAgent)) {
+                deviceInfo.os = 'MacOS';
+            } else if (/linux/i.test(userAgent)) {
+                deviceInfo.os = 'Linux';
+            }
+
+            return deviceInfo;
+        }
+
+        // Вызываем функцию и выводим результат
+        const device = detectDevice();
+        console.log('Device Info:', device);
+
+        // Выводим информацию на страницу
+        const deviceInfoDiv = document.getElementById('device-info');
+        if (deviceInfoDiv) {
+            deviceInfoDiv.innerHTML = `
+                <p>Тип устройства: ${device.deviceType}</p>
+                <p>Операционная система: ${device.os}</p>
+                <p>Платформа Telegram: ${device.telegramPlatform}</p>
+            `;
+        }
