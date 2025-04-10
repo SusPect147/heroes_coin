@@ -469,7 +469,7 @@ function restartGame2() {
     gameOverScreen2.classList.add('hidden');
     startGame2();
 }
-    }
+
 
     // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');
