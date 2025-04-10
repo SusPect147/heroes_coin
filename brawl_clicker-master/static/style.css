@@ -2343,13 +2343,11 @@ html, body {
     border-radius: 5px;
 }
 
-.puck {
+#puck {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: black;
-    border-radius: 50%;
-    will-change: transform; /* Оптимизация для transform */
+    will-change: transform;
     transition: none;
 }
 

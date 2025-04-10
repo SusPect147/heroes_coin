@@ -210,7 +210,7 @@ let puckSpeedX = 3;
 let puckSpeedY = 3;
 let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
 let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.02;
+let computerSpeed = 0.015; // Уменьшаем скорость компьютера с 0.02 до 0.015
 let timeSinceLastGoal = 0;
 let speedMultiplier = 1;
 const maxSpeed = 15;
@@ -246,7 +246,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
             paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
         }
-        paddle.style.transform = `translateX(${paddleX}px)`; // Используем transform для плавности
+        paddle.style.transform = `translateX(${paddleX}px)`;
     };
 
     const handleTouchMove = (e) => {
@@ -290,7 +290,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.02;
+        computerSpeed = 0.015; // Уменьшаем скорость компьютера
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
         lastPaddleHit = null;
@@ -303,7 +303,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         lastFpsTime = performance.now();
         fps = 0;
 
-        // Инициализируем начальные позиции с помощью transform
+        // Инициализируем начальные позиции
         puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
         paddle.style.transform = `translateX(${paddleX}px)`;
         computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
@@ -331,14 +331,14 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
         timeSinceLastGoal++;
         if (timeSinceLastGoal % 300 === 0) {
-            speedMultiplier += 0.01;
-            if (speedMultiplier > 1.3) speedMultiplier = 1.3;
+            speedMultiplier += 0.015; // Увеличиваем прирост с 0.01 до 0.015
+            if (speedMultiplier > 1.5) speedMultiplier = 1.5; // Увеличиваем максимум с 1.3 до 1.5
         }
 
         // Обновляем позицию шайбы
         puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier * deltaTime;
         puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier * deltaTime;
-        puck.style.transform = `translate(${puckX}px, ${puckY}px)`; // Используем transform для плавности
+        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
 
         const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
         if (speed > maxSpeed) {
@@ -424,7 +424,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
         // Логика движения компьютера
         frameCounter++;
-        if (frameCounter % 15 === 0) {
+        if (frameCounter % 20 === 0) { // Увеличиваем задержку с 15 до 20 кадров
             if (puckSpeedY < 0) {
                 const timeToTop = puckY / Math.abs(puckSpeedY);
                 let predictedPuckX = puckX + puckSpeedX * timeToTop;
@@ -450,7 +450,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
             computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
         }
-        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`; // Используем transform для плавности
+        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
 
         if (computerScore >= 5) {
             endGame2();
