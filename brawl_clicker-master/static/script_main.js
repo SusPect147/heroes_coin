@@ -493,4 +493,17 @@ function createMinionEffect(event) {
   }, 1000);
 }
 
+const tg = window.Telegram.WebApp;
+    // Применяем режим полного экрана для мини-приложения
+    window.Telegram.WebApp.expand();
+
+    // Убедитесь, что Web App готов
+    tg.ready();
+// Получаем данные пользователя (если доступны)
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
+        } else {
+            console.log('Данные пользователя недоступны.');
+        }
 
