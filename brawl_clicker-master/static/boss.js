@@ -445,7 +445,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
             }
         }
 
-        const adaptiveSpeed = computerSpeed + level * 0.01;
+        const adaptiveSpeed = computerSpeed + level * 0.015;
         computerPaddleX += (targetX - computerPaddleX) * adaptiveSpeed;
 
         if (computerPaddleX < 0) computerPaddleX = 0;
@@ -461,14 +461,20 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         requestAnimationFrame(gameLoop2);
     }
 
-    function resetPuck() {
-        puckX = gameContainer2.offsetWidth / 2 - 15;
-        puckY = gameContainer2.offsetHeight / 2 - 30;
+function resetPuck() {
+    puckX = gameContainer2.offsetWidth / 2 - 15;
+    puckY = gameContainer2.offsetHeight / 2 - 30;
+    puckSpeedX = 0; // Устанавливаем начальную скорость 0
+    puckSpeedY = 0; // Устанавливаем начальную скорость 0
+    lastPaddleHit = null;
+    puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
+
+    // Через 500 миллисекунд (0.5 секунды) задаём шайбе скорость
+    setTimeout(() => {
         puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
-        lastPaddleHit = null;
-        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
-    }
+    }, 500);
+}
 
     function endGame2() {
         gameActive2 = false;
