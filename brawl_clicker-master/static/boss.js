@@ -176,321 +176,331 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-// Игра 2: Аэрохоккей
-const gameContainer2 = document.getElementById('gameContainer2');
-const paddle = document.getElementById('paddle');
-const computerPaddle = document.getElementById('computerPaddle');
-const puck = document.getElementById('puck');
-const playerScoreElement = document.getElementById('playerScore');
-const computerScoreElement = document.getElementById('computerScore');
-const levelElement = document.getElementById('levelValue');
-const gameOverScreen2 = document.getElementById('gameOver2');
-const finalPlayerScore = document.getElementById('finalPlayerScore');
-const finalComputerScore = document.getElementById('finalComputerScore');
-const exitButton2 = document.getElementById('exitButton2');
+    // Игра 2: Аэрохоккей
+    const gameContainer2 = document.getElementById('gameContainer2');
+    const paddle = document.getElementById('paddle');
+    const computerPaddle = document.getElementById('computerPaddle');
+    const puck = document.getElementById('puck');
+    const playerScoreElement = document.getElementById('playerScore');
+    const computerScoreElement = document.getElementById('computerScore');
+    const levelElement = document.getElementById('levelValue');
+    const gameOverScreen2 = document.getElementById('gameOver2');
+    const finalPlayerScore = document.getElementById('finalPlayerScore');
+    const finalComputerScore = document.getElementById('finalComputerScore');
+    const finalLevel = document.getElementById('finalLevel');
+    const exitButton2 = document.getElementById('exitButton2');
 
-// Добавляем элемент для отображения FPS
-const fpsDisplay = document.createElement('div');
-fpsDisplay.style.position = 'absolute';
-fpsDisplay.style.top = '10px';
-fpsDisplay.style.right = '10px';
-fpsDisplay.style.color = 'white';
-fpsDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-fpsDisplay.style.padding = '5px';
-fpsDisplay.style.zIndex = '10';
-gameContainer2.appendChild(fpsDisplay);
+    // Добавляем элемент для отображения FPS
+    const fpsDisplay = document.createElement('div');
+    fpsDisplay.style.position = 'absolute';
+    fpsDisplay.style.top = '10px';
+    fpsDisplay.style.right = '10px';
+    fpsDisplay.style.color = 'white';
+    fpsDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    fpsDisplay.style.padding = '5px';
+    fpsDisplay.style.zIndex = '10';
+    gameContainer2.appendChild(fpsDisplay);
 
-let gameActive2 = false;
-let playerScore = 0;
-let computerScore = 0;
-let level = 1;
-let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 15 : 0;
-let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 15 : 0;
-let puckSpeedX = 5;
-let puckSpeedY = 5;
-let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.005; // Уменьшаем скорость компьютера с 0.01 до 0.005
-let timeSinceLastGoal = 0;
-let speedMultiplier = 1;
-const maxSpeed = 15;
-const minSpeed = 2;
-const speedBoost = 1.05;
-let lastPaddleHit = null;
-let frameCounter = 0;
-let targetX = (gameContainer2 ? gameContainer2.offsetWidth - (computerPaddle ? computerPaddle.offsetWidth : 0) : 0) / 2;
-let lastTime = performance.now();
-let frameCount = 0;
-let lastFpsTime = performance.now();
-let fps = 0;
+    let gameActive2 = false;
+    let playerScore = 0;
+    let computerScore = 0;
+    let level = 1;
+    let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 15 : 0;
+    let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 15 : 0;
+    let puckSpeedX = 5;
+    let puckSpeedY = 5;
+    let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
+    let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
+    let computerSpeed = 0.005;
+    let timeSinceLastGoal = 0;
+    let speedMultiplier = 1;
+    const maxSpeed = 15;
+    const minSpeed = 2;
+    const speedBoost = 1.05;
+    let lastPaddleHit = null;
+    let frameCounter = 0;
+    let targetX = (gameContainer2 ? gameContainer2.offsetWidth - (computerPaddle ? computerPaddle.offsetWidth : 0) : 0) / 2;
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let lastFpsTime = performance.now();
+    let fps = 0;
 
-// Проверка элементов для 2-й игры
-if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
-    console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
-} else {
-    exitButton2.style.display = 'none';
-
-    banner2.addEventListener('click', () => {
-        banner.classList.add('hidden');
-        banner2.classList.add('hidden');
-        banner3.classList.add('hidden');
-        gameContainer2.classList.remove('hidden');
-        startGame2();
-    });
-
-    const handleMouseMove = (e) => {
-        if (!gameActive2) return;
-        const rect = gameContainer2.getBoundingClientRect();
-        paddleX = e.clientX - rect.left - paddle.offsetWidth / 2;
-        if (paddleX < 0) paddleX = 0;
-        if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
-            paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
-        }
-        paddle.style.transform = `translateX(${paddleX}px)`;
-    };
-
-    const handleTouchMove = (e) => {
-        if (!gameActive2) return;
-        e.preventDefault();
-        const touch = e.touches[0];
-        const rect = gameContainer2.getBoundingClientRect();
-        paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
-        if (paddleX < 0) paddleX = 0;
-        if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
-            paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
-        }
-        paddle.style.transform = `translateX(${paddleX}px)`;
-    };
-
-    gameContainer2.addEventListener('mousemove', handleMouseMove);
-    gameContainer2.addEventListener('touchstart', handleTouchMove);
-    gameContainer2.addEventListener('touchmove', handleTouchMove);
-
-    exitButton2.addEventListener('click', (e) => {
-        e.stopPropagation();
-        endGame2();
-        gameContainer2.classList.add('hidden');
-        banner.classList.remove('hidden');
-        banner2.classList.remove('hidden');
-        banner3.classList.remove('hidden');
+    // Проверка элементов для 2-й игры
+    if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !finalLevel || !exitButton2) {
+        console.error("One or more DOM elements for Game 2 are missing. Game 2 will not be initialized.");
+    } else {
         exitButton2.style.display = 'none';
-    });
 
-    function startGame2() {
-        gameActive2 = true;
-        playerScore = 0;
-        computerScore = 0;
-        level = 1;
-        playerScoreElement.textContent = playerScore;
-        computerScoreElement.textContent = computerScore;
-        levelElement.textContent = level;
-        puckX = gameContainer2.offsetWidth / 2 - 15;
-        puckY = gameContainer2.offsetHeight / 2 - 15;
-        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1);
-        puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1);
-        paddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.005; // Уменьшаем скорость компьютера
-        timeSinceLastGoal = 0;
-        speedMultiplier = 1;
-        lastPaddleHit = null;
-        frameCounter = 0;
-        targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
-        gameOverScreen2.classList.add('hidden');
-        exitButton2.style.display = 'none';
-        lastTime = performance.now();
-        frameCount = 0;
-        lastFpsTime = performance.now();
-        fps = 0;
+        banner2.addEventListener('click', () => {
+            banner.classList.add('hidden');
+            banner2.classList.add('hidden');
+            banner3.classList.add('hidden');
+            gameContainer2.classList.remove('hidden');
+            startGame2();
+        });
 
-        // Инициализируем начальные позиции
-        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
-        paddle.style.transform = `translateX(${paddleX}px)`;
-        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
+        const handleMouseMove = (e) => {
+            if (!gameActive2) return;
+            const rect = gameContainer2.getBoundingClientRect();
+            paddleX = e.clientX - rect.left - paddle.offsetWidth / 2;
+            if (paddleX < 0) paddleX = 0;
+            if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
+                paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
+            }
+            paddle.style.transform = `translateX(${paddleX}px)`;
+        };
 
-        gameLoop2();
-    }
+        const handleTouchMove = (e) => {
+            if (!gameActive2) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = gameContainer2.getBoundingClientRect();
+            paddleX = touch.clientX - rect.left - paddle.offsetWidth / 2;
+            if (paddleX < 0) paddleX = 0;
+            if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
+                paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
+            }
+            paddle.style.transform = `translateX(${paddleX}px)`;
+        };
 
-    function gameLoop2(timestamp) {
-        if (!gameActive2) return;
+        gameContainer2.addEventListener('mousemove', handleMouseMove);
+        gameContainer2.addEventListener('touchstart', handleTouchMove);
+        gameContainer2.addEventListener('touchmove', handleTouchMove);
 
-        // Вычисляем FPS
-        frameCount++;
-        const currentTime = timestamp || performance.now();
-        const elapsedFpsTime = currentTime - lastFpsTime;
-        if (elapsedFpsTime >= 1000) {
-            fps = (frameCount * 1000) / elapsedFpsTime;
-            fpsDisplay.textContent = `FPS: ${Math.round(fps)}`;
-            frameCount = 0;
-            lastFpsTime = currentTime;
-        }
+        exitButton2.addEventListener('click', (e) => {
+            e.stopPropagation();
+            endGame2();
+            gameContainer2.classList.add('hidden');
+            banner.classList.remove('hidden');
+            banner2.classList.remove('hidden');
+            banner3.classList.remove('hidden');
+            exitButton2.style.display = 'none';
+        });
 
-        // Вычисляем дельту времени
-        const deltaTime = (currentTime - lastTime) / 16.67; // Нормализуем для 60 FPS
-        lastTime = currentTime;
-
-        timeSinceLastGoal++;
-        if (timeSinceLastGoal % 300 === 0) {
-            speedMultiplier += 0.015;
-            if (speedMultiplier > 1.5) speedMultiplier = 1.5;
-        }
-
-        // Обновляем позицию шайбы
-        puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier * deltaTime;
-        puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier * deltaTime;
-        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
-
-        const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
-        if (speed > maxSpeed) {
-            const scale = maxSpeed / speed;
-            puckSpeedX *= scale;
-            puckSpeedY *= scale;
-        }
-        if (speed < minSpeed && speed > 0) {
-            const scale = minSpeed / speed;
-            puckSpeedX *= scale;
-            puckSpeedY *= scale;
-        }
-
-        if (puckX <= 0 || puckX >= gameContainer2.offsetWidth - puck.offsetWidth) {
-            puckSpeedX = -puckSpeedX;
-        }
-
-        if (puckY <= 0) {
-            playerScore++;
-            level++;
-            totalCoins += window.coinsPerPoint || 1;
-            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-            localStorage.setItem('totalCoins', totalCoins);
+        function startGame2() {
+            gameActive2 = true;
+            playerScore = 0;
+            computerScore = 0;
+            level = 1;
             playerScoreElement.textContent = playerScore;
-            levelElement.textContent = level;
-            resetPuck();
-            timeSinceLastGoal = 0;
-            speedMultiplier = 1;
-        } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
-            computerScore++;
             computerScoreElement.textContent = computerScore;
-            resetPuck();
+            levelElement.textContent = level;
+            puckX = gameContainer2.offsetWidth / 2 - 15;
+            puckY = gameContainer2.offsetHeight / 2 - 30; // Смещаем шайбу вверх
+            puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1);
+            puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1);
+            paddleX = gameContainer2.offsetWidth / 2 - 50;
+            computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
+            computerSpeed = 0.005;
             timeSinceLastGoal = 0;
             speedMultiplier = 1;
+            lastPaddleHit = null;
+            frameCounter = 0;
+            targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
+            gameOverScreen2.classList.add('hidden');
+            exitButton2.style.display = 'none';
+            lastTime = performance.now();
+            frameCount = 0;
+            lastFpsTime = performance.now();
+            fps = 0;
+
+            // Инициализируем начальные позиции
+            puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
+            paddle.style.transform = `translateX(${paddleX}px)`;
+            computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
+
+            gameLoop2();
         }
 
-        const puckRect = puck.getBoundingClientRect();
-        const paddleRect = paddle.getBoundingClientRect();
-        const computerPaddleRect = computerPaddle.getBoundingClientRect();
+        function gameLoop2(timestamp) {
+            if (!gameActive2) return;
 
-        if (
-            puckRect.bottom >= paddleRect.top &&
-            puckRect.top <= paddleRect.bottom &&
-            puckRect.right >= paddleRect.left &&
-            puckRect.left <= paddleRect.right &&
-            lastPaddleHit !== 'player'
-        ) {
-            puckSpeedY = -Math.abs(puckSpeedY);
-            puckSpeedX *= speedBoost;
-            puckSpeedY *= speedBoost;
-            lastPaddleHit = 'player';
-        }
+            // Вычисляем FPS
+            frameCount++;
+            const currentTime = timestamp || performance.now();
+            const elapsedFpsTime = currentTime - lastFpsTime;
+            if (elapsedFpsTime >= 1000) {
+                fps = (frameCount * 1000) / elapsedFpsTime;
+                fpsDisplay.textContent = `FPS: ${Math.round(fps)}`;
+                frameCount = 0;
+                lastFpsTime = currentTime;
+            }
 
-        if (
-            puckRect.bottom >= computerPaddleRect.top &&
-            puckRect.top <= computerPaddleRect.bottom &&
-            puckRect.right >= computerPaddleRect.left &&
-            puckRect.left <= computerPaddleRect.right &&
-            lastPaddleHit !== 'computer'
-        ) {
-            puckSpeedY = Math.abs(puckSpeedY);
-            puckSpeedX *= speedBoost;
-            puckSpeedY *= speedBoost;
-            lastPaddleHit = 'computer';
-        }
+            // Вычисляем дельту времени
+            const deltaTime = (currentTime - lastTime) / 16.67;
+            lastTime = currentTime;
 
-        if (
-            !(
+            timeSinceLastGoal++;
+            if (timeSinceLastGoal % 300 === 0) {
+                speedMultiplier += 0.015;
+                if (speedMultiplier > 1.5) speedMultiplier = 1.5;
+            }
+
+            // Обновляем позицию шайбы
+            puckX += puckSpeedX * (1 + level * 0.05) * speedMultiplier * deltaTime; // Уменьшенное ускорение
+            puckY += puckSpeedY * (1 + level * 0.05) * speedMultiplier * deltaTime; // Уменьшенное ускорение
+            puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
+
+            const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
+            if (speed > maxSpeed) {
+                const scale = maxSpeed / speed;
+                puckSpeedX *= scale;
+                puckSpeedY *= scale;
+            }
+            if (speed < minSpeed && speed > 0) {
+                const scale = minSpeed / speed;
+                puckSpeedX *= scale;
+                puckSpeedY *= scale;
+            }
+
+            // Проверка столкновения со стенками
+            if (puckX <= 0 || puckX >= gameContainer2.offsetWidth - puck.offsetWidth) {
+                puckSpeedX = -puckSpeedX; // Меняем направление по X
+                // Добавляем минимальную скорость по Y, чтобы шайба не прилипала
+                if (Math.abs(puckSpeedY) < 1) {
+                    puckSpeedY = (puckSpeedY >= 0 ? 1 : -1) * (1 + Math.random()); // Случайная скорость от 1 до 2
+                }
+            }
+
+            if (puckY <= 0) {
+                playerScore++;
+                level = Math.min(level + 1, 10); // Ограничиваем уровень 10
+                totalCoins += window.coinsPerPoint || 1;
+                if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+                localStorage.setItem('totalCoins', totalCoins);
+                playerScoreElement.textContent = playerScore;
+                levelElement.textContent = level;
+                resetPuck();
+                timeSinceLastGoal = 0;
+                speedMultiplier = 1;
+            } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
+                computerScore++;
+                computerScoreElement.textContent = computerScore;
+                resetPuck();
+                timeSinceLastGoal = 0;
+                speedMultiplier = 1;
+            }
+
+            const puckRect = puck.getBoundingClientRect();
+            const paddleRect = paddle.getBoundingClientRect();
+            const computerPaddleRect = computerPaddle.getBoundingClientRect();
+
+            if (
                 puckRect.bottom >= paddleRect.top &&
                 puckRect.top <= paddleRect.bottom &&
                 puckRect.right >= paddleRect.left &&
-                puckRect.left <= paddleRect.right
-            ) &&
-            !(
+                puckRect.left <= paddleRect.right &&
+                lastPaddleHit !== 'player'
+            ) {
+                puckSpeedY = -Math.abs(puckSpeedY);
+                puckSpeedX *= speedBoost;
+                puckSpeedY *= speedBoost;
+                lastPaddleHit = 'player';
+            }
+
+            if (
                 puckRect.bottom >= computerPaddleRect.top &&
                 puckRect.top <= computerPaddleRect.bottom &&
                 puckRect.right >= computerPaddleRect.left &&
-                puckRect.left <= computerPaddleRect.right
-            )
-        ) {
-            lastPaddleHit = null;
-        }
-
-        // Логика движения компьютера
-        frameCounter++;
-        if (frameCounter % 15 === 0) { // Увеличиваем задержку с 25 до 30 кадров
-            // Случайно выбираем, предсказывать траекторию или просто следовать за шайбой
-            if (puckSpeedY < 0 && Math.random() < 0.5) { // 50% шанс предсказать траекторию
-                const timeToTop = puckY / Math.abs(puckSpeedY);
-                let predictedPuckX = puckX + puckSpeedX * timeToTop;
-
-                while (predictedPuckX < 0 || predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
-                    if (predictedPuckX < 0) {
-                        predictedPuckX = -predictedPuckX;
-                    } else if (predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
-                        predictedPuckX = 2 * (gameContainer2.offsetWidth - puck.offsetWidth) - predictedPuckX;
-                    }
-                }
-
-                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 60; // Увеличиваем случайность с 80 до 120
-            } else {
-                // В остальных случаях компьютер просто следует за текущей позицией шайбы
-                targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 60;
+                puckRect.left <= computerPaddleRect.right &&
+                lastPaddleHit !== 'computer'
+            ) {
+                puckSpeedY = Math.abs(puckSpeedY);
+                puckSpeedX *= speedBoost;
+                puckSpeedY *= speedBoost;
+                lastPaddleHit = 'computer';
             }
+
+            if (
+                !(
+                    puckRect.bottom >= paddleRect.top &&
+                    puckRect.top <= paddleRect.bottom &&
+                    puckRect.right >= paddleRect.left &&
+                    puckRect.left <= paddleRect.right
+                ) &&
+                !(
+                    puckRect.bottom >= computerPaddleRect.top &&
+                    puckRect.top <= computerPaddleRect.bottom &&
+                    puckRect.right >= computerPaddleRect.left &&
+                    puckRect.left <= computerPaddleRect.right
+                )
+            ) {
+                lastPaddleHit = null;
+            }
+
+            // Логика движения компьютера
+            frameCounter++;
+            const updateInterval = Math.max(10, 30 - level * 2);
+            if (frameCounter % updateInterval === 0) {
+                const predictionChance = Math.min(0.9, 0.5 + level * 0.05);
+                const randomness = Math.max(30, 120 - level * 10);
+
+                if (puckSpeedY < 0 && Math.random() < predictionChance) {
+                    const timeToTop = puckY / Math.abs(puckSpeedY);
+                    let predictedPuckX = puckX + puckSpeedX * timeToTop;
+
+                    while (predictedPuckX < 0 || predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                        if (predictedPuckX < 0) {
+                            predictedPuckX = -predictedPuckX;
+                        } else if (predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                            predictedPuckX = 2 * (gameContainer2.offsetWidth - puck.offsetWidth) - predictedPuckX;
+                        }
+                    }
+
+                    targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * randomness;
+                } else {
+                    targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * randomness;
+                }
+            }
+
+            const adaptiveSpeed = computerSpeed + level * 0.015;
+            computerPaddleX += (targetX - computerPaddleX) * adaptiveSpeed;
+
+            if (computerPaddleX < 0) computerPaddleX = 0;
+            if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
+                computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
+            }
+            computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
+
+            if (computerScore >= 5) {
+                endGame2();
+            }
+
+            requestAnimationFrame(gameLoop2);
         }
 
-        const adaptiveSpeed = computerSpeed + level * 0.015;
-        computerPaddleX += (targetX - computerPaddleX) * adaptiveSpeed;
+        function resetPuck() {
+            puckX = gameContainer2.offsetWidth / 2 - 15;
+            puckY = gameContainer2.offsetHeight / 2 - 30;
+            puckSpeedX = 0;
+            puckSpeedY = 0;
+            lastPaddleHit = null;
+            puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
+            puck.classList.add('blinking');
 
-        if (computerPaddleX < 0) computerPaddleX = 0;
-        if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
-            computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
+            setTimeout(() => {
+                puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
+                puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
+                puck.classList.remove('blinking');
+            }, 500);
         }
-        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
 
-        if (computerScore >= 5) {
+        function endGame2() {
+            gameActive2 = false;
+            finalPlayerScore.textContent = playerScore;
+            finalComputerScore.textContent = computerScore;
+            finalLevel.textContent = level;
+            gameOverScreen2.classList.remove('hidden');
+            exitButton2.style.display = 'block';
+            if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+        }
+
+        function restartGame2() {
             endGame2();
+            gameOverScreen2.classList.add('hidden');
+            startGame2();
         }
-
-        requestAnimationFrame(gameLoop2);
     }
-
-function resetPuck() {
-    puckX = gameContainer2.offsetWidth / 2 - 15;
-    puckY = gameContainer2.offsetHeight / 2 - 30;
-    puckSpeedX = 0; // Устанавливаем начальную скорость 0
-    puckSpeedY = 0; // Устанавливаем начальную скорость 0
-    lastPaddleHit = null;
-    puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
-
-    // Через 500 миллисекунд (0.5 секунды) задаём шайбе скорость
-    setTimeout(() => {
-        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
-        puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
-    }, 500);
-}
-
-    function endGame2() {
-        gameActive2 = false;
-        finalPlayerScore.textContent = playerScore;
-        finalComputerScore.textContent = computerScore;
-        gameOverScreen2.classList.remove('hidden');
-        exitButton2.style.display = 'block';
-        if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
-    }
-
-    function restartGame2() {
-        endGame2();
-        gameOverScreen2.classList.add('hidden');
-        startGame2();
-    }
-}
 
     // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');
