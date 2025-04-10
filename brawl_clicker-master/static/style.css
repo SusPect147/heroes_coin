@@ -2350,6 +2350,7 @@ html, body {
     background-color: black;
     border-radius: 50%;
     will-change: left, top; /* Оптимизация для плавного движения */
+    transition: none; /* Убираем любые переходы, которые могут мешать */
 }
 
 #scoreDisplay {
