@@ -189,6 +189,17 @@ const finalPlayerScore = document.getElementById('finalPlayerScore');
 const finalComputerScore = document.getElementById('finalComputerScore');
 const exitButton2 = document.getElementById('exitButton2');
 
+// Добавляем элемент для отображения FPS
+const fpsDisplay = document.createElement('div');
+fpsDisplay.style.position = 'absolute';
+fpsDisplay.style.top = '10px';
+fpsDisplay.style.right = '10px';
+fpsDisplay.style.color = 'white';
+fpsDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+fpsDisplay.style.padding = '5px';
+fpsDisplay.style.zIndex = '10';
+gameContainer2.appendChild(fpsDisplay);
+
 let gameActive2 = false;
 let playerScore = 0;
 let computerScore = 0;
@@ -208,7 +219,10 @@ const speedBoost = 1.05;
 let lastPaddleHit = null;
 let frameCounter = 0;
 let targetX = (gameContainer2 ? gameContainer2.offsetWidth - (computerPaddle ? computerPaddle.offsetWidth : 0) : 0) / 2;
-let lastTime = performance.now(); // Инициализируем lastTime
+let lastTime = performance.now();
+let frameCount = 0;
+let lastFpsTime = performance.now();
+let fps = 0;
 
 // Проверка элементов для 2-й игры
 if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
@@ -224,7 +238,6 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         startGame2();
     });
 
-    // Функция для обработки движения мыши
     const handleMouseMove = (e) => {
         if (!gameActive2) return;
         const rect = gameContainer2.getBoundingClientRect();
@@ -233,10 +246,9 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
             paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
         }
-        paddle.style.left = `${paddleX}px`;
+        paddle.style.transform = `translateX(${paddleX}px)`; // Используем transform для плавности
     };
 
-    // Функция для обработки сенсорного ввода
     const handleTouchMove = (e) => {
         if (!gameActive2) return;
         e.preventDefault();
@@ -247,7 +259,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         if (paddleX > gameContainer2.offsetWidth - paddle.offsetWidth) {
             paddleX = gameContainer2.offsetWidth - paddle.offsetWidth;
         }
-        paddle.style.left = `${paddleX}px`;
+        paddle.style.transform = `translateX(${paddleX}px)`;
     };
 
     gameContainer2.addEventListener('mousemove', handleMouseMove);
@@ -287,15 +299,34 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         gameOverScreen2.classList.add('hidden');
         exitButton2.style.display = 'none';
         lastTime = performance.now();
+        frameCount = 0;
+        lastFpsTime = performance.now();
+        fps = 0;
+
+        // Инициализируем начальные позиции с помощью transform
+        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
+        paddle.style.transform = `translateX(${paddleX}px)`;
+        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
+
         gameLoop2();
     }
 
     function gameLoop2(timestamp) {
         if (!gameActive2) return;
 
-        // Вычисляем дельту времени
+        // Вычисляем FPS
+        frameCount++;
         const currentTime = timestamp || performance.now();
-        const deltaTime = (currentTime - lastTime) / 16.67; // Нормализуем для 60 FPS (1000 / 60 ≈ 16.67ms)
+        const elapsedFpsTime = currentTime - lastFpsTime;
+        if (elapsedFpsTime >= 1000) {
+            fps = (frameCount * 1000) / elapsedFpsTime;
+            fpsDisplay.textContent = `FPS: ${Math.round(fps)}`;
+            frameCount = 0;
+            lastFpsTime = currentTime;
+        }
+
+        // Вычисляем дельту времени
+        const deltaTime = (currentTime - lastTime) / 16.67; // Нормализуем для 60 FPS
         lastTime = currentTime;
 
         timeSinceLastGoal++;
@@ -304,11 +335,10 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
             if (speedMultiplier > 1.3) speedMultiplier = 1.3;
         }
 
-        // Обновляем позицию шайбы с учётом дельты времени
+        // Обновляем позицию шайбы
         puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier * deltaTime;
         puckY += puckSpeedY * (1 + level * 0.1) * speedMultiplier * deltaTime;
-        puck.style.left = `${puckX}px`;
-        puck.style.top = `${puckY}px`;
+        puck.style.transform = `translate(${puckX}px, ${puckY}px)`; // Используем transform для плавности
 
         const speed = Math.sqrt(puckSpeedX * puckSpeedX + puckSpeedY * puckSpeedY);
         if (speed > maxSpeed) {
@@ -392,7 +422,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
             lastPaddleHit = null;
         }
 
-        // Упрощённая логика движения компьютера
+        // Логика движения компьютера
         frameCounter++;
         if (frameCounter % 15 === 0) {
             if (puckSpeedY < 0) {
@@ -420,7 +450,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         if (computerPaddleX > gameContainer2.offsetWidth - computerPaddle.offsetWidth) {
             computerPaddleX = gameContainer2.offsetWidth - computerPaddle.offsetWidth;
         }
-        computerPaddle.style.left = `${computerPaddleX}px`;
+        computerPaddle.style.transform = `translateX(${computerPaddleX}px)`; // Используем transform для плавности
 
         if (computerScore >= 5) {
             endGame2();
@@ -435,6 +465,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         puckSpeedX = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         lastPaddleHit = null;
+        puck.style.transform = `translate(${puckX}px, ${puckY}px)`;
     }
 
     function endGame2() {
