@@ -204,13 +204,13 @@ let gameActive2 = false;
 let playerScore = 0;
 let computerScore = 0;
 let level = 1;
-let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 15 : 0; // Учитываем новый размер шайбы (30/2 = 15)
+let puckX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 15 : 0;
 let puckY = gameContainer2 ? gameContainer2.offsetHeight / 2 - 15 : 0;
-let puckSpeedX = 5; // Увеличиваем начальную скорость с 3 до 5
-let puckSpeedY = 5; // Увеличиваем начальную скорость с 3 до 5
+let puckSpeedX = 5;
+let puckSpeedY = 5;
 let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
 let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.01; // Уменьшаем скорость компьютера с 0.015 до 0.01
+let computerSpeed = 0.005; // Уменьшаем скорость компьютера с 0.01 до 0.005
 let timeSinceLastGoal = 0;
 let speedMultiplier = 1;
 const maxSpeed = 15;
@@ -284,13 +284,13 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         playerScoreElement.textContent = playerScore;
         computerScoreElement.textContent = computerScore;
         levelElement.textContent = level;
-        puckX = gameContainer2.offsetWidth / 2 - 15; // Учитываем новый размер шайбы
+        puckX = gameContainer2.offsetWidth / 2 - 15;
         puckY = gameContainer2.offsetHeight / 2 - 15;
-        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1); // Увеличиваем начальную скорость
+        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.01; // Уменьшаем скорость компьютера
+        computerSpeed = 0.005; // Уменьшаем скорость компьютера
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
         lastPaddleHit = null;
@@ -424,8 +424,9 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
         // Логика движения компьютера
         frameCounter++;
-        if (frameCounter % 25 === 0) { // Увеличиваем задержку с 20 до 25 кадров
-            if (puckSpeedY < 0) {
+        if (frameCounter % 30 === 0) { // Увеличиваем задержку с 25 до 30 кадров
+            // Случайно выбираем, предсказывать траекторию или просто следовать за шайбой
+            if (puckSpeedY < 0 && Math.random() < 0.5) { // 50% шанс предсказать траекторию
                 const timeToTop = puckY / Math.abs(puckSpeedY);
                 let predictedPuckX = puckX + puckSpeedX * timeToTop;
 
@@ -437,9 +438,10 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
                     }
                 }
 
-                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 80;
+                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 120; // Увеличиваем случайность с 80 до 120
             } else {
-                targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
+                // В остальных случаях компьютер просто следует за текущей позицией шайбы
+                targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 120;
             }
         }
 
@@ -460,9 +462,9 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
     }
 
     function resetPuck() {
-        puckX = gameContainer2.offsetWidth / 2 - 15; // Учитываем новый размер шайбы
+        puckX = gameContainer2.offsetWidth / 2 - 15;
         puckY = gameContainer2.offsetHeight / 2 - 15;
-        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1); // Увеличиваем начальную скорость
+        puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         lastPaddleHit = null;
         puck.style.transform = `translate(${puckX}px, ${puckY}px)`;

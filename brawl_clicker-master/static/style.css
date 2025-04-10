@@ -2328,7 +2328,7 @@ html, body {
 /* Элементы игры "Аэрохоккей" */
 .paddle {
     position: absolute;
-    width: 100px;
+    width: 90px;
     height: 20px;
     background-color: blue;
     bottom: 100px; /* Отступ от нижней части экрана */
@@ -2337,7 +2337,7 @@ html, body {
 #computerPaddle {
     position: absolute;
     top: 20px;
-    width: 100px;
+    width: 80px;
     height: 20px;
     background-color: #f00;
     border-radius: 5px;
