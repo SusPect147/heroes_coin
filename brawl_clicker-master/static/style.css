@@ -2343,12 +2343,13 @@ html, body {
     border-radius: 5px;
 }
 
-#puck {
+.puck {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #000;
+    background-color: black;
     border-radius: 50%;
+    will-change: left, top; /* Оптимизация для плавного движения */
 }
 
 #scoreDisplay {
