@@ -424,7 +424,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
         // Логика движения компьютера
         frameCounter++;
-        if (frameCounter % 30 === 0) { // Увеличиваем задержку с 25 до 30 кадров
+        if (frameCounter % 20 === 0) { // Увеличиваем задержку с 25 до 30 кадров
             // Случайно выбираем, предсказывать траекторию или просто следовать за шайбой
             if (puckSpeedY < 0 && Math.random() < 0.5) { // 50% шанс предсказать траекторию
                 const timeToTop = puckY / Math.abs(puckSpeedY);
@@ -463,7 +463,7 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
     function resetPuck() {
         puckX = gameContainer2.offsetWidth / 2 - 15;
-        puckY = gameContainer2.offsetHeight / 2 - 15;
+        puckY = gameContainer2.offsetHeight / 2 - 35;
         puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.1);
         lastPaddleHit = null;
