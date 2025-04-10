@@ -199,13 +199,15 @@ let puckSpeedX = 3;
 let puckSpeedY = 3;
 let paddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
 let computerPaddleX = gameContainer2 ? gameContainer2.offsetWidth / 2 - 50 : 0;
-let computerSpeed = 0.07; // Увеличиваем скорость компьютера с 0.05 до 0.07
+let computerSpeed = 0.03; // Уменьшаем скорость компьютера с 0.07 до 0.03
 let timeSinceLastGoal = 0;
 let speedMultiplier = 1;
 const maxSpeed = 15;
 const minSpeed = 2;
 const speedBoost = 1.05;
 let lastPaddleHit = null;
+let frameCounter = 0; // Счётчик кадров для задержки реакции компьютера
+let targetX = (gameContainer2 ? gameContainer2.offsetWidth - (computerPaddle ? computerPaddle.offsetWidth : 0) : 0) / 2; // Инициализируем targetX
 
 // Проверка элементов для 2-й игры
 if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElement || !computerScoreElement || !levelElement || !gameOverScreen2 || !finalPlayerScore || !finalComputerScore || !exitButton2) {
@@ -280,10 +282,12 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
         puckSpeedY = 3 * (Math.random() > 0.5 ? 1 : -1);
         paddleX = gameContainer2.offsetWidth / 2 - 50;
         computerPaddleX = gameContainer2.offsetWidth / 2 - 50;
-        computerSpeed = 0.07; // Увеличиваем скорость компьютера
+        computerSpeed = 0.03; // Уменьшаем скорость компьютера
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
         lastPaddleHit = null;
+        frameCounter = 0;
+        targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2; // Инициализируем targetX
         gameOverScreen2.classList.add('hidden');
         exitButton2.style.display = 'none';
         gameLoop2();
@@ -294,8 +298,8 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
 
         timeSinceLastGoal++;
         if (timeSinceLastGoal % 300 === 0) {
-            speedMultiplier += 0.05;
-            if (speedMultiplier > 2) speedMultiplier = 2;
+            speedMultiplier += 0.02; // Уменьшаем прирост speedMultiplier с 0.05 до 0.02
+            if (speedMultiplier > 1.5) speedMultiplier = 1.5; // Уменьшаем максимальное значение с 2 до 1.5
         }
 
         puckX += puckSpeedX * (1 + level * 0.1) * speedMultiplier;
@@ -385,34 +389,32 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
             lastPaddleHit = null;
         }
 
-        // Улучшенная логика движения компьютера
-        let targetX;
+        // Упрощённая логика движения компьютера с задержкой реакции
+        frameCounter++;
+        if (frameCounter % 10 === 0) { // Обновляем цель раз в 10 кадров
+            if (puckSpeedY < 0) {
+                // Предсказываем будущую позицию шайбы
+                const timeToTop = puckY / Math.abs(puckSpeedY);
+                let predictedPuckX = puckX + puckSpeedX * timeToTop;
 
-        // Проверяем, движется ли шайба к воротам компьютера (вверх, puckSpeedY < 0)
-        if (puckSpeedY < 0) {
-            // Предсказываем будущую позицию шайбы
-            // Рассчитываем, сколько времени потребуется шайбе, чтобы достичь верхней части поля (y = 0)
-            const timeToTop = puckY / Math.abs(puckSpeedY); // Время до достижения верха
-            let predictedPuckX = puckX + puckSpeedX * timeToTop; // Предсказываем позицию X
-
-            // Учитываем отскоки от стен
-            while (predictedPuckX < 0 || predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
-                if (predictedPuckX < 0) {
-                    predictedPuckX = -predictedPuckX; // Отскок от левой стены
-                } else if (predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
-                    predictedPuckX = 2 * (gameContainer2.offsetWidth - puck.offsetWidth) - predictedPuckX; // Отскок от правой стены
+                // Учитываем отскоки от стен
+                while (predictedPuckX < 0 || predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                    if (predictedPuckX < 0) {
+                        predictedPuckX = -predictedPuckX;
+                    } else if (predictedPuckX > gameContainer2.offsetWidth - puck.offsetWidth) {
+                        predictedPuckX = 2 * (gameContainer2.offsetWidth - puck.offsetWidth) - predictedPuckX;
+                    }
                 }
-            }
 
-            // Цель — предсказанная позиция шайбы с небольшой случайной погрешностью
-            targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 20; // Уменьшаем случайность с 50 до 20
-        } else {
-            // Если шайба движется вниз (к игроку), компьютер возвращается к центру
-            targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
+                // Увеличиваем случайную погрешность
+                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 50; // Увеличиваем случайность с 20 до 50
+            } else {
+                targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
+            }
         }
 
-        // Адаптивная скорость: увеличиваем скорость компьютера с ростом уровня
-        const adaptiveSpeed = computerSpeed + level * 0.05; // Увеличиваем скорость на 0.05 за каждый уровень
+        // Адаптивная скорость: уменьшаем влияние уровня
+        const adaptiveSpeed = computerSpeed + level * 0.02; // Уменьшаем влияние уровня с 0.05 до 0.02
         computerPaddleX += (targetX - computerPaddleX) * adaptiveSpeed;
 
         // Ограничиваем движение компьютера
