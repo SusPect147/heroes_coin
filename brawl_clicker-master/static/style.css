@@ -2328,7 +2328,7 @@ html, body {
 /* Элементы игры "Аэрохоккей" */
 .paddle {
     position: absolute;
-    width: 90px;
+    width: 80px;
     height: 20px;
     background-color: blue;
     bottom: 100px; /* Отступ от нижней части экрана */
@@ -2362,15 +2362,17 @@ html, body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
 
-#levelValue {
+#levelDisplay {
     position: absolute;
-    top: 40px;
+    top: 30px;
     left: 10px;
     font-size: 20px;
-    font-family: 'Pusia-bold', sans-serif;
-    color: #ffd700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
 }
+
 /* Экран "Game Over" */
 #gameOver, #gameOver2, #gameOver3 {
     position: absolute;
