@@ -264,7 +264,14 @@ if (exitButton2) {
         banner.classList.remove('hidden');
         banner2.classList.remove('hidden');
         banner3.classList.remove('hidden');
-        exitButton2.style.display = 'none';
+        // Скрываем gameOverScreen2 при выходе
+        if (gameOverScreen2) {
+            gameOverScreen2.classList.add('hidden');
+            gameOverScreen2.style.display = 'none';
+        }
+        if (exitButton2) {
+            exitButton2.style.display = 'none';
+        }
     });
 }
 
@@ -288,7 +295,11 @@ function startGame2() {
     lastPaddleHit = null;
     frameCounter = 0;
     targetX = (gameContainer2.offsetWidth - computerPaddle.offsetWidth) / 2;
-    if (gameOverScreen2) gameOverScreen2.classList.add('hidden');
+    // Принудительно скрываем gameOverScreen2 при старте игры
+    if (gameOverScreen2) {
+        gameOverScreen2.classList.add('hidden');
+        gameOverScreen2.style.display = 'none'; // Сбрасываем display
+    }
     if (exitButton2) exitButton2.style.display = 'none';
     lastTime = performance.now();
 
@@ -490,7 +501,10 @@ function endGame2() {
 
 function restartGame2() {
     endGame2();
-    if (gameOverScreen2) gameOverScreen2.classList.add('hidden');
+    if (gameOverScreen2) {
+        gameOverScreen2.classList.add('hidden');
+        gameOverScreen2.style.display = 'none';
+    }
     startGame2();
 }
 
