@@ -438,10 +438,10 @@ if (!gameContainer2 || !paddle || !computerPaddle || !puck || !playerScoreElemen
                     }
                 }
 
-                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 120; // Увеличиваем случайность с 80 до 120
+                targetX = predictedPuckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 80; // Увеличиваем случайность с 80 до 120
             } else {
                 // В остальных случаях компьютер просто следует за текущей позицией шайбы
-                targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 120;
+                targetX = puckX - computerPaddle.offsetWidth / 2 + (Math.random() - 0.5) * 80;
             }
         }
 
