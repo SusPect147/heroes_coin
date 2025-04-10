@@ -508,6 +508,7 @@ function restartGame2() {
     startGame2();
 }
 
+
     // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');
     const scoreElement3 = document.getElementById('scoreValue3');
