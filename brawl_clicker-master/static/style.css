@@ -2332,6 +2332,7 @@ html, body {
     height: 20px;
     background-color: blue;
     bottom: 100px; /* Отступ от нижней части экрана */
+    border-radius: 10px; /* Добавляем закругленные края */
 }
 
 #computerPaddle {
@@ -2340,7 +2341,7 @@ html, body {
     width: 90px;
     height: 20px;
     background-color: #f00;
-    border-radius: 5px;
+    border-radius: 10px; /* Увеличиваем радиус для большей заметности (было 5px) */
 }
 
 #puck {
