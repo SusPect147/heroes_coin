@@ -8,9 +8,9 @@ const buyButton = document.getElementById('buyButton');
 // Описания улучшений для каждой игры
 const upgrades = {
     game1: {
-        image: 'brawl_clicker-master/static/images/magnet.png', // Иконка для улучшения
-        text: 'Магнитный мешок: притягивает монеты в радиусе 120px.',
-        price: 5000 // Пример цены
+        image: 'brawl_clicker-master/static/images/safe.png', // Иконка для сейфа
+        text: 'Сейф: заменяет мешок на сейф, увеличивая его размер и зону захвата.',
+        price: 500 // Цена 500 монет
     },
     game2: {
         image: 'brawl_clicker-master/static/images/speed.png',
@@ -23,6 +23,9 @@ const upgrades = {
         price: 10000
     }
 };
+
+// Переменная для отслеживания состояния улучшения
+let isSafeActive = false; // Флаг, указывающий, активен ли сейф
 
 // Обработчик клика по значку улучшения
 upgradeIcons.forEach(icon => {
@@ -60,6 +63,11 @@ buyButton.addEventListener('click', () => {
         localStorage.setItem('totalCoins', totalCoins); // Сохраняем только обновлённое количество монет
         if (currentScoreElement) currentScoreElement.textContent = totalCoins;
         alert(`Улучшение для ${game} куплено!`);
+
+        // Активируем улучшение для игры 1
+        if (game === 'game1') {
+            isSafeActive = true; // Активируем сейф
+        }
     } else {
         alert('Недостаточно монет для покупки улучшения!');
     }
@@ -177,6 +185,20 @@ document.addEventListener('DOMContentLoaded', () => {
             coins = [];
             gameOverScreen.classList.add('hidden');
             exitButton.style.display = 'none';
+
+            // Применяем улучшение, если сейф активен
+            if (isSafeActive) {
+                bag.classList.remove('bag'); // Убираем класс мешка
+                bag.classList.add('safe'); // Добавляем класс сейфа
+                bag.style.width = '150px'; // Увеличиваем размер
+                bag.style.height = '150px';
+            } else {
+                bag.classList.remove('safe'); // Убираем класс сейфа
+                bag.classList.add('bag'); // Возвращаем класс мешка
+                bag.style.width = '100px'; // Стандартный размер мешка
+                bag.style.height = '100px';
+            }
+
             bag.style.left = `${bagPosition}px`;
             spawnCoins();
             gameLoop();
@@ -210,7 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const bagActiveHeight = bagRect.height * 0.2;
                 const bagActiveBottom = bagRect.top + bagActiveHeight;
-                const bagActiveWidth = 80; // Убрано применение улучшения
+                // Увеличиваем зону захвата для сейфа
+                const bagActiveWidth = isSafeActive ? 120 : 80; // 120px для сейфа, 80px для мешка
                 const bagActiveLeft = bagRect.left + (bagRect.width - bagActiveWidth) / 2;
                 const bagActiveRight = bagActiveLeft + bagActiveWidth;
 

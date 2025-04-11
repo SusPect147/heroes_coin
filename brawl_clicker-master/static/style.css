@@ -2374,6 +2374,18 @@ html, body {
     border-radius: 10px;
 }
 
+.safe {
+    position: absolute;
+    bottom: 70px;
+    width: 180px;
+    height: 180px;
+    background-image: url('images/safe.png'); /* Укажите путь к изображению сейфа */
+    background-size: cover;
+    position: absolute;
+    background-position: center;
+    bottom: 0;
+}
+
 .coin3 {
     position: absolute;
     width: 60px;
