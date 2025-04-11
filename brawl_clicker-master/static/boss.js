@@ -914,7 +914,7 @@ function restartGame2() {
                             currentBoss = 3;
                             bossHealth = 200;
                             bossHealthElement.textContent = bossHealth;
-                            const backgroundImageIce4 = 'brawl_clicker-master/static/images/ice4.png';
+                            const backgroundImageIce4 = 'brawl_clicker-master/static/images/ice.png';
                             gameContainer3.style.backgroundImage = `url('${backgroundImageIce4}')`;
                             boss.classList.remove('boss2');
                             boss.classList.add('boss3');

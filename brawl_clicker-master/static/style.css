@@ -242,7 +242,7 @@ body {
 
 .shadow {
     position: fixed;
-    bottom: 190px;
+    bottom: 170px;
     left: 50%;
     transform: translateX(-50%);
     width: 15px;
