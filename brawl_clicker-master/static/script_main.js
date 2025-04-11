@@ -273,11 +273,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
         body.style.backgroundPosition = 'center calc(50% - 12vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/poison.png') {
-        body.style.backgroundPosition = 'center calc(50% - 15vh)'; // Сильно выше
+        body.style.backgroundPosition = 'center calc(50% - 12vh)'; // Сильно выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark_2.png') {
         body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/plat.png') {
-        body.style.backgroundPosition = 'center calc(50% - 7vh)'; // Выше
+        body.style.backgroundPosition = 'center calc(50% - 8vh)'; // Выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark.png') {
         body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
     } else {
