@@ -138,7 +138,7 @@ body {
 
 #clickButton {
     position: absolute;
-    bottom: 185px;
+    bottom: 165px;
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.3s ease; /* Уменьшаем время для быстрой реакции */
