@@ -25,7 +25,7 @@ const upgrades = {
 };
 
 // Переменная для отслеживания состояния улучшения
-let isSafeActive = false; // Флаг, указывающий, активен ли сейф
+let isSafeActive = localStorage.getItem('isSafeActive') === 'true'; // Загружаем состояние из localStorage
 
 // Обработчик клика по значку улучшения
 upgradeIcons.forEach(icon => {
@@ -67,6 +67,7 @@ buyButton.addEventListener('click', () => {
         // Активируем улучшение для игры 1
         if (game === 'game1') {
             isSafeActive = true; // Активируем сейф
+            localStorage.setItem('isSafeActive', 'true'); // Сохраняем состояние улучшения
         }
     } else {
         alert('Недостаточно монет для покупки улучшения!');
