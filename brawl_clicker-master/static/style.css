@@ -2362,15 +2362,15 @@ html, body {
 }
 
 /* Элементы игры "Лови монеты" */
-#bag {
+.bag {
     position: absolute;
     bottom: 70px;
     width: 140px;
     height: 140px;
-    background-image: url("images/bag.png"); /* Заменяем коричневый квадрат на изображение */
-    background-size: contain; /* Сохраняем пропорции изображения */
-    background-repeat: no-repeat; /* Убираем повторение */
-    background-position: center; /* Центрируем изображение */
+    background-image: url("images/bag.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     border-radius: 10px;
 }
 
@@ -2379,11 +2379,10 @@ html, body {
     bottom: 70px;
     width: 180px;
     height: 180px;
-    background-image: url('images/safe.png'); /* Укажите путь к изображению сейфа */
+    background-image: url('images/safe.png');
     background-size: cover;
-    position: absolute;
+    background-repeat: no-repeat;
     background-position: center;
-    bottom: 0;
 }
 
 .coin3 {
