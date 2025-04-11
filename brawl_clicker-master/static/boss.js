@@ -1,14 +1,87 @@
+// Получаем элементы
+const upgradeIcons = document.querySelectorAll('.upgrade-icon');
+const modal = document.getElementById('upgradeModal');
+const modalImage = document.getElementById('modalImage');
+const modalText = document.getElementById('modalText');
+const buyButton = document.getElementById('buyButton');
+
+// Описания улучшений для каждой игры
+const upgrades = {
+    game1: {
+        image: 'brawl_clicker-master/static/images/magnet.png', // Иконка для улучшения
+        text: 'Магнитный мешок: притягивает монеты в радиусе 120px.',
+        price: 5000 // Пример цены
+    },
+    game2: {
+        image: 'brawl_clicker-master/static/images/speed.png',
+        text: 'Ускоренный старт: увеличивает начальную скорость шайбы до 7.',
+        price: 7000
+    },
+    game3: {
+        image: 'brawl_clicker-master/static/images/attack.png',
+        text: 'Супер-атака: увеличивает урон по боссам на 20%.',
+        price: 10000
+    }
+};
+
+// Обработчик клика по значку улучшения
+upgradeIcons.forEach(icon => {
+    icon.addEventListener('click', (event) => {
+        event.stopPropagation(); // Предотвращаем запуск игры при клике на значок
+
+        const game = icon.getAttribute('data-game');
+        const upgrade = upgrades[game];
+
+        // Заполняем модальное окно
+        modalImage.src = upgrade.image;
+        modalText.textContent = `${upgrade.text} Цена: ${upgrade.price} монет`;
+        buyButton.setAttribute('data-game', game);
+
+        // Показываем модальное окно
+        modal.style.display = 'flex';
+    });
+});
+
+// Переменная totalCoins должна быть доступна глобально
+let totalCoins = parseInt(localStorage.getItem('totalCoins')) || 0;
+const currentScoreElement = document.querySelector('.currentScore');
+if (currentScoreElement) {
+    currentScoreElement.textContent = totalCoins;
+}
+
+// Закрытие модального окна при клике на кнопку "Купить"
+buyButton.addEventListener('click', () => {
+    const game = buyButton.getAttribute('data-game');
+    const price = upgrades[game].price;
+
+    // Проверяем, достаточно ли монет
+    if (totalCoins >= price) {
+        totalCoins -= price;
+        localStorage.setItem('totalCoins', totalCoins); // Сохраняем только обновлённое количество монет
+        if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+        alert(`Улучшение для ${game} куплено!`);
+    } else {
+        alert('Недостаточно монет для покупки улучшения!');
+    }
+
+    modal.style.display = 'none';
+});
+
+// Закрытие модального окна при клике вне его
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // Общие элементы
     const banner = document.getElementById('startBanner');
     const banner2 = document.getElementById('startBanner2');
     const banner3 = document.getElementById('startBanner3');
-    const currentScoreElement = document.querySelector('.currentScore');
 
-    let totalCoins = parseInt(localStorage.getItem('totalCoins')) || 0;
-    if (currentScoreElement) {
-        currentScoreElement.textContent = totalCoins;
-    } else {
+    // totalCoins и currentScoreElement уже определены выше
+    if (!currentScoreElement) {
         console.warn("Element '.currentScore' not found. Score display may not work.");
     }
 
@@ -137,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const bagActiveHeight = bagRect.height * 0.2;
                 const bagActiveBottom = bagRect.top + bagActiveHeight;
-                const bagActiveWidth = 80;
+                const bagActiveWidth = 80; // Убрано применение улучшения
                 const bagActiveLeft = bagRect.left + (bagRect.width - bagActiveWidth) / 2;
                 const bagActiveRight = bagActiveLeft + bagActiveWidth;
 

@@ -641,18 +641,38 @@
             <div class="banner" id="startBanner">
                 <img src="brawl_clicker-master/static/images/coin.png" alt="Banner 1">
                 <span class="banner-text">Earn coins</span>
+                <div class="upgrade-icon" data-game="game1">
+                    <img src="brawl_clicker-master/static/images/upgrade_icon.png" alt="Upgrade">
+                </div>
             </div>
 
             <!-- Игра 2: Аэрохоккей -->
             <div class="banner" id="startBanner2">
                 <img src="brawl_clicker-master/static/images/stars.png" alt="Banner 2">
                 <span class="banner-text">Air hockey</span>
+                <div class="upgrade-icon" data-game="game2">
+                    <img src="brawl_clicker-master/static/images/upgrade_icon.png" alt="Upgrade">
+                </div>
             </div>
 
             <!-- Игра 3: Боссы -->
             <div class="banner" id="startBanner3">
                 <img src="brawl_clicker-master/static/images/bomb.png" alt="Box">
                 <span class="banner-text">Boss Fights</span>
+                <div class="upgrade-icon" data-game="game3">
+                    <img src="brawl_clicker-master/static/images/upgrade_icon.png" alt="Upgrade">
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для улучшений -->
+        <div class="modal" id="upgradeModal">
+            <div class="modal-content">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="Upgrade Image">
+                </div>
+                <div class="modal-text" id="modalText"></div>
+                <button class="modal-button" id="buyButton">Купить</button>
             </div>
         </div>
 
@@ -667,22 +687,22 @@
             </div>
         </div>
 
-<div id="gameContainer2" class="game-container hidden">
-    <div id="airHockeyField">
-        <div id="paddle" class="paddle"></div>
-        <div id="computerPaddle" class="paddle"></div>
-        <img id="puck" src="brawl_clicker-master/static/images/shaiba.png" alt="Puck">
-        <div id="scoreDisplay">
-            <span id="playerScore">0</span> : <span id="computerScore">0</span>
+        <div id="gameContainer2" class="game-container hidden">
+            <div id="airHockeyField">
+                <div id="paddle" class="paddle"></div>
+                <div id="computerPaddle" class="paddle"></div>
+                <img id="puck" src="brawl_clicker-master/static/images/shaiba.png" alt="Puck">
+                <div id="scoreDisplay">
+                    <span id="playerScore">0</span> : <span id="computerScore">0</span>
+                </div>
+                <div id="levelValue">Level: 1</div>
+            </div>
+            <div id="gameOver2" class="game-over hidden">
+                <p>Game over!</p>
+                <p>Score: <span id="finalPlayerScore">0</span> : <span id="finalComputerScore">0</span></p>
+                <button id="exitButton2">Quit</button>
+            </div>
         </div>
-        <div id="levelValue">Level: 1</div>
-    </div>
-    <div id="gameOver2" class="game-over hidden">
-        <p>Game over!</p>
-        <p>Score: <span id="finalPlayerScore">0</span> : <span id="finalComputerScore">0</span></p>
-        <button id="exitButton2">Quit</button>
-    </div>
-</div>
 
 
         <!-- Игра 3: Битва с боссом -->
