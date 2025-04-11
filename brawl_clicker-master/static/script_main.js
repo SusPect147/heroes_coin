@@ -269,15 +269,14 @@ document.addEventListener('DOMContentLoaded', () => {
     progressLabel.style.backgroundSize = 'cover';
     progressLabel.style.backgroundPosition = 'center';
 
-  if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
-    body.style.backgroundPosition = 'center calc(50% - 12vh)';
-} else if (backgroundImage === 'brawl_clicker-master/static/images/poison.png') {
-    body.style.backgroundPosition = 'center calc(50% - 50vh)';
-} else {
-    body.style.backgroundPosition = 'center';
-}
+   if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
+      body.style.backgroundPosition = 'center calc(50% - 12vh)';
+    } else {
+      body.style.backgroundPosition = 'center';
+    }
 
-localStorage.setItem('backgroundImage', backgroundImage);
+    localStorage.setItem('backgroundImage', backgroundImage);
+  }
 
   function spawnEffect(selectedCharacter, event) {
     const effects = {
