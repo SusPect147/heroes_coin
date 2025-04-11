@@ -284,7 +284,7 @@ function startGame2() {
     if (computerScoreElement) computerScoreElement.textContent = computerScore;
     if (levelElement) levelElement.textContent = level;
     puckX = gameContainer2.offsetWidth / 2 - 15;
-    puckY = gameContainer2.offsetHeight / 2 - 30; // Смещаем шайбу вверх
+    puckY = gameContainer2.offsetHeight / 2 - 35; // Смещаем шайбу вверх
     puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1);
     puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1);
     paddleX = gameContainer2.offsetWidth / 2 - 50;
@@ -453,7 +453,7 @@ function gameLoop2(timestamp) {
     if (computerPaddle) computerPaddle.style.transform = `translateX(${computerPaddleX}px)`;
 
     // Проверка условия окончания игры
-    if (computerScore >= 5) {
+    if (computerScore >= 3) {
         endGame2();
     }
 
