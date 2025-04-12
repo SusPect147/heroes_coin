@@ -13,13 +13,13 @@ const upgrades = {
         price: 500
     },
     game2: {
-        image: 'brawl_clicker-master/static/images/paddle2.png', // Иконка для увеличенной биты
+        image: 'brawl_clicker-master/static/images/paddle2.png',
         text: 'Увеличенная бита: заменяет стандартную биту на увеличенную (105px).',
         price: 600
     },
     game3: {
-        image: 'brawl_clicker-master/static/images/attack.png',
-        text: 'Супер-атака: увеличивает урон по боссам на 20%.',
+        image: 'brawl_clicker-master/static/images/cannon2.png',
+        text: 'Новая пушка: заменяет стандартную пушку на улучшенную с уроном 25.',
         price: 10000
     }
 };
@@ -27,6 +27,7 @@ const upgrades = {
 // Переменные для отслеживания состояния улучшений
 let isSafeActive = localStorage.getItem('isSafeActive') === 'true'; // Для игры 1
 let isPaddle2Active = localStorage.getItem('isPaddle2Active') === 'true'; // Для игры 2
+let isCannon2Active = localStorage.getItem('isCannon2Active') === 'true'; // Для игры 3
 
 // Обработчик клика по значку улучшения
 upgradeIcons.forEach(icon => {
@@ -42,6 +43,9 @@ upgradeIcons.forEach(icon => {
             buyButton.textContent = 'Убрать';
         } else if (game === 'game2' && isPaddle2Active) {
             modalText.textContent = 'Убрать увеличенную биту и вернуть стандартную?';
+            buyButton.textContent = 'Убрать';
+        } else if (game === 'game3' && isCannon2Active) {
+            modalText.textContent = 'Убрать улучшенную пушку и вернуть стандартную?';
             buyButton.textContent = 'Убрать';
         } else {
             modalText.textContent = `${upgrade.text} Цена: ${upgrade.price} монет`;
@@ -72,6 +76,10 @@ buyButton.addEventListener('click', () => {
         isPaddle2Active = false;
         localStorage.setItem('isPaddle2Active', 'false');
         alert('Увеличенная бита убрана, стандартная бита возвращена!');
+    } else if (game === 'game3' && isCannon2Active) {
+        isCannon2Active = false;
+        localStorage.setItem('isCannon2Active', 'false');
+        alert('Улучшенная пушка убрана, стандартная пушка возвращена!');
     } else {
         const price = upgrades[game].price;
 
@@ -87,6 +95,9 @@ buyButton.addEventListener('click', () => {
             } else if (game === 'game2') {
                 isPaddle2Active = true;
                 localStorage.setItem('isPaddle2Active', 'true');
+            } else if (game === 'game3') {
+                isCannon2Active = true;
+                localStorage.setItem('isCannon2Active', 'true');
             }
         } else {
             alert('Недостаточно монет для покупки улучшения!');
@@ -194,26 +205,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         function startGame() {
-    gameActive = true;
-    score = 0;
-    scoreElement.textContent = score;
-    coinSpeed = 2;
-    coins = [];
-    gameOverScreen.classList.add('hidden');
-    exitButton.style.display = 'none';
+            gameActive = true;
+            score = 0;
+            scoreElement.textContent = score;
+            coinSpeed = 2;
+            coins = [];
+            gameOverScreen.classList.add('hidden');
+            exitButton.style.display = 'none';
 
-    if (isSafeActive) {
-        bag.classList.remove('bag');
-        bag.classList.add('safe');
-    } else {
-        bag.classList.remove('safe');
-        bag.classList.add('bag');
-    }
+            if (isSafeActive) {
+                bag.classList.remove('bag');
+                bag.classList.add('safe');
+            } else {
+                bag.classList.remove('safe');
+                bag.classList.add('bag');
+            }
 
-    bag.style.left = `${bagPosition}px`;
-    spawnCoins();
-    gameLoop();
-}
+            bag.style.left = `${bagPosition}px`;
+            spawnCoins();
+            gameLoop();
+        }
 
         function spawnCoins() {
             if (!gameActive) return;
@@ -612,8 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startGame2();
     }
 
-
- // Игра 3: Битва с боссами
+    // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');
     const scoreElement3 = document.getElementById('scoreValue3');
     const bossHealthElement = document.getElementById('bossHealthValue');
@@ -623,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitButton3 = document.getElementById('exitButton3');
     const boss = document.getElementById('boss');
     const cannon = document.getElementById('cannon');
+    const cannon2 = document.getElementById('cannon2'); // Новая пушка
 
     let score3 = 0;
     let gameActive3 = false;
@@ -650,6 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let clones = [];
     let boss7BulletSpeed = 1.5;
     let isDraggingCannon = false;
+    let currentCannon = cannon; // Текущая пушка
 
     // Функция для проверки попадания точки в треугольник
     function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
@@ -660,10 +672,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return alpha >= 0 && beta >= 0 && gamma >= 0;
     }
 
-    if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 || !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon) {
+    if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 || !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon || !cannon2) {
         console.error("One or more DOM elements for Game 3 are missing. Game 3 will not be initialized.");
     } else {
         gameOverScreen3.classList.add('hidden');
+        cannon2.style.display = 'none'; // По умолчанию скрываем cannon2
 
         banner3.addEventListener('click', () => {
             banner.classList.add('hidden');
@@ -707,12 +720,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function moveCannon(clientX) {
             const rect = gameContainer3.getBoundingClientRect();
-            cannonPosition = clientX - rect.left - cannon.offsetWidth / 2;
+            cannonPosition = clientX - rect.left - currentCannon.offsetWidth / 2;
             if (cannonPosition < 0) cannonPosition = 0;
-            if (cannonPosition > gameContainer3.offsetWidth - cannon.offsetWidth) {
-                cannonPosition = gameContainer3.offsetWidth - cannon.offsetWidth;
+            if (cannonPosition > gameContainer3.offsetWidth - currentCannon.offsetWidth) {
+                cannonPosition = gameContainer3.offsetWidth - currentCannon.offsetWidth;
             }
-            cannon.style.left = `${cannonPosition}px`;
+            currentCannon.style.left = `${cannonPosition}px`;
         }
 
         function startGame3() {
@@ -730,7 +743,13 @@ document.addEventListener('DOMContentLoaded', () => {
             scoreElement3.textContent = score3;
             bossHealthElement.textContent = bossHealth;
             gameOverScreen3.classList.add('hidden');
-            cannon.style.left = `${cannonPosition}px`;
+
+            // Устанавливаем текущую пушку в зависимости от улучшения
+            currentCannon = isCannon2Active ? cannon2 : cannon;
+            cannon.style.display = isCannon2Active ? 'none' : 'block';
+            cannon2.style.display = isCannon2Active ? 'block' : 'none';
+            currentCannon.style.left = `${cannonPosition}px`;
+
             boss.style.left = `${bossPosition}px`;
             boss.style.top = '50px';
             const backgroundImagePlat = 'brawl_clicker-master/static/images/plat.png';
@@ -752,9 +771,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function shootPlayerBullet() {
             const bullet = document.createElement('div');
-            bullet.classList.add('player-bullet');
-            bullet.style.left = `${cannonPosition + cannon.offsetWidth / 2 - 5}px`;
-            bullet.style.bottom = `${cannon.offsetHeight + 50}px`;
+            // Выбираем тип снаряда в зависимости от текущей пушки
+            bullet.classList.add(currentCannon === cannon ? 'player-bullet' : 'player-bullet2');
+            bullet.style.left = `${cannonPosition + currentCannon.offsetWidth / 2 - 14}px`; // Учитываем ширину снаряда (28px / 2)
+            bullet.style.bottom = `${currentCannon.offsetHeight + 50}px`;
             gameContainer3.appendChild(bullet);
             playerBullets.push(bullet);
         }
@@ -803,7 +823,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (currentBoss === 5) {
                 const numBullets = 4;
-                const cannonCenterX = cannonPosition + cannon.offsetWidth / 2;
+                const cannonCenterX = cannonPosition + currentCannon.offsetWidth / 2;
                 const bossCenterX = bossPosition + boss.offsetWidth / 2;
                 const bossCenterY = parseFloat(boss.style.top) + boss.offsetHeight / 2;
                 const dx = cannonCenterX - bossCenterX;
@@ -836,8 +856,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     bullet.classList.add('boss-bullet', 'boss6-fast-bullet');
                     bullet.style.left = `${bossPosition + boss.offsetWidth / 2}px`;
                     bullet.style.top = `${boss.offsetHeight + 50}px`;
-                    const cannonCenterX = cannonPosition + cannon.offsetWidth / 2;
-                    const cannonCenterY = gameContainer3.offsetHeight - cannon.offsetHeight / 2;
+                    const cannonCenterX = cannonPosition + currentCannon.offsetWidth / 2;
+                    const cannonCenterY = gameContainer3.offsetHeight - currentCannon.offsetHeight / 2;
                     const bulletCenterX = bossPosition + boss.offsetWidth / 2;
                     const bulletCenterY = 50 + boss.offsetHeight / 2;
                     const dx = cannonCenterX - bulletCenterX;
@@ -899,7 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     bossDirection *= -1;
                 }
             } else if (currentBoss === 4) {
-                const targetPosition = cannonPosition + cannon.offsetWidth / 2 - boss.offsetWidth / 2;
+                const targetPosition = cannonPosition + currentCannon.offsetWidth / 2 - boss.offsetWidth / 2;
                 const diff = targetPosition - bossPosition;
                 bossPosition += diff * 0.01;
                 if (bossPosition < 0) bossPosition = 0;
@@ -1000,7 +1020,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ) {
                     bullet.remove();
                     playerBullets.splice(index, 1);
-                    bossHealth -= 30;
+                    // Урон зависит от типа снаряда
+                    const damage = bullet.classList.contains('player-bullet2') ? 25 : 15;
+                    bossHealth -= damage;
                     score3 += 1;
                     totalCoins += window.coinsPerPoint || 1;
                     if (currentScoreElement) currentScoreElement.textContent = totalCoins;
@@ -1102,7 +1124,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         ) {
                             bullet.remove();
                             playerBullets.splice(index, 1);
-                            clone.hp -= 50;
+                            // Урон клону тоже зависит от типа снаряда
+                            const damage = bullet.classList.contains('player-bullet2') ? 25 : 15;
+                            clone.hp -= damage;
                             score3 += 5;
                             totalCoins += 5;
                             if (currentScoreElement) currentScoreElement.textContent = totalCoins;
@@ -1258,37 +1282,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const bulletRect = bullet.getBoundingClientRect();
-    const containerRect = gameContainer3.getBoundingClientRect();
+                const containerRect = gameContainer3.getBoundingClientRect();
 
-    // Координаты центра снаряда относительно gameContainer3
-    const bulletCenterX = bulletRect.left + bulletRect.width / 2 - containerRect.left;
-    const bulletCenterY = bulletRect.top + bulletRect.height / 2 - containerRect.top;
+                // Координаты центра снаряда относительно gameContainer3
+                const bulletCenterX = bulletRect.left + bulletRect.width / 2 - containerRect.left;
+                const bulletCenterY = bulletRect.top + bulletRect.height / 2 - containerRect.top;
 
-    // Определяем маленький треугольный хитбокс, привязанный к центру пушки
-    const hitboxWidth = 50; // Ширина основания треугольника (меньше визуальной ширины 90px)
-    const hitboxHeight = 70; // Высота треугольника (меньше визуальной высоты 110px)
-    const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
-    const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
-    const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
+                // Определяем маленький треугольный хитбокс, привязанный к центру пушки
+                const hitboxWidth = 50; // Ширина основания треугольника (меньше визуальной ширины 90px)
+                const hitboxHeight = 70; // Высота треугольника (меньше визуальной высоты 110px)
+                const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
+                const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
+                const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
 
-    // Вершины треугольника
-    const ax = cannonCenterX; // Вершина A (середина верха)
-    const ay = cannonTopY;
-    const bx = cannonCenterX - hitboxWidth / 2; // Вершина B (левый нижний угол)
-    const by = cannonBottomY;
-    const cx = cannonCenterX + hitboxWidth / 2; // Вершина C (правый нижний угол)
-    const cy = cannonBottomY;
+                // Вершины треугольника
+                const ax = cannonCenterX; // Вершина A (середина верха)
+                const ay = cannonTopY;
+                const bx = cannonCenterX - hitboxWidth / 2; // Вершина B (левый нижний угол)
+                const by = cannonBottomY;
+                const cx = cannonCenterX + hitboxWidth / 2; // Вершина C (правый нижний угол)
+                const cy = cannonBottomY;
 
-    // Проверяем попадание центра снаряда в треугольник
-    if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
-        bullet.remove();
-        bossBullets.splice(index, 1);
-        endGame3(false);
-    } else if (bulletTop > gameContainer3.offsetHeight && currentBoss !== 5 && currentBoss !== 6 && currentBoss !== 7) {
-        bullet.remove();
-        bossBullets.splice(index, 1);
-    }
-});
+                // Проверяем попадание центра снаряда в треугольник
+                if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
+                    bullet.remove();
+                    bossBullets.splice(index, 1);
+                    endGame3(false);
+                } else if (bulletTop > gameContainer3.offsetHeight && currentBoss !== 5 && currentBoss !== 6 && currentBoss !== 7) {
+                    bullet.remove();
+                    bossBullets.splice(index, 1);
+                }
+            });
+
             requestAnimationFrame(gameLoop3);
         }
 

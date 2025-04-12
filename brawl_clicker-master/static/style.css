@@ -2501,7 +2501,36 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
 }
-
+#cannon2 {
+    position: absolute;
+    bottom: 80px;
+    width: 90px;
+    height: 110px;
+    background-image: url("images/cannon2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.player-bullet {
+    position: absolute;
+    width: 28px; /* 40px * 0.7 = 28px */
+    height: 28px;
+    background-image: url("images/stone_effect.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+.player-bullet2 {
+    position: absolute;
+    width: 28px; /* 40px * 0.7 = 28px */
+    height: 28px;
+    background-image: url("images/fireshot.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
 #bossHealth {
     position: absolute;
     top: 40px;
@@ -2669,13 +2698,4 @@ html, body {
     border-radius: 50%;
 }
 
-.player-bullet {
-    position: absolute;
-    width: 28px; /* 40px * 0.7 = 28px */
-    height: 28px;
-    background-image: url("images/stone_effect.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-}
+
