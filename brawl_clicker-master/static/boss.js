@@ -20,7 +20,7 @@ const upgrades = {
     game3: {
         image: 'brawl_clicker-master/static/images/cannon2.png',
         text: 'Новая пушка: заменяет стандартную пушку на улучшенную с уроном 25.',
-        price: 10000
+        price: 700
     }
 };
 
