@@ -2365,8 +2365,8 @@ html, body {
 .bag {
     position: absolute;
     bottom: 70px;
-    width: 140px;
-    height: 140px;
+    width: 125px;
+    height: 125px;
     background-image: url("images/bag.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -2377,8 +2377,8 @@ html, body {
 .safe {
     position: absolute;
     bottom: 70px;
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     background-image: url('images/safe.png');
     background-size: cover;
     background-repeat: no-repeat;

@@ -15,7 +15,7 @@ const upgrades = {
     game2: {
         image: 'brawl_clicker-master/static/images/paddle2.png', // Иконка для увеличенной биты
         text: 'Увеличенная бита: заменяет стандартную биту на увеличенную (105px).',
-        price: 7000
+        price: 600
     },
     game3: {
         image: 'brawl_clicker-master/static/images/attack.png',
@@ -194,30 +194,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         function startGame() {
-            gameActive = true;
-            score = 0;
-            scoreElement.textContent = score;
-            coinSpeed = 2;
-            coins = [];
-            gameOverScreen.classList.add('hidden');
-            exitButton.style.display = 'none';
+    gameActive = true;
+    score = 0;
+    scoreElement.textContent = score;
+    coinSpeed = 2;
+    coins = [];
+    gameOverScreen.classList.add('hidden');
+    exitButton.style.display = 'none';
 
-            if (isSafeActive) {
-                bag.classList.remove('bag');
-                bag.classList.add('safe');
-                bag.style.width = '150px';
-                bag.style.height = '150px';
-            } else {
-                bag.classList.remove('safe');
-                bag.classList.add('bag');
-                bag.style.width = '100px';
-                bag.style.height = '100px';
-            }
+    if (isSafeActive) {
+        bag.classList.remove('bag');
+        bag.classList.add('safe');
+    } else {
+        bag.classList.remove('safe');
+        bag.classList.add('bag');
+    }
 
-            bag.style.left = `${bagPosition}px`;
-            spawnCoins();
-            gameLoop();
-        }
+    bag.style.left = `${bagPosition}px`;
+    spawnCoins();
+    gameLoop();
+}
 
         function spawnCoins() {
             if (!gameActive) return;
