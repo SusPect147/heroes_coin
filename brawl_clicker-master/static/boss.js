@@ -1258,29 +1258,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const bulletRect = bullet.getBoundingClientRect();
-                const cannonRect = cannon.getBoundingClientRect();
+    const containerRect = gameContainer3.getBoundingClientRect();
 
-                const bulletCenterX = bulletRect.left + bulletRect.width / 2;
-                const bulletCenterY = bulletRect.top + bulletRect.height / 2;
+    // Координаты центра снаряда относительно gameContainer3
+    const bulletCenterX = bulletRect.left + bulletRect.width / 2 - containerRect.left;
+    const bulletCenterY = bulletRect.top + bulletRect.height / 2 - containerRect.top;
 
-                const cannonTop = cannonRect.top;
-                const ax = cannonRect.left + cannonRect.width / 2; // Вершина A (середина верха)
-                const ay = cannonTop;
-                const bx = cannonRect.left + 10; // Вершина B (сдвигаем правее на 10px)
-                const by = cannonTop + cannonRect.height;
-                const cx = cannonRect.right - 10; // Вершина C (сдвигаем левее на 10px)
-                const cy = cannonTop + cannonRect.height;
+    // Определяем маленький треугольный хитбокс, привязанный к центру пушки
+    const hitboxWidth = 30; // Ширина основания треугольника (меньше визуальной ширины 90px)
+    const hitboxHeight = 50; // Высота треугольника (меньше визуальной высоты 110px)
+    const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
+    const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
+    const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
 
-                if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
-                    bullet.remove();
-                    bossBullets.splice(index, 1);
-                    endGame3(false);
-                } else if (bulletTop > gameContainer3.offsetHeight && currentBoss !== 5 && currentBoss !== 6 && currentBoss !== 7) {
-                    bullet.remove();
-                    bossBullets.splice(index, 1);
-                }
-            });
+    // Вершины треугольника
+    const ax = cannonCenterX; // Вершина A (середина верха)
+    const ay = cannonTopY;
+    const bx = cannonCenterX - hitboxWidth / 2; // Вершина B (левый нижний угол)
+    const by = cannonBottomY;
+    const cx = cannonCenterX + hitboxWidth / 2; // Вершина C (правый нижний угол)
+    const cy = cannonBottomY;
 
+    // Проверяем попадание центра снаряда в треугольник
+    if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
+        bullet.remove();
+        bossBullets.splice(index, 1);
+        endGame3(false);
+    } else if (bulletTop > gameContainer3.offsetHeight && currentBoss !== 5 && currentBoss !== 6 && currentBoss !== 7) {
+        bullet.remove();
+        bossBullets.splice(index, 1);
+    }
+});
             requestAnimationFrame(gameLoop3);
         }
 
