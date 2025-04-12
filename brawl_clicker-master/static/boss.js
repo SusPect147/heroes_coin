@@ -1265,9 +1265,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const bulletCenterY = bulletRect.top + bulletRect.height / 2 - containerRect.top;
 
     // Определяем маленький треугольный хитбокс, привязанный к центру пушки
-    const hitboxWidth = 30; // Ширина основания треугольника (меньше визуальной ширины 90px)
-    const hitboxHeight = 50; // Высота треугольника (меньше визуальной высоты 110px)
-    const cannonCenterX = cannonPosition + 120 / 2; // Центр пушки (визуальная ширина 90px)
+    const hitboxWidth = 50; // Ширина основания треугольника (меньше визуальной ширины 90px)
+    const hitboxHeight = 70; // Высота треугольника (меньше визуальной высоты 110px)
+    const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
     const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
     const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
 
