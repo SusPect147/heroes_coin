@@ -107,47 +107,77 @@
         </div>
     </div>
 
-    <!-- Друзья -->
-    <div class="page" id="friends" style="display:none;height: 1000px;">
-        <div class="invitation-container">
-            <div class="header">
-                <h1>Your friends</h1>
-                <h2 class="friends-count">0 friends</h2>
-                <button class="how-it-works">Money from friends</button>
-            </div>
+ <!-- Маркет -->
+<div class="page" id="market" style="display:none;height: 1000px;">
+    <div class="market-container">
+        <div class="header">
+            <h1>Market</h1>
+            <h2 class="items-count">0 items</h2>
+            <button class="how-it-works">How it works</button>
         </div>
-        <div class="invite-container">
-            <div class="coin-stack">
-                <img src="brawl_clicker-master/static/images/coin.png" alt="Coins" class="coins">
-            </div>
-            <div class="invite-text">
-                <div class="title">invite friend</div>
-                <div class="reward">
-                    <img src="brawl_clicker-master/static/images/coin.png" alt="Coin" class="coin-icon">
-                    <span class="reward-amount">+5,000</span>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div class="up_text">
-            <p>List of your friends</p>
+    <!-- Кнопка для размещения скина на продажу -->
+    <div class="list-item-container">
+        <div class="coin-stack">
+            <img src="brawl_clicker-master/static/images/bomb.png" alt="Skin Icon" class="skin-icon">
         </div>
-
-        <div class="friend-list">
-            <div class="friend-card">
-                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
-                <div class="friend-info">Ник - уровень</div>
-            </div>
-            <div class="friend-card">
-                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
-                <div class="friend-info">Ник - уровень</div>
-            </div>
-            <div class="friend-card">
-                <img src="brawl_clicker-master/static/images/colt_av.png" alt="Avatar">
-                <div class="friend-info">Ник - уровень</div>
+        <div class="list-text">
+            <div class="title">List your skin</div>
+            <div class="description">
+                Upload your skin and set a price in Telegram Stars
             </div>
         </div>
     </div>
+
+    <!-- Заголовок списка скинов -->
+    <div class="up_text">
+        <p>Available Skins</p>
+    </div>
+
+    <!-- Список скинов -->
+    <div class="skin-list">
+        <!-- Пример карточки скина -->
+        <div class="skin-card">
+            <img src="brawl_clicker-master/static/images/crow_av.png" alt="Skin Preview">
+            <div class="skin-info">
+                <div class="skin-name">Skin Name</div>
+                <div class="skin-price">
+                    <img src="brawl_clicker-master/static/images/star.png" alt="Star Icon" class="star-icon">
+                    <span class="price-amount">100</span>
+                </div>
+            </div>
+            <button class="buy-button">Buy</button>
+        </div>
+        <!-- Дополнительные карточки для примера -->
+        <div class="skin-card">
+            <img src="brawl_clicker-master/static/images/crow_av.png" alt="Skin Preview">
+            <div class="skin-info">
+                <div class="skin-name">Skin Name</div>
+                <div class="skin-price">
+                    <img src="brawl_clicker-master/static/images/star.png" alt="Star Icon" class="star-icon">
+                    <span class="price-amount">150</span>
+                </div>
+            </div>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="skin-card">
+            <img src="brawl_clicker-master/static/images/crow_av.png" alt="Skin Preview">
+            <div class="skin-info">
+                <div class="skin-name">Skin Name</div>
+                <div class="skin-price">
+                    <img src="brawl_clicker-master/static/images/star.png" alt="Star Icon" class="star-icon">
+                    <span class="price-amount">200</span>
+                </div>
+            </div>
+            <button class="buy-button">Buy</button>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Элементы магазина -->
     <div class="background">
         <!-- Слой затемнения -->
         <div class="overlay_box1" style="display: none;"></div>
