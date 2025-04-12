@@ -613,7 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Игра 3: Битва с боссами
+ // Игра 3: Битва с боссами
     const gameContainer3 = document.getElementById('gameContainer3');
     const scoreElement3 = document.getElementById('scoreValue3');
     const bossHealthElement = document.getElementById('bossHealthValue');
@@ -651,7 +651,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let boss7BulletSpeed = 1.5;
     let isDraggingCannon = false;
 
-    // Проверка элементов для 3-й игры
+    // Функция для проверки попадания точки в треугольник
+    function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
+        const d = (by - cy) * (ax - cx) + (cy - ay) * (bx - cx);
+        const alpha = ((by - cy) * (px - cx) + (cy - py) * (bx - cx)) / d;
+        const beta = ((cy - ay) * (px - cx) + (py - ay) * (cx - bx)) / d;
+        const gamma = 1 - alpha - beta;
+        return alpha >= 0 && beta >= 0 && gamma >= 0;
+    }
+
     if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 || !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon) {
         console.error("One or more DOM elements for Game 3 are missing. Game 3 will not be initialized.");
     } else {
@@ -1252,12 +1260,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bulletRect = bullet.getBoundingClientRect();
                 const cannonRect = cannon.getBoundingClientRect();
 
-                if (
-                    bulletRect.bottom >= cannonRect.top &&
-                    bulletRect.top <= cannonRect.bottom &&
-                    bulletRect.right >= cannonRect.left &&
-                    bulletRect.left <= cannonRect.right
-                ) {
+                const bulletCenterX = bulletRect.left + bulletRect.width / 2;
+                const bulletCenterY = bulletRect.top + bulletRect.height / 2;
+
+                const cannonTop = cannonRect.top;
+                const ax = cannonRect.left + cannonRect.width / 2; // Вершина A (середина верха)
+                const ay = cannonTop;
+                const bx = cannonRect.left; // Вершина B (левый нижний угол)
+                const by = cannonTop + cannonRect.height;
+                const cx = cannonRect.right; // Вершина C (правый нижний угол)
+                const cy = cannonTop + cannonRect.height;
+
+                if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
                     bullet.remove();
                     bossBullets.splice(index, 1);
                     endGame3(false);
