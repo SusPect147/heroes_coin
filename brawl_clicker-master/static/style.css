@@ -2505,8 +2505,8 @@ html, body {
 #cannon2 {
     position: absolute;
     bottom: 80px;
-    width: 90px;
-    height: 110px;
+    width: 100px;
+    height: 120px;
     background-image: url("images/cannon2.png");
     background-size: contain;
     background-repeat: no-repeat;
