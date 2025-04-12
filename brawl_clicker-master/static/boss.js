@@ -1266,9 +1266,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cannonTop = cannonRect.top;
                 const ax = cannonRect.left + cannonRect.width / 2; // Вершина A (середина верха)
                 const ay = cannonTop;
-                const bx = cannonRect.left + 10; // Вершина B (сдвигаем правее на 10px)
+                const bx = cannonRect.left + 30; // Вершина B (сдвигаем правее на 10px)
                 const by = cannonTop + cannonRect.height;
-                const cx = cannonRect.right - 10; // Вершина C (сдвигаем левее на 10px)
+                const cx = cannonRect.right - 30; // Вершина C (сдвигаем левее на 10px)
                 const cy = cannonTop + cannonRect.height;
 
                 if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
