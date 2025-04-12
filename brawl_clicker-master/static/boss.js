@@ -1067,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             currentBoss = 6;
                             bossHealth = 350;
                             bossHealthElement.textContent = bossHealth;
-                            const backgroundImageDark3 = 'brawl_clicker-master/static/images/pixel.png';
+                            const backgroundImageDark3 = 'brawl_clicker-master/static/images/pirate.png';
                             gameContainer3.style.backgroundImage = `url('${backgroundImageDark3}')`;
                             boss.classList.remove('boss5');
                             boss.classList.add('boss6');
