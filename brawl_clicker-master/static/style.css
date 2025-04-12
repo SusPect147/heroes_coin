@@ -1372,7 +1372,7 @@ h2 {
 }
 
 .container_up {
-    max-width: 400px;
+    max-width: 370px;
     max-height: 500px;
     margin: 0 auto;
     padding: 0;
@@ -2409,6 +2409,14 @@ html, body {
     width: 85px;
     height: 20px;
     background-color: blue;
+    bottom: 100px; /* Отступ от нижней части экрана */
+    border-radius: 10px; /* Добавляем закругленные края */
+}
+.paddle2 {
+    position: absolute;
+    width: 105px;
+    height: 20px;
+    background-color: cyan;
     bottom: 100px; /* Отступ от нижней части экрана */
     border-radius: 10px; /* Добавляем закругленные края */
 }
