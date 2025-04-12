@@ -1082,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             currentBoss = 7;
                             bossHealth = 5000;
                             bossHealthElement.textContent = bossHealth;
-                            const backgroundImageMystical = 'brawl_clicker-master/static/images/mystical.png';
+                            const backgroundImageMystical = 'brawl_clicker-master/static/images/poison.png';
                             gameContainer3.style.backgroundImage = `url('${backgroundImageMystical}')`;
                             boss.classList.remove('boss6');
                             boss.classList.add('boss7');
@@ -1267,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Определяем маленький треугольный хитбокс, привязанный к центру пушки
     const hitboxWidth = 30; // Ширина основания треугольника (меньше визуальной ширины 90px)
     const hitboxHeight = 50; // Высота треугольника (меньше визуальной высоты 110px)
-    const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
+    const cannonCenterX = cannonPosition + 120 / 2; // Центр пушки (визуальная ширина 90px)
     const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
     const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
 
