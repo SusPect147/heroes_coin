@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const preview = document.getElementById('preview');
   const previewImg = preview ? preview.querySelector('img') : null;
   const selectButton = document.getElementById('select-button');
+  const clickButton = document.getElementById('clickButton'); // Добавляем элемент clickButton
 
   const shopBox = document.querySelector('.shop_box');
   const overlayBox1 = document.querySelector('.overlay_box1');
@@ -28,6 +29,10 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   if (!selectButton) {
     console.error("Element with ID 'select-button' not found.");
+    return;
+  }
+  if (!clickButton) {
+    console.error("Element with ID 'clickButton' not found.");
     return;
   }
   if (!shopBox || !overlayBox1 || !containerBox1 || !containerBox11 || !closeButtonBox1 || !closeRewardButton || !upgradeButtonBox1 || !rewardImage) {
@@ -172,6 +177,13 @@ window.addEventListener('DOMContentLoaded', () => {
     currentPreviewCharacter.classList.remove('selected-preview');
     currentPreviewCharacter.classList.add('selected');
     selectedCharacter = currentPreviewCharacter;
+
+    // Проверяем, выбран ли Groot, и смещаем clickButton влево
+    if (imgSrc === "brawl_clicker-master/static/images/groot.png") {
+      clickButton.style.transform = "translateX(-50px)"; // Смещение влево на 50px
+    } else {
+      clickButton.style.transform = "translateX(0)"; // Сбрасываем смещение для других персонажей
+    }
 
     if (window.updateClickButtonImage) {
       window.updateClickButtonImage(imgSrc);
