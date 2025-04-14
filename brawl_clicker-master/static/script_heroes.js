@@ -170,20 +170,13 @@ window.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('selectedCharacterImg', imgSrc);
     localStorage.setItem('selectedCharacterName', name);
 
-    if (selectedCharacter) {
+   if (selectedCharacter) {
       selectedCharacter.classList.remove('selected');
     }
 
     currentPreviewCharacter.classList.remove('selected-preview');
     currentPreviewCharacter.classList.add('selected');
     selectedCharacter = currentPreviewCharacter;
-
-    // Проверяем, выбран ли Groot, и смещаем clickButton влево
-    if (imgSrc === "brawl_clicker-master/static/images/groot.png") {
-      clickButton.style.transform = "translateX(-50px)"; // Смещение влево на 50px
-    } else {
-      clickButton.style.transform = "translateX(0)"; // Сбрасываем смещение для других персонажей
-    }
 
     if (window.updateClickButtonImage) {
       window.updateClickButtonImage(imgSrc);
