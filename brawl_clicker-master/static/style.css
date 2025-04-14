@@ -423,7 +423,7 @@ body {
 /* Страница маркет */
 .market-container {
     padding: 20px;
-    background-color: #f5f5f5; /* Светлый фон, как на изображении */
+    background-color: #f5f5f5; /* Светлый фон */
 }
 
 .list-item-container {
@@ -473,14 +473,14 @@ body {
     color: #333;
 }
 
-.skin-pack-list {
+.skin-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 0 10px;
 }
 
-.skin-pack-card {
+.skin-card {
     background-color: #fff;
     border-radius: 15px;
     padding: 15px;
@@ -490,32 +490,32 @@ body {
     margin: 0 auto;
 }
 
-.pack-header {
+.skin-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.pack-title {
+.skin-title {
     display: flex;
     flex-direction: column;
 }
 
-.pack-name {
+.skin-name {
     font-size: 18px;
     font-weight: bold;
     color: #333;
 }
 
-.pack-creator {
+.skin-creator {
     font-size: 14px;
     color: #666;
     margin-top: 5px;
 }
 
-.get-pack-button {
-    background-color: #ffeb3b; /* Жёлтый фон, как на изображении */
+.get-skin-button {
+    background-color: #ffeb3b; /* Жёлтый фон */
     color: #333;
     font-size: 14px;
     font-weight: bold;
@@ -533,22 +533,21 @@ body {
     color: #333;
 }
 
-.pack-skins {
+.skin-preview-container {
     display: flex;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: center;
     margin-bottom: 15px;
 }
 
 .skin-preview {
-    width: 80px;
-    height: 80px;
+    width: 150px; /* Увеличиваем размер изображения скина */
+    height: 150px;
     border-radius: 10px;
     object-fit: cover;
 }
 
 .buy-button {
-    background-color: #42a5f5; /* Голубой цвет, как на изображении */
+    background-color: #42a5f5; /* Голубой цвет */
     color: white;
     font-size: 16px;
     font-weight: bold;
