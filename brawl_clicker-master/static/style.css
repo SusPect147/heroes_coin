@@ -11,7 +11,7 @@ body {
 
 #play {
     overflow: hidden;
-        height: 125vh;
+
 }
 
 #friends {}
@@ -22,6 +22,9 @@ body {
     height: 125vh;
 }
 
+#market {
+    height: 125vh;
+}
 #top {}
 
 .page {
