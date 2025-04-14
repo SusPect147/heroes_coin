@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const banner = document.getElementById('startBanner');
     const banner2 = document.getElementById('startBanner2');
     const banner3 = document.getElementById('startBanner3');
+    const banner4 = document.getElementById('startBanner4');
 
     if (!currentScoreElement) {
         console.warn("Element '.currentScore' not found. Score display may not work.");
@@ -1343,6 +1344,170 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.remove('hidden');
             banner2.classList.remove('hidden');
             banner3.classList.remove('hidden');
+            banner4.classList.remove('hidden');
         });
     }
+// Игра 4: Bounce Survival
+    const gameContainer4 = document.getElementById('gameContainer4');
+    const ball = document.getElementById('ball');
+    const survivalTimeElement = document.getElementById('survivalTime');
+    const gameOverScreen4 = document.getElementById('gameOver4');
+    const finalSurvivalTimeElement = document.getElementById('finalSurvivalTime');
+    const earnedCoinsElement = document.getElementById('earnedCoins');
+    const exitButton4 = document.getElementById('exitButton4');
+
+    let gameActive4 = false;
+    let survivalTime = 0;
+    let obstacles = [];
+    let obstacleSpawnInterval;
+    let timeTrackingInterval;
+    let ballOnLeft = true; // Мячик изначально слева
+    let earnedCoins = 0;
+
+    if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
+        console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
+    } else {
+        exitButton4.style.display = 'none';
+
+        // Запуск игры при клике на баннер
+        banner4.addEventListener('click', () => {
+            banner.classList.add('hidden');
+            banner2.classList.add('hidden');
+            banner3.classList.add('hidden');
+            banner4.classList.add('hidden');
+            gameContainer4.classList.remove('hidden');
+            startGame4();
+        });
+
+        // Обработчик клика по мячику для прыжка влево-вправо
+        ball.addEventListener('click', () => {
+            if (!gameActive4) return;
+            ballOnLeft = !ballOnLeft;
+            ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - (isSmallBallActive ? 30 : 40) - 20}px`;
+        });
+
+        // Обработчик для сенсорных устройств
+        ball.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!gameActive4) return;
+            ballOnLeft = !ballOnLeft;
+            ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - (isSmallBallActive ? 30 : 40) - 20}px`;
+        });
+
+        // Кнопка выхода
+        exitButton4.addEventListener('click', (e) => {
+            e.stopPropagation();
+            endGame4();
+            gameContainer4.classList.add('hidden');
+            banner.classList.remove('hidden');
+            banner2.classList.remove('hidden');
+            banner3.classList.remove('hidden');
+            banner4.classList.remove('hidden');
+            exitButton4.style.display = 'none';
+        });
+
+        function startGame4() {
+            gameActive4 = true;
+            survivalTime = 0;
+            earnedCoins = 0;
+            survivalTimeElement.textContent = survivalTime;
+            obstacles = [];
+            gameOverScreen4.classList.add('hidden');
+            exitButton4.style.display = 'none';
+
+            // Применяем улучшение, если меньший мячик активен
+            if (isSmallBallActive) {
+                ball.classList.add('small-ball');
+            } else {
+                ball.classList.remove('small-ball');
+            }
+
+            ballOnLeft = true;
+            ball.style.left = '20px';
+            spawnObstacles();
+            trackTime();
+            gameLoop4();
+        }
+
+        function spawnObstacles() {
+            if (!gameActive4) return;
+            spawnObstacle();
+            obstacleSpawnInterval = setTimeout(spawnObstacles, 1000); // Препятствия появляются каждую секунду
+        }
+
+        function spawnObstacle() {
+            if (!gameActive4) return;
+            const obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle');
+            const obstacleWidth = 20;
+            obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
+            obstacle.style.top = '0px';
+            gameContainer4.appendChild(obstacle);
+            obstacles.push(obstacle);
+        }
+
+        function trackTime() {
+            if (!gameActive4) return;
+            survivalTime++;
+            survivalTimeElement.textContent = survivalTime;
+
+            // Начисляем 1 монету каждые 5 секунд
+            if (survivalTime % 5 === 0) {
+                earnedCoins += 1;
+            }
+
+            timeTrackingInterval = setTimeout(trackTime, 1000);
+        }
+
+        function gameLoop4() {
+            if (!gameActive4) return;
+
+            obstacles.forEach((obstacle, index) => {
+                let obstacleTop = parseFloat(obstacle.style.top) || 0;
+                obstacleTop += 3; // Скорость падения препятствий
+                obstacle.style.top = `${obstacleTop}px`;
+
+                const obstacleRect = obstacle.getBoundingClientRect();
+                const ballRect = ball.getBoundingClientRect();
+
+                // Проверка столкновения
+                if (
+                    obstacleRect.bottom >= ballRect.top &&
+                    obstacleRect.top <= ballRect.bottom &&
+                    obstacleRect.right >= ballRect.left &&
+                    obstacleRect.left <= ballRect.right
+                ) {
+                    endGame4();
+                }
+
+                // Удаляем препятствие, если оно вышло за пределы экрана
+                if (obstacleTop > gameContainer4.offsetHeight) {
+                    obstacle.remove();
+                    obstacles.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(gameLoop4);
+        }
+
+        function endGame4() {
+            gameActive4 = false;
+            clearTimeout(obstacleSpawnInterval);
+            clearTimeout(timeTrackingInterval);
+            obstacles.forEach(obstacle => obstacle.remove());
+            obstacles = [];
+            finalSurvivalTimeElement.textContent = survivalTime;
+            earnedCoinsElement.textContent = earnedCoins;
+
+            // Добавляем заработанные монеты к общему счёту
+            totalCoins += earnedCoins;
+            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+            localStorage.setItem('totalCoins', totalCoins);
+
+            gameOverScreen4.classList.remove('hidden');
+            exitButton4.style.display = 'block';
+            if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+        }
+    }
 });
+

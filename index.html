@@ -783,7 +783,16 @@
                     <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
                 </div>
             </div>
+            <!-- Игра 4: Bounce Survival -->
+        <div class="banner" id="startBanner4">
+            <img src="brawl_clicker-master/static/images/test.png" alt="Banner 4">
+            <span class="banner-text">Bounce Survival</span>
+            <div class="upgrade-icon" data-game="game4">
+                <img src="brawl_clicker-master/static/images/fireshot.png" alt="Upgrade">
+            </div>
         </div>
+    </div>
+
 
         <!-- Модальное окно для улучшений -->
         <div class="modal" id="upgradeModal">
@@ -838,6 +847,20 @@
                 <button id="exitButton3">Quit</button>
             </div>
         </div>
+
+<!-- Контейнер для игры 4: Bounce Survival -->
+    <div class="game-container hidden" id="gameContainer4">
+        <div class="score">Survival Time: <span id="survivalTime">0</span>s</div>
+        <div id="ball" class="ball"></div>
+        <div id="gameOver4" class="game-over hidden">
+            <div class="game-over-text">Game Over!</div>
+            <div class="final-score">Survival Time: <span id="finalSurvivalTime">0</span>s</div>
+            <div class="final-score">Earned Coins: <span id="earnedCoins">0</span></div>
+        </div>
+        <button id="exitButton4" class="exit-button">Exit</button>
+    </div>
+
+
 
     </div>
 </div>
