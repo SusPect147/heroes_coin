@@ -2112,8 +2112,8 @@ html, body {
 .safe {
     position: absolute;
     bottom: 70px;
-    width: 70px;
-    height: 70px;
+    width: 150px;
+    height: 150px;
     background-image: url('images/safe.png');
     background-size: cover;
     background-repeat: no-repeat;

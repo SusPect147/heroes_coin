@@ -21,6 +21,11 @@ const upgrades = {
         image: 'brawl_clicker-master/static/images/cannon2.png',
         text: 'Новая пушка: заменяет стандартную пушку на улучшенную с уроном 25.',
         price: 700
+    },
+    game4: {
+        image: 'brawl_clicker-master/static/images/fireshot.png',
+        text: 'Маленький мяч: уменьшает размер мяча, облегчая уклонение от препятствий.',
+        price: 400
     }
 };
 
@@ -28,6 +33,7 @@ const upgrades = {
 let isSafeActive = localStorage.getItem('isSafeActive') === 'true'; // Для игры 1
 let isPaddle2Active = localStorage.getItem('isPaddle2Active') === 'true'; // Для игры 2
 let isCannon2Active = localStorage.getItem('isCannon2Active') === 'true'; // Для игры 3
+let isSmallBallActive = localStorage.getItem('isSmallBallActive') === 'true'; // Для игры 4
 
 // Обработчик клика по значку улучшения
 upgradeIcons.forEach(icon => {
@@ -46,6 +52,9 @@ upgradeIcons.forEach(icon => {
             buyButton.textContent = 'Убрать';
         } else if (game === 'game3' && isCannon2Active) {
             modalText.textContent = 'Убрать улучшенную пушку и вернуть стандартную?';
+            buyButton.textContent = 'Убрать';
+        } else if (game === 'game4' && isSmallBallActive) {
+            modalText.textContent = 'Убрать маленький мяч и вернуть стандартный?';
             buyButton.textContent = 'Убрать';
         } else {
             modalText.textContent = `${upgrade.text} Цена: ${upgrade.price} монет`;
@@ -80,6 +89,10 @@ buyButton.addEventListener('click', () => {
         isCannon2Active = false;
         localStorage.setItem('isCannon2Active', 'false');
         alert('Улучшенная пушка убрана, стандартная пушка возвращена!');
+    } else if (game === 'game4' && isSmallBallActive) {
+        isSmallBallActive = false;
+        localStorage.setItem('isSmallBallActive', 'false');
+        alert('Маленький мяч убран, стандартный мяч возвращён!');
     } else {
         const price = upgrades[game].price;
 
@@ -98,6 +111,9 @@ buyButton.addEventListener('click', () => {
             } else if (game === 'game3') {
                 isCannon2Active = true;
                 localStorage.setItem('isCannon2Active', 'true');
+            } else if (game === 'game4') {
+                isSmallBallActive = true;
+                localStorage.setItem('isSmallBallActive', 'true');
             }
         } else {
             alert('Недостаточно монет для покупки улучшения!');
@@ -149,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
             banner3.classList.add('hidden');
+            banner4.classList.add('hidden');
             gameContainer.classList.remove('hidden');
             startGame();
         });
@@ -202,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.remove('hidden');
             banner2.classList.remove('hidden');
             banner3.classList.remove('hidden');
+            banner4.classList.remove('hidden');
             exitButton.style.display = 'none';
         });
 
@@ -338,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
             banner3.classList.add('hidden');
+            banner4.classList.add('hidden');
             gameContainer2.classList.remove('hidden');
             startGame2();
         });
@@ -381,6 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.remove('hidden');
             banner2.classList.remove('hidden');
             banner3.classList.remove('hidden');
+            banner4.classList.remove('hidden');
             if (gameOverScreen2) {
                 gameOverScreen2.classList.add('hidden');
                 gameOverScreen2.style.display = 'none';
@@ -683,6 +703,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
             banner3.classList.add('hidden');
+            banner4.classList.add('hidden');
             gameContainer3.classList.remove('hidden');
             startGame3();
         });
@@ -1347,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner4.classList.remove('hidden');
         });
     }
-// Игра 4: Bounce Survival
+    // Игра 4: Bounce Survival
     const gameContainer4 = document.getElementById('gameContainer4');
     const ball = document.getElementById('ball');
     const survivalTimeElement = document.getElementById('survivalTime');
@@ -1510,4 +1531,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-
