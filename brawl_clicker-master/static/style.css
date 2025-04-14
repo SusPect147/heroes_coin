@@ -475,9 +475,10 @@ body {
 
 .skin-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; /* Разрешаем перенос на следующую строку */
     gap: 20px;
     padding: 0 10px;
+    justify-content: center; /* Центрируем карточки */
 }
 
 .skin-card {
@@ -485,9 +486,12 @@ body {
     border-radius: 15px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    width: calc(33.33% - 20px); /* Ширина карточки: 1/3 от контейнера минус отступы */
+    max-width: 300px; /* Ограничиваем максимальную ширину */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .skin-header {
@@ -495,6 +499,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .skin-title {
@@ -503,13 +508,13 @@ body {
 }
 
 .skin-name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
 }
 
 .skin-creator {
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     margin-top: 5px;
 }
@@ -517,9 +522,9 @@ body {
 .get-skin-button {
     background-color: #ffeb3b; /* Жёлтый фон */
     color: #333;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -529,7 +534,7 @@ body {
 }
 
 .star-icon {
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
 }
 
@@ -540,8 +545,8 @@ body {
 }
 
 .skin-preview {
-    width: 150px; /* Увеличиваем размер изображения скина */
-    height: 150px;
+    width: 120px; /* Уменьшил размер, чтобы карточки помещались в ряд */
+    height: 120px;
     border-radius: 10px;
     object-fit: cover;
 }
@@ -549,9 +554,9 @@ body {
 .buy-button {
     background-color: #42a5f5; /* Голубой цвет */
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 10px;
     width: 100%;
@@ -562,6 +567,7 @@ body {
 .buy-button:hover {
     background-color: #2196f3;
 }
+
 
 /* Также скорректируем shop_menu для уверенности в позиционировании */
 .shop_menu {
