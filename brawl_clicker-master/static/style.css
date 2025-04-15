@@ -2460,11 +2460,19 @@ html, body {
 
 .obstacle {
     position: absolute;
-    top: 0;
-    width: 20px;
-    height: 40px;
-    background-color: #55ff55;
     border-radius: 5px;
+}
+
+.obstacle.spike {
+    /* Маленький шип: красный квадрат */
+}
+
+.obstacle.block {
+    /* Квадратный блок: серый квадрат */
+}
+
+.obstacle.line {
+    /* Длинная линия: жёлтая полоска */
 }
 
 #gameContainer4 .score {
