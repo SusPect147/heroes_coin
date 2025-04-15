@@ -46,66 +46,71 @@
 </div>
 
 <div id="content">
-    <!-- Играть -->
-    <div class="page" id="play" style="display:block;">
-        <!-- Элементы для первой секции -->
-        <div class="score-container">
-            <div class="coin">
-                <img src="brawl_clicker-master/static/images/coin.png" alt="Монеты">
-            </div>
-            <div class="score">
-        <span class="score-background">
-            <span class="currentScore">0</span>
-        </span>
-            </div>
+ <!-- Играть -->
+<div class="page" id="play" style="display:block;">
+    <!-- Элементы для первой секции -->
+    <div class="score-container">
+        <div class="coin">
+            <img src="brawl_clicker-master/static/images/coin.png" alt="Монеты">
         </div>
-
-        <div id="coinContainer"></div> <!-- Контейнер для монет с анимацией -->
-
-        <img id="clickButton" src="brawl_clicker-master/static/images/croco.png">
-        <!-- Добавляем src и курсор pointer -->
-        <div id="lightningEffect"></div>
-
-        <div class="shadow">
-            <img src="brawl_clicker-master/static/images/shadow.png" alt="Монеты" width="500" height="55">
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-label" id="progressLabel"></div>
-
-        <div class="energy-container">
-            <div class="energy-bar" id="energyBar"></div>
-            <div id="energyDisplay">100/100</div> <!-- Отображаем текущую энергию -->
-        </div>
-
-        <div class="dropdown">
-            <img src="brawl_clicker-master/static/images/menu.png" alt="Меню" id="menu-icon">
-
-            <!-- Выпадающее меню -->
-            <div class="dropdown-menu" id="dropdown-menu">
-                <a href="#item1">Язык</a>
-                <a href="#item2">Как играть</a>
-                <a href="#item3">Аирдроп</a>
-                <a href="#item4">Тех поддержка</a>
-            </div>
+        <div class="score">
+            <span class="score-background">
+                <span class="currentScore">0</span>
+            </span>
         </div>
     </div>
 
-    <div id="conditionsModal" class="modal">
-        <div class="modal-content">
-            <h3>Условия для перехода в Ледяной мир</h3>
-            <ul id="conditionsList">
-                <li id="coinsCondition">Набрать 1000 монет: <span>0/1000</span></li>
-                <li id="minigamesCondition">Сыграть в мини-игры 5 раз: <span>0/5</span></li>
-                <li id="telegramCondition">Подписаться на Telegram:
-                    <button id="subscribeButton">Подписаться</button>
-                </li>
-            </ul>
-            <button id="closeModal">Закрыть</button>
+    <div id="coinContainer"></div> <!-- Контейнер для монет с анимацией -->
+
+    <img id="clickButton" src="brawl_clicker-master/static/images/croco.png">
+    <!-- Добавляем src и курсор pointer -->
+    <div id="lightningEffect"></div>
+
+    <div class="shadow">
+        <img src="brawl_clicker-master/static/images/shadow.png" alt="Монеты" width="500" height="55">
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel"></div>
+
+    <div class="energy-container">
+        <div class="energy-bar" id="energyBar"></div>
+        <div id="energyDisplay">100/100</div> <!-- Отображаем текущую энергию -->
+    </div>
+
+    <div class="dropdown">
+        <img src="brawl_clicker-master/static/images/menu.png" alt="Меню" id="menu-icon">
+
+        <!-- Выпадающее меню -->
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="#item1">Язык</a>
+            <a href="#item2">Как играть</a>
+            <a href="#item3">Аирдроп</a>
+            <a href="#item4">Тех поддержка</a>
         </div>
     </div>
+
+    <!-- Кнопка для управления музыкой -->
+    <button id="musicToggleButton" style="margin: 10px; padding: 5px; position: absolute; bottom: 10px; right: 10px;">
+        Включить музыку
+    </button>
+</div>
+
+<div id="conditionsModal" class="modal">
+    <div class="modal-content">
+        <h3>Условия для перехода в Ледяной мир</h3>
+        <ul id="conditionsList">
+            <li id="coinsCondition">Набрать 1000 монет: <span>0/1000</span></li>
+            <li id="minigamesCondition">Сыграть в мини-игры 5 раз: <span>0/5</span></li>
+            <li id="telegramCondition">Подписаться на Telegram:
+                <button id="subscribeButton">Подписаться</button>
+            </li>
+        </ul>
+        <button id="closeModal">Закрыть</button>
+    </div>
+</div>
 
 <!-- Маркет -->
 <div class="page" id="market" style="display:none;">
@@ -874,5 +879,6 @@
 <script src="brawl_clicker-master/static/script_heroes.js"></script>
 <script src="brawl_clicker-master/static/dragon.js"></script>
 <script src="brawl_clicker-master/static/boss.js"></script>
+<script src="brawl_clicker-master/static/music.js"></script>
 </body>
 </html>
