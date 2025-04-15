@@ -2443,7 +2443,7 @@ html, body {
 
 #ball {
     /* Устанавливаем изображение для мячика */
-    background-image: url("brawl_clicker-master/static/images/ball.png");
+    background-image: url("images/ball.png");
     background-size: cover;
     background-color: transparent; /* Убираем цвет фона */
     width: 60px; /* Увеличенный размер */
@@ -2452,7 +2452,7 @@ html, body {
 
 #ball.small-ball {
     /* Уменьшенный мячик с тем же изображением */
-    background-image: url("brawl_clicker-master/static/images/ball.png");
+    background-image: url("images/ball.png");
     background-size: cover;
     background-color: transparent;
     width: 30px; /* Размер для маленького мячика */
@@ -2463,7 +2463,7 @@ html, body {
     position: absolute;
     top: 0;
     /* Устанавливаем изображение для препятствий */
-    background-image: url("brawl_clicker-master/static/images/car.png");
+    background-image: url("images/car.png");
     background-size: cover;
     background-color: transparent; /* Убираем цвет фона */
     width: 30px;
