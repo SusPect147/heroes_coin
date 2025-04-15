@@ -478,26 +478,24 @@ body {
 }
 
 .skin-list {
-    display: flex;
-    flex-wrap: wrap; /* Разрешаем перенос на следующую строку */
-    gap: 20px;
-    padding: 0 10px;
-    justify-content: center; /* Центрируем карточки */
-}
+            display: flex;
+            flex-wrap: wrap; /* Позволяет переносить элементы на следующую строку */
+            justify-content: space-around; /* Равномерное распределение элементов */
+            gap: 10px; /* Отступы между карточками */
+        }
 
-.skin-card {
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: calc(33.33% - 20px); /* Ширина карточки: 1/3 от контейнера минус отступы */
-    max-width: 300px; /* Ограничиваем максимальную ширину */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        .skin-card {
+            flex: 0 0 calc(50% - 10px); /* Ширина карточки: 50% минус отступы */
+            box-sizing: border-box; /* Учитываем padding и border в ширине */
+            margin-bottom: 10px; /* Отступ снизу для строк */
+        }
 
+        /* Для экранов с меньшей шириной можно уменьшить размер карточек */
+        @media (max-width: 600px) {
+            .skin-card {
+                flex: 0 0 calc(50% - 5px); /* Уменьшаем отступы для маленьких экранов */
+            }
+        }
 .skin-header {
     display: flex;
     justify-content: space-between;
