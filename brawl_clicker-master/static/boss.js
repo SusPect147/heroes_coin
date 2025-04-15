@@ -1391,7 +1391,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
 } else {
     // Добавляем фон для игрового контейнера
-    gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/dark_2.png")';
+    gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
     gameContainer4.style.backgroundSize = 'cover';
     gameContainer4.style.backgroundPosition = 'center';
 

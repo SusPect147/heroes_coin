@@ -2442,28 +2442,32 @@ html, body {
 }
 
 #ball {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    background-color: #ff5555;
-    border-radius: 50%;
-    transition: left 0.3s ease;
-    cursor: pointer;
+    /* Устанавливаем изображение для мячика */
+    background-image: url("brawl_clicker-master/static/images/ball.png");
+    background-size: cover;
+    background-color: transparent; /* Убираем цвет фона */
+    width: 60px; /* Увеличенный размер */
+    height: 60px;
 }
 
 #ball.small-ball {
-    width: 30px;
+    /* Уменьшенный мячик с тем же изображением */
+    background-image: url("brawl_clicker-master/static/images/ball.png");
+    background-size: cover;
+    background-color: transparent;
+    width: 30px; /* Размер для маленького мячика */
     height: 30px;
 }
 
 .obstacle {
     position: absolute;
     top: 0;
-    width: 20px;
-    height: 40px;
-    background-color: #55ff55;
+    /* Устанавливаем изображение для препятствий */
+    background-image: url("brawl_clicker-master/static/images/car.png");
+    background-size: cover;
+    background-color: transparent; /* Убираем цвет фона */
+    width: 30px;
+    height: 55px;
     border-radius: 5px;
 }
 
