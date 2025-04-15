@@ -1369,8 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4 игра
-const gameContainer4 = document.getElementById('gameContainer4');
+   const gameContainer4 = document.getElementById('gameContainer4');
 const ball = document.getElementById('ball');
 const survivalTimeElement = document.getElementById('survivalTime');
 const gameOverScreen4 = document.getElementById('gameOver4');
@@ -1395,10 +1394,6 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     gameContainer4.style.backgroundSize = 'cover';
     gameContainer4.style.backgroundPosition = 'center';
 
-    // Увеличиваем размер мячика
-    ball.style.width = '60px'; // Увеличенный размер
-    ball.style.height = '60px';
-
     exitButton4.style.display = 'none';
 
     // Запуск игры при клике на баннер
@@ -1415,8 +1410,9 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     ball.addEventListener('click', () => {
         if (!gameActive4) return;
         ballOnLeft = !ballOnLeft;
-        // Учитываем новый размер мячика (60px)
-        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - (isSmallBallActive ? 40 : 60) - 20}px`;
+        // Размеры мячика берутся из CSS, поэтому учитываем их через getBoundingClientRect
+        const ballWidth = ball.getBoundingClientRect().width;
+        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
     });
 
     // Обработчик для сенсорных устройств
@@ -1424,8 +1420,9 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         e.preventDefault();
         if (!gameActive4) return;
         ballOnLeft = !ballOnLeft;
-        // Учитываем новый размер мячика (60px)
-        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - (isSmallBallActive ? 40 : 60) - 20}px`;
+        // Размеры мячика берутся из CSS
+        const ballWidth = ball.getBoundingClientRect().width;
+        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
     });
 
     // Кнопка выхода
@@ -1453,12 +1450,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         // Применяем улучшение, если меньший мячик активен
         if (isSmallBallActive) {
             ball.classList.add('small-ball');
-            ball.style.width = '40px'; // Меньший мячик
-            ball.style.height = '40px';
         } else {
             ball.classList.remove('small-ball');
-            ball.style.width = '60px'; // Увеличенный размер
-            ball.style.height = '60px';
         }
 
         ballOnLeft = true;
@@ -1479,14 +1472,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         const obstacle = document.createElement('div');
         obstacle.classList.add('obstacle');
 
-        // Устанавливаем параметры препятствия согласно CSS
-        const obstacleWidth = 20;
-        obstacle.style.width = `${obstacleWidth}px`;
-        obstacle.style.height = '40px';
-        obstacle.style.backgroundColor = '#55ff55';
-        obstacle.style.borderRadius = '5px';
-
-        // Позиционирование препятствия
+        // Размеры и стили препятствия задаются через CSS, здесь только позиция
+        const obstacleWidth = parseFloat(getComputedStyle(document.querySelector('.obstacle')).width) || 20;
         obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
         obstacle.style.top = '0px';
         gameContainer4.appendChild(obstacle);
