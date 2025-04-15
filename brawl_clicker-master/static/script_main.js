@@ -24,21 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let minigamesPlayed = parseInt(localStorage.getItem('minigamesPlayed')) || 0;
   let isSubscribedToTelegram = localStorage.getItem('isSubscribedToTelegram') === 'true';
 
-  // Переменная для управления музыкой
-  let isMusicEnabled = localStorage.getItem('isMusicEnabled') !== 'false'; // По умолчанию музыка включена
-
-  // Создаём объект Audio для основной музыки
-  const mainMenuMusic = new Audio('brawl_clicker-master/static/audio/Clown.mp3');
-  mainMenuMusic.loop = true; // Зацикливаем музыку
-  mainMenuMusic.volume = 0.5; // Устанавливаем громкость (0.0 - 1.0)
-
-  // Инициализация музыки при загрузке
-  if (isMusicEnabled) {
-    mainMenuMusic.play().catch(error => {
-      console.log("Автовоспроизведение музыки заблокировано: ", error);
-    });
-  }
-
   const savedCoinsPerClick = localStorage.getItem('coinsPerClick');
   if (savedCoinsPerClick) window.coinsPerClick = parseInt(savedCoinsPerClick, 10);
 
@@ -284,23 +269,23 @@ document.addEventListener('DOMContentLoaded', () => {
     progressLabel.style.backgroundSize = 'cover';
     progressLabel.style.backgroundPosition = 'center';
 
-    // Настройка смещения фона
+// Настройка смещения фона
     if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
         body.style.backgroundPosition = 'center calc(50% - 12vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/poison.png') {
-        body.style.backgroundPosition = 'center calc(50% - 9vh)';
+        body.style.backgroundPosition = 'center calc(50% - 9vh)'; // Сильно выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark_2.png') {
-        body.style.backgroundPosition = 'center calc(50% - 10vh)';
+        body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/plat.png') {
-        body.style.backgroundPosition = 'center calc(50% - 7vh)';
+        body.style.backgroundPosition = 'center calc(50% - 7vh)'; // Выше
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark.png') {
-        body.style.backgroundPosition = 'center calc(50% - 10vh)';
+        body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
     } else {
         body.style.backgroundPosition = 'center';
     }
 
     localStorage.setItem('backgroundImage', backgroundImage);
-  }
+}
 
   function spawnEffect(selectedCharacter, event) {
     const effects = {
@@ -523,11 +508,11 @@ const tg = window.Telegram.WebApp;
 
     // Убедитесь, что Web App готов
     tg.ready();
-    // Получаем данные пользователя (если доступны)
-    const user = Telegram.WebApp.initDataUnsafe.user;
-    if (user) {
-        console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
-    } else {
-        console.log('Данные пользователя недоступны.');
-    }
-});
+// Получаем данные пользователя (если доступны)
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
+        } else {
+            console.log('Данные пользователя недоступны.');
+        }
+
