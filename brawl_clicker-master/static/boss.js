@@ -1368,7 +1368,9 @@ document.addEventListener('DOMContentLoaded', () => {
             banner4.classList.remove('hidden');
         });
     }
-   const gameContainer4 = document.getElementById('gameContainer4');
+
+    // 4 игра
+const gameContainer4 = document.getElementById('gameContainer4');
 const ball = document.getElementById('ball');
 const survivalTimeElement = document.getElementById('survivalTime');
 const gameOverScreen4 = document.getElementById('gameOver4');
@@ -1388,14 +1390,14 @@ let obstacleSpeed = 3; // Начальная скорость падения п�
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
     console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
 } else {
-    // 1. Добавляем фон для игрового контейнера
+    // Добавляем фон для игрового контейнера
     gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/dark_2.png")';
     gameContainer4.style.backgroundSize = 'cover';
     gameContainer4.style.backgroundPosition = 'center';
 
-    // 2. Увеличиваем размер мячика
-    ball.style.width = '60px'; // Увеличиваем ширину мячика (было 40px по умолчанию)
-    ball.style.height = '60px'; // Увеличиваем высоту мячика (было 40px по умолчанию)
+    // Увеличиваем размер мячика
+    ball.style.width = '60px'; // Увеличенный размер
+    ball.style.height = '60px';
 
     exitButton4.style.display = 'none';
 
@@ -1477,21 +1479,15 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         const obstacle = document.createElement('div');
         obstacle.classList.add('obstacle');
 
-        // 3. Разные виды препятствий
-        const obstacleTypes = [
-            { type: 'spike', width: 20, height: 20, background: 'red' }, // Маленький шип
-            { type: 'block', width: 30, height: 30, background: 'gray' }, // Квадратный блок
-            { type: 'line', width: 50, height: 10, background: 'yellow' } // Длинная линия
-        ];
-
-        const randomType = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
-        obstacle.classList.add(randomType.type);
-        obstacle.style.width = `${randomType.width}px`;
-        obstacle.style.height = `${randomType.height}px`;
-        obstacle.style.backgroundColor = randomType.background;
+        // Устанавливаем параметры препятствия согласно CSS
+        const obstacleWidth = 20;
+        obstacle.style.width = `${obstacleWidth}px`;
+        obstacle.style.height = '40px';
+        obstacle.style.backgroundColor = '#55ff55';
+        obstacle.style.borderRadius = '5px';
 
         // Позиционирование препятствия
-        obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - randomType.width)}px`;
+        obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
         obstacle.style.top = '0px';
         gameContainer4.appendChild(obstacle);
         obstacles.push(obstacle);
@@ -1507,7 +1503,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             earnedCoins += 1;
         }
 
-        // 4. Увеличиваем скорость каждые 10 секунд
+        // Увеличиваем скорость каждые 10 секунд
         if (survivalTime % 10 === 0 && survivalTime > 0) {
             obstacleSpeed += 0.5; // Увеличиваем скорость на 0.5 каждые 10 секунд
         }
