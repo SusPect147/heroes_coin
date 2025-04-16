@@ -1386,6 +1386,7 @@ let timeTrackingInterval;
 let ballOnLeft = true; // Мячик изначально слева
 let earnedCoins = 0;
 let obstacleSpeed = 3; // Начальная скорость падения препятствий
+let lastSideSwitchTime = 0; // Время последнего переключения стороны
 
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
     console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
@@ -1421,6 +1422,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         ball.addEventListener('click', () => {
             if (!gameActive4) return;
             ballOnLeft = !ballOnLeft;
+            lastSideSwitchTime = survivalTime; // Обновляем время последнего переключения
             const ballWidth = ball.getBoundingClientRect().width || 60;
             ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
         });
@@ -1430,6 +1432,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             e.preventDefault();
             if (!gameActive4) return;
             ballOnLeft = !ballOnLeft;
+            lastSideSwitchTime = survivalTime; // Обновляем время последнего переключения
             const ballWidth = ball.getBoundingClientRect().width || 60;
             ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
         });
@@ -1452,6 +1455,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             survivalTime = 0;
             earnedCoins = 0;
             obstacleSpeed = 3; // Сбрасываем скорость при старте игры
+            lastSideSwitchTime = 0; // Сбрасываем время переключения
             survivalTimeElement.textContent = survivalTime;
             obstacles = [];
             gameOverScreen4.classList.add('hidden');
@@ -1505,14 +1509,14 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             }
             console.log("Spawning obstacle");
             // Случайно выбираем, будет ли это обычное препятствие или боковое
-            const spawnSideObstacleChance = Math.random() < 0.5; // 50% шанс на боковое препятствие
+            const spawnSideObstacleChance = Math.random() < 0.2; // 20% шанс на боковое препятствие (80% на обычное)
             if (spawnSideObstacleChance) {
                 spawnSideObstacle();
             } else {
                 spawnObstacle();
             }
             // Рекурсивно вызываем spawnObstacles через setTimeout
-            obstacleSpawnInterval = setTimeout(spawnObstacles, 1000); // Препятствия появляются каждую секунду
+            obstacleSpawnmanipulationInterval = setTimeout(spawnObstacles, 500); // Препятствия появляются каждые 0.5 секунды
         }
 
         function trackTime() {
