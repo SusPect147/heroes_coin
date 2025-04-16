@@ -2478,7 +2478,7 @@ html, body {
 .obstacle-side {
     position: absolute;
     top: 0;
-    background-image: url("images/bomb.png"); /* Другое изображение для боковых препятствий */
+    background-image: url("images/shaiba.png"); /* Другое изображение для боковых препятствий */
     background-size: cover;
     background-color: transparent;
     width: 35px;
