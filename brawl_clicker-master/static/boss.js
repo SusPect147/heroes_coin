@@ -1430,9 +1430,9 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         endGame4();
         gameContainer4.classList.add('hidden');
         banner.classList.remove('hidden');
-        banner2.classList.remove('hidden');
-        banner3.classList.remove('hidden');
-        banner4.classList.remove('hidden');
+        banner2.classList.add('hidden');
+        banner3.classList.add('hidden');
+        banner4.classList.add('hidden');
         exitButton4.style.display = 'none';
     });
 
@@ -1495,7 +1495,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
         if (survivalTime % 10 === 0 && survivalTime > 0) {
             spawnInterval = Math.max(500, spawnInterval - 200);
-            obstacleSpeed += 0.1;
+            obstacleSpeed += 0.15; // Увеличено ускорение скорости
             console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
         }
 
