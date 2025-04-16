@@ -1369,6 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
 const gameContainer4 = document.getElementById('gameContainer4');
 const ball = document.getElementById('ball');
 const survivalTimeElement = document.getElementById('survivalTime');
@@ -1407,6 +1408,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     } else {
         // Запуск игры при клике на баннер
         banner4.addEventListener('click', () => {
+            console.log("Banner 4 clicked, starting Game 4");
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
             banner3.classList.add('hidden');
@@ -1445,6 +1447,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         });
 
         function startGame4() {
+            console.log("Starting Game 4");
             gameActive4 = true;
             survivalTime = 0;
             earnedCoins = 0;
@@ -1468,19 +1471,6 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             gameLoop4();
         }
 
-        function spawnObstacles() {
-            if (!gameActive4) return;
-            // Случайно выбираем, будет ли это обычное препятствие или боковое
-            const spawnSideObstacle = Math.random() < 0.5; // 50% шанс на боковое препятствие
-            if (spawnSideObstacle) {
-                spawnSideObstacle();
-            } else {
-                spawnObstacle();
-            }
-            // Рекурсивно вызываем spawnObstacles через setTimeout
-            obstacleSpawnInterval = setTimeout(spawnObstacles, 1000); // Препятствия появляются каждую секунду
-        }
-
         function spawnObstacle() {
             if (!gameActive4) return;
             const obstacle = document.createElement('div');
@@ -1491,6 +1481,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
             obstacles.push(obstacle);
+            console.log("Spawned regular obstacle at left:", obstacle.style.left);
         }
 
         function spawnSideObstacle() {
@@ -1499,12 +1490,29 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             obstacle.classList.add('obstacle-side');
 
             const obstacleWidth = 35; // Соответствует CSS .obstacle-side { width: 35px }
-            // Препятствие появляется либо слева (20px), либо справа
             const onLeftSide = Math.random() < 0.5; // 50% шанс появления слева
             obstacle.style.left = onLeftSide ? '20px' : `${gameContainer4.offsetWidth - obstacleWidth - 20}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
             obstacles.push(obstacle);
+            console.log("Spawned side obstacle at left:", obstacle.style.left);
+        }
+
+        function spawnObstacles() {
+            if (!gameActive4) {
+                console.log("Game is not active, stopping obstacle spawning");
+                return;
+            }
+            console.log("Spawning obstacle");
+            // Случайно выбираем, будет ли это обычное препятствие или боковое
+            const spawnSideObstacleChance = Math.random() < 0.5; // 50% шанс на боковое препятствие
+            if (spawnSideObstacleChance) {
+                spawnSideObstacle();
+            } else {
+                spawnObstacle();
+            }
+            // Рекурсивно вызываем spawnObstacles через setTimeout
+            obstacleSpawnInterval = setTimeout(spawnObstacles, 1000); // Препятствия появляются каждую секунду
         }
 
         function trackTime() {
