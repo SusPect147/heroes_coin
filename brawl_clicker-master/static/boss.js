@@ -1370,182 +1370,184 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 // Игра 4: Уклонение от препятствий
-    const gameContainer4 = document.getElementById('gameContainer4');
-    const ball = document.getElementById('ball');
-    const survivalTimeElement = document.getElementById('survivalTime');
-    const gameOverScreen4 = document.getElementById('gameOver4');
-    const finalSurvivalTimeElement = document.getElementById('finalSurvivalTime');
-    const earnedCoinsElement = document.getElementById('earnedCoins');
-    const exitButton4 = document.getElementById('exitButton4');
+const gameContainer4 = document.getElementById('gameContainer4');
+const ball = document.getElementById('ball');
+const survivalTimeElement = document.getElementById('survivalTime');
+const gameOverScreen4 = document.getElementById('gameOver4');
+const finalSurvivalTimeElement = document.getElementById('finalSurvivalTime');
+const earnedCoinsElement = document.getElementById('earnedCoins');
+const exitButton4 = document.getElementById('exitButton4');
 
-    if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
-        console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
-    } else {
-        let gameActive4 = false;
-        let survivalTime = 0;
-        let obstacles = [];
-        let obstacleSpawnInterval;
-        let timeTrackingInterval;
-        let ballOnLeft = true;
-        let earnedCoins = 0;
-        let obstacleSpeed = 1;
-        let spawnInterval = 2000;
-        let lastSideSwitchTime = 0;
+if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
+    console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
+} else {
+    let gameActive4 = false;
+    let survivalTime = 0;
+    let obstacles = [];
+    let obstacleSpawnInterval;
+    let timeTrackingInterval;
+    let ballOnLeft = true;
+    let earnedCoins = 0;
+    let obstacleSpeed = 1;
+    let spawnInterval = 2000;
+    let lastSideSwitchTime = 0;
 
-        gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
-        gameContainer4.style.backgroundSize = 'cover';
-        gameContainer4.style.backgroundPosition = 'center';
+    gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
+    gameContainer4.style.backgroundSize = 'cover';
+    gameContainer4.style.backgroundPosition = 'center';
 
+    exitButton4.style.display = 'none';
+
+    banner4.addEventListener('click', () => {
+        console.log("Banner 4 clicked, starting Game 4");
+        banner.classList.add('hidden');
+        banner2.classList.add('hidden');
+        banner3.classList.add('hidden');
+        banner4.classList.add('hidden');
+        gameContainer4.classList.remove('hidden');
+        startGame4();
+    });
+
+    ball.addEventListener('click', () => {
+        if (!gameActive4) return;
+        ballOnLeft = !ballOnLeft;
+        lastSideSwitchTime = survivalTime;
+        const ballWidth = ball.getBoundingClientRect().width || 60;
+        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
+    });
+
+    ball.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameActive4) return;
+        ballOnLeft = !ballOnLeft;
+        lastSideSwitchTime = survivalTime;
+        const ballWidth = ball.getBoundingClientRect().width || 60;
+        ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
+    });
+
+    exitButton4.addEventListener('click', (e) => {
+        e.stopPropagation();
+        endGame4();
+        gameContainer4.classList.add('hidden');
+        banner.classList.remove('hidden');
+        banner2.classList.remove('hidden');
+        banner3.classList.remove('hidden');
+        banner4.classList.remove('hidden');
+        exitButton4.style.display = 'none';
+    });
+
+    function startGame4() {
+        console.log("Starting Game 4");
+        gameActive4 = true;
+        survivalTime = 0;
+        earnedCoins = 0;
+        obstacleSpeed = 1; // Сбрасываем скорость при старте
+        spawnInterval = 2000;
+        lastSideSwitchTime = 0;
+        survivalTimeElement.textContent = survivalTime;
+        obstacles = [];
+        gameOverScreen4.classList.add('hidden');
         exitButton4.style.display = 'none';
 
-        banner4.addEventListener('click', () => {
-            console.log("Banner 4 clicked, starting Game 4");
-            banner.classList.add('hidden');
-            banner2.classList.add('hidden');
-            banner3.classList.add('hidden');
-            banner4.classList.add('hidden');
-            gameContainer4.classList.remove('hidden');
-            startGame4();
-        });
-
-        ball.addEventListener('click', () => {
-            if (!gameActive4) return;
-            ballOnLeft = !ballOnLeft;
-            lastSideSwitchTime = survivalTime;
-            const ballWidth = ball.getBoundingClientRect().width || 60;
-            ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
-        });
-
-        ball.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            if (!gameActive4) return;
-            ballOnLeft = !ballOnLeft;
-            lastSideSwitchTime = survivalTime;
-            const ballWidth = ball.getBoundingClientRect().width || 60;
-            ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
-        });
-
-        exitButton4.addEventListener('click', (e) => {
-            e.stopPropagation();
-            endGame4();
-            gameContainer4.classList.add('hidden');
-            banner.classList.remove('hidden');
-            banner2.classList.remove('hidden');
-            banner3.classList.remove('hidden');
-            banner4.classList.remove('hidden');
-            exitButton4.style.display = 'none';
-        });
-
-        function startGame4() {
-            console.log("Starting Game 4");
-            gameActive4 = true;
-            survivalTime = 0;
-            earnedCoins = 0;
-            spawnInterval = 2000;
-            lastSideSwitchTime = 0;
-            survivalTimeElement.textContent = survivalTime;
-            obstacles = [];
-            gameOverScreen4.classList.add('hidden');
-            exitButton4.style.display = 'none';
-
-            if (isSmallBallActive) {
-                ball.classList.add('small-ball');
-            } else {
-                ball.classList.remove('small-ball');
-            }
-
-            ballOnLeft = true;
-            ball.style.left = '20px';
-            spawnObstacles();
-            trackTime();
-            gameLoop4();
+        if (isSmallBallActive) {
+            ball.classList.add('small-ball');
+        } else {
+            ball.classList.remove('small-ball');
         }
 
-        function spawnObstacle() {
-            if (!gameActive4) return;
-            const obstacle = document.createElement('div');
-            obstacle.classList.add('obstacle');
-            const obstacleWidth = 100;
-            obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
-            obstacle.style.top = '0px';
-            gameContainer4.appendChild(obstacle);
-            obstacles.push(obstacle);
-            console.log("Spawned regular obstacle at left:", obstacle.style.left);
-        }
-
-        function spawnObstacles() {
-            if (!gameActive4) {
-                console.log("Game is not active, stopping obstacle spawning");
-                return;
-            }
-            console.log("Spawning obstacle");
-            spawnObstacle();
-            obstacleSpawnInterval = setTimeout(spawnObstacles, spawnInterval);
-        }
-
-        function trackTime() {
-            if (!gameActive4) return;
-            survivalTime++;
-            survivalTimeElement.textContent = survivalTime;
-
-            if (survivalTime % 5 === 0) {
-                earnedCoins += 1;
-            }
-
-            if (survivalTime % 10 === 0 && survivalTime > 0) {
-                spawnInterval = Math.max(500, spawnInterval - 200);
-                console.log("New spawn interval:", spawnInterval);
-            }
-
-            timeTrackingInterval = setTimeout(trackTime, 1000);
-        }
-
-        function gameLoop4() {
-            if (!gameActive4) return;
-
-            obstacles.forEach((obstacle, index) => {
-                let obstacleTop = parseFloat(obstacle.style.top) || 0;
-                obstacleTop += obstacleSpeed;
-                obstacle.style.top = `${obstacleTop}px`;
-
-                const obstacleRect = obstacle.getBoundingClientRect();
-                const ballRect = ball.getBoundingClientRect();
-
-                if (
-                    obstacleRect.bottom >= ballRect.top &&
-                    obstacleRect.top <= ballRect.bottom &&
-                    obstacleRect.right >= ballRect.left &&
-                    obstacleRect.left <= ballRect.right
-                ) {
-                    endGame4();
-                }
-
-                if (obstacleTop > gameContainer4.offsetHeight) {
-                    obstacle.remove();
-                    obstacles.splice(index, 1);
-                }
-            });
-
-            requestAnimationFrame(gameLoop4);
-        }
-
-        function endGame4() {
-            gameActive4 = false;
-            clearTimeout(obstacleSpawnInterval);
-            clearTimeout(timeTrackingInterval);
-            obstacles.forEach(obstacle => obstacle.remove());
-            obstacles = [];
-            finalSurvivalTimeElement.textContent = survivalTime;
-            earnedCoinsElement.textContent = earnedCoins;
-
-            totalCoins += earnedCoins;
-            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-            localStorage.setItem('totalCoins', totalCoins);
-
-            gameOverScreen4.classList.remove('hidden');
-            exitButton4.style.display = 'block';
-            if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
-        }
+        ballOnLeft = true;
+        ball.style.left = '20px';
+        spawnObstacles();
+        trackTime();
+        gameLoop4();
     }
+
+    function spawnObstacle() {
+        if (!gameActive4) return;
+        const obstacle = document.createElement('div');
+        obstacle.classList.add('obstacle');
+        const obstacleWidth = 100;
+        obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
+        obstacle.style.top = '0px';
+        gameContainer4.appendChild(obstacle);
+        obstacles.push(obstacle);
+        console.log("Spawned regular obstacle at left:", obstacle.style.left);
+    }
+
+    function spawnObstacles() {
+        if (!gameActive4) {
+            console.log("Game is not active, stopping obstacle spawning");
+            return;
+        }
+        console.log("Spawning obstacle");
+        spawnObstacle();
+        obstacleSpawnInterval = setTimeout(spawnObstacles, spawnInterval);
+    }
+
+    function trackTime() {
+        if (!gameActive4) return;
+        survivalTime++;
+        survivalTimeElement.textContent = survivalTime;
+
+        if (survivalTime % 5 === 0) {
+            earnedCoins += 1;
+        }
+
+        if (survivalTime % 10 === 0 && survivalTime > 0) {
+            spawnInterval = Math.max(500, spawnInterval - 200);
+            obstacleSpeed += 0.1; // Увеличиваем скорость препятствий незначительно
+            console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
+        }
+
+        timeTrackingInterval = setTimeout(trackTime, 1000);
+    }
+
+    function gameLoop4() {
+        if (!gameActive4) return;
+
+        obstacles.forEach((obstacle, index) => {
+            let obstacleTop = parseFloat(obstacle.style.top) || 0;
+            obstacleTop += obstacleSpeed;
+            obstacle.style.top = `${obstacleTop}px`;
+
+            const obstacleRect = obstacle.getBoundingClientRect();
+            const ballRect = ball.getBoundingClientRect();
+
+            if (
+                obstacleRect.bottom >= ballRect.top &&
+                obstacleRect.top <= ballRect.bottom &&
+                obstacleRect.right >= ballRect.left &&
+                obstacleRect.left <= ballRect.right
+            ) {
+                endGame4();
+            }
+
+            if (obstacleTop > gameContainer4.offsetHeight) {
+                obstacle.remove();
+                obstacles.splice(index, 1);
+            }
+        });
+
+        requestAnimationFrame(gameLoop4);
+    }
+
+    function endGame4() {
+        gameActive4 = false;
+        clearTimeout(obstacleSpawnInterval);
+        clearTimeout(timeTrackingInterval);
+        obstacles.forEach(obstacle => obstacle.remove());
+        obstacles = [];
+        finalSurvivalTimeElement.textContent = survivalTime;
+        earnedCoinsElement.textContent = earnedCoins;
+
+        totalCoins += earnedCoins;
+        if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+        localStorage.setItem('totalCoins', totalCoins);
+
+        gameOverScreen4.classList.remove('hidden');
+        exitButton4.style.display = 'block';
+        if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+    }
+}
 });
 
