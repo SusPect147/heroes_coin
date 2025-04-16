@@ -1419,7 +1419,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         ball.addEventListener('click', () => {
             if (!gameActive4) return;
             ballOnLeft = !ballOnLeft;
-            const ballWidth = ball.getBoundingClientRect().width || 60; // Значение по умолчанию, если стили не загружены
+            const ballWidth = ball.getBoundingClientRect().width || 60;
             ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
         });
 
@@ -1470,7 +1470,13 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
         function spawnObstacles() {
             if (!gameActive4) return;
-            spawnObstacle();
+            // Случайно выбираем, будет ли это обычное препятствие или боковое
+            const spawnSideObstacle = Math.random() < 0.5; // 50% шанс на боковое препятствие
+            if (spawnSideObstacle) {
+                spawnSideObstacle();
+            } else {
+                spawnObstacle();
+            }
             obstacleSpawnInterval = setTimeout(spawnObstacles, 1000); // Препятствия появляются каждую секунду
         }
 
@@ -1479,11 +1485,22 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
 
-            // Жёстко задаём ширину препятствия из CSS (30px), чтобы избежать проблем с getComputedStyle
             const obstacleWidth = 30; // Соответствует CSS .obstacle { width: 30px }
-
-            // Позиционирование препятствия
             obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
+            obstacle.style.top = '0px';
+            gameContainer4.appendChild(obstacle);
+            obstacles.push(obstacle);
+        }
+
+        function spawnSideObstacle() {
+            if (!gameActive4) return;
+            const obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle-side');
+
+            const obstacleWidth = 30; // Соответствует CSS .obstacle-side { width: 30px }
+            // Препятствие появляется либо слева (20px), либо справа
+            const onLeftSide = Math.random() < 0.5; // 50% шанс появления слева
+            obstacle.style.left = onLeftSide ? '20px' : `${gameContainer4.offsetWidth - obstacleWidth - 20}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
             obstacles.push(obstacle);

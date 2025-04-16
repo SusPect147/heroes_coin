@@ -2469,11 +2469,20 @@ html, body {
     background-image: url("images/car.png");
     background-size: cover;
     background-color: transparent; /* Убираем цвет фона */
-    width: 30px;
+    width: 35px;
     height: 55px;
     border-radius: 5px;
 }
-
+.obstacle-side {
+    position: absolute;
+    top: 0;
+    background-image: url("images/bomb.png"); /* Другое изображение для боковых препятствий */
+    background-size: cover;
+    background-color: transparent;
+    width: 30px;
+    height: 30px; /* Меньший размер для боковых препятствий */
+    border-radius: 50%; /* Круглая форма */
+}
 #gameContainer4 .score {
     position: absolute;
     top: 10px;
