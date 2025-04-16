@@ -1441,7 +1441,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         gameActive4 = true;
         survivalTime = 0;
         earnedCoins = 0;
-        obstacleSpeed = 1; // Сбрасываем скорость при старте
+        obstacleSpeed = 1;
         spawnInterval = 2000;
         lastSideSwitchTime = 0;
         survivalTimeElement.textContent = survivalTime;
@@ -1495,7 +1495,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
         if (survivalTime % 10 === 0 && survivalTime > 0) {
             spawnInterval = Math.max(500, spawnInterval - 200);
-            obstacleSpeed += 0.1; // Увеличиваем скорость препятствий незначительно
+            obstacleSpeed += 0.1;
             console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
         }
 
@@ -1513,11 +1513,20 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacleRect = obstacle.getBoundingClientRect();
             const ballRect = ball.getBoundingClientRect();
 
+            // Уменьшаем хитбокс мяча на 20% по ширине и высоте
+            const hitboxShrink = 0.2; // 20% уменьшение
+            const ballHitbox = {
+                top: ballRect.top + ballRect.height * hitboxShrink / 2,
+                bottom: ballRect.bottom - ballRect.height * hitboxShrink / 2,
+                left: ballRect.left + ballRect.width * hitboxShrink / 2,
+                right: ballRect.right - ballRect.width * hitboxShrink / 2
+            };
+
             if (
-                obstacleRect.bottom >= ballRect.top &&
-                obstacleRect.top <= ballRect.bottom &&
-                obstacleRect.right >= ballRect.left &&
-                obstacleRect.left <= ballRect.right
+                obstacleRect.bottom >= ballHitbox.top &&
+                obstacleRect.top <= ballHitbox.bottom &&
+                obstacleRect.right >= ballHitbox.left &&
+                obstacleRect.left <= ballHitbox.right
             ) {
                 endGame4();
             }
