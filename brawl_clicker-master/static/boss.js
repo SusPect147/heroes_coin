@@ -1383,22 +1383,21 @@ let survivalTime = 0;
 let obstacles = [];
 let obstacleSpawnInterval;
 let timeTrackingInterval;
-let ballOnLeft = true; // Мячик изначально слева
+let ballOnLeft = true;
 let earnedCoins = 0;
-let obstacleSpeed = 1; // Начальная скорость падения препятствий
-let lastSideSwitchTime = 0; // Время последнего переключения стороны
+let obstacleSpeed = 1; // Фиксированная скорость падения препятствий
+let spawnInterval = 2000; // Начальный интервал спавна препятствий (в миллисекундах)
+let lastSideSwitchTime = 0;
 
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
     console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
 } else {
-    // Добавляем фон для игрового контейнера
     gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
     gameContainer4.style.backgroundSize = 'cover';
     gameContainer4.style.backgroundPosition = 'center';
 
     exitButton4.style.display = 'none';
 
-    // Получаем баннер для игры 4
     const banner4 = document.getElementById('startBanner4');
     const banner = document.getElementById('startBanner');
     const banner2 = document.getElementById('startBanner2');
@@ -1407,7 +1406,6 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     if (!banner4 || !banner || !banner2 || !banner3) {
         console.error("One or more banner elements are missing. Game 4 cannot be started.");
     } else {
-        // Запуск игры при клике на баннер
         banner4.addEventListener('click', () => {
             console.log("Banner 4 clicked, starting Game 4");
             banner.classList.add('hidden');
@@ -1418,26 +1416,23 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             startGame4();
         });
 
-        // Обработчик клика по мячику для прыжка влево-вправо
         ball.addEventListener('click', () => {
             if (!gameActive4) return;
             ballOnLeft = !ballOnLeft;
-            lastSideSwitchTime = survivalTime; // Обновляем время последнего переключения
+            lastSideSwitchTime = survivalTime;
             const ballWidth = ball.getBoundingClientRect().width || 60;
             ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
         });
 
-        // Обработчик для сенсорных устройств
         ball.addEventListener('touchstart', (e) => {
             e.preventDefault();
             if (!gameActive4) return;
             ballOnLeft = !ballOnLeft;
-            lastSideSwitchTime = survivalTime; // Обновляем время последнего переключения
+            lastSideSwitchTime = survivalTime;
             const ballWidth = ball.getBoundingClientRect().width || 60;
             ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
         });
 
-        // Кнопка выхода
         exitButton4.addEventListener('click', (e) => {
             e.stopPropagation();
             endGame4();
@@ -1454,14 +1449,13 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             gameActive4 = true;
             survivalTime = 0;
             earnedCoins = 0;
-            obstacleSpeed = 1; // Сбрасываем скорость при старте игры
-            lastSideSwitchTime = 0; // Сбрасываем время переключения
+            spawnInterval = 2000; // Сбрасываем интервал спавна
+            lastSideSwitchTime = 0;
             survivalTimeElement.textContent = survivalTime;
             obstacles = [];
             gameOverScreen4.classList.add('hidden');
             exitButton4.style.display = 'none';
 
-            // Применяем улучшение, если меньший мячик активен
             if (isSmallBallActive) {
                 ball.classList.add('small-ball');
             } else {
@@ -1480,7 +1474,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
 
-            const obstacleWidth = 85; // Обновлено для соответствия новому размеру (85px)
+            const obstacleWidth = 100;
             obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
@@ -1494,8 +1488,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
                 return;
             }
             console.log("Spawning obstacle");
-            spawnObstacle(); // Только обычные препятствия (машины)
-            obstacleSpawnInterval = setTimeout(spawnObstacles, 2000); // Препятствия появляются каждые 2 секунды
+            spawnObstacle();
+            obstacleSpawnInterval = setTimeout(spawnObstacles, spawnInterval); // Используем переменный интервал
         }
 
         function trackTime() {
@@ -1508,9 +1502,10 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
                 earnedCoins += 1;
             }
 
-            // Увеличиваем скорость каждые 10 секунд
+            // Уменьшаем интервал спавна каждые 10 секунд
             if (survivalTime % 10 === 0 && survivalTime > 0) {
-                obstacleSpeed += 0.5; // Увеличиваем скорость на 0.5 каждые 10 секунд
+                spawnInterval = Math.max(500, spawnInterval - 200); // Уменьшаем интервал на 200 мс, но не менее 500 мс
+                console.log("New spawn interval:", spawnInterval);
             }
 
             timeTrackingInterval = setTimeout(trackTime, 1000);
@@ -1521,13 +1516,12 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
             obstacles.forEach((obstacle, index) => {
                 let obstacleTop = parseFloat(obstacle.style.top) || 0;
-                obstacleTop += obstacleSpeed; // Используем переменную скорость
+                obstacleTop += obstacleSpeed; // Фиксированная скорость
                 obstacle.style.top = `${obstacleTop}px`;
 
                 const obstacleRect = obstacle.getBoundingClientRect();
                 const ballRect = ball.getBoundingClientRect();
 
-                // Проверка столкновения
                 if (
                     obstacleRect.bottom >= ballRect.top &&
                     obstacleRect.top <= ballRect.bottom &&
@@ -1537,7 +1531,6 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
                     endGame4();
                 }
 
-                // Удаляем препятствие, если оно вышло за пределы экрана
                 if (obstacleTop > gameContainer4.offsetHeight) {
                     obstacle.remove();
                     obstacles.splice(index, 1);
@@ -1556,7 +1549,6 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             finalSurvivalTimeElement.textContent = survivalTime;
             earnedCoinsElement.textContent = earnedCoins;
 
-            // Добавляем заработанные монеты к общему счёту
             totalCoins += earnedCoins;
             if (currentScoreElement) currentScoreElement.textContent = totalCoins;
             localStorage.setItem('totalCoins', totalCoins);

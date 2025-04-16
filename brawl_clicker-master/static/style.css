@@ -2470,7 +2470,7 @@ html, body {
     background-image: url("images/car.png");
     background-size: cover;
     background-color: transparent; /* Убираем цвет фона */
-    width: 85px;
+    width: 100px;
     height: 110px;
     border-radius: 5px;
 }
