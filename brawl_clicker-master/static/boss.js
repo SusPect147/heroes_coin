@@ -1385,7 +1385,7 @@ let obstacleSpawnInterval;
 let timeTrackingInterval;
 let ballOnLeft = true; // Мячик изначально слева
 let earnedCoins = 0;
-let obstacleSpeed = 3; // Начальная скорость падения препятствий
+let obstacleSpeed = 1; // Уменьшенная начальная скорость падения препятствий
 let lastSideSwitchTime = 0; // Время последнего переключения стороны
 
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
@@ -1454,7 +1454,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             gameActive4 = true;
             survivalTime = 0;
             earnedCoins = 0;
-            obstacleSpeed = 3; // Сбрасываем скорость при старте игры
+            obstacleSpeed = 1; // Сбрасываем скорость при старте игры
             lastSideSwitchTime = 0; // Сбрасываем время переключения
             survivalTimeElement.textContent = survivalTime;
             obstacles = [];
@@ -1480,26 +1480,12 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
 
-            const obstacleWidth = 35; // Соответствует CSS .obstacle { width: 35px }
+            const obstacleWidth = 70; // Обновлено для соответствия новому размеру (70px)
             obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
             obstacles.push(obstacle);
             console.log("Spawned regular obstacle at left:", obstacle.style.left);
-        }
-
-        function spawnSideObstacle() {
-            if (!gameActive4) return;
-            const obstacle = document.createElement('div');
-            obstacle.classList.add('obstacle-side');
-
-            const obstacleWidth = 35; // Соответствует CSS .obstacle-side { width: 35px }
-            const onLeftSide = Math.random() < 0.5; // 50% шанс появления слева
-            obstacle.style.left = onLeftSide ? '20px' : `${gameContainer4.offsetWidth - obstacleWidth - 20}px`;
-            obstacle.style.top = '0px';
-            gameContainer4.appendChild(obstacle);
-            obstacles.push(obstacle);
-            console.log("Spawned side obstacle at left:", obstacle.style.left);
         }
 
         function spawnObstacles() {
@@ -1508,15 +1494,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
                 return;
             }
             console.log("Spawning obstacle");
-            // Случайно выбираем, будет ли это обычное препятствие или боковое
-            const spawnSideObstacleChance = Math.random() < 0.2; // 20% шанс на боковое препятствие (80% на обычное)
-            if (spawnSideObstacleChance) {
-                spawnSideObstacle();
-            } else {
-                spawnObstacle();
-            }
-            // Рекурсивно вызываем spawnObstacles через setTimeout
-            obstacleSpawnmanipulationInterval = setTimeout(spawnObstacles, 500); // Препятствия появляются каждые 0.5 секунды
+            spawnObstacle(); // Теперь только обычные препятствия (машины)
+            obstacleSpawnInterval = setTimeout(spawnObstacles, 800); // Препятствия появляются каждые 0.5 секунды
         }
 
         function trackTime() {

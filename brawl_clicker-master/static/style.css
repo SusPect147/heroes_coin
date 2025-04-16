@@ -2471,8 +2471,8 @@ html, body {
     background-image: url("images/car.png");
     background-size: cover;
     background-color: transparent; /* Убираем цвет фона */
-    width: 35px;
-    height: 55px;
+    width: 70px;
+    height: 110px;
     border-radius: 5px;
 }
 .obstacle-side {
