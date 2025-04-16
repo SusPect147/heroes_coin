@@ -1485,7 +1485,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
 
-            const obstacleWidth = 30; // Соответствует CSS .obstacle { width: 30px }
+            const obstacleWidth = 35; // Соответствует CSS .obstacle { width: 30px }
             obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
@@ -1497,7 +1497,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle-side');
 
-            const obstacleWidth = 30; // Соответствует CSS .obstacle-side { width: 30px }
+            const obstacleWidth = 35; // Соответствует CSS .obstacle-side { width: 30px }
             // Препятствие появляется либо слева (20px), либо справа
             const onLeftSide = Math.random() < 0.5; // 50% шанс появления слева
             obstacle.style.left = onLeftSide ? '20px' : `${gameContainer4.offsetWidth - obstacleWidth - 20}px`;

@@ -2451,6 +2451,7 @@ html, body {
     position: absolute;
     bottom: 20px; /* Позиция мячика внизу контейнера */
     left: 20px; /* Начальная позиция слева */
+    transition: left 0.3s ease-in-out; /* Плавное перемещение мячика */
 }
 
 #ball.small-ball {
@@ -2460,6 +2461,7 @@ html, body {
     background-color: transparent;
     width: 30px; /* Размер для маленького мячика */
     height: 30px;
+    transition: left 0.3s ease-in-out;
 }
 
 .obstacle {
@@ -2479,8 +2481,8 @@ html, body {
     background-image: url("images/bomb.png"); /* Другое изображение для боковых препятствий */
     background-size: cover;
     background-color: transparent;
-    width: 30px;
-    height: 30px; /* Меньший размер для боковых препятствий */
+    width: 35px;
+    height: 35px; /* Меньший размер для боковых препятствий */
     border-radius: 50%; /* Круглая форма */
 }
 #gameContainer4 .score {
