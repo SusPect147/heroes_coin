@@ -2459,8 +2459,9 @@ html, body {
     background-image: url("images/ball.png");
     background-size: cover;
     background-color: transparent;
-    width: 60px; /* Размер для маленького мячика */
-    height: 60px;
+    width: 45px; /* Размер для маленького мячика */
+    height: 45px;
+    transition: left 0.3s ease-in-out;
 }
 
 .obstacle {

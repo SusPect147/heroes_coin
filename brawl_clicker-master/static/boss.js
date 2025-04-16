@@ -1389,7 +1389,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     let ballOnLeft = true;
     let earnedCoins = 0;
     let obstacleSpeed = 1;
-    let spawnInterval = 2000;
+    let spawnInterval = 2500;
     let lastSideSwitchTime = 0;
 
     gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
@@ -1442,7 +1442,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         survivalTime = 0;
         earnedCoins = 0;
         obstacleSpeed = 1;
-        spawnInterval = 2000;
+        spawnInterval = 2500;
         lastSideSwitchTime = 0;
         survivalTimeElement.textContent = survivalTime;
         obstacles = [];
