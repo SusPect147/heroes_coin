@@ -1385,7 +1385,7 @@ let obstacleSpawnInterval;
 let timeTrackingInterval;
 let ballOnLeft = true; // Мячик изначально слева
 let earnedCoins = 0;
-let obstacleSpeed = 1; // Уменьшенная начальная скорость падения препятствий
+let obstacleSpeed = 1; // Начальная скорость падения препятствий
 let lastSideSwitchTime = 0; // Время последнего переключения стороны
 
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
@@ -1480,7 +1480,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const obstacle = document.createElement('div');
             obstacle.classList.add('obstacle');
 
-            const obstacleWidth = 70; // Обновлено для соответствия новому размеру (70px)
+            const obstacleWidth = 85; // Обновлено для соответствия новому размеру (85px)
             obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
             obstacle.style.top = '0px';
             gameContainer4.appendChild(obstacle);
@@ -1494,8 +1494,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
                 return;
             }
             console.log("Spawning obstacle");
-            spawnObstacle(); // Теперь только обычные препятствия (машины)
-            obstacleSpawnInterval = setTimeout(spawnObstacles, 800); // Препятствия появляются каждые 0.5 секунды
+            spawnObstacle(); // Только обычные препятствия (машины)
+            obstacleSpawnInterval = setTimeout(spawnObstacles, 2000); // Препятствия появляются каждые 2 секунды
         }
 
         function trackTime() {
