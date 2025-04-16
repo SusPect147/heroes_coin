@@ -1547,6 +1547,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             requestAnimationFrame(gameLoop4);
         }
 
+
         function endGame4() {
             gameActive4 = false;
             clearTimeout(obstacleSpawnInterval);
