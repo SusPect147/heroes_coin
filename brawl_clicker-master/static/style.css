@@ -2448,6 +2448,9 @@ html, body {
     background-color: transparent; /* Убираем цвет фона */
     width: 60px; /* Увеличенный размер */
     height: 60px;
+    position: absolute;
+    bottom: 20px; /* Позиция мячика внизу контейнера */
+    left: 20px; /* Начальная позиция слева */
 }
 
 #ball.small-ball {
