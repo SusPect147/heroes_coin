@@ -26,34 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Функция для попытки воспроизведения музыки
-    function tryPlayMusic() {
-        if (isMusicEnabled) {
-            mainMenuMusic.play().catch(error => {
-                console.log("Автовоспроизведение музыки заблокировано: ", error);
-            });
-        }
-    }
-
     // Инициализация состояния кнопки и музыки
     if (musicToggleButton) {
         musicToggleButton.textContent = isMusicEnabled ? 'Выключить музыку' : 'Включить музыку';
         musicToggleButton.addEventListener('click', toggleMusic);
 
-        // Пытаемся запустить музыку при загрузке страницы
-        tryPlayMusic();
+        // Запускаем музыку при загрузке, если она включена
+        if (isMusicEnabled) {
+            mainMenuMusic.play().catch(error => {
+                console.log("Автовоспроизведение музыки заблокировано: ", error);
+            });
+        }
     } else {
         console.error("Кнопка управления музыкой (musicToggleButton) не найдена.");
     }
-
-    // Добавляем обработчик для первого взаимодействия пользователя
-    let hasInteracted = false;
-    document.addEventListener('click', () => {
-        if (!hasInteracted && isMusicEnabled) {
-            hasInteracted = true;
-            mainMenuMusic.play().catch(error => {
-                console.log("Автовоспроизведение музыки заблокировано даже после взаимодействия: ", error);
-            });
-        }
-    }, { once: true }); // Событие сработает только один раз
 });

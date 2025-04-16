@@ -1369,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   const gameContainer4 = document.getElementById('gameContainer4');
+const gameContainer4 = document.getElementById('gameContainer4');
 const ball = document.getElementById('ball');
 const survivalTimeElement = document.getElementById('survivalTime');
 const gameOverScreen4 = document.getElementById('gameOver4');
@@ -1410,8 +1410,8 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     ball.addEventListener('click', () => {
         if (!gameActive4) return;
         ballOnLeft = !ballOnLeft;
-        // Размеры мячика берутся из CSS, поэтому учитываем их через getBoundingClientRect
-        const ballWidth = ball.getBoundingClientRect().width;
+        // Размеры мячика берутся из CSS, используем getBoundingClientRect с проверкой
+        const ballWidth = ball.getBoundingClientRect().width || 60; // Значение по умолчанию, если стили не загружены
         ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
     });
 
@@ -1421,7 +1421,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         if (!gameActive4) return;
         ballOnLeft = !ballOnLeft;
         // Размеры мячика берутся из CSS
-        const ballWidth = ball.getBoundingClientRect().width;
+        const ballWidth = ball.getBoundingClientRect().width || 60;
         ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
     });
 
@@ -1472,8 +1472,16 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         const obstacle = document.createElement('div');
         obstacle.classList.add('obstacle');
 
-        // Размеры и стили препятствия задаются через CSS, здесь только позиция
-        const obstacleWidth = parseFloat(getComputedStyle(document.querySelector('.obstacle')).width) || 20;
+        // Получаем ширину препятствия из CSS, создавая временный элемент
+        let obstacleWidth = 20; // Значение по умолчанию
+        const tempObstacle = document.createElement('div');
+        tempObstacle.classList.add('obstacle');
+        tempObstacle.style.display = 'none'; // Скрываем временный элемент
+        document.body.appendChild(tempObstacle);
+        obstacleWidth = parseFloat(getComputedStyle(tempObstacle).width) || 20;
+        document.body.removeChild(tempObstacle);
+
+        // Позиционирование препятствия
         obstacle.style.left = `${Math.random() * (gameContainer4.offsetWidth - obstacleWidth)}px`;
         obstacle.style.top = '0px';
         gameContainer4.appendChild(obstacle);
