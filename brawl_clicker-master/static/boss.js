@@ -1558,4 +1558,4 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
     }
 }
-
+});
