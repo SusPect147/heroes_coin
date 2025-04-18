@@ -1391,7 +1391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let ballOnLeft = true;
         let earnedCoins = 0;
         let obstacleSpeed = 1.5;
-        let spawnInterval = 2500; // Увеличен начальный интервал спавна до 2.5 секунд
+        let spawnInterval = 1500; // Увеличен начальный интервал спавна до 2.5 секунд
         let lastSideSwitchTime = 0;
         let lastFrameTime = performance.now();
 
@@ -1463,7 +1463,7 @@ document.addEventListener('DOMContentLoaded', () => {
             survivalTime = 0;
             earnedCoins = 0;
             obstacleSpeed = 1.5;
-            spawnInterval = 2500;
+            spawnInterval = 1500;
             lastSideSwitchTime = 0;
             lastFrameTime = performance.now();
             survivalTimeElement.textContent = survivalTime;
