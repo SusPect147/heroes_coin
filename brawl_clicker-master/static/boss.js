@@ -1378,9 +1378,11 @@ const finalSurvivalTimeElement = document.getElementById('finalSurvivalTime');
 const earnedCoinsElement = document.getElementById('earnedCoins');
 const exitButton4 = document.getElementById('exitButton4');
 
+// Проверяем наличие всех DOM-элементов
 if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !finalSurvivalTimeElement || !earnedCoinsElement || !exitButton4) {
     console.error("One or more DOM elements for Game 4 are missing. Game 4 will not be initialized.");
 } else {
+    // Инициализация переменных
     let gameActive4 = false;
     let survivalTime = 0;
     let obstacles = [];
@@ -1392,22 +1394,37 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     let spawnInterval = 2500;
     let lastSideSwitchTime = 0;
 
+    // Проверяем существование глобальных переменных, используемых в игре
+    const banner = document.getElementById('startBanner') || null;
+    const banner2 = document.getElementById('startBanner2') || null;
+    const banner3 = document.getElementById('startBanner3') || null;
+    const banner4 = document.getElementById('startBanner4') || null;
+    const currentScoreElement = document.querySelector('.currentScore') || null;
+    let totalCoins = parseInt(localStorage.getItem('totalCoins')) || 0;
+    let isSmallBallActive = localStorage.getItem('isSmallBallActive') === 'true';
+
+    // Устанавливаем стили фона
     gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
     gameContainer4.style.backgroundSize = 'cover';
     gameContainer4.style.backgroundPosition = 'center';
-
     exitButton4.style.display = 'none';
 
-    banner4.addEventListener('click', () => {
-        console.log("Banner 4 clicked, starting Game 4");
-        banner.classList.add('hidden');
-        banner2.classList.add('hidden');
-        banner3.classList.add('hidden');
-        banner4.classList.add('hidden');
-        gameContainer4.classList.remove('hidden');
-        startGame4();
-    });
+    // Обработчик для запуска игры
+    if (banner4) {
+        banner4.addEventListener('click', () => {
+            console.log("Banner 4 clicked, starting Game 4");
+            if (banner) banner.classList.add('hidden');
+            if (banner2) banner2.classList.add('hidden');
+            if (banner3) banner3.classList.add('hidden');
+            if (banner4) banner4.classList.add('hidden');
+            gameContainer4.classList.remove('hidden');
+            startGame4();
+        });
+    } else {
+        console.warn("Banner 4 not found. Game 4 cannot be started via banner.");
+    }
 
+    // Обработчики для перемещения мяча
     ball.addEventListener('click', () => {
         if (!gameActive4) return;
         ballOnLeft = !ballOnLeft;
@@ -1425,14 +1442,16 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         ball.style.left = ballOnLeft ? '20px' : `${gameContainer4.offsetWidth - ballWidth - 20}px`;
     });
 
+    // Обработчик выхода из игры
     exitButton4.addEventListener('click', (e) => {
         e.stopPropagation();
         endGame4();
         gameContainer4.classList.add('hidden');
-        banner.classList.remove('hidden');
-        banner2.classList.remove('hidden'); // Исправлено: показываем все баннеры
-        banner3.classList.remove('hidden');
-        banner4.classList.remove('hidden');
+        // Исправлено: показываем все баннеры
+        if (banner) banner.classList.remove('hidden');
+        if (banner2) banner2.classList.remove('hidden');
+        if (banner3) banner3.classList.remove('hidden');
+        if (banner4) banner4.classList.remove('hidden');
         exitButton4.style.display = 'none';
     });
 
