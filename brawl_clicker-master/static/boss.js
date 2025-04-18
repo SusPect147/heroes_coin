@@ -1390,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeTrackingInterval;
         let ballOnLeft = true;
         let earnedCoins = 0;
-        let obstacleSpeed = 3;
+        let obstacleSpeed = 3.5;
         let spawnInterval = 1500; // Увеличен начальный интервал спавна до 2.5 секунд
         let lastSideSwitchTime = 0;
         let lastFrameTime = performance.now();
@@ -1462,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gameActive4 = true;
             survivalTime = 0;
             earnedCoins = 0;
-            obstacleSpeed = 3;
+            obstacleSpeed = 3.5;
             spawnInterval = 1500;
             lastSideSwitchTime = 0;
             lastFrameTime = performance.now();
@@ -1517,7 +1517,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (survivalTime % 10 === 0 && survivalTime > 0) {
                 spawnInterval = Math.max(500, spawnInterval - 160);
-                obstacleSpeed += 0.35;
+                obstacleSpeed += 0.4;
                 console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
             }
 
