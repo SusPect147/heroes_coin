@@ -1461,7 +1461,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         survivalTime = 0;
         earnedCoins = 0;
         obstacleSpeed = 1.5; // Увеличена начальная скорость
-        spawnInterval = 2500;
+        spawnInterval = 1500;
         lastSideSwitchTime = 0;
         survivalTimeElement.textContent = survivalTime;
         obstacles = [];
