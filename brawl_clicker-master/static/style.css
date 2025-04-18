@@ -2452,7 +2452,7 @@ html, body {
     width: 60px; /* Увеличенный размер */
     height: 60px;
     position: absolute;
-    bottom: 20px; /* Позиция мячика внизу контейнера */
+    bottom: 80px; /* Позиция мячика внизу контейнера */
     left: 20px; /* Начальная позиция слева */
     transition: left 0.3s ease-in-out; /* Плавное перемещение мячика */
 }
@@ -2512,7 +2512,7 @@ html, body {
 
 #gameContainer4 .exit-button {
     position: absolute;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 20px;
