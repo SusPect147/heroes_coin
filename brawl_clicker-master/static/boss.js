@@ -1390,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeTrackingInterval;
         let ballOnLeft = true;
         let earnedCoins = 0;
-        let obstacleSpeed = 1.5;
+        let obstacleSpeed = 3;
         let spawnInterval = 1500; // Увеличен начальный интервал спавна до 2.5 секунд
         let lastSideSwitchTime = 0;
         let lastFrameTime = performance.now();
@@ -1462,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gameActive4 = true;
             survivalTime = 0;
             earnedCoins = 0;
-            obstacleSpeed = 1.5;
+            obstacleSpeed = 3;
             spawnInterval = 1500;
             lastSideSwitchTime = 0;
             lastFrameTime = performance.now();
