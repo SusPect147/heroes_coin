@@ -1514,7 +1514,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
         if (survivalTime % 10 === 0 && survivalTime > 0) {
             spawnInterval = Math.max(500, spawnInterval - 200);
-            obstacleSpeed += 0.32;
+            obstacleSpeed += 0.35;
             console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
         }
 
