@@ -1388,7 +1388,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
     let timeTrackingInterval;
     let ballOnLeft = true;
     let earnedCoins = 0;
-    let obstacleSpeed = 1;
+    let obstacleSpeed = 1.5; // Увеличена начальная скорость
     let spawnInterval = 2500;
     let lastSideSwitchTime = 0;
 
@@ -1430,9 +1430,9 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         endGame4();
         gameContainer4.classList.add('hidden');
         banner.classList.remove('hidden');
-        banner2.classList.add('hidden');
-        banner3.classList.add('hidden');
-        banner4.classList.add('hidden');
+        banner2.classList.remove('hidden'); // Исправлено: показываем все баннеры
+        banner3.classList.remove('hidden');
+        banner4.classList.remove('hidden');
         exitButton4.style.display = 'none';
     });
 
@@ -1441,7 +1441,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         gameActive4 = true;
         survivalTime = 0;
         earnedCoins = 0;
-        obstacleSpeed = 1;
+        obstacleSpeed = 1.5; // Увеличена начальная скорость
         spawnInterval = 2500;
         lastSideSwitchTime = 0;
         survivalTimeElement.textContent = survivalTime;
@@ -1495,7 +1495,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
 
         if (survivalTime % 10 === 0 && survivalTime > 0) {
             spawnInterval = Math.max(500, spawnInterval - 200);
-            obstacleSpeed += 0.15; // Увеличено ускорение скорости
+            obstacleSpeed += 0.15;
             console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
         }
 
@@ -1514,7 +1514,7 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
             const ballRect = ball.getBoundingClientRect();
 
             // Уменьшаем хитбокс мяча на 20% по ширине и высоте
-            const hitboxShrink = 0.2; // 20% уменьшение
+            const hitboxShrink = 0.2;
             const ballHitbox = {
                 top: ballRect.top + ballRect.height * hitboxShrink / 2,
                 bottom: ballRect.bottom - ballRect.height * hitboxShrink / 2,
@@ -1558,5 +1558,4 @@ if (!gameContainer4 || !ball || !survivalTimeElement || !gameOverScreen4 || !fin
         if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
     }
 }
-});
 

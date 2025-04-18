@@ -2434,11 +2434,14 @@ html, body {
 
 /* Стили для игры 4: Bounce Survival */
 #gameContainer4 {
-    position: relative;
+    position: absolute; /* Изменено с relative на absolute для соответствия другим играм */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 600px;
+    height: 100vh; /* Изменено с 600px на 100vh для полного экрана */
     background-color: #1a1a1a;
     overflow: hidden;
+    font-family: Arial, sans-serif; /* Добавлено для консистентности */
 }
 
 #ball {
