@@ -1517,7 +1517,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (survivalTime % 10 === 0 && survivalTime > 0) {
                 spawnInterval = Math.max(500, spawnInterval - 160);
-                obstacleSpeed += 0.9;
+                obstacleSpeed += 1.1;
                 console.log("New spawn interval:", spawnInterval, "New obstacle speed:", obstacleSpeed);
             }
 
