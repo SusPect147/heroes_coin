@@ -659,89 +659,14 @@
     </div>
 
 
-    <!-- Квесты -->
-    <div class="page" id="quests" style="display:none;">
-
-        <div class="cards-container">
-            <div class="card-text">Выберите задание</div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Подписка на телеграм</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        50 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Подключи свой кошелек</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        100 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Пригласи 5 друзей</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        150 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-        </div>
-
-        <div class="cards-container2">
-            <div class="card-text">Задания партнеров</div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Доп задание</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        50 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Доп задание</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        100 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-
-            <div class="card">
-                <img src="brawl_clicker-master/static/images/icon.png" alt="TON Logo" class="card-logo">
-                <div class="card-content">
-                    <div class="card-title">Доп задание</div>
-                    <div class="card-amount">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="Coin Icon" class="coin-icon">
-                        150 000
-                    </div>
-                </div>
-                <div class="card-arrow">></div>
-            </div>
-        </div>
+  <!-- Рулетка вместо квестов -->
+<div class="page" id="quests" style="display:none;">
+    <div class="roulette-container">
+        <div class="roulette-text">Вы можете выиграть ценные призы!</div>
+        <canvas id="rouletteCanvas" width="300" height="300"></canvas>
+        <button id="spinButton" class="spin-button">Крутить</button>
     </div>
+</div>
 
     <!--Мини игры -->
     <div class="page" id="top" style="display:none;">
@@ -866,5 +791,6 @@
 <script src="brawl_clicker-master/static/dragon.js"></script>
 <script src="brawl_clicker-master/static/boss.js"></script>
 <script src="brawl_clicker-master/static/music.js"></script>
+<script src="brawl_clicker-master/static/script_wheel.js"></script>
 </body>
 </html>
