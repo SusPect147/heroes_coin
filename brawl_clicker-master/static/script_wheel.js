@@ -2,19 +2,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('rouletteCanvas');
         const ctx = canvas.getContext('2d');
         const spinButton = document.getElementById('spinButton');
+        const rewardModal = document.getElementById('rewardModal');
+        const rewardText = document.getElementById('rewardText');
+        const closeModalButton = document.getElementById('closeModalButton');
 
         const sectors = [
             { name: 'Монеты (50 000)', image: 'brawl_clicker-master/static/images/coin.png' },
-            { name: 'Leon (бонус)', image: 'brawl_clicker-master/static/images/angel.png' },
+            { name: 'Leon (бонус)', image: 'brawl_clicker-master/static/images/leon.png' },
             { name: 'Улучшение', image: 'brawl_clicker-master/static/images/fireshot.png' },
             { name: 'Монеты (100 000)', image: 'brawl_clicker-master/static/images/coin.png' },
-            { name: 'Скин', image: 'brawl_clicker-master/static/images/groot.png' },
-            { name: 'Монеты (25 000)', image: 'brawl_clicker-master/static/images/coin.png' }
+            { name: 'Скин', image: 'brawl_clicker-master/static/images/icon.png' },
+            { name: 'Монеты (25 000)', image: 'brawl_clicker-master/static/images/coin.png' },
+            { name: 'Сундук героя', image: 'brawl_clicker-master/static/images/box_1.png' },
+            { name: 'Бонусные звёзды', image: 'brawl_clicker-master/static/images/stars.png' }
         ];
 
         const sectorAngle = (2 * Math.PI) / sectors.length;
         let currentAngle = 0;
         let isSpinning = false;
+
+        // Градиенты для секторов
+        const gradients = [
+            ['#ff4500', '#ff8c00'], // Оранжевый
+            ['#ffd700', '#ffa500'], // Золотой
+            ['#00b7eb', '#00ced1'], // Голубой
+            ['#32cd32', '#228b22'], // Зелёный
+            ['#ff4500', '#ff8c00'],
+            ['#ffd700', '#ffa500'],
+            ['#00b7eb', '#00ced1'],
+            ['#32cd32', '#228b22']
+        ];
 
         // Загрузка изображений
         const images = {};
@@ -46,14 +63,25 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.rotate(currentAngle);
 
             sectors.forEach((sector, index) => {
+                // Создание радиального градиента
+                const gradient = ctx.createRadialGradient(0, 0, canvas.width / 4, 0, 0, canvas.width / 2);
+                gradient.addColorStop(0, gradients[index][0]);
+                gradient.addColorStop(1, gradients[index][1]);
+
+                // Отрисовка сектора
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.arc(0, 0, canvas.width / 2, index * sectorAngle, (index + 1) * sectorAngle);
-                ctx.fillStyle = index % 2 === 0 ? '#ff4500' : '#ffd700';
+                ctx.fillStyle = gradient;
                 ctx.fill();
+
+                // Эффект свечения
+                ctx.shadowColor = '#fff';
+                ctx.shadowBlur = 10;
                 ctx.strokeStyle = '#fff';
                 ctx.lineWidth = 2;
                 ctx.stroke();
+                ctx.shadowBlur = 0; // Отключаем свечение для других элементов
 
                 // Отрисовка изображения
                 ctx.save();
@@ -61,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.translate(canvas.width / 3, 0);
                 ctx.rotate(Math.PI / 2);
                 if (images[index]) {
-                    ctx.drawImage(images[index], -30, -30, 60, 60);
+                    ctx.drawImage(images[index], -40, -40, 80, 80);
                 }
                 ctx.restore();
             });
@@ -70,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Отрисовка стрелки
             ctx.beginPath();
-            ctx.moveTo(canvas.width - 20, canvas.height / 2 - 15);
+            ctx.moveTo(canvas.width - 25, canvas.height / 2 - 20);
             ctx.lineTo(canvas.width, canvas.height / 2);
-            ctx.lineTo(canvas.width - 20, canvas.height / 2 + 15);
+            ctx.lineTo(canvas.width - 25, canvas.height / 2 + 20);
             ctx.fillStyle = '#fff';
             ctx.fill();
         }
@@ -106,8 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const selectedSectorIndex = Math.floor((2 * Math.PI - normalizedAngle) / sectorAngle) % sectors.length;
                     const selectedSector = sectors[selectedSectorIndex];
 
-                    // Вывод результата
-                    Telegram.WebApp.showAlert(`Вы выиграли: ${selectedSector.name}!`);
+                    // Показ модального окна
+                    rewardText.textContent = `Вы получили: ${selectedSector.name}!`;
+                    rewardModal.style.display = 'flex';
                 }
             }
 
@@ -115,5 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         spinButton.addEventListener('click', spinRoulette);
-    });
 
+        closeModalButton.addEventListener('click', () => {
+            rewardModal.style.display = 'none';
+        });
+    });

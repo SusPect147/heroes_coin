@@ -659,12 +659,18 @@
     </div>
 
 
-  <!-- Рулетка вместо квестов -->
-<div class="page" id="quests" style="display:none;">
+ <div class="page" id="quests" style="display:none;">
     <div class="roulette-container">
         <div class="roulette-text">Вы можете выиграть ценные призы!</div>
-        <canvas id="rouletteCanvas" width="300" height="300"></canvas>
+        <canvas id="rouletteCanvas" width="400" height="400"></canvas>
         <button id="spinButton" class="spin-button">Крутить</button>
+        <div id="rewardModal" class="reward-modal" style="display:none;">
+            <div class="reward-modal-content">
+                <h2>Поздравляем!</h2>
+                <p id="rewardText">Вы получили: [Награда]</p>
+                <button id="closeModalButton" class="close-modal-button">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
 

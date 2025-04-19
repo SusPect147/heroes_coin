@@ -18,12 +18,8 @@ body {
 
 #shop {}
 
-#quests {
-    height: 125vh;
-}
-
 #market {
-    height: 125vh;
+    height: 135vh;
 }
 #top {}
 
@@ -763,7 +759,7 @@ h2 {
 
     .roulette-text {
         font-family: 'Pusia-bold', sans-serif;
-        font-size: 24px;
+        font-size: 28px;
         font-weight: bold;
         color: #fff;
         margin-bottom: 20px;
@@ -771,21 +767,21 @@ h2 {
     }
 
     #rouletteCanvas {
-        border: 5px solid #ffd700;
+        border: 8px solid #ffd700;
         border-radius: 50%;
-        background: #333;
+        background: #222;
     }
 
     .spin-button {
         margin-top: 20px;
-        padding: 10px 20px;
+        padding: 12px 24px;
         font-family: 'Pusia-bold', sans-serif;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         color: #fff;
         background: #ff4500;
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         cursor: pointer;
         transition: background 0.3s;
     }
@@ -797,6 +793,60 @@ h2 {
     .spin-button:disabled {
         background: #555;
         cursor: not-allowed;
+    }
+
+    .reward-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    .reward-modal-content {
+        background: linear-gradient(135deg, #ff4500, #ffd700);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        color: #fff;
+        font-family: 'Pusia-bold', sans-serif;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+
+    .reward-modal-content h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .reward-modal-content p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .close-modal-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .close-modal-button:hover {
+        background: #333;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
 /* Убедимся, что menu_char занимает правильную ширину */
