@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Скин', image: 'brawl_clicker-master/static/images/icon.png' },
             { name: 'Монеты (25 000)', image: 'brawl_clicker-master/static/images/coin.png' },
             { name: 'Сундук героя', image: 'brawl_clicker-master/static/images/box_1.png' },
-            { name: 'Бонусные звёзды', image: 'brawl_clicker-master/static/images/stars.png' }
+            { name: 'Бонусные звёзды', image: 'brawl_clicker-master/static/images/stars.png' },
+            { name: 'Экстра-бонус', image: 'brawl_clicker-master/static/images/stars.png' }
         ];
 
         const sectorAngle = (2 * Math.PI) / sectors.length;
@@ -27,10 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ['#ffd700', '#ffa500'], // Золотой
             ['#00b7eb', '#00ced1'], // Голубой
             ['#32cd32', '#228b22'], // Зелёный
-            ['#ff4500', '#ff8c00'],
-            ['#ffd700', '#ffa500'],
-            ['#00b7eb', '#00ced1'],
-            ['#32cd32', '#228b22']
+            ['#ff4500', '#ff8c00'], // Оранжевый
+            ['#ffd700', '#ffa500'], // Золотой
+            ['#00b7eb', '#00ced1'], // Голубой
+            ['#800080', '#4b0082'], // Фиолетовый
+            ['#32cd32', '#228b22']  // Зелёный
         ];
 
         // Загрузка изображений
@@ -89,18 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.translate(canvas.width / 3, 0);
                 ctx.rotate(Math.PI / 2);
                 if (images[index]) {
-                    ctx.drawImage(images[index], -40, -40, 80, 80);
+                    ctx.drawImage(images[index], -35, -35, 70, 70);
                 }
                 ctx.restore();
             });
 
             ctx.restore();
 
-            // Отрисовка стрелки
+            // Отрисовка стрелки (сверху)
             ctx.beginPath();
-            ctx.moveTo(canvas.width - 25, canvas.height / 2 - 20);
-            ctx.lineTo(canvas.width, canvas.height / 2);
-            ctx.lineTo(canvas.width - 25, canvas.height / 2 + 20);
+            ctx.moveTo(canvas.width / 2 - 20, 25);
+            ctx.lineTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2 + 20, 25);
             ctx.fillStyle = '#fff';
             ctx.fill();
         }
@@ -110,15 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpinning = true;
             spinButton.disabled = true;
 
-            const spinTime = 5000; // 5 секунд
+            const spinTime = 7000; // 7 секунд
             const startTime = performance.now();
             const randomSector = Math.floor(Math.random() * sectors.length);
-            const targetAngle = randomSector * sectorAngle + Math.PI * 4; // 2 полных оборота + случайный сектор
+            const targetAngle = randomSector * sectorAngle + Math.PI * 5; // 2.5 полных оборота + случайный сектор
 
             function animate(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / spinTime, 1);
-                const easeOut = 1 - (1 - progress) ** 3; // Ease-out анимация
+                const easeOut = 1 - (1 - progress) ** 2; // Быстрее в начале, плавное замедление
                 currentAngle = easeOut * targetAngle;
 
                 drawRoulette();
@@ -129,9 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     isSpinning = false;
                     spinButton.disabled = false;
 
-                    // Вычисление выбранного сектора
+                    // Вычисление выбранного сектора (стрелка сверху)
                     const normalizedAngle = (currentAngle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-                    const selectedSectorIndex = Math.floor((2 * Math.PI - normalizedAngle) / sectorAngle) % sectors.length;
+                    const selectedSectorIndex = Math.floor(normalizedAngle / sectorAngle) % sectors.length;
                     const selectedSector = sectors[selectedSectorIndex];
 
                     // Показ модального окна
