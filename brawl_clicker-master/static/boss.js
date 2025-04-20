@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-  // Игра 2: Аэрохоккей
+ // Игра 2: Аэрохоккей
 const gameContainer2 = document.getElementById('gameContainer2');
 const paddle = document.getElementById('paddle');
 const computerPaddle = document.getElementById('computerPaddle');
@@ -362,6 +362,32 @@ if (banner2) {
     });
 }
 
+// Add listeners to other banners to stop the game when switching sections
+if (banner) {
+    banner.addEventListener('click', () => {
+        if (gameActive2) {
+            endGame2();
+            gameContainer2.classList.add('hidden');
+        }
+    });
+}
+if (banner3) {
+    banner3.addEventListener('click', () => {
+        if (gameActive2) {
+            endGame2();
+            gameContainer2.classList.add('hidden');
+        }
+    });
+}
+if (banner4) {
+    banner4.addEventListener('click', () => {
+        if (gameActive2) {
+            endGame2();
+            gameContainer2.classList.add('hidden');
+        }
+    });
+}
+
 const handleMouseMove = (e) => {
     if (!gameActive2) return;
     const rect = gameContainer2.getBoundingClientRect();
@@ -391,22 +417,6 @@ if (gameContainer2) {
     gameContainer2.addEventListener('touchstart', handleTouchMove);
     gameContainer2.addEventListener('touchmove', handleTouchMove);
 }
-
-// Обработка смены видимости вкладки
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        if (gameActive2) {
-            gameActive2 = false;
-        }
-    } else {
-        if (!gameActive2 && !gameContainer2.classList.contains('hidden')) {
-            gameActive2 = true;
-            resetPuck();
-            lastTime = performance.now();
-            gameLoop2();
-        }
-    }
-});
 
 if (exitButton2) {
     exitButton2.addEventListener('click', (e) => {
@@ -634,7 +644,6 @@ function resetPuck() {
 function endGame2() {
     gameActive2 = false;
     if (finalPlayerScore) finalPlayerScore.textContent = playerScore;
-    if (finalComputerScore) finalPlayerScore.textContent = playerScore;
     if (finalComputerScore) finalComputerScore.textContent = computerScore;
     if (finalLevel) finalLevel.textContent = level;
 
