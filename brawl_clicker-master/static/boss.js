@@ -717,61 +717,87 @@ function restartGame2() {
     }
     startGame2();
 }
-    // Игра 3: Битва с боссами
-    const gameContainer3 = document.getElementById('gameContainer3');
-    const scoreElement3 = document.getElementById('scoreValue3');
-    const bossHealthElement = document.getElementById('bossHealthValue');
-    const gameOverScreen3 = document.getElementById('gameOver3');
-    const finalScoreElement3 = document.getElementById('finalScore3');
-    const gameOverMessage3 = document.getElementById('gameOverMessage3');
-    const exitButton3 = document.getElementById('exitButton3');
-    const boss = document.getElementById('boss');
-    const cannon = document.getElementById('cannon');
-    const cannon2 = document.getElementById('cannon2'); // Новая пушка
+// Игра 3: Битва с боссами
+    (function initGame3() {
+        const gameContainer3 = document.getElementById('gameContainer3');
+        const scoreElement3 = document.getElementById('scoreValue3');
+        const bossHealthElement = document.getElementById('bossHealthValue');
+        const gameOverScreen3 = document.getElementById('gameOver3');
+        const finalScoreElement3 = document.getElementById('finalScore3');
+        const gameOverMessage3 = document.getElementById('gameOverMessage3');
+        const exitButton3 = document.getElementById('exitButton3');
+        const boss = document.getElementById('boss');
+        const cannon = document.getElementById('cannon');
+        const cannon2 = document.getElementById('cannon2');
 
-    let score3 = 0;
-    let gameActive3 = false;
-    let cannonPosition = window.innerWidth / 2 - 50;
-    let bossPosition = window.innerWidth / 2 - 75;
-    let bossDirection = 1;
-    let bossSpeed = 2;
-    let bossHealth = 100;
-    let playerBullets = [];
-    let bossBullets = [];
-    let canShoot = true;
-    let currentBoss = 1;
-    let autoShootInterval;
-    let bossDirectionChangeInterval;
-    let boss4Pause = false;
-    let boss4PauseTimer = 0;
-    let boss4Speed = 2;
-    let boss4BulletTimer = 0;
-    let boss5TeleportTimer = 0;
-    let boss5Angle = 0;
-    let boss6WaveTimer = 0;
-    let boss6SineOffset = 0;
-    let boss6FastBulletTimer = 0;
-    let boss7CloneTimer = 300;
-    let clones = [];
-    let boss7BulletSpeed = 1.5;
-    let isDraggingCannon = false;
-    let currentCannon = cannon; // Текущая пушка
+        let score3 = 0;
+        let gameActive3 = false;
+        let cannonPosition = window.innerWidth / 2 - 50;
+        let bossPosition = window.innerWidth / 2 - 75;
+        let bossDirection = 1;
+        let bossSpeed = 2;
+        let bossHealth = 100;
+        let playerBullets = [];
+        let bossBullets = [];
+        let canShoot = true;
+        let currentBoss = 1;
+        let autoShootInterval = null;
+        let bossDirectionChangeInterval = null;
+        let bossBulletTimeout = null;
+        let boss4Pause = false;
+        let boss4PauseTimer = 0;
+        let boss4Speed = 2;
+        let boss4BulletTimer = 0;
+        let boss5TeleportTimer = 0;
+        let boss5Angle = 0;
+        let boss6WaveTimer = 0;
+        let boss6SineOffset = 0;
+        let boss6FastBulletTimer = 0;
+        let boss7CloneTimer = 300;
+        let clones = [];
+        let boss7BulletSpeed = 1.5;
+        let isDraggingCannon = false;
+        let currentCannon = cannon;
+        let animationFrameId = null;
 
-    // Функция для проверки попадания точки в треугольник
-    function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
-        const d = (by - cy) * (ax - cx) + (cy - ay) * (bx - cx);
-        const alpha = ((by - cy) * (px - cx) + (cy - py) * (bx - cx)) / d;
-        const beta = ((cy - ay) * (px - cx) + (py - ay) * (cx - bx)) / d;
-        const gamma = 1 - alpha - beta;
-        return alpha >= 0 && beta >= 0 && gamma >= 0;
-    }
+        function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
+            const d = (by - cy) * (ax - cx) + (cy - ay) * (bx - cx);
+            const alpha = ((by - cy) * (px - cx) + (cy - py) * (bx - cx)) / d;
+            const beta = ((cy - ay) * (px - cx) + (py - ay) * (cx - bx)) / d;
+            const gamma = 1 - alpha - beta;
+            return alpha >= 0 && beta >= 0 && gamma >= 0;
+        }
 
-    if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 || !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon || !cannon2) {
-        console.error("One or more DOM elements for Game 3 are missing. Game 3 will not be initialized.");
-    } else {
+        if (!gameContainer3 || !scoreElement3 || !bossHealthElement || !gameOverScreen3 || !finalScoreElement3 || !gameOverMessage3 || !exitButton3 || !boss || !cannon || !cannon2) {
+            console.error("One or more DOM elements for Game 3 are missing. Game 3 will not be initialized.");
+            return;
+        }
+
         gameOverScreen3.classList.add('hidden');
-        cannon2.style.display = 'none'; // По умолчанию скрываем cannon2
+        cannon2.style.display = 'none';
+        exitButton3.style.display = 'none';
 
+        // Настройка IntersectionObserver
+        let observer = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting && gameActive3) {
+                stopGame3();
+            }
+        }, { threshold: 0 });
+        observer.observe(gameContainer3);
+
+        // Функция для остановки игры
+        function stopGame3() {
+            if (gameActive3) {
+                endGame3(false);
+                gameContainer3.classList.add('hidden');
+                banner.classList.remove('hidden');
+                banner2.classList.remove('hidden');
+                banner3.classList.remove('hidden');
+                banner4.classList.remove('hidden');
+            }
+        }
+
+        // Обработчик клика по баннеру
         banner3.addEventListener('click', () => {
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
@@ -779,6 +805,19 @@ function restartGame2() {
             banner4.classList.add('hidden');
             gameContainer3.classList.remove('hidden');
             startGame3();
+        });
+
+        // Остановка игры при клике на другие баннеры
+        banner.addEventListener('click', stopGame3);
+        banner2.addEventListener('click', stopGame3);
+        banner4.addEventListener('click', stopGame3);
+
+        // Глобальный слушатель для навигации
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-section], a[href="#Main"], #mainNav, .nav-link');
+            if (target && gameActive3 && !target.matches('[data-section="Minigames"], #banner3')) {
+                stopGame3();
+            }
         });
 
         gameContainer3.addEventListener('mousedown', (e) => {
@@ -824,6 +863,11 @@ function restartGame2() {
         }
 
         function startGame3() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            if (autoShootInterval) clearInterval(autoShootInterval);
+            if (bossDirectionChangeInterval) clearInterval(bossDirectionChangeInterval);
+            if (bossBulletTimeout) clearTimeout(bossBulletTimeout);
+
             gameActive3 = true;
             score3 = 0;
             bossHealth = 100;
@@ -831,15 +875,29 @@ function restartGame2() {
             cannonPosition = window.innerWidth / 2 - 50;
             bossPosition = window.innerWidth / 2 - 75;
             bossDirection = 1;
+            bossSpeed = 2;
             playerBullets = [];
             bossBullets = [];
             clones.forEach(clone => clone.element.remove());
             clones = [];
+            canShoot = true;
+            boss4Pause = false;
+            boss4PauseTimer = 0;
+            boss4Speed = 2;
+            boss4BulletTimer = 0;
+            boss5TeleportTimer = 0;
+            boss5Angle = 0;
+            boss6WaveTimer = 0;
+            boss6SineOffset = 0;
+            boss6FastBulletTimer = 0;
+            boss7CloneTimer = 300;
+            boss7BulletSpeed = 1.5;
+
             scoreElement3.textContent = score3;
             bossHealthElement.textContent = bossHealth;
             gameOverScreen3.classList.add('hidden');
+            exitButton3.style.display = 'none';
 
-            // Устанавливаем текущую пушку в зависимости от улучшения
             currentCannon = isCannon2Active ? cannon2 : cannon;
             cannon.style.display = isCannon2Active ? 'none' : 'block';
             cannon2.style.display = isCannon2Active ? 'block' : 'none';
@@ -849,14 +907,14 @@ function restartGame2() {
             boss.style.top = '50px';
             const backgroundImagePlat = 'brawl_clicker-master/static/images/plat.png';
             gameContainer3.style.backgroundImage = `url('${backgroundImagePlat}')`;
-            boss.classList.remove('boss2', 'boss3', 'boss4', 'boss5', 'boss6', 'boss7');
+            boss.classList.remove('boss2', 'boss3', 'boss4', 'boss5', 'boss6', 'boss7', 'hit');
             boss.classList.add('boss1');
-            boss7CloneTimer = 300;
+
             spawnBossBullets();
             gameLoop3();
 
             autoShootInterval = setInterval(() => {
-                if (gameActive3 && canShoot) {
+                if (gameActive3 && canShoot && window.getComputedStyle(gameContainer3).display !== 'none') {
                     shootPlayerBullet();
                     canShoot = false;
                     setTimeout(() => (canShoot = true), 300);
@@ -866,16 +924,15 @@ function restartGame2() {
 
         function shootPlayerBullet() {
             const bullet = document.createElement('div');
-            // Выбираем тип снаряда в зависимости от текущей пушки
             bullet.classList.add(currentCannon === cannon ? 'player-bullet' : 'player-bullet2');
-            bullet.style.left = `${cannonPosition + currentCannon.offsetWidth / 2 - 14}px`; // Учитываем ширину снаряда (28px / 2)
+            bullet.style.left = `${cannonPosition + currentCannon.offsetWidth / 2 - 14}px`;
             bullet.style.bottom = `${currentCannon.offsetHeight + 50}px`;
             gameContainer3.appendChild(bullet);
             playerBullets.push(bullet);
         }
 
         function spawnBossBullets() {
-            if (!gameActive3) return;
+            if (!gameActive3 || window.getComputedStyle(gameContainer3).display === 'none') return;
 
             if (currentBoss === 1) {
                 const bullet = document.createElement('div');
@@ -985,7 +1042,8 @@ function restartGame2() {
                 bossBullets.push(bullet);
             }
 
-            setTimeout(spawnBossBullets,
+            if (bossBulletTimeout) clearTimeout(bossBulletTimeout);
+            bossBulletTimeout = setTimeout(spawnBossBullets,
                 currentBoss === 1 ? 1500 :
                 currentBoss === 2 ? 1800 :
                 currentBoss === 3 ? 1300 :
@@ -996,7 +1054,10 @@ function restartGame2() {
         }
 
         function gameLoop3() {
-            if (!gameActive3) return;
+            if (!gameActive3 || window.getComputedStyle(gameContainer3).display === 'none') {
+                stopGame3();
+                return;
+            }
 
             if (currentBoss === 1) {
                 bossPosition += 1 * bossDirection;
@@ -1115,13 +1176,14 @@ function restartGame2() {
                 ) {
                     bullet.remove();
                     playerBullets.splice(index, 1);
-                    // Урон зависит от типа снаряда
                     const damage = bullet.classList.contains('player-bullet2') ? 25 : 15;
                     bossHealth -= damage;
                     score3 += 1;
-                    totalCoins += window.coinsPerPoint || 1;
-                    if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-                    localStorage.setItem('totalCoins', totalCoins);
+                    if (gameActive3 && window.getComputedStyle(gameContainer3).display !== 'none') {
+                        totalCoins += window.coinsPerPoint || 1;
+                        if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+                        localStorage.setItem('totalCoins', totalCoins);
+                    }
                     scoreElement3.textContent = score3;
                     bossHealthElement.textContent = bossHealth;
                     boss.classList.remove('hit');
@@ -1219,13 +1281,14 @@ function restartGame2() {
                         ) {
                             bullet.remove();
                             playerBullets.splice(index, 1);
-                            // Урон клону тоже зависит от типа снаряда
                             const damage = bullet.classList.contains('player-bullet2') ? 25 : 15;
                             clone.hp -= damage;
                             score3 += 5;
-                            totalCoins += 5;
-                            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-                            localStorage.setItem('totalCoins', totalCoins);
+                            if (gameActive3 && window.getComputedStyle(gameContainer3).display !== 'none') {
+                                totalCoins += 5;
+                                if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+                                localStorage.setItem('totalCoins', totalCoins);
+                            }
                             scoreElement3.textContent = score3;
                             if (clone.hp <= 0) {
                                 clone.element.remove();
@@ -1368,8 +1431,8 @@ function restartGame2() {
                 } else {
                     const angle = parseFloat(bullet.dataset.angle) || 0;
                     const speed = currentBoss === 1 ? 2 :
-                                   currentBoss === 2 ? 1.5 :
-                                   2;
+                                  currentBoss === 2 ? 1.5 :
+                                  2;
                     bulletTop += speed;
                     bulletLeft += (angle / 30) * speed;
                     bullet.style.top = `${bulletTop}px`;
@@ -1379,26 +1442,22 @@ function restartGame2() {
                 const bulletRect = bullet.getBoundingClientRect();
                 const containerRect = gameContainer3.getBoundingClientRect();
 
-                // Координаты центра снаряда относительно gameContainer3
                 const bulletCenterX = bulletRect.left + bulletRect.width / 2 - containerRect.left;
                 const bulletCenterY = bulletRect.top + bulletRect.height / 2 - containerRect.top;
 
-                // Определяем маленький треугольный хитбокс, привязанный к центру пушки
-                const hitboxWidth = 50; // Ширина основания треугольника (меньше визуальной ширины 90px)
-                const hitboxHeight = 70; // Высота треугольника (меньше визуальной высоты 110px)
-                const cannonCenterX = cannonPosition + 90 / 2; // Центр пушки (визуальная ширина 90px)
-                const cannonBottomY = gameContainer3.offsetHeight - 80; // bottom: 80px
-                const cannonTopY = cannonBottomY - hitboxHeight; // Верх треугольника
+                const hitboxWidth = 50;
+                const hitboxHeight = 70;
+                const cannonCenterX = cannonPosition + 90 / 2;
+                const cannonBottomY = gameContainer3.offsetHeight - 80;
+                const cannonTopY = cannonBottomY - hitboxHeight;
 
-                // Вершины треугольника
-                const ax = cannonCenterX; // Вершина A (середина верха)
+                const ax = cannonCenterX;
                 const ay = cannonTopY;
-                const bx = cannonCenterX - hitboxWidth / 2; // Вершина B (левый нижний угол)
+                const bx = cannonCenterX - hitboxWidth / 2;
                 const by = cannonBottomY;
-                const cx = cannonCenterX + hitboxWidth / 2; // Вершина C (правый нижний угол)
+                const cx = cannonCenterX + hitboxWidth / 2;
                 const cy = cannonBottomY;
 
-                // Проверяем попадание центра снаряда в треугольник
                 if (isPointInTriangle(bulletCenterX, bulletCenterY, ax, ay, bx, by, cx, cy)) {
                     bullet.remove();
                     bossBullets.splice(index, 1);
@@ -1409,23 +1468,56 @@ function restartGame2() {
                 }
             });
 
-            requestAnimationFrame(gameLoop3);
+            animationFrameId = requestAnimationFrame(gameLoop3);
         }
 
         function endGame3(victory) {
             gameActive3 = false;
-            clearInterval(autoShootInterval);
-            clearInterval(bossDirectionChangeInterval);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+            if (autoShootInterval) {
+                clearInterval(autoShootInterval);
+                autoShootInterval = null;
+            }
+            if (bossDirectionChangeInterval) {
+                clearInterval(bossDirectionChangeInterval);
+                bossDirectionChangeInterval = null;
+            }
+            if (bossBulletTimeout) {
+                clearTimeout(bossBulletTimeout);
+                bossBulletTimeout = null;
+            }
             playerBullets.forEach(bullet => bullet.remove());
             bossBullets.forEach(bullet => bullet.remove());
             clones.forEach(clone => clone.element.remove());
             playerBullets = [];
             bossBullets = [];
             clones = [];
+            score3 = 0;
+            bossHealth = 100;
+            currentBoss = 1;
+            bossPosition = window.innerWidth / 2 - 75;
+            bossDirection = 1;
+            bossSpeed = 2;
+            boss4Pause = false;
+            boss4PauseTimer = 0;
+            boss4Speed = 2;
+            boss4BulletTimer = 0;
+            boss5TeleportTimer = 0;
+            boss5Angle = 0;
+            boss6WaveTimer = 0;
+            boss6SineOffset = 0;
+            boss6FastBulletTimer = 0;
+            boss7CloneTimer = 300;
+            boss7BulletSpeed = 1.5;
+            boss.classList.remove('hit');
             finalScoreElement3.textContent = score3;
             gameOverMessage3.textContent = victory ? 'Win!' : 'Lose!';
             gameOverScreen3.classList.remove('hidden');
-            if (victory) {
+            exitButton3.style.display = 'block';
+            if (victory && gameActive3 && window.getComputedStyle(gameContainer3).display !== 'none') {
                 totalCoins += 50;
                 if (currentScoreElement) currentScoreElement.textContent = totalCoins;
                 localStorage.setItem('totalCoins', totalCoins);
@@ -1433,14 +1525,11 @@ function restartGame2() {
             if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
         }
 
-        exitButton3.addEventListener('click', () => {
-            gameContainer3.classList.add('hidden');
-            banner.classList.remove('hidden');
-            banner2.classList.remove('hidden');
-            banner3.classList.remove('hidden');
-            banner4.classList.remove('hidden');
+        exitButton3.addEventListener('click', (e) => {
+            e.stopPropagation();
+            stopGame3();
         });
-    }
+    })();
 
 // Игра 4: Уклонение от препятствий
     const gameContainer4 = document.getElementById('gameContainer4');
