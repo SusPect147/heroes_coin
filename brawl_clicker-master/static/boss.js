@@ -346,6 +346,7 @@ let lastPaddleHit = null;
 let frameCounter = 0;
 let targetX = (gameContainer2 ? gameContainer2.offsetWidth - (computerPaddle ? computerPaddle.offsetWidth : 0) : 0) / 2;
 let lastTime = performance.now();
+let animationFrameId = null; // Для хранения ID анимации
 
 if (exitButton2) {
     exitButton2.style.display = 'none';
@@ -362,7 +363,7 @@ if (banner2) {
     });
 }
 
-// Ensure game stops when switching to other sections
+// Функция для остановки игры
 function stopGame2() {
     if (gameActive2) {
         endGame2();
@@ -370,6 +371,7 @@ function stopGame2() {
     }
 }
 
+// Остановка игры при переключении на другие разделы
 if (banner) {
     banner.addEventListener('click', stopGame2);
 }
@@ -380,11 +382,18 @@ if (banner4) {
     banner4.addEventListener('click', stopGame2);
 }
 
-// Fallback for Main section (assuming a generic navigation element)
+// Попытка перехватить переключение на раздел Main
 const mainNav = document.querySelector('[data-section="Main"]') || document.querySelector('a[href="#Main"]') || document.getElementById('mainNav');
 if (mainNav) {
     mainNav.addEventListener('click', stopGame2);
 }
+
+// Обработка потери активности вкладки
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && gameActive2) {
+        endGame2();
+    }
+});
 
 const handleMouseMove = (e) => {
     if (!gameActive2) return;
@@ -436,6 +445,11 @@ if (exitButton2) {
 }
 
 function startGame2() {
+    // Сбрасываем предыдущий цикл анимации, если он существует
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
     gameActive2 = true;
     playerScore = 0;
     computerScore = 0;
@@ -479,7 +493,8 @@ function startGame2() {
 }
 
 function gameLoop2(timestamp) {
-    if (!gameActive2 || gameContainer2.classList.contains('hidden')) {
+    // Проверяем, активна ли игра и видим ли контейнер
+    if (!gameActive2 || gameContainer2.classList.contains('hidden') || document.hidden) {
         endGame2();
         return;
     }
@@ -518,7 +533,7 @@ function gameLoop2(timestamp) {
     }
 
     if (puckY <= 0) {
-        if (gameActive2 && !gameContainer2.classList.contains('hidden')) {
+        if (gameActive2 && !gameContainer2.classList.contains('hidden') && !document.hidden) {
             playerScore++;
             level = Math.min(level + 1, 10);
             totalCoins += window.coinsPerPoint || 1;
@@ -531,7 +546,7 @@ function gameLoop2(timestamp) {
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
     } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
-        if (gameActive2 && !gameContainer2.classList.contains('hidden')) {
+        if (gameActive2 && !gameContainer2.classList.contains('hidden') && !document.hidden) {
             computerScore++;
             if (computerScoreElement) computerScoreElement.textContent = computerScore;
         }
@@ -624,7 +639,7 @@ function gameLoop2(timestamp) {
         endGame2();
     }
 
-    requestAnimationFrame(gameLoop2);
+    animationFrameId = requestAnimationFrame(gameLoop2);
 }
 
 function resetPuck() {
@@ -639,7 +654,7 @@ function resetPuck() {
     }
 
     setTimeout(() => {
-        if (!gameActive2 || gameContainer2.classList.contains('hidden')) return;
+        if (!gameActive2 || gameContainer2.classList.contains('hidden') || document.hidden) return;
         puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
         if (puck) puck.classList.remove('blinking');
@@ -652,6 +667,13 @@ function endGame2() {
     puckSpeedY = 0;
     timeSinceLastGoal = 0;
     speedMultiplier = 1;
+    playerScore = 0; // Сбрасываем счёт
+    computerScore = 0; // Сбрасываем счёт
+    level = 1; // Сбрасываем уровень
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId); // Останавливаем цикл анимации
+        animationFrameId = null;
+    }
     if (finalPlayerScore) finalPlayerScore.textContent = playerScore;
     if (finalComputerScore) finalComputerScore.textContent = computerScore;
     if (finalLevel) finalLevel.textContent = level;
