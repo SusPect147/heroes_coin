@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
- // Игра 2: Аэрохоккей
+// Игра 2: Аэрохоккей
 const gameContainer2 = document.getElementById('gameContainer2');
 const paddle = document.getElementById('paddle');
 const computerPaddle = document.getElementById('computerPaddle');
@@ -362,30 +362,28 @@ if (banner2) {
     });
 }
 
-// Add listeners to other banners to stop the game when switching sections
+// Ensure game stops when switching to other sections
+function stopGame2() {
+    if (gameActive2) {
+        endGame2();
+        gameContainer2.classList.add('hidden');
+    }
+}
+
 if (banner) {
-    banner.addEventListener('click', () => {
-        if (gameActive2) {
-            endGame2();
-            gameContainer2.classList.add('hidden');
-        }
-    });
+    banner.addEventListener('click', stopGame2);
 }
 if (banner3) {
-    banner3.addEventListener('click', () => {
-        if (gameActive2) {
-            endGame2();
-            gameContainer2.classList.add('hidden');
-        }
-    });
+    banner3.addEventListener('click', stopGame2);
 }
 if (banner4) {
-    banner4.addEventListener('click', () => {
-        if (gameActive2) {
-            endGame2();
-            gameContainer2.classList.add('hidden');
-        }
-    });
+    banner4.addEventListener('click', stopGame2);
+}
+
+// Fallback for Main section (assuming a generic navigation element)
+const mainNav = document.querySelector('[data-section="Main"]') || document.querySelector('a[href="#Main"]') || document.getElementById('mainNav');
+if (mainNav) {
+    mainNav.addEventListener('click', stopGame2);
 }
 
 const handleMouseMove = (e) => {
@@ -481,7 +479,10 @@ function startGame2() {
 }
 
 function gameLoop2(timestamp) {
-    if (!gameActive2) return;
+    if (!gameActive2 || gameContainer2.classList.contains('hidden')) {
+        endGame2();
+        return;
+    }
 
     const currentTime = timestamp || performance.now();
     const deltaTime = (currentTime - lastTime) / 16.67;
@@ -517,19 +518,23 @@ function gameLoop2(timestamp) {
     }
 
     if (puckY <= 0) {
-        playerScore++;
-        level = Math.min(level + 1, 10);
-        totalCoins += window.coinsPerPoint || 1;
-        if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-        localStorage.setItem('totalCoins', totalCoins);
-        if (playerScoreElement) playerScoreElement.textContent = playerScore;
-        if (levelElement) levelElement.textContent = level;
+        if (gameActive2 && !gameContainer2.classList.contains('hidden')) {
+            playerScore++;
+            level = Math.min(level + 1, 10);
+            totalCoins += window.coinsPerPoint || 1;
+            if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+            localStorage.setItem('totalCoins', totalCoins);
+            if (playerScoreElement) playerScoreElement.textContent = playerScore;
+            if (levelElement) levelElement.textContent = level;
+        }
         resetPuck();
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
     } else if (puckY >= gameContainer2.offsetHeight - puck.offsetHeight) {
-        computerScore++;
-        if (computerScoreElement) computerScoreElement.textContent = computerScore;
+        if (gameActive2 && !gameContainer2.classList.contains('hidden')) {
+            computerScore++;
+            if (computerScoreElement) computerScoreElement.textContent = computerScore;
+        }
         resetPuck();
         timeSinceLastGoal = 0;
         speedMultiplier = 1;
@@ -634,7 +639,7 @@ function resetPuck() {
     }
 
     setTimeout(() => {
-        if (!gameActive2) return;
+        if (!gameActive2 || gameContainer2.classList.contains('hidden')) return;
         puckSpeedX = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
         puckSpeedY = 5 * (Math.random() > 0.5 ? 1 : -1) * (1 + level * 0.05);
         if (puck) puck.classList.remove('blinking');
@@ -643,6 +648,10 @@ function resetPuck() {
 
 function endGame2() {
     gameActive2 = false;
+    puckSpeedX = 0;
+    puckSpeedY = 0;
+    timeSinceLastGoal = 0;
+    speedMultiplier = 1;
     if (finalPlayerScore) finalPlayerScore.textContent = playerScore;
     if (finalComputerScore) finalComputerScore.textContent = computerScore;
     if (finalLevel) finalLevel.textContent = level;
