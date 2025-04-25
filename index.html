@@ -21,7 +21,7 @@
     </a>
 <a href="#" class="nav-button" data-page="market">
         <figure>
-            <img src="brawl_clicker-master/static/images/friends_72.png" alt="Маркет" width="65" height="65">
+            <img src="brawl_clicker-master/static/images/market2.png" alt="Маркет" width="65" height="65">
             <figcaption>Market</figcaption>
         </figure>
     </a>
@@ -34,12 +34,12 @@
     <a href="#" class="nav-button" data-page="quests">
         <figure>
             <img src="brawl_clicker-master/static/images/quests2.png" alt="Квесты" width="65" height="65">
-            <figcaption>Quests</figcaption>
+            <figcaption>Wheel</figcaption>
         </figure>
     </a>
     <a href="#" class="nav-button" data-page="top">
         <figure>
-            <img src="brawl_clicker-master/static/images/boss2.png" alt="Топ" width="65" height="65">
+            <img src="brawl_clicker-master/static/images/minigames2.png" alt="Топ" width="65" height="65">
             <figcaption>Minigames</figcaption>
         </figure>
     </a>
@@ -63,6 +63,7 @@
     <div id="coinContainer"></div> <!-- Контейнер для монет с анимацией -->
 
     <img id="clickButton" src="brawl_clicker-master/static/images/croco.png">
+
     <!-- Добавляем src и курсор pointer -->
     <div id="lightningEffect"></div>
 
@@ -80,22 +81,29 @@
         <div id="energyDisplay">100/100</div> <!-- Отображаем текущую энергию -->
     </div>
 
-    <div class="dropdown">
-        <img src="brawl_clicker-master/static/images/menu.png" alt="Меню" id="menu-icon">
+  <!-- Иконка меню -->
+<div class="settings-icon">
+    <img src="brawl_clicker-master/static/images/menu.png" alt="Настройки" id="settings-icon">
+</div>
 
-        <!-- Выпадающее меню -->
-        <div class="dropdown-menu" id="dropdown-menu">
-            <a href="#item1">Язык</a>
-            <a href="#item2">Как играть</a>
-            <a href="#item3">Аирдроп</a>
-            <a href="#item4">Тех поддержка</a>
+<!-- Модальное окно настроек -->
+<div class="settings-modal" id="settings-modal">
+    <div class="settings-content">
+        <span class="close-settings" id="close-settings">×</span>
+        <h2>Настройки</h2>
+        <div class="settings-item">
+            <label for="musicToggle">Музыка:</label>
+            <input type="checkbox" id="musicToggle" checked>
         </div>
+        <div class="settings-item">
+            <label for="soundToggle">Звук:</label>
+            <input type="checkbox" id="soundToggle" checked>
+        </div>
+        <a href="https://t.me/heroes_coin_bot" target="_blank" class="support-button">Техподдержка</a>
     </div>
+</div>
 
-    <!-- Кнопка для управления музыкой -->
-    <button id="musicToggleButton" style="margin: 10px; padding: 5px; position: absolute; top: 10px; left: 10px;">
-        Включить музыку
-    </button>
+
 </div>
 
 <div id="conditionsModal" class="modal">
@@ -399,92 +407,63 @@
             </div>
         </div>
 
-        <!-- Магазин герои -->
-        <div id="heroes" class="content-section">
-            <div class="character-preview">
-                <div class="preview" id="preview">
-                    <img src="brawl_clicker-master/static/images/croco.png" alt="Preview">
-                </div>
-                <button id="select-button">Choose</button>
-                <div class="menu_char">
-                    <div class="character char-12" data-id="1" data-name="Character 1"
-                         data-img="brawl_clicker-master/static/images/croco.png">
-                        <img src="brawl_clicker-master/static/images/croco.png" alt="Character 1">
-                        <p>Croco</p>
-                    </div>
-                    <div class="character char-12" data-id="2" data-name="Character 2"
-                         data-img="brawl_clicker-master/static/images/cot.png">
-                        <img src="brawl_clicker-master/static/images/cot.png" alt="Character 2">
-                        <p>Ghost</p>
-                    </div>
-                    <div class="character char-12" data-id="3" data-name="Character 3"
-                         data-img="brawl_clicker-master/static/images/groot.png">
-                        <img src="brawl_clicker-master/static/images/groot.png" alt="Character 3">
-                        <p>Groot</p>
-                    </div>
-                    <div class="character char-12" data-id="4" data-name="Character 4"
-                         data-img="brawl_clicker-master/static/images/golem.png">
-                        <img src="brawl_clicker-master/static/images/golem.png" alt="Character 4">
-                        <p>Golem</p>
-                    </div>
-                    <div class="character char-12" data-id="5" data-name="Character 5"
-                         data-img="brawl_clicker-master/static/images/fire.png">
-                        <img src="brawl_clicker-master/static/images/fire.png" alt="Character 5">
-                        <p>Fire</p>
-                    </div>
-                    <div class="character char-12" data-id="6" data-name="Character 6"
-                         data-img="brawl_clicker-master/static/images/water.png">
-                        <img src="brawl_clicker-master/static/images/water.png" alt="Character 6">
-                        <p>Water</p>
-                    </div>
-                    <div class="character char-12" data-id="7" data-name="Character 7"
-                         data-img="brawl_clicker-master/static/images/tor.png">
-                        <img src="brawl_clicker-master/static/images/tor.png" alt="Character 7">
-                        <p>Thor</p>
-                    </div>
-                    <div class="character char-12" data-id="8" data-name="Character 8"
-                         data-img="brawl_clicker-master/static/images/witch.png">
-                        <img src="brawl_clicker-master/static/images/witch.png" alt="Character 8">
-                        <p>Witch</p>
-                    </div>
-                    <div class="character char-12" data-id="9" data-name="Character 9"
-                         data-img="brawl_clicker-master/static/images/angel.png">
-                        <img src="brawl_clicker-master/static/images/angel.png" alt="Character 9">
-                        <p>Queen</p>
-                    </div>
-                    <div class="character char-12" data-id="10" data-name="Character 10"
-                         data-img="brawl_clicker-master/static/images/ananas.png">
-                        <img src="brawl_clicker-master/static/images/ananas.png" alt="Character 10">
-                        <p>Ananas</p>
-                    </div>
-                    <div class="character char-12" data-id="11" data-name="Character 11"
-                         data-img="brawl_clicker-master/static/images/frog.png">
-                        <img src="brawl_clicker-master/static/images/frog.png" alt="Character 11">
-                        <p>Frog</p>
-                    </div>
-                    <div class="character char-12" data-id="12" data-name="Character 12"
-                         data-img="brawl_clicker-master/static/images/leon.png">
-                        <img src="brawl_clicker-master/static/images/leon.png" alt="Character 12">
-                        <p>Soldier</p>
-                    </div>
-                    <div class="character char-12" data-id="13" data-name="Character 13"
-                         data-img="brawl_clicker-master/static/images/syth.png">
-                        <img src="brawl_clicker-master/static/images/syth.png" alt="Character 13">
-                        <p>Syth</p>
-                    </div>
-                    <div class="character char-12" data-id="14" data-name="Character 14"
-                         data-img="brawl_clicker-master/static/images/cat.png">
-                        <img src="brawl_clicker-master/static/images/cat.png" alt="Character 14">
-                        <p>Cat</p>
-                    </div>
-                    <div class="character char-12" data-id="15" data-name="Character 15"
-                         data-img="brawl_clicker-master/static/images/minion.png">
-                        <img src="brawl_clicker-master/static/images/minion.png" alt="Character 15">
-                        <p>Minion</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Магазин героев -->
+<div id="heroes" class="content-section">
+  <div class="character-preview">
+    <div class="preview" id="preview">
+      <img src="/static/images/croco.png" alt="Preview">
+    </div>
+    <button id="select-button">Choose</button>
+    <div class="menu_char">
+      <!-- Один шаблон, 15 персонажей -->
+      <div class="character char-12" data-id="1" data-name="Croco" data-img="/static/images/croco.png">
+        <img src="/static/images/croco.png" alt="Croco"><p>Croco</p>
+      </div>
+      <div class="character char-12" data-id="2" data-name="Ghost" data-img="/static/images/cot.png">
+        <img src="/static/images/cot.png" alt="Ghost"><p>Ghost</p>
+      </div>
+      <div class="character char-12" data-id="3" data-name="Groot" data-img="/static/images/groot.png">
+        <img src="/static/images/groot.png" alt="Groot"><p>Groot</p>
+      </div>
+      <div class="character char-12" data-id="4" data-name="Golem" data-img="/static/images/golem.png">
+        <img src="/static/images/golem.png" alt="Golem"><p>Golem</p>
+      </div>
+      <div class="character char-12" data-id="5" data-name="Fire" data-img="/static/images/fire.png">
+        <img src="/static/images/fire.png" alt="Fire"><p>Fire</p>
+      </div>
+      <div class="character char-12" data-id="6" data-name="Water" data-img="/static/images/water.png">
+        <img src="/static/images/water.png" alt="Water"><p>Water</p>
+      </div>
+      <div class="character char-12" data-id="7" data-name="Thor" data-img="/static/images/tor.png">
+        <img src="/static/images/tor.png" alt="Thor"><p>Thor</p>
+      </div>
+      <div class="character char-12" data-id="8" data-name="Witch" data-img="/static/images/witch.png">
+        <img src="/static/images/witch.png" alt="Witch"><p>Witch</p>
+      </div>
+      <div class="character char-12" data-id="9" data-name="Queen" data-img="/static/images/angel.png">
+        <img src="/static/images/angel.png" alt="Queen"><p>Queen</p>
+      </div>
+      <div class="character char-12" data-id="10" data-name="Ananas" data-img="/static/images/ananas.png">
+        <img src="/static/images/ananas.png" alt="Ananas"><p>Ananas</p>
+      </div>
+      <div class="character char-12" data-id="11" data-name="Frog" data-img="/static/images/frog.png">
+        <img src="/static/images/frog.png" alt="Frog"><p>Frog</p>
+      </div>
+      <div class="character char-12" data-id="12" data-name="Soldier" data-img="/static/images/leon.png">
+        <img src="/static/images/leon.png" alt="Soldier"><p>Soldier</p>
+      </div>
+      <div class="character char-12" data-id="13" data-name="Syth" data-img="/static/images/syth.png">
+        <img src="/static/images/syth.png" alt="Syth"><p>Syth</p>
+      </div>
+      <div class="character char-12" data-id="14" data-name="Cat" data-img="/static/images/cat.png">
+        <img src="/static/images/cat.png" alt="Cat"><p>Cat</p>
+      </div>
+      <div class="character char-12" data-id="15" data-name="Minion" data-img="/static/images/minion.png">
+        <img src="/static/images/minion.png" alt="Minion"><p>Minion</p>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- Магазин улучшения -->
         <div id="upgrades" class="content-section" style="display:none;">
@@ -674,46 +653,68 @@
     </div>
 </div>
 
-    <!--Мини игры -->
-    <div class="page" id="top" style="display:none;">
-
-        <!-- Контейнер для баннеров -->
-        <div class="banner-container">
-            <!-- Игра 1: Лови монеты -->
-            <div class="banner" id="startBanner">
+ <!-- Мини-игры -->
+<div class="page" id="top" style="display:none;">
+    <div class="minigames-text">Играй в мини-игры и зарабатывай монеты</div>
+    <!-- Контейнер для баннеров -->
+    <div class="banner-container">
+        <!-- Игра 1: Лови монеты -->
+        <div class="banner-wrapper">
+            <div class="banner-image">
+                <img src="brawl_clicker-master/static/images/banner1.png" alt="Sky Riches Preview">
+            </div>
+            <div class="banner banner-sky-riches" id="startBanner">
                 <img src="brawl_clicker-master/static/images/coin.png" alt="Banner 1">
                 <span class="banner-text">Sky Riches</span>
                 <div class="upgrade-icon" data-game="game1">
                     <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
                 </div>
             </div>
+        </div>
 
-            <!-- Игра 2: Аэрохоккей -->
-            <div class="banner" id="startBanner2">
-                <img src="brawl_clicker-master/static/images/stars.png" alt="Banner 2">
-                <span class="banner-text">Air hockey legends</span>
+        <!-- Игра 2: Аэрохоккей -->
+        <div class="banner-wrapper">
+            <div class="banner-image">
+                <img src="brawl_clicker-master/static/images/banner22.png" alt="Air Hockey Legends Preview">
+            </div>
+            <div class="banner banner-air-hockey" id="startBanner2">
+                <img src="/static/images/stars.png" alt="Banner 2">
+                <span class="banner-text">Air Hockey</span>
                 <div class="upgrade-icon" data-game="game2">
                     <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
                 </div>
             </div>
+        </div>
 
-            <!-- Игра 3: Боссы -->
-            <div class="banner" id="startBanner3">
+        <!-- Игра 3: Боссы -->
+        <div class="banner-wrapper">
+            <div class="banner-image">
+                <img src="brawl_clicker-master/static/images/banner3.png" alt="Boss Rush Preview">
+            </div>
+            <div class="banner banner-boss-rush" id="startBanner3">
                 <img src="brawl_clicker-master/static/images/bomb.png" alt="Box">
                 <span class="banner-text">Boss Rush</span>
                 <div class="upgrade-icon" data-game="game3">
                     <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
                 </div>
             </div>
-            <!-- Игра 4: Bounce Survival -->
-        <div class="banner" id="startBanner4">
-            <img src="brawl_clicker-master/static/images/test.png" alt="Banner 4">
-            <span class="banner-text">Bounce Survival</span>
-            <div class="upgrade-icon" data-game="game4">
-                <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
+        </div>
+
+        <!-- Игра 4: Bounce Survival -->
+        <div class="banner-wrapper">
+            <div class="banner-image">
+                <img src="brawl_clicker-master/static/images/banner4.png" alt="Bounce Survival Preview">
+            </div>
+            <div class="banner banner-bounce-survival" id="startBanner4">
+                <img src="brawl_clicker-master/static/images/test.png" alt="Banner 4">
+                <span class="banner-text">Bounce Survival</span>
+                <div class="upgrade-icon" data-game="game4">
+                    <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
+                </div>
             </div>
         </div>
     </div>
+</div>
 
 
         <!-- Модальное окно для улучшений -->
@@ -787,6 +788,7 @@
 </div>
 
 
+<script src="brawl_clicker-master/static/SCRIPT.js"></script>
 <script src="brawl_clicker-master/static/script_new.js"></script>
 <script src="brawl_clicker-master/static/script_main.js"></script>
 <script src="brawl_clicker-master/static/script_up.js"></script>

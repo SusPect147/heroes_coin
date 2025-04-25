@@ -93,7 +93,7 @@ body {
     background-color: #2e2e3a;
     display: flex;
     justify-content: space-around;
-    padding: 0px 0 5px 0; /* Уменьшены отступы: сверху 5px вместо 10px, снизу 10px вместо 15px */
+    padding: 0px 0 0px 0; /* Уменьшены отступы: сверху 5px вместо 10px, снизу 10px вместо 15px */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     font-family: 'Pusia-bold', sans-serif;
@@ -124,6 +124,7 @@ body {
 .nav-button img {
     object-fit: contain;
     transition: transform 0.3s ease;
+         transform: scale(1.2); /* Увеличиваем изображение визуально */
 }
 
 .nav-button figcaption {
@@ -272,50 +273,133 @@ body {
     height: 50px;
 }
 
-.dropdown {
+/* Иконка настроек */
+.settings-icon {
     position: absolute;
     top: 10px;
-    right: 3px;
+    right: 10px;
+    z-index: 1001;
 }
 
-.dropdown img {
-    width: 45px;
-    height: 45px;
+.settings-icon img {
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    width: 150px;
+/* Модальное окно настроек */
+.settings-modal {
     display: none;
-    flex-direction: column;
-    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
     z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
-.dropdown-menu a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    display: block;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-menu a:hover {
-    background-color: #3E5F8A;
-    color: white;
-}
-
-.dropdown-menu.active {
+.settings-modal.active {
     display: flex;
 }
 
+.settings-content {
+    background-color: #2e2e3a;
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(244, 187, 11, 0.5);
+    border: 2px solid #f4bb0b;
+    position: relative;
+    font-family: 'Pusia-bold', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.close-settings {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #f4bb0b;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-settings:hover {
+    color: #ffd700;
+}
+
+.settings-content h2 {
+    margin: 0 0 20px;
+    font-size: 24px;
+    color: #f4bb0b;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.settings-item label {
+    margin-right: 10px;
+}
+
+.settings-item input[type="checkbox"] {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #555;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.settings-item input[type="checkbox"]:checked {
+    background-color: #f4bb0b;
+}
+
+.settings-item input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.settings-item input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}
+
+.support-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f4bb0b;
+    color: #2e2e3a;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.support-button:hover {
+    background-color: #ffd700;
+}
 
 .modal {
   display: none;
@@ -753,7 +837,6 @@ h2 {
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        background: linear-gradient(180deg, #1a1a1a, #2a2a2a);
         min-height: 100vh;
     }
 
@@ -1873,6 +1956,10 @@ h2 {
 
 
 
+
+
+
+
 /* Сброс отступов для html и body */
 html, body {
     margin: 0;  /* Убираем внешние отступы */
@@ -1880,6 +1967,78 @@ html, body {
     height: 100%; /* Устанавливаем высоту 100% */
     width: 100%; /* Устанавливаем ширину 100% */
     overflow-x: hidden; /* Убираем горизонтальный скролл */
+}
+/* Стили для текста на странице мини-игр */
+.minigames-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc66;
+    font-family: 'Pusia-bold', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
+    text-align: center;
+    margin: 20px 0;
+}
+/* Устанавливаем box-sizing: border-box для всех элементов */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* Стили для страницы с мини-играми */
+.page:not(#play) {
+    background: radial-gradient(circle at center, #1a2a6c 0%, #0d1b2a 70%, #000 100%); /* Космический градиент */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Добавляем прокрутку, если контент выходит за пределы */
+}
+
+/* Эффект звёзд */
+.page:not(#play)::before,
+.page:not(#play)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    will-change: opacity; /* Улучшаем производительность анимации */
+}
+
+/* Слой 1: Маленькие звёзды */
+.page:not(#play)::before {
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 1px, transparent 2px) 0 0,
+                radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 50px 50px;
+    background-size: 100px 100px;
+    opacity: 0.5; /* Уменьшаем базовую прозрачность для контраста при мерцании */
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Слой 2: Крупные звёзды */
+.page:not(#play)::after {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.5px, transparent 3px) 25px 25px,
+                radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 3px) 75px 75px;
+    background-size: 150px 150px;
+    opacity: 0.5;
+    animation: twinkle 5s infinite ease-in-out 0.5s; /* Добавляем задержку для второго слоя */
+}
+
+/* Анимация мерцания звёзд */
+@keyframes twinkle {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
 }
 
 /* Мини игры */
@@ -1889,29 +2048,126 @@ html, body {
     left: 20px;
     display: flex;
     flex-direction: column;
-    margin-top: 100px; /* Дополнительный отступ сверху */
+    margin-top: 100px;
+    z-index: 2; /* Убедимся, что баннеры выше звёзд */
 }
-
-/* Стили для баннеров */
-.banner {
+/* Контейнер для баннера и изображения */
+.banner-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #2e2e3a;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    border: 2px solid #d1a34a;
-    cursor: pointer;
-    width: 250px;
     margin-bottom: 20px; /* Отступ между баннерами */
-    position: relative; /* Для позиционирования значка */
+    width: 250px; /* Устанавливаем ширину обёртки */
 }
 
-/* Убираем отступ у последнего баннера */
-.banner:last-child {
+/* Убираем лишний отступ у последнего баннера */
+.banner-wrapper:last-child {
     margin-bottom: 0;
 }
 
+/* Стили для изображения игры */
+.banner-image {
+    width: 100%; /* Подстраивается под ширину обёртки (250px) */
+    margin-bottom: 0; /* Убираем отступ между изображением и баннером */
+    line-height: 0; /* Убираем возможное влияние line-height */
+}
+
+.banner-image img {
+    display: block; /* Убираем зазор, который может появляться из-за inline */
+    width: 100%; /* 250px от обёртки */
+    height: 90px; /* Фиксированная высота */
+    object-fit: cover; /* Изображение заполняет контейнер */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 2px solid #d1a34a; /* Унифицированный цвет рамки */
+    border-bottom: none; /* Убираем нижнюю рамку */
+    box-shadow: none; /* Убираем тень у изображения */
+}
+
+/* Стили для баннеров (общие) */
+.banner {
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 10px;
+    box-shadow: none; /* Убираем тень */
+    border: 2px solid #d1a34a; /* Унифицированный цвет рамки */
+    border-top: none; /* Убираем верхнюю рамку */
+    cursor: pointer;
+    width: 100%; /* Теперь ширина включает padding и border, итого 250px от обёртки */
+    height: 30px;
+    position: relative;
+    margin-top: 0; /* Убедимся, что нет отступа сверху */
+}
+
+/* Стили для баннера Sky Riches (золотой) */
+.banner-sky-riches {
+    background: linear-gradient(135deg, #ffd700, #ffaa00) !important; /* Золотой градиент */
+    border: 2px solid #d1a34a;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стили для баннера Air Hockey (синий) */
+.banner-air-hockey {
+    background: linear-gradient(135deg, #1e90ff, #00b7eb); /* Синий градиент */
+    border: 2px solid #d1a34a;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стили для баннера Boss Rush (красный) */
+.banner-boss-rush {
+    background: linear-gradient(135deg, #ff4500, #dc143c); /* Красный градиент */
+    border: 2px solid #d1a34a;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стили для баннера Bounce Survival (зелёный) */
+.banner-bounce-survival {
+    background: linear-gradient(135deg, #32cd32, #00ff7f); /* Зелёный градиент */
+    border: 2px solid #d1a34a;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Эффект блеска для всех баннеров */
+.banner-sky-riches::before,
+.banner-air-hockey::before,
+.banner-boss-rush::before,
+.banner-bounce-survival::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: rotate(45deg);
+    animation: shine 3s infinite linear;
+}
+
+/* Анимация блеска */
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Стили для иконки внутри баннера */
 .banner img {
     width: 30px;
     height: 30px;
@@ -1922,7 +2178,7 @@ html, body {
 .banner-text {
     font-size: 20px;
     font-weight: bold;
-    color: #ffcc66;
+    color: #ffcc66; /* Сохраняем жёлтый цвет текста */
     font-family: 'Pusia-bold', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
@@ -1931,6 +2187,8 @@ html, body {
 .upgrade-icon {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Выравниваем стрелку по центру */
     cursor: pointer;
 }
 
@@ -1939,7 +2197,6 @@ html, body {
     height: 24px;
     margin-right: 0; /* Убираем отступ, так как это значок */
 }
-
 /* Стили для модального окна */
 .modal {
     display: none;
