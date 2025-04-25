@@ -162,10 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
         exitButton.style.display = 'none';
 
         banner.addEventListener('click', () => {
+            // Скрываем баннеры и картинки над ними
             banner.classList.add('hidden');
             banner2.classList.add('hidden');
             banner3.classList.add('hidden');
             banner4.classList.add('hidden');
+            bannerImages.forEach(image => image.classList.add('hidden')); // Скрываем все .banner-image
             gameContainer.classList.remove('hidden');
             startGame();
         });
@@ -220,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner2.classList.remove('hidden');
             banner3.classList.remove('hidden');
             banner4.classList.remove('hidden');
+            bannerImages.forEach(image => image.classList.remove('hidden')); // Показываем все .banner-image
             exitButton.style.display = 'none';
         });
 
@@ -365,15 +368,17 @@ if (gameContainer2) {
 }
 
 if (banner2) {
-    banner2.addEventListener('click', () => {
-        banner.classList.add('hidden');
-        banner2.classList.add('hidden');
-        banner3.classList.add('hidden');
-        banner4.classList.add('hidden');
-        gameContainer2.classList.remove('hidden');
-        startGame2();
-    });
-}
+        banner2.addEventListener('click', () => {
+            // Скрываем баннеры и картинки над ними
+            banner.classList.add('hidden');
+            banner2.classList.add('hidden');
+            banner3.classList.add('hidden');
+            banner4.classList.add('hidden');
+            bannerImages.forEach(image => image.classList.add('hidden')); // Скрываем все .banner-image
+            gameContainer2.classList.remove('hidden');
+            startGame2();
+        });
+    }
 
 // Функция для остановки игры
 function stopGame2() {
@@ -433,23 +438,24 @@ if (gameContainer2) {
 }
 
 if (exitButton2) {
-    exitButton2.addEventListener('click', (e) => {
-        e.stopPropagation();
-        endGame2();
-        gameContainer2.classList.add('hidden');
-        banner.classList.remove('hidden');
-        banner2.classList.remove('hidden');
-        banner3.classList.remove('hidden');
-        banner4.classList.remove('hidden');
-        if (gameOverScreen2) {
-            gameOverScreen2.classList.add('hidden');
-            gameOverScreen2.style.display = 'none';
-        }
-        if (exitButton2) {
-            exitButton2.style.display = 'none';
-        }
-    });
-}
+        exitButton2.addEventListener('click', (e) => {
+            e.stopPropagation();
+            endGame2();
+            gameContainer2.classList.add('hidden');
+            banner.classList.remove('hidden');
+            banner2.classList.remove('hidden');
+            banner3.classList.remove('hidden');
+            banner4.classList.remove('hidden');
+            bannerImages.forEach(image => image.classList.remove('hidden')); // Показываем все .banner-image
+            if (gameOverScreen2) {
+                gameOverScreen2.classList.add('hidden');
+                gameOverScreen2.style.display = 'none';
+            }
+            if (exitButton2) {
+                exitButton2.style.display = 'none';
+            }
+        });
+    }
 
 function startGame2() {
     if (animationFrameId) {
