@@ -1455,65 +1455,73 @@ document.addEventListener('DOMContentLoaded', () => {
             animationFrameId = requestAnimationFrame(gameLoop3);
         }
 
-        function endGame3(victory) {
-            gameActive3 = false;
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
-            }
-            if (autoShootInterval) {
-                clearInterval(autoShootInterval);
-                autoShootInterval = null;
-            }
-            if (bossDirectionChangeInterval) {
-                clearInterval(bossDirectionChangeInterval);
-                bossDirectionChangeInterval = null;
-            }
-            if (bossBulletTimeout) {
-                clearTimeout(bossBulletTimeout);
-                bossBulletTimeout = null;
-            }
-            playerBullets.forEach(bullet => bullet.remove());
-            bossBullets.forEach(bullet => bullet.remove());
-            clones.forEach(clone => clone.element.remove());
-            playerBullets = [];
-            bossBullets = [];
-            clones = [];
-            score3 = 0;
-            bossHealth = 100;
-            currentBoss = 1;
-            bossPosition = window.innerWidth / 2 - 75;
-            bossDirection = 1;
-            bossSpeed = 2;
-            boss4Pause = false;
-            boss4PauseTimer = 0;
-            boss4Speed = 2;
-            boss4BulletTimer = 0;
-            boss5TeleportTimer = 0;
-            boss5Angle = 0;
-            boss6WaveTimer = 0;
-            boss6SineOffset = 0;
-            boss6FastBulletTimer = 0;
-            boss7CloneTimer = 300;
-            boss7BulletSpeed = 1.5;
-            boss.classList.remove('hit');
-            finalScoreElement3.textContent = score3;
-            gameOverMessage3.textContent = victory ? 'Win!' : 'Lose!';
-            gameOverScreen3.classList.remove('hidden');
-            exitButton3.style.display = 'block';
-            if (victory && gameActive3 && window.getComputedStyle(gameContainer3).display !== 'none') {
-                totalCoins += 50;
-                if (currentScoreElement) currentScoreElement.textContent = totalCoins;
-                localStorage.setItem('totalCoins', totalCoins);
-            }
-            if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
-        }
+ function endGame3(victory) {
+    gameActive3 = false;
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    if (autoShootInterval) {
+        clearInterval(autoShootInterval);
+        autoShootInterval = null;
+    }
+    if (bossDirectionChangeInterval) {
+        clearInterval(bossDirectionChangeInterval);
+        bossDirectionChangeInterval = null;
+    }
+    if (bossBulletTimeout) {
+        clearTimeout(bossBulletTimeout);
+        bossBulletTimeout = null;
+    }
+    playerBullets.forEach(bullet => bullet.remove());
+    bossBullets.forEach(bullet => bullet.remove());
+    clones.forEach(clone => clone.element.remove());
+    playerBullets = [];
+    bossBullets = [];
+    clones = [];
+    score3 = 0;
+    bossHealth = 100;
+    currentBoss = 1;
+    bossPosition = window.innerWidth / 2 - 75;
+    bossDirection = 1;
+    bossSpeed = 2;
+    boss4Pause = false;
+    boss4PauseTimer = 0;
+    boss4Speed = 2;
+    boss4BulletTimer = 0;
+    boss5TeleportTimer = 0;
+    boss5Angle = 0;
+    boss6WaveTimer = 0;
+    boss6SineOffset = 0;
+    boss6FastBulletTimer = 0;
+    boss7CloneTimer = 300;
+    boss7BulletSpeed = 1.5;
+    boss.classList.remove('hit');
+    finalScoreElement3.textContent = score3;
+    gameOverMessage3.textContent = victory ? 'Win!' : 'Lose!';
+    gameOverScreen3.classList.remove('hidden');
+    exitButton3.style.display = 'block';
+    if (victory && window.getComputedStyle(gameContainer3).display !== 'none') {
+        totalCoins += 50;
+        if (currentScoreElement) currentScoreElement.textContent = totalCoins;
+        localStorage.setItem('totalCoins', totalCoins);
+    }
+    if (window.incrementMinigamesPlayed) window.incrementMinigamesPlayed();
+}
 
-        exitButton3.addEventListener('click', (e) => {
-            e.stopPropagation();
-            stopGame3();
-        });
-    })();
+exitButton3.addEventListener('click', (e) => {
+    e.stopPropagation();
+    endGame3(false);
+    gameContainer3.classList.add('hidden');
+    banner.classList.remove('hidden');
+    banner2.classList.remove('hidden');
+    banner3.classList.remove('hidden');
+    banner4.classList.remove('hidden');
+    bannerImages.forEach(image => image.classList.remove('hidden'));
+    gameOverScreen3.classList.add('hidden');
+    exitButton3.style.display = 'none';
+});
+})();
 
     // Игра 4: Уклонение от препятствий
     const gameContainer4 = document.getElementById('gameContainer4');
