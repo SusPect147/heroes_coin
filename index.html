@@ -13,13 +13,7 @@
 
 <!-- Навигация -->
 <div class="navigation" id="menu">
-    <a href="#" class="nav-button active" data-page="play">
-        <figure>
-            <img src="brawl_clicker-master/static/images/play2.png" alt="Играть" width="65" height="65">
-            <figcaption>Play</figcaption>
-        </figure>
-    </a>
-<a href="#" class="nav-button" data-page="market">
+    <a href="#" class="nav-button" data-page="market">
         <figure>
             <img src="brawl_clicker-master/static/images/market2.png" alt="Маркет" width="65" height="65">
             <figcaption>Market</figcaption>
@@ -31,18 +25,25 @@
             <figcaption>Shop</figcaption>
         </figure>
     </a>
+    <a href="#" class="nav-button active" data-page="play">
+        <figure>
+            <img src="brawl_clicker-master/static/images/play2.png" alt="Играть" width="65" height="65">
+            <figcaption>Play</figcaption>
+        </figure>
+    </a>
     <a href="#" class="nav-button" data-page="quests">
         <figure>
             <img src="brawl_clicker-master/static/images/quests2.png" alt="Квесты" width="65" height="65">
             <figcaption>Wheel</figcaption>
         </figure>
     </a>
-    <a href="#" class="nav-button" data-page="top">
+    <a href="#" class="nav-button mini-icon" data-page="top">
         <figure>
             <img src="brawl_clicker-master/static/images/minigames2.png" alt="Топ" width="65" height="65">
             <figcaption>Minigames</figcaption>
         </figure>
     </a>
+
 </div>
 
 <div id="content">
@@ -62,7 +63,7 @@
 
     <div id="coinContainer"></div> <!-- Контейнер для монет с анимацией -->
 
-    <img id="clickButton" src="brawl_clicker-master/static/images/croco.png">
+    <img id="clickButton" src="/static/images/croco.png">
 
     <!-- Добавляем src и курсор pointer -->
     <div id="lightningEffect"></div>
@@ -83,7 +84,7 @@
 
   <!-- Иконка меню -->
 <div class="settings-icon">
-    <img src="brawl_clicker-master/static/images/menu.png" alt="Настройки" id="settings-icon">
+    <img src="/static/images/menu.png" alt="Настройки" id="settings-icon">
 </div>
 
 <!-- Модальное окно настроек -->
@@ -123,148 +124,262 @@
 <!-- Маркет -->
 <div class="page" id="market" style="display:none;">
     <div class="market-container">
-        <!-- Кнопка для размещения скина на продажу -->
-        <div class="list-item-container">
-            <div class="list-item-content">
-                <div class="list-text">
-                    <div class="title">List your skin</div>
-                    <div class="description">Upload your skin and set a price in Telegram Stars</div>
+        <!-- Панель навигации -->
+        <div class="market-nav">
+            <button class="market-nav-button active" data-tab="available-skins">Available Skins</button>
+            <button class="market-nav-button" data-tab="skin-storage">Skin Storage</button>
+        </div>
+
+        <!-- Контейнер для Available Skins -->
+        <div class="market-tab-content active" id="available-skins">
+            <!-- Заголовок списка скинов -->
+            <div class="up_text">
+                <p style="color: white;">Available Skins</p>
+            </div>
+
+            <!-- Список отдельных скинов -->
+            <div class="skin-list">
+                <!-- Скин 1 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Croco Skin</span>
+                            <span class="skin-creator">DOGS OG</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/croco_skin.png" alt="Skin 1" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
                 </div>
-                <img src="brawl_clicker-master/static/images/bomb.png" alt="Skin Icon" class="skin-icon">
+
+
+                                <!-- Скин 7 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Fire Skin</span>
+                            <span class="skin-creator">Fire Legends</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 777</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+                <!-- Скин 3 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 2</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 111</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/groot_skin2.png" alt="Skin 3" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+                <!-- Скин 5 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 3</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/dark_skin.png" alt="Skin 5" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+               <!-- Скин 4 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Croco Skin 2</span>
+                            <span class="skin-creator">DOGS OG</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 228</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/ananas_skin.png" alt="Skin 4" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+                <!-- Скин 6 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 4</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 1111</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/fire_skin.png" alt="Skin 6" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+                <!-- Скин 7 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Fire Skin</span>
+                            <span class="skin-creator">Fire Legends</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 777</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
+
+                <!-- Скин 8 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Water Skin</span>
+                            <span class="skin-creator">Aqua Clan Pro</span>
+                        </div>
+                        <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 88</button>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/cat_skin2.png" alt="Skin 8" class="skin-preview">
+                    </div>
+                    <button class="buy-button">BUY</button>
+                </div>
             </div>
         </div>
 
-        <!-- Заголовок списка скинов -->
-        <div class="up_text">
-            <p>Available Skins</p>
-        </div>
 
-        <!-- Список отдельных скинов -->
-        <div class="skin-list">
-            <!-- Скин 1 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Croco Skin</span>
-                        <span class="skin-creator">DOGS OG</span>
-                    </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
-                </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/croco_skin.png" alt="Skin 1" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
+
+        <!-- Контейнер для Skin Storage -->
+        <div class="market-tab-content" id="skin-storage">
+            <!-- Заголовок хранилища скинов -->
+            <div class="up_text">
+                <p style="color: white;">Skin Storage</p>
             </div>
 
-            <!-- Скин 2 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Groot Skin</span>
-                        <span class="skin-creator">DOGS OG</span>
+            <!-- Список скинов в хранилище -->
+            <div class="skin-list storage-skins">
+                <!-- Скин 1 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Croco Skin</span>
+                            <span class="skin-creator">DOGS OG</span>
+                        </div>
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 77</button>
-                </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/groot_skin.png" alt="Skin 2" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
-
-            <!-- Скин 3 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Groot Skin 2</span>
-                        <span class="skin-creator">Catta Life</span>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/croco_skin.png" alt="Skin 1" class="skin-preview">
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 111</button>
                 </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/groot_skin2.png" alt="Skin 3" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
 
-            <!-- Скин 4 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Croco Skin 2</span>
-                        <span class="skin-creator">DOGS OG</span>
+                <!-- Скин 2 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin</span>
+                            <span class="skin-creator">DOGS OG</span>
+                        </div>
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 228</button>
-                </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/ananas_skin.png" alt="Skin 4" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
-
-            <!-- Скин 5 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Groot Skin 3</span>
-                        <span class="skin-creator">Catta Life</span>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/groot_skin.png" alt="Skin 2" class="skin-preview">
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
                 </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/dark_skin.png" alt="Skin 5" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
 
-            <!-- Скин 6 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Groot Skin 4</span>
-                        <span class="skin-creator">Catta Life</span>
+                <!-- Скин 3 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 2</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 1111</button>
-                </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/fire_skin.png" alt="Skin 6" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
-
-            <!-- Скин 7 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Fire Skin</span>
-                        <span class="skin-creator">Fire Legends</span>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/groot_skin2.png" alt="Skin 3" class="skin-preview">
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 777</button>
                 </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
 
-            <!-- Скин 8 -->
-            <div class="skin-card">
-                <div class="skin-header">
-                    <div class="skin-title">
-                        <span class="skin-name">Water Skin</span>
-                        <span class="skin-creator">Aqua Clan Pro</span>
+                <!-- Скин 4 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Croco Skin 2</span>
+                            <span class="skin-creator">DOGS OG</span>
+                        </div>
                     </div>
-                    <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 88</button>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/ananas_skin.png" alt="Skin 4" class="skin-preview">
+                    </div>
                 </div>
-                <div class="skin-preview-container">
-                    <img src="brawl_clicker-master/static/images/cat_skin2.png" alt="Skin 8" class="skin-preview">
-                </div>
-                <button class="buy-button">BUY</button>
-            </div>
 
+                <!-- Скин 5 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 3</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/dark_skin.png" alt="Skin 5" class="skin-preview">
+                    </div>
+                </div>
+
+                <!-- Скин 6 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Groot Skin 4</span>
+                            <span class="skin-creator">Catta Life</span>
+                        </div>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/fire_skin.png" alt="Skin 6" class="skin-preview">
+                    </div>
+                </div>
+
+                <!-- Скин 7 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Fire Skin</span>
+                            <span class="skin-creator">Fire Legends</span>
+                        </div>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
+                    </div>
+                </div>
+
+                <!-- Скин 8 -->
+                <div class="skin-card">
+                    <div class="skin-header">
+                        <div class="skin-title">
+                            <span class="skin-name">Water Skin</span>
+                            <span class="skin-creator">Aqua Clan Pro</span>
+                        </div>
+                    </div>
+                    <div class="skin-preview-container">
+                        <img src="brawl_clicker-master/static/images/cat_skin2.png" alt="Skin 8" class="skin-preview">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 
     <!-- Элементы магазина -->
     <div class="background">
@@ -655,7 +770,7 @@
 
  <!-- Мини-игры -->
 <div class="page" id="top" style="display:none;">
-    <div class="minigames-text">Играй в мини-игры и зарабатывай монеты</div>
+    <div class="minigames-text">Play mini-games and earn coins</div>
     <!-- Контейнер для баннеров -->
     <div class="banner-container">
         <!-- Игра 1: Лови монеты -->
@@ -678,7 +793,7 @@
                 <img src="brawl_clicker-master/static/images/banner22.png" alt="Air Hockey Legends Preview">
             </div>
             <div class="banner banner-air-hockey" id="startBanner2">
-                <img src="/static/images/stars.png" alt="Banner 2">
+                <img src="brawl_clicker-master/static/images/stars.png" alt="Banner 2">
                 <span class="banner-text">Air Hockey</span>
                 <div class="upgrade-icon" data-game="game2">
                     <img src="brawl_clicker-master/static/images/up_arrow.png" alt="Upgrade">
@@ -788,17 +903,17 @@
 </div>
 
 
-<script src="brawl_clicker-master/static/SCRIPT.js"></script>
-<!--<script src="brawl_clicker-master/static/script_new.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_main.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_up.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_up_energy.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_up_recovery.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_autoclicker.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_heroes.js"></script> -->
-<!--<script src="brawl_clicker-master/static/dragon.js"></script> -->
-<!--<script src="brawl_clicker-master/static/boss.js"></script> -->
-<!--<script src="brawl_clicker-master/static/music.js"></script> -->
-<!--<script src="brawl_clicker-master/static/script_wheel.js"></script> -->
+ <!--<script src="brawl_clicker-master/static/SCRIPT.js"></script>-->
+<script src="brawl_clicker-master/static/script_new.js"></script>
+<script src="brawl_clicker-master/static/script_main.js"></script>
+<script src="brawl_clicker-master/static/script_up.js"></script>
+<script src="brawl_clicker-master/static/script_up_energy.js"></script>
+<script src="brawl_clicker-master/static/script_up_recovery.js"></script>
+<script src="brawl_clicker-master/static/script_autoclicker.js"></script>
+<script src="brawl_clicker-master/static/script_heroes.js"></script>
+<script src="brawl_clicker-master/static/dragon.js"></script>
+<script src="brawl_clicker-master/static/boss.js"></script>
+<script src="brawl_clicker-master/static/music.js"></script>
+<script src="brawl_clicker-master/static/script_wheel.js"></script>
 </body>
 </html>

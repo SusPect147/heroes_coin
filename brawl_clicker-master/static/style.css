@@ -136,6 +136,15 @@ body {
 .nav-button:hover figcaption {
     color: #ffd700;
 }
+/* Уменьшаем только иконку Minigames */
+.nav-button.mini-icon img {
+    transform: scale(1.0); /* Можно 0.8 или 0.75 — по вкусу */
+}
+.nav-button[data-page="play"] img {
+    transform: scale(1.4); /* Визуально увеличиваем иконку */
+    transition: transform 0.3s ease;
+}
+
 
 #clickButton {
     position: absolute;
@@ -211,21 +220,23 @@ body {
 
 .score-background {
     display: inline-block;
-    padding: 0px 10px;
-    padding-left: 20px;
+    padding: 0px 25px;
     background-color: black;
-    border-radius: 5px;
-    margin-left: 0px;
+    border-radius: 10px;
+    margin-left: -22px; /* Отрицательный отступ, чтобы залезть на монету */
+    position: relative; /* Для корректного наложения */
+    z-index: 1; /* Чтобы очки были поверх монеты */
 }
 
 .coin {
     margin-left: 0;
+    margin-right: 0; /* Добавлено для устранения возможных отступов */
     z-index: 900;
 }
 
 .coin img {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     vertical-align: middle;
 }
 
@@ -504,11 +515,6 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-/* Страница маркет */
-.market-container {
-    padding: 20px;
-    background-color: #f5f5f5; /* Светлый фон */
-}
 
 .list-item-container {
     background-color: #fff;
@@ -557,25 +563,81 @@ body {
     color: #333;
 }
 
+/* Маркет */
+.market-container {
+    min-height: 170%; /* Минимальная высота для содержимого */
+}
+.market-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.market-nav-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.market-nav-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.market-nav-button:hover:not(.active) {
+    background-color: #555;
+}
+
+.market-tab-content {
+    display: none;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.market-tab-content.active {
+    display: block;
+}
+
+.storage-skins .skin-card {
+    pointer-events: none;
+}
+
+.storage-skins .buy-button {
+    display: none;
+}
+
 .skin-list {
-            display: flex;
-            flex-wrap: wrap; /* Позволяет переносить элементы на следующую строку */
-            justify-content: space-around; /* Равномерное распределение элементов */
-            gap: 10px; /* Отступы между карточками */
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
 
-        .skin-card {
-            flex: 0 0 calc(50% - 10px); /* Ширина карточки: 50% минус отступы */
-            box-sizing: border-box; /* Учитываем padding и border в ширине */
-            margin-bottom: 10px; /* Отступ снизу для строк */
-        }
+.skin-card {
+    flex: 0 0 calc(50% - 10px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+}
 
-        /* Для экранов с меньшей шириной можно уменьшить размер карточек */
-        @media (max-width: 600px) {
-            .skin-card {
-                flex: 0 0 calc(50% - 5px); /* Уменьшаем отступы для маленьких экранов */
-            }
-        }
+@media (max-width: 600px) {
+    .skin-card {
+        flex: 0 0 calc(50% - 5px);
+    }
+}
+
 .skin-header {
     display: flex;
     justify-content: space-between;
@@ -592,17 +654,17 @@ body {
 .skin-name {
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #fff; /* Изменил с #333 на белый для лучшей видимости на тёмном фоне */
 }
 
 .skin-creator {
     font-size: 12px;
-    color: #666;
+    color: #aaa; /* Более светлый серый для контраста */
     margin-top: 5px;
 }
 
 .get-skin-button {
-    background-color: #ffeb3b; /* Жёлтый фон */
+    background-color: #ffeb3b;
     color: #333;
     font-size: 12px;
     font-weight: bold;
@@ -627,29 +689,30 @@ body {
 }
 
 .skin-preview {
-    width: 120px; /* Уменьшил размер, чтобы карточки помещались в ряд */
+    width: 120px;
     height: 120px;
     border-radius: 10px;
     object-fit: cover;
 }
 
 .buy-button {
-    background-color: #42a5f5; /* Голубой цвет */
+    background-color: #42a5f5;
     color: white;
     font-size: 14px;
     font-weight: bold;
-    padding: 8px;
+    padding: 8px 16px;
     border: none;
     border-radius: 10px;
-    width: 100%;
     cursor: pointer;
     text-transform: uppercase;
+    display: block;
+    margin: 10px auto 0 auto;
+    width: 140px;
 }
 
 .buy-button:hover {
     background-color: #2196f3;
 }
-
 
 /* Также скорректируем shop_menu для уверенности в позиционировании */
 .shop_menu {

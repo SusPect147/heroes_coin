@@ -1547,7 +1547,7 @@ exitButton3.addEventListener('click', (e) => {
         let lastSideSwitchTime = 0;
         let lastFrameTime = performance.now();
 
-        gameContainer4.style.backgroundImage = 'url("brawl_clicker-master/static/images/race.png")';
+        gameContainer4.style.backgroundImage = 'url("/static/images/race.png")';
         gameContainer4.style.backgroundSize = 'cover';
         gameContainer4.style.backgroundPosition = 'center';
         exitButton4.style.display = 'none';

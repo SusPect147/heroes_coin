@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Убираем выделение с других опций
       backgroundOptions.forEach(option => option.classList.remove('selected'));
 
-      // Выделяем текущую
       option.classList.add('selected');
+      // Выделяем текущую
       currentSelectedBackground = option;
     });
   });
