@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainMenuMusic.volume = 0.5;
 
     // Музыка для мини-игр (top)
-    const miniGameMusic = new Audio('/static/audio/Jingle-Bells.mp3');
+    const miniGameMusic = new Audio('brawl_clicker-master/static/audio/Jingle-Bells.mp3');
     miniGameMusic.loop = true;
     miniGameMusic.volume = 0.5;
 
