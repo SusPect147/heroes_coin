@@ -38,12 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
     progressBar.style.width = `${progress}%`;
   }
 
+  // Восстановление персонажа и градиента при загрузке
   const savedCharacterImg = localStorage.getItem('selectedCharacterImg');
   if (savedCharacterImg) clickButton.src = savedCharacterImg;
+
+  const savedGradient = localStorage.getItem('backgroundGradient');
+  if (savedGradient) {
+    document.body.style.backgroundImage = savedGradient;
+  } else {
+    document.body.style.backgroundImage = 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%)';
+  }
 
   window.updateClickButtonImage = (imgSrc) => {
     const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
     clickButton.src = cleanSrc;
+    localStorage.setItem('selectedCharacterImg', cleanSrc); // Сохраняем персонажа
   };
 
   window.updateCoinsPerClick = (newCoinsPerClick) => {
@@ -147,72 +156,107 @@ document.addEventListener('DOMContentLoaded', () => {
   function setLeagueBackground(level) {
     const body = document.body;
     let backgroundImage = '';
+    let characterSrc = '';
+    let newGradient = '';
 
     switch (level) {
       case 1:
         progressLabel.innerText = 'Ледяной мир';
         clicksPerLevel = 5;
         backgroundImage = 'brawl_clicker-master/static/images/ice.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/automobile_1f697.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.2), transparent 70%)';
         break;
       case 2:
         progressLabel.innerText = 'Адский мир';
         clicksPerLevel = 6;
         backgroundImage = 'brawl_clicker-master/static/images/ad.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/locomotive_1f682.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2), transparent 70%)';
         break;
       case 3:
         progressLabel.innerText = 'Китай';
         clicksPerLevel = 7;
         backgroundImage = 'brawl_clicker-master/static/images/china.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/airplane_2708-fe0f.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(135, 206, 235, 0.2), rgba(255, 255, 255, 0.1), transparent 70%)';
         break;
       case 4:
         progressLabel.innerText = 'Водный мир';
         clicksPerLevel = 8;
         backgroundImage = 'brawl_clicker-master/static/images/water_world.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/rocket_1f680.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), rgba(30, 144, 255, 0.2), transparent 70%)';
         break;
       case 5:
         progressLabel.innerText = 'Мистика';
         clicksPerLevel = 8;
         backgroundImage = 'brawl_clicker-master/static/images/poison.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/moai_1f5ff.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(128, 128, 128, 0.2), transparent 70%)';
         break;
       case 6:
         progressLabel.innerText = 'Кубический мир';
         clicksPerLevel = 10;
         backgroundImage = 'brawl_clicker-master/static/images/minecraft.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/alien_1f47d.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(50, 205, 50, 0.2), transparent 70%)';
         break;
       case 7:
         progressLabel.innerText = 'Тьма';
         clicksPerLevel = 11;
         backgroundImage = 'brawl_clicker-master/static/images/dark.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/robot_1f916.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(70, 130, 180, 0.2), rgba(169, 169, 169, 0.2), transparent 70%)';
         break;
       case 8:
         progressLabel.innerText = 'Космос';
         clicksPerLevel = 12;
         backgroundImage = 'brawl_clicker-master/static/images/cosmos.png';
+        // Повторяем персонажа, так как в предоставленном коде больше нет вариантов
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/automobile_1f697.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.2), transparent 70%)';
         break;
       case 9:
         progressLabel.innerText = 'Темнота';
         clicksPerLevel = 13;
         backgroundImage = 'brawl_clicker-master/static/images/dark_2.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/locomotive_1f682.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2), transparent 70%)';
         break;
       case 10:
         progressLabel.innerText = 'НЛО';
         clicksPerLevel = 14;
         backgroundImage = 'brawl_clicker-master/static/images/plat.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/airplane_2708-fe0f.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(135, 206, 235, 0.2), rgba(255, 255, 255, 0.1), transparent 70%)';
         break;
       default:
         progressLabel.innerText = 'Деревня';
         leagueLevel = 0;
         clicksPerLevel = 5;
         backgroundImage = 'brawl_clicker-master/static/images/hogwarts.png';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/video-game_1f3ae.webp';
+        newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%)';
     }
 
-    body.style.backgroundImage = `url("${backgroundImage}")`;
-    body.style.backgroundSize = 'cover';
+    // Установка фона мира
+    body.style.backgroundImage = `url("${backgroundImage}"), ${newGradient}`;
+    body.style.backgroundSize = 'cover, cover';
     body.style.backgroundAttachment = 'fixed';
     progressLabel.style.backgroundImage = `url("${backgroundImage}")`;
     progressLabel.style.backgroundSize = 'cover';
     progressLabel.style.backgroundPosition = 'center';
 
+    // Установка персонажа
+    clickButton.src = characterSrc;
+
+    // Сохранение персонажа и градиента
+    localStorage.setItem('selectedCharacterImg', characterSrc);
+    localStorage.setItem('backgroundGradient', newGradient);
+    localStorage.setItem('backgroundImage', backgroundImage);
+
+    // Настройка смещения фона
     if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
       body.style.backgroundPosition = 'center calc(50% - 12vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/poison.png') {
@@ -226,8 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       body.style.backgroundPosition = 'center';
     }
-
-    localStorage.setItem('backgroundImage', backgroundImage);
   }
 
   function spawnEffect(selectedCharacter, event) {
