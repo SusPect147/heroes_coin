@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let progress = 0;
   const maxProgress = 100;
   let leagueLevel = 0;
-  let clicksPerLevel = 10;
+  let clicksPerLevel = 1;
 
-  window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 500;
-  window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 500;
+  window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 100;
+  window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 100;
   const energyCost = 10;
   window.energyRecoveryRate = parseInt(localStorage.getItem('energyRecoveryRate'), 10) || 5;
   window.coinsPerClick = 1;
