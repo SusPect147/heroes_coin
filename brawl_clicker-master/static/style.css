@@ -104,7 +104,7 @@ canvas {
 
 .energy-container {
     position: fixed;
-    bottom: 50px; /* Учитываем высоту навигации (примерно 100px) */
+    bottom: 45px; /* Учитываем высоту навигации (примерно 100px) */
     left: 16%;
     transform: translateX(-50%);
     z-index: 1001; /* Выше навигации */
@@ -114,25 +114,25 @@ canvas {
     display: flex;
     align-items: center;
     gap: 0.75rem; /* Соответствует предоставленному коду */
-    padding: 0.75rem 1.25rem; /* Соответствует предоставленному коду */
+    padding: 0.5rem 0.8rem; /* Соответствует предоставленному коду */
     background: rgba(30, 30, 30, 0.85);
     border-radius: 16px;
-    font-size: 1.2rem; /* Соответствует предоставленному коду */
+    font-size: 1rem; /* Соответствует предоставленному коду */
     font-weight: 600;
     color: #ffffff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
 }
 
 .energy-counter img {
-    width: 35px; /* Соответствует предоставленному коду */
-    height: 35px; /* Соответствует предоставленному коду */
+    width: 30px; /* Соответствует предоставленному коду */
+    height: 30px; /* Соответствует предоставленному коду */
     object-fit: contain;
 }
 
 .navigation {
     position: fixed;
     bottom: 1.5rem;
-    right: 1rem; /* Смещаем вправо, чтобы не пересекаться с энергией */
+    right: 0.5rem; /* Смещаем вправо, чтобы не пересекаться с энергией */
     transform: none; /* Убираем смещение по центру */
     width: auto;
     background: rgba(30, 30, 30, 0.85);
@@ -145,7 +145,8 @@ canvas {
     font-weight: 600;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
-    gap: 5px; /* Добавляем равномерное расстояние между элементами */
+    gap: 2px; /* Добавляем равномерное расстояние между элементами */
+    font-size: 0.8rem;
 }
 
 .nav-button {
