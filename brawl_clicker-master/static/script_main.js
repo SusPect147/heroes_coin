@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let leagueLevel = 0;
   let clicksPerLevel = 10;
 
-  window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 100;
-  window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 100;
+  window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 500;
+  window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 500;
   const energyCost = 10;
   window.energyRecoveryRate = parseInt(localStorage.getItem('energyRecoveryRate'), 10) || 5;
   window.coinsPerClick = 1;
