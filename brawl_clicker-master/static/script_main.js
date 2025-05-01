@@ -264,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => effect.remove(), 1000);
   }
 
+
   const tg = window.Telegram?.WebApp;
   if (tg) {
     tg.expand();
