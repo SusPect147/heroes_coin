@@ -214,13 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
       case 8:
         progressLabel.innerText = 'Космос';
         clicksPerLevel = 12;
-        characterSrc = 'https://em-content.zobj.net/source/telegram/386/automobile_1f697.webp';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/hamster_1f439.webp';
         newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.2), transparent 70%)';
         break;
       case 9:
         progressLabel.innerText = 'Темнота';
         clicksPerLevel = 13;
-        characterSrc = 'https://em-content.zobj.net/source/telegram/386/locomotive_1f682.webp';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/frog_1f438.webp';
         newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2), transparent 70%)';
         break;
       case 10:
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressLabel.innerText = 'Деревня';
         leagueLevel = 0;
         clicksPerLevel = 5;
-        characterSrc = 'https://em-content.zobj.net/source/telegram/386/video-game_1f3ae.webp';
+        characterSrc = 'https://em-content.zobj.net/source/telegram/386/lion_1f981.webp';
         newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%)';
     }
 
