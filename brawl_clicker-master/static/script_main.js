@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const energyDisplay = document.querySelector('#energyDisplay');
   const coinContainer = document.querySelector('#coinContainer');
 
+  // Проверка наличия всех необходимых элементов
+  if (!clickButton) console.error("Element with ID 'clickButton' not found.");
+  if (!currentScoreElement) console.error("Element with class 'currentScore' not found.");
+  if (!progressBar) console.error("Element with ID 'progressBar' not found.");
+  if (!progressLabel) console.error("Element with ID 'progressLabel' not found.");
+  if (!energyDisplay) console.error("Element with ID 'energyDisplay' not found.");
+  if (!coinContainer) console.error("Element with ID 'coinContainer' not found.");
+
   let progress = 0;
   const maxProgress = 100;
   let leagueLevel = 0;
@@ -29,18 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedEnergy = localStorage.getItem('currentEnergy');
   if (savedEnergy !== null) {
     window.energy = parseInt(savedEnergy, 10);
-    energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
+    if (energyDisplay) energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
   }
 
   const savedProgress = localStorage.getItem('currentProgress');
   if (savedProgress !== null) {
     progress = parseFloat(savedProgress);
-    progressBar.style.width = `${progress}%`;
+    if (progressBar) progressBar.style.width = `${progress}%`;
   }
 
   // Восстановление персонажа и градиента при загрузке
   const savedCharacterImg = localStorage.getItem('selectedCharacterImg');
-  if (savedCharacterImg) clickButton.src = savedCharacterImg;
+  if (savedCharacterImg && clickButton) clickButton.src = savedCharacterImg;
 
   const savedGradient = localStorage.getItem('backgroundGradient');
   if (savedGradient) {
@@ -51,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.updateClickButtonImage = (imgSrc) => {
     const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
-    clickButton.src = cleanSrc;
+    if (clickButton) clickButton.src = cleanSrc;
     localStorage.setItem('selectedCharacterImg', cleanSrc);
   };
 
@@ -71,49 +79,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function recoverEnergy() {
     window.energy = Math.min(window.energy + window.energyRecoveryRate / 10, window.maxEnergy);
-    energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
+    if (energyDisplay) energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
   }
 
   setInterval(recoverEnergy, 50);
 
   function handleTap(event) {
     if (window.energy >= energyCost) {
-      let score = parseInt(currentScoreElement.innerText) || 0;
+      let score = parseInt(currentScoreElement?.innerText) || 0;
       score += window.coinsPerClick;
       updateScore(score);
 
       const progressIncrement = (maxProgress / clicksPerLevel) * window.coinsPerClick;
       progress = Math.min(progress + progressIncrement, maxProgress);
-      progressBar.style.width = `${progress}%`;
+      if (progressBar) progressBar.style.width = `${progress}%`;
       localStorage.setItem('currentProgress', progress);
 
       window.energy = Math.max(window.energy - energyCost, 0);
-      energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
+      if (energyDisplay) energyDisplay.textContent = `${Math.round(window.energy)}/${window.maxEnergy}`;
 
-      const selectedCharacter = localStorage.getItem('selectedCharacter');
+      const selectedCharacter = localStorage.getItem('selectedCharacter') || 'default';
       spawnEffect(selectedCharacter, event);
 
       if (progress === maxProgress) {
         updateLeague();
         progress = 0;
-        progressBar.style.width = '0%';
+        if (progressBar) progressBar.style.width = '0%';
         localStorage.setItem('currentProgress', 0);
       }
+    } else {
+      console.warn('Not enough energy to tap.');
     }
   }
 
   // Обработчики событий для анимации
   if (clickButton) {
     clickButton.addEventListener('mousedown', (event) => {
+      console.log('mousedown event triggered');
       clickButton.classList.add('active');
       handleTap(event);
     });
 
     clickButton.addEventListener('mouseup', () => {
+      console.log('mouseup event triggered');
       clickButton.classList.remove('active');
     });
 
     clickButton.addEventListener('touchstart', (event) => {
+      console.log('touchstart event triggered');
       event.preventDefault();
       clickButton.classList.add('active');
       const touches = event.touches;
@@ -133,10 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     clickButton.addEventListener('touchend', () => {
+      console.log('touchend event triggered');
       clickButton.classList.remove('active');
     });
-  } else {
-    console.error("Element with ID 'clickButton' not found.");
   }
 
   function updateScore(newScore) {
@@ -225,236 +237,44 @@ document.addEventListener('DOMContentLoaded', () => {
         newGradient = 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%)';
     }
 
-    // Установка только градиента
     body.style.backgroundImage = newGradient;
     body.style.backgroundSize = 'cover';
     body.style.backgroundAttachment = 'fixed';
     body.style.backgroundPosition = 'center';
 
-    // Установка персонажа
-    clickButton.src = characterSrc;
+    if (clickButton) clickButton.src = characterSrc;
 
-    // Сохранение персонажа и градиента
     localStorage.setItem('selectedCharacterImg', characterSrc);
     localStorage.setItem('backgroundGradient', newGradient);
   }
 
- // Удалены все старые функции эффектов
+  function spawnEffect(selectedCharacter, event) {
+    if (!event.clientX || !event.clientY) {
+      console.warn('Event coordinates are missing:', event);
+      return;
+    }
+    console.log('Spawning effect at:', event.clientX, event.clientY);
+    const effect = document.createElement('img');
+    effect.src = 'https://em-content.zobj.net/source/telegram/386/collision_1f4a5.webp';
+    effect.className = 'click-effect';
+    effect.setAttribute('draggable', 'false');
+    effect.style.left = `${event.clientX}px`;
+    effect.style.top = `${event.clientY}px`;
+    document.body.appendChild(effect);
+    setTimeout(() => effect.remove(), 1000);
+  }
 
-function spawnEffect(selectedCharacter, event) {
-  const effect = document.createElement('img');
-  effect.src = 'https://em-content.zobj.net/source/telegram/386/collision_1f4a5.webp';
-  effect.className = 'click-effect';
-  effect.setAttribute('draggable', 'false');
-  effect.style.left = `${event.clientX}px`;
-  effect.style.top = `${event.clientY}px`;
-  document.body.appendChild(effect);
-  setTimeout(() => effect.remove(), 1000);
-}
-
-// Остальной код остается без изменений
-
-  function spawnCoinDrop(event) {
-    const coin = document.createElement('div');
-    coin.classList.add('coin_drop');
-    coin.style.left = `${event.clientX - 20}px`;
-    coin.style.top = `${event.clientY - 20}px`;
-    coinContainer.appendChild(coin);
-    coin.addEventListener('animationend', () => coin.remove());
+  const tg = window.Telegram?.WebApp;
+  if (tg) {
+    tg.expand();
+    tg.ready();
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+      console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
+    } else {
+      console.log('Данные пользователя недоступны.');
+    }
+  } else {
+    console.warn('Telegram WebApp is not available.');
   }
 });
-
-// Оставшиеся функции эффектов остаются без изменений
-function createGhostEffect(event) {
-  const ghost = document.createElement('div');
-  ghost.classList.add('ghost-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  ghost.style.left = `${x - 25}px`;
-  ghost.style.top = `${y - 25}px`;
-  document.body.appendChild(ghost);
-  setTimeout(() => {
-    ghost.remove();
-  }, 1000);
-}
-
-function createLeafEffect(event) {
-  const leaf = document.createElement('div');
-  leaf.classList.add('leaf-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  leaf.style.left = `${x - 25}px`;
-  leaf.style.top = `${y - 25}px`;
-  document.body.appendChild(leaf);
-  setTimeout(() => {
-    leaf.remove();
-  }, 1000);
-}
-
-function createStoneEffect(event) {
-  const stone = document.createElement('div');
-  stone.classList.add('stone-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  stone.style.left = `${x - 25}px`;
-  stone.style.top = `${y - 25}px`;
-  document.body.appendChild(stone);
-  setTimeout(() => {
-    stone.remove();
-  }, 1000);
-}
-
-function createFireEffect(event) {
-  const fire = document.createElement('div');
-  fire.classList.add('fire-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  fire.style.left = `${x - 25}px`;
-  fire.style.top = `${y - 25}px`;
-  document.body.appendChild(fire);
-  setTimeout(() => {
-    fire.remove();
-  }, 1000);
-}
-
-function createWaterEffect(event) {
-  const water = document.createElement('div');
-  water.classList.add('water-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  water.style.left = `${x - 25}px`;
-  water.style.top = `${y - 25}px`;
-  water.style.backgroundImage = 'url("brawl_clicker-master/static/images/water.png")';
-  document.body.appendChild(water);
-  setTimeout(() => {
-    water.remove();
-  }, 1000);
-}
-
-function createGodEffect(event) {
-  const god = document.createElement('div');
-  god.classList.add('god-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  god.style.left = `${x - 25}px`;
-  god.style.top = `${y - 25}px`;
-  document.body.appendChild(god);
-  setTimeout(() => {
-    god.remove();
-  }, 1000);
-}
-
-function createMagicEffect(event) {
-  const magic = document.createElement('div');
-  magic.classList.add('magic-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  magic.style.left = `${x - 25}px`;
-  magic.style.top = `${y - 25}px`;
-  document.body.appendChild(magic);
-  setTimeout(() => {
-    magic.remove();
-  }, 1000);
-}
-
-function createHeartEffect(event) {
-  const heart = document.createElement('div');
-  heart.classList.add('heart-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  heart.style.left = `${x - 25}px`;
-  heart.style.top = `${y - 25}px`;
-  document.body.appendChild(heart);
-  setTimeout(() => {
-    heart.remove();
-  }, 1000);
-}
-
-function createAnanasEffect(event) {
-  const ananas = document.createElement('div');
-  ananas.classList.add('ananas-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  ananas.style.left = `${x - 25}px`;
-  ananas.style.top = `${y - 25}px`;
-  document.body.appendChild(ananas);
-  setTimeout(() => {
-    ananas.remove();
-  }, 1000);
-}
-
-function createFrogEffect(event) {
-  const frog = document.createElement('div');
-  frog.classList.add('frog-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  frog.style.left = `${x - 25}px`;
-  frog.style.top = `${y - 25}px`;
-  document.body.appendChild(frog);
-  setTimeout(() => {
-    frog.remove();
-  }, 1000);
-}
-
-function createRedEffect(event) {
-  const red = document.createElement('div');
-  red.classList.add('red-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  red.style.left = `${x - 25}px`;
-  red.style.top = `${y - 25}px`;
-  document.body.appendChild(red);
-  setTimeout(() => {
-    red.remove();
-  }, 1000);
-}
-
-function createDarkEffect(event) {
-  const dark = document.createElement('div');
-  dark.classList.add('dark-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  dark.style.left = `${x - 25}px`;
-  dark.style.top = `${y - 25}px`;
-  document.body.appendChild(dark);
-  setTimeout(() => {
-    dark.remove();
-  }, 1000);
-}
-
-function createFishEffect(event) {
-  const fish = document.createElement('div');
-  fish.classList.add('fish-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  fish.style.left = `${x - 25}px`;
-  fish.style.top = `${y - 25}px`;
-  document.body.appendChild(fish);
-  setTimeout(() => {
-    fish.remove();
-  }, 1000);
-}
-
-function createMinionEffect(event) {
-  const minion = document.createElement('div');
-  minion.classList.add('minion-effect');
-  const x = event.clientX;
-  const y = event.clientY;
-  minion.style.left = `${x - 25}px`;
-  minion.style.top = `${y - 25}px`;
-  document.body.appendChild(minion);
-  setTimeout(() => {
-    minion.remove();
-  }, 1000);
-}
-
-const tg = window.Telegram.WebApp;
-window.Telegram.WebApp.expand();
-tg.ready();
-
-const user = Telegram.WebApp.initDataUnsafe.user;
-if (user) {
-  console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
-} else {
-  console.log('Данные пользователя недоступны.');
-}
