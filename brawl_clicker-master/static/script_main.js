@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let progress = 0;
   const maxProgress = 100;
   let leagueLevel = 0;
-  let clicksPerLevel = 1;
+  let clicksPerLevel = 10;
 
   window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 100;
   window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 100;
