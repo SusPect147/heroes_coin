@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressLabel = document.querySelector('#progressLabel');
   const energyDisplay = document.querySelector('#energyDisplay');
   const coinContainer = document.querySelector('#coinContainer');
-  const conditionsModal = document.getElementById('conditionsModal');
-  const closeModal = document.getElementById('closeModal');
-  const subscribeButton = document.getElementById('subscribeButton');
 
   let progress = 0;
   const maxProgress = 100;
@@ -19,10 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const energyCost = 10;
   window.energyRecoveryRate = parseInt(localStorage.getItem('energyRecoveryRate'), 10) || 5;
   window.coinsPerClick = 1;
-
-  // Переменные для условий
-  let minigamesPlayed = parseInt(localStorage.getItem('minigamesPlayed')) || 0;
-  let isSubscribedToTelegram = localStorage.getItem('isSubscribedToTelegram') === 'true';
 
   const savedCoinsPerClick = localStorage.getItem('coinsPerClick');
   if (savedCoinsPerClick) window.coinsPerClick = parseInt(savedCoinsPerClick, 10);
@@ -47,38 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const savedCharacterImg = localStorage.getItem('selectedCharacterImg');
   if (savedCharacterImg) clickButton.src = savedCharacterImg;
-
-  // Обновление интерфейса условий
-  function updateConditionsDisplay() {
-    const coins = parseInt(currentScoreElement.innerText) || 0;
-    document.getElementById('coinsCondition').innerHTML = `Набрать 1000 монет: <span>${coins}/1000</span>`;
-    document.getElementById('minigamesCondition').innerHTML = `Сыграть в мини-игры 5 раз: <span>${minigamesPlayed}/5</span>`;
-    document.getElementById('telegramCondition').innerHTML = `Подписаться на Telegram: ${
-      isSubscribedToTelegram ? 'Выполнено' : '<button id="subscribeButton">Подписаться</button>'
-    }`;
-    if (!isSubscribedToTelegram) {
-      document.getElementById('subscribeButton').addEventListener('click', subscribeToTelegram);
-    }
-  }
-
-  // Функция подписки на Telegram
-  function subscribeToTelegram() {
-    window.open('https://t.me/heroes_coin', '_blank');
-    isSubscribedToTelegram = true;
-    localStorage.setItem('isSubscribedToTelegram', 'true');
-    updateConditionsDisplay();
-  }
-
-  // Показать модальное окно
-  function showConditionsModal() {
-    updateConditionsDisplay();
-    conditionsModal.style.display = 'flex';
-  }
-
-  // Закрыть модальное окно
-  closeModal.addEventListener('click', () => {
-    conditionsModal.style.display = 'none';
-  });
 
   window.updateClickButtonImage = (imgSrc) => {
     const cleanSrc = imgSrc.includes('brawl_clicker-master/static/images/') ? imgSrc : `brawl_clicker-master/static/images/${imgSrc}`;
@@ -124,37 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
       spawnEffect(selectedCharacter, event);
 
       if (progress === maxProgress) {
-        checkAndUpdateLeague();
+        updateLeague();
+        progress = 0;
+        progressBar.style.width = '0%';
+        localStorage.setItem('currentProgress', 0);
       }
     }
   }
-
-  function checkAndUpdateLeague() {
-    const coins = parseInt(currentScoreElement.innerText) || 0;
-    const conditionsMet = coins >= 1000 && minigamesPlayed >= 5 && isSubscribedToTelegram;
-
-    if (leagueLevel === 0 && !conditionsMet) {
-      showConditionsModal();
-    } else {
-      updateLeague();
-      progress = 0;
-      progressBar.style.width = '0%';
-      localStorage.setItem('currentProgress', 0);
-    }
-  }
-
-  // Пример функции для увеличения счетчика мини-игр
-  window.incrementMinigamesPlayed = () => {
-    minigamesPlayed++;
-    localStorage.setItem('minigamesPlayed', minigamesPlayed);
-  };
 
   // Обработчики событий для анимации
   if (clickButton) {
     // Для компьютера (мышь)
     clickButton.addEventListener('mousedown', (event) => {
       clickButton.classList.add('active');
-      handleTap(event); // Вызываем handleTap при нажатии мыши
+      handleTap(event);
     });
 
     clickButton.addEventListener('mouseup', () => {
@@ -163,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Для мобильных устройств (касание)
     clickButton.addEventListener('touchstart', (event) => {
-      event.preventDefault(); // Предотвращаем стандартное поведение (например, прокрутку)
+      event.preventDefault();
       clickButton.classList.add('active');
       const touches = event.touches;
       for (let i = 0; i < touches.length; i++) {
@@ -176,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
           touch.clientY <= rect.bottom
         ) {
           const tapEvent = { clientX: touch.clientX, clientY: touch.clientY };
-          handleTap(tapEvent); // Вызываем handleTap при касании
+          handleTap(tapEvent);
         }
       }
     });
@@ -269,23 +213,22 @@ document.addEventListener('DOMContentLoaded', () => {
     progressLabel.style.backgroundSize = 'cover';
     progressLabel.style.backgroundPosition = 'center';
 
-// Настройка смещения фона
     if (backgroundImage === 'brawl_clicker-master/static/images/hogwarts.png' || backgroundImage === 'brawl_clicker-master/static/images/ice.png') {
-        body.style.backgroundPosition = 'center calc(50% - 12vh)';
+      body.style.backgroundPosition = 'center calc(50% - 12vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/poison.png') {
-        body.style.backgroundPosition = 'center calc(50% - 9vh)'; // Сильно выше
+      body.style.backgroundPosition = 'center calc(50% - 9vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark_2.png') {
-        body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
+      body.style.backgroundPosition = 'center calc(50% - 10vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/plat.png') {
-        body.style.backgroundPosition = 'center calc(50% - 7vh)'; // Выше
+      body.style.backgroundPosition = 'center calc(50% - 7vh)';
     } else if (backgroundImage === 'brawl_clicker-master/static/images/dark.png') {
-        body.style.backgroundPosition = 'center calc(50% - 10vh)'; // Немного выше
+      body.style.backgroundPosition = 'center calc(50% - 10vh)';
     } else {
-        body.style.backgroundPosition = 'center';
+      body.style.backgroundPosition = 'center';
     }
 
     localStorage.setItem('backgroundImage', backgroundImage);
-}
+  }
 
   function spawnEffect(selectedCharacter, event) {
     const effects = {
@@ -503,16 +446,12 @@ function createMinionEffect(event) {
 }
 
 const tg = window.Telegram.WebApp;
-    // Применяем режим полного экрана для мини-приложения
-    window.Telegram.WebApp.expand();
+window.Telegram.WebApp.expand();
+tg.ready();
 
-    // Убедитесь, что Web App готов
-    tg.ready();
-// Получаем данные пользователя (если доступны)
-        const user = Telegram.WebApp.initDataUnsafe.user;
-        if (user) {
-            console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
-        } else {
-            console.log('Данные пользователя недоступны.');
-        }
-
+const user = Telegram.WebApp.initDataUnsafe.user;
+if (user) {
+  console.log(`Привет, ${user.first_name} ${user.last_name || ''}! ID: ${user.id}`);
+} else {
+  console.log('Данные пользователя недоступны.');
+}
