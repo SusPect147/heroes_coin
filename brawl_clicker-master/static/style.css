@@ -169,8 +169,8 @@ canvas {
 }
 
 .nav-button img {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
@@ -178,6 +178,19 @@ canvas {
     transition: transform 0.3s ease;
 }
 
+.click-effect {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fadeOut 1s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+}
  /* Top menu styles */
         .top-menu {
             position: fixed;
