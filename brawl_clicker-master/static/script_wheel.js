@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let spinCost = 150;
 
   const prizes = [
-    { type: 'gift', name: "Подарок 1", value: 150, animationPath: "images/May1.json" },
-    { type: 'gift', name: "Подарок 2", value: 100, animationPath: "images/Kettle.json" },
-    { type: 'gift', name: "Подарок 3", value: 1000, animationPath: "images/Tiffany.json" },
-    { type: 'gift', name: "Подарок 4", value: 60, animationPath: "images/Pepe.json" },
-    { type: 'gift', name: "Подарок 5", value: 200, animationPath: "images/Bear.json" }
+    { type: 'gift', name: "Подарок 1", value: 150, animationPath: "brawl_clicker-master/static/images/May1.json" },
+    { type: 'gift', name: "Подарок 2", value: 100, animationPath: "brawl_clicker-master/static/images/Kettle.json" },
+    { type: 'gift', name: "Подарок 3", value: 1000, animationPath: "brawl_clicker-master/static/images/Tiffany.json" },
+    { type: 'gift', name: "Подарок 4", value: 60, animationPath: "/brawl_clicker-masterstatic/images/Pepe.json" },
+    { type: 'gift', name: "Подарок 5", value: 200, animationPath: "brawl_clicker-master/static/images/Bear.json" }
   ];
 
   const totalItems = 30;

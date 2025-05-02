@@ -70,8 +70,18 @@ canvas {
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #ffd700;
+    background-color: #gray;
     transition: width 0.3s;
+}
+
+.progress-label {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  font-size: 14px;
+  pointer-events: none;
 }
 
 .energy-status span {
@@ -248,7 +258,9 @@ canvas {
     width: 300px;
     z-index: 1000;
 }
-
+#clickButton:active {
+    transform: translate(-50%, -50%) scale(1.1); /* Увеличиваем на 10% при нажатии */
+}
 
 #coinContainer {
     position: absolute;
