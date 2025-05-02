@@ -1,153 +1,134 @@
 document.addEventListener('DOMContentLoaded', () => {
-        const canvas = document.getElementById('rouletteCanvas');
-        const ctx = canvas.getContext('2d');
-        const spinButton = document.getElementById('spinButton');
-        const rewardModal = document.getElementById('rewardModal');
-        const rewardText = document.getElementById('rewardText');
-        const closeModalButton = document.getElementById('closeModalButton');
+  if (typeof lottie === 'undefined') {
+    console.error("Lottie library is not loaded. Please include lottie.min.js.");
+    return;
+  }
 
-        const sectors = [
-            { name: 'Монеты (50 000)', image: 'brawl_clicker-master/static/images/coin.png' },
-            { name: 'Leon (бонус)', image: 'brawl_clicker-master/static/images/leon.png' },
-            { name: 'Улучшение', image: 'brawl_clicker-master/static/images/fireshot.png' },
-            { name: 'Монеты (100 000)', image: 'brawl_clicker-master/static/images/coin.png' },
-            { name: 'Скин', image: 'brawl_clicker-master/static/images/icon.png' },
-            { name: 'Монеты (25 000)', image: 'brawl_clicker-master/static/images/coin.png' },
-            { name: 'Сундук героя', image: 'brawl_clicker-master/static/images/box_1.png' },
-            { name: 'Бонусные звёзды', image: 'brawl_clicker-master/static/images/stars.png' },
-            { name: 'Экстра-бонус', image: 'brawl_clicker-master/static/images/stars.png' }
-        ];
+  const spinButton = document.getElementById('spinButton');
+  const rewardModal = document.getElementById('rewardModal');
+  const rewardText = document.getElementById('rewardText');
+  const closeModalButton = document.getElementById('closeModalButton');
+  const prizeList = document.getElementById('prizeList');
+  const betButtons = document.querySelectorAll('.bet-button');
+  const spinCostDisplay = document.getElementById('spinCost');
 
-        const sectorAngle = (2 * Math.PI) / sectors.length;
-        let currentAngle = 0;
-        let isSpinning = false;
+  let selectedBet = 1;
+  let spinCost = 150;
 
-        // Градиенты для секторов
-        const gradients = [
-            ['#ff4500', '#ff8c00'], // Оранжевый
-            ['#ffd700', '#ffa500'], // Золотой
-            ['#00b7eb', '#00ced1'], // Голубой
-            ['#32cd32', '#228b22'], // Зелёный
-            ['#ff4500', '#ff8c00'], // Оранжевый
-            ['#ffd700', '#ffa500'], // Золотой
-            ['#00b7eb', '#00ced1'], // Голубой
-            ['#800080', '#4b0082'], // Фиолетовый
-            ['#32cd32', '#228b22']  // Зелёный
-        ];
+  const prizes = [
+    { type: 'gift', name: "Подарок 1", value: 150, animationPath: "/static/images/May1.json" },
+    { type: 'gift', name: "Подарок 2", value: 100, animationPath: "/static/images/Kettle.json" },
+    { type: 'gift', name: "Подарок 3", value: 1000, animationPath: "/static/images/Tiffany.json" },
+    { type: 'gift', name: "Подарок 4", value: 60, animationPath: "/static/images/Pepe.json" },
+    { type: 'gift', name: "Подарок 5", value: 200, animationPath: "/static/images/Bear.json" }
+  ];
 
-        // Загрузка изображений
-        const images = {};
-        let loadedImages = 0;
+  const totalItems = 30;
+  for (let i = 0; i < totalItems; i++) {
+    const prizeIndex = i % prizes.length;
+    const prizeItem = document.createElement('div');
+    prizeItem.className = 'prize-item';
 
-        sectors.forEach((sector, index) => {
-            const img = new Image();
-            img.src = sector.image;
-            img.onload = () => {
-                images[index] = img;
-                loadedImages++;
-                if (loadedImages === sectors.length) {
-                    drawRoulette();
-                }
-            };
-            img.onerror = () => {
-                console.error(`Failed to load image: ${sector.image}`);
-                loadedImages++;
-                if (loadedImages === sectors.length) {
-                    drawRoulette();
-                }
-            };
+    const prize = prizes[prizeIndex];
+    if (prize.animationPath) {
+      const animationContainer = document.createElement('div');
+      animationContainer.id = `anim-${i}`;
+      prizeItem.appendChild(animationContainer);
+
+      try {
+        lottie.loadAnimation({
+          container: animationContainer,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: prize.animationPath,
+          rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+          }
+        }).addEventListener('data_failed', () => {
+          console.error(`Failed to load animation for prize ${prizeIndex} at path: ${prize.animationPath}`);
         });
+      } catch (error) {
+        console.error(`Error loading animation for prize ${prizeIndex}:`, error);
+      }
+    } else if (prize.img) {
+      const prizeImg = document.createElement('img');
+      prizeImg.src = prize.img;
+      prizeImg.className = 'prize-img';
+      prizeImg.onerror = () => console.error(`Failed to load image for prize ${prizeIndex} at path: ${prize.img}`);
+      prizeItem.appendChild(prizeImg);
+    }
 
-        function drawRoulette() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.save();
-            ctx.translate(canvas.width / 2, canvas.height / 2);
-            ctx.rotate(currentAngle);
+    prizeList.appendChild(prizeItem);
+  }
 
-            sectors.forEach((sector, index) => {
-                // Создание радиального градиента
-                const gradient = ctx.createRadialGradient(0, 0, canvas.width / 4, 0, 0, canvas.width / 2);
-                gradient.addColorStop(0, gradients[index][0]);
-                gradient.addColorStop(1, gradients[index][1]);
+  function updateSpinButtonState(score) {
+    spinButton.disabled = score < spinCost;
+  }
 
-                // Отрисовка сектора
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.arc(0, 0, canvas.width / 2, index * sectorAngle, (index + 1) * sectorAngle);
-                ctx.fillStyle = gradient;
-                ctx.fill();
+  function updateScore(newScore) {
+    localStorage.setItem('currentScore', newScore);
+    updateSpinButtonState(newScore);
+  }
 
-                // Эффект свечения
-                ctx.shadowColor = '#fff';
-                ctx.shadowBlur = 10;
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                ctx.shadowBlur = 0; // Отключаем свечение для других элементов
-
-                // Отрисовка изображения
-                ctx.save();
-                ctx.rotate(index * sectorAngle + sectorAngle / 2);
-                ctx.translate(canvas.width / 3, 0);
-                ctx.rotate(Math.PI / 2);
-                if (images[index]) {
-                    ctx.drawImage(images[index], -35, -35, 70, 70);
-                }
-                ctx.restore();
-            });
-
-            ctx.restore();
-
-            // Отрисовка стрелки (сверху)
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2 - 20, 25);
-            ctx.lineTo(canvas.width / 2, 0);
-            ctx.lineTo(canvas.width / 2 + 20, 25);
-            ctx.fillStyle = '#fff';
-            ctx.fill();
-        }
-
-        function spinRoulette() {
-            if (isSpinning) return;
-            isSpinning = true;
-            spinButton.disabled = true;
-
-            const spinTime = 7000; // 7 секунд
-            const startTime = performance.now();
-            const randomSector = Math.floor(Math.random() * sectors.length);
-            const targetAngle = randomSector * sectorAngle + Math.PI * 5; // 2.5 полных оборота + случайный сектор
-
-            function animate(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / spinTime, 1);
-                const easeOut = 1 - (1 - progress) ** 2; // Быстрее в начале, плавное замедление
-                currentAngle = easeOut * targetAngle;
-
-                drawRoulette();
-
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    isSpinning = false;
-                    spinButton.disabled = false;
-
-                    // Вычисление выбранного сектора (стрелка сверху)
-                    const normalizedAngle = (currentAngle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-                    const selectedSectorIndex = Math.floor(normalizedAngle / sectorAngle) % sectors.length;
-                    const selectedSector = sectors[selectedSectorIndex];
-
-                    // Показ модального окна
-                    rewardText.textContent = `Вы получили: ${selectedSector.name}!`;
-                    rewardModal.style.display = 'flex';
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        spinButton.addEventListener('click', spinRoulette);
-
-        closeModalButton.addEventListener('click', () => {
-            rewardModal.style.display = 'none';
-        });
+  betButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      betButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      selectedBet = parseInt(button.getAttribute('data-bet'));
+      spinCost = parseInt(button.getAttribute('data-cost'));
+      spinCostDisplay.textContent = spinCost;
+      updateSpinButtonState(parseInt(localStorage.getItem('currentScore')) || 0);
     });
+  });
+
+spinButton.addEventListener('click', () => {
+  let score = parseInt(localStorage.getItem('currentScore')) || 0;
+  if (score < spinCost) {
+    console.warn('Not enough coins to spin.');
+    return;
+  }
+
+  spinButton.disabled = true;
+  score -= spinCost;
+  updateScore(score);
+
+  prizeList.style.transition = 'none';
+  prizeList.style.transform = 'translateX(0)';
+
+  const prizeIndex = Math.floor(Math.random() * prizes.length);
+  const prize = prizes[prizeIndex];
+  let rewardValue = prize.value;
+
+const itemWidth = 200; // ширина одного приза в пикселях
+const targetIndex = Math.floor(totalItems / 2) + prizeIndex;
+
+const containerWidth = prizeList.parentElement.offsetWidth; // ширина видимой области
+const centerOffset = (containerWidth / 2) - (itemWidth / 2); // сдвиг чтобы элемент оказался по центру
+const offset = -(targetIndex * itemWidth) + centerOffset;
+
+setTimeout(() => {
+  prizeList.style.transition = 'transform 3s ease-out';
+  prizeList.style.transform = `translateX(${offset}px)`;
+}, 50);
+
+  setTimeout(() => {
+    if (prize.type === 'coins') {
+      rewardValue *= selectedBet;
+      score += rewardValue;
+      updateScore(score);
+      rewardText.textContent = `Вы получили монеты: +${rewardValue}`;
+    } else if (prize.type === 'gift') {
+      rewardText.textContent = `Вы получили подарок: ${prize.name} (${rewardValue}★)`;
+    }
+
+    rewardModal.style.display = 'flex';
+    spinButton.disabled = false;
+  }, 3000);
+});
+
+
+  closeModalButton.addEventListener('click', () => {
+    rewardModal.style.display = 'none';
+  });
+});

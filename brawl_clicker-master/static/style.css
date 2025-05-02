@@ -55,8 +55,8 @@ canvas {
 
 .progress-container {
     position: fixed;
-    bottom: 570px;
-    left: 50%;
+    bottom: 150px;
+    left: 35%;
     transform: translateX(-50%);
     width: 280px;
     height: 20px;
@@ -64,7 +64,7 @@ canvas {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 10px;
-    border: 2px solid #ffd700;
+    border: 2px solid gray;
 }
 
 .progress-bar {
@@ -78,34 +78,10 @@ canvas {
     margin-bottom: 5px;
 }
 
-.progress-label {
-    display: none;
-    position: fixed;
-    top: 125px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: rgba(255, 165, 0, 0.7);
-    color: white;
-    font-family: 'Pusia-bold', sans-serif;
-    font-size: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    background-size: cover;
-    background-position: center;
-    opacity: 100%;
-}
-
-.progress-container, .progress-label {
-    visibility: hidden; /* Скрываем визуально, но место остаётся */
-}
-
 .energy-container {
     position: fixed;
-    bottom: 45px; /* Учитываем высоту навигации (примерно 100px) */
-    left: 16%;
+    bottom: 145px; /* Учитываем высоту навигации (примерно 100px) */
+    right: 3%;
     transform: translateX(-50%);
     z-index: 1001; /* Выше навигации */
 }
@@ -131,30 +107,34 @@ canvas {
 
 .navigation {
     position: fixed;
-    bottom: 1.5rem;
-    right: 0.5rem; /* Смещаем вправо, чтобы не пересекаться с энергией */
-    transform: none; /* Убираем смещение по центру */
-    width: auto;
+    bottom: 0; /* Теперь меню прямо у нижней границы */
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
     background: rgba(30, 30, 30, 0.85);
-    border-radius: 20px;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.4rem 0.6rem; /* уменьшил паддинг */
+    padding: 0.6rem 0.8rem; /* немного увеличил паддинг для баланса */
     z-index: 1000;
     font-weight: 600;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
-    gap: 2px; /* Добавляем равномерное расстояние между элементами */
-    font-size: 0.8rem;
+    gap: 2px;
+    font-size: 1rem; /* увеличенный размер текста */
 }
 
 .nav-button {
+    flex: 1 1 auto;
     text-align: center;
     text-decoration: none;
     color: white;
     transition: all 0.3s ease;
 }
+
+
 
 .nav-button.active figcaption {
     color: #ffd700; /* Жёлтый цвет для текста активного пункта */
@@ -169,13 +149,17 @@ canvas {
 }
 
 .nav-button img {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
-    padding: 12px;
+    padding: 10px;
     transition: transform 0.3s ease;
+}
+
+.nav-button.active img {
+    transform: scale(1.2);
 }
 
 .click-effect {
@@ -257,15 +241,14 @@ canvas {
 
 #clickButton {
     position: absolute;
-    bottom: 265px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: transform 0.3s ease; /* Уменьшаем время для быстрой реакции */
+    top: 50%; /* Ставим кнопку по центру сверху вниз */
+    left: 50%; /* По центру слева направо */
+    transform: translate(-50%, -50%); /* Центруем по обеим осям */
+    transition: transform 0.3s ease;
     width: 300px;
     z-index: 1000;
-    cursor: pointer; /* Для компьютера */
-    -webkit-tap-highlight-color: transparent; /* Убираем подсветку при касании на мобильных */
 }
+
 
 #clickButton.active {
     transform: translateX(-50%) scale(1.1);
@@ -311,13 +294,14 @@ canvas {
 
 .score-container {
     position: fixed;
-    right: 1rem;
     top: 5.5rem;
+    left: 50%; /* Ставим в центр */
+    transform: translateX(-50%); /* Смещаем назад на 50% ширины элемента */
     padding: 0.75rem 1.5rem;
     background: none;
     font-size: 2rem;
     font-weight: 700;
-    text-align: right;
+    text-align: center; /* Центрируем текст */
 }
 
 
@@ -358,19 +342,6 @@ canvas {
     margin-right: 0px;
 }
 
-.shadow {
-    position: fixed;
-    bottom: 170px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 15px;
-    height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.7;
-}
-
 .close-button {
     color: #aaa;
     float: right;
@@ -393,8 +364,8 @@ canvas {
 /* Иконка настроек */
 .settings-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 100px;
+    right: 80px;
     z-index: 1001;
 }
 
@@ -402,6 +373,23 @@ canvas {
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+.icon {
+    width: 56px;
+    height: 56px;
+    background: black; /* Черный фон */
+    border-radius: 50%; /* Круглая форма */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px; /* Расстояние между точками */
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: white; /* Белые точки */
+    border-radius: 50%; /* Круглые точки */
 }
 
 /* Модальное окно настроек */
@@ -1000,106 +988,169 @@ h2 {
     margin: 10px 0;
 }
 
-/* Рулетка */
+/* Стили для страницы рулетки */
+.page#quests {
+  background: radial-gradient(circle at center, #FF6F91 0%, #7B3FE4 50%, #FF9A8B 100%);
+  width: 100%;
+  height: 300%;
+  text-align: center;
+  padding: 20px;
+}
+
 .roulette-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        min-height: 100vh;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .roulette-text {
-        font-family: 'Pusia-bold', sans-serif;
-        font-size: 28px;
-        font-weight: bold;
-        color: #fff;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.roulette-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-    #rouletteCanvas {
-        border: 8px solid #ffd700;
-        border-radius: 50%;
-        background: #222;
-    }
+.roulette-subtitle {
+  font-size: 16px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
 
-    .spin-button {
-        margin-top: 20px;
-        padding: 12px 24px;
-        font-family: 'Pusia-bold', sans-serif;
-        font-size: 20px;
-        font-weight: bold;
-        color: #fff;
-        background: #ff4500;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
+.prize-ticker {
+  width: 400px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+}
 
-    .spin-button:hover {
-        background: #ff6347;
-    }
+.prize-list {
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: transform 3s ease-out;
+}
 
-    .spin-button:disabled {
-        background: #555;
-        cursor: not-allowed;
-    }
+.prize-item {
+  width: 200px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .reward-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        animation: fadeIn 0.3s ease-in;
-    }
+.prize-item div {
+  width: 120px;
+  height: 120px;
+}
+.prize-item img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: contain; /* Убедимся, что изображение не искажается */
+}
 
-    .reward-modal-content {
-        background: linear-gradient(135deg, #ff4500, #ffd700);
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-        color: #fff;
-        font-family: 'Pusia-bold', sans-serif;
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    }
+.bet-container {
+  margin-bottom: 20px;
+}
 
-    .reward-modal-content h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+.bet-oval {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+}
 
-    .reward-modal-content p {
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
+.bet-button {
+  background: white;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
 
-    .close-modal-button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background: #1a1a1a;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
+.bet-button.active {
+  background: white;
+  color: #FF6F91;
+  transform: scale(1.05);
+}
 
-    .close-modal-button:hover {
-        background: #333;
-    }
+.spin-button {
+  background: white;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.1s;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+.spin-button:hover {
+  transform: scale(1.05);
+}
+
+.spin-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reward-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reward-modal-content {
+  background: linear-gradient(90deg, #FF6F91 0%, #FF9A8B 100%);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  max-width: 300px;
+  width: 80%;
+}
+
+.reward-modal-content h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.reward-modal-content p {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+.close-modal-button {
+  background: linear-gradient(90deg, #FF9A8B 0%, #FF6F91 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  background: linear-gradient(90deg, #FF6F91 0%, #FF9A8B 100%);
+}
 /* Убедимся, что menu_char занимает правильную ширину */
 .menu_char {
     display: grid;
@@ -1696,438 +1747,6 @@ h2 {
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
-.ghost-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/ghost_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: ghostAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes ghostAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.leaf-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/leaf.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: fireAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes leafAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.stone-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/stone_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: stoneAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes stoneAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.fire-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/fire_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: fireAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes fireAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.water-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/water_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: waterAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes waterAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.god-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/god_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: godAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes godAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.magic-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/magic_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: magicAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes magicAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.heart-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/heart_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: heartAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes heartAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.ananas-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/ananas_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: ananasAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes ananasAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 0.9;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.frog-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/frog_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: frogAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes frogAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.dark-effect {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: url("images/dark_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: darkAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes darkAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.red-effect {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(255, 99, 71, 0.4));
-    box-shadow:
-        0 0 20px 5px rgba(255, 0, 0, 0.7),
-        0 0 30px 10px rgba(255, 99, 71, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: redAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes redAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.fish-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/fish_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: fishAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes fishAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.minion-effect {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url("images/star_effect.png") no-repeat center center;
-    background-size: contain;
-    pointer-events: none;
-    animation: minionAnimation 1s ease-out forwards;
-    z-index: 1000;
-}
-
-@keyframes minionAnimation {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.spark {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: radial-gradient(circle, rgba(255, 100, 0, 1) 10%, rgba(255, 0, 0, 1) 80%);
-    border-radius: 50%;
-    opacity: 1;
-    filter: blur(0px);
-    box-shadow: 0px 0px 50px rgba(255, 50, 0, 1), 0px 0px 100px rgba(255, 0, 0, 1);
-    animation: riseUp 3s linear forwards;
-}
-
-@keyframes riseUp {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-150px) scale(1.5); opacity: 0.8; }
-}
-
-#butterfly-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
-}
-
-.butterfly {
-    position: absolute;
-    background-image: url("images/batterfly.png");
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-    opacity: 0.8;
-    animation: flyButterfly 10s infinite linear;
-}
-
-@keyframes flyButterfly {
-    0% {
-        transform: translateX(-100px) translateY(30px);
-        opacity: 1;
-    }
-    25% {
-        transform: translateX(calc(25vw + 50px)) translateY(10vh);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(calc(50vw + 100px)) translateY(20vh);
-        opacity: 1;
-    }
-    75% {
-        transform: translateX(calc(75vw + 150px)) translateY(10vh);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px)) translateY(30px);
-        opacity: 0;
-    }
-}
-
-
-
-
-
-
 
 /* Сброс отступов для html и body */
 html, body {
@@ -2155,7 +1774,7 @@ html, body {
 }
 
 /* Стили для страницы с мини-играми */
-.page:not(#play) {
+/*.page:not(#play) {
     background: radial-gradient(circle at center, #1a2a6c 0%, #0d1b2a 70%, #000 100%); /* Космический градиент */
     position: absolute;
     top: 0;
@@ -2166,7 +1785,7 @@ html, body {
 }
 
 /* Эффект звёзд */
-.page:not(#play)::before,
+/*.page:not(#play)::before,
 .page:not(#play)::after {
     content: '';
     position: absolute;
@@ -2180,7 +1799,7 @@ html, body {
 }
 
 /* Слой 1: Маленькие звёзды */
-.page:not(#play)::before {
+/*.page:not(#play)::before {
     background: radial-gradient(circle, rgba(255, 255, 255, 1) 1px, transparent 2px) 0 0,
                 radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 50px 50px;
     background-size: 100px 100px;
@@ -2189,7 +1808,7 @@ html, body {
 }
 
 /* Слой 2: Крупные звёзды */
-.page:not(#play)::after {
+/*.page:not(#play)::after {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.5px, transparent 3px) 25px 25px,
                 radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 3px) 75px 75px;
     background-size: 150px 150px;
@@ -2198,7 +1817,7 @@ html, body {
 }
 
 /* Анимация мерцания звёзд */
-@keyframes twinkle {
+/*@keyframes twinkle {
     0% {
         opacity: 0.3;
     }

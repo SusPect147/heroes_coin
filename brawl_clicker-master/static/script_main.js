@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.energy = parseInt(localStorage.getItem('currentEnergy'), 10) || 100;
   window.maxEnergy = parseInt(localStorage.getItem('maxEnergy'), 10) || 100;
-  const energyCost = 1;
+  const energyCost = 3;
   window.energyRecoveryRate = parseInt(localStorage.getItem('energyRecoveryRate'), 10) || 5;
   window.coinsPerClick = 1;
 

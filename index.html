@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <title>Heroes</title>
-    <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
+     <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -69,7 +69,7 @@
         <!-- Top menu -->
         <header class="top-menu">
             <div class="top-menu-left">
-                <img src="brawl_clicker-master/static/images/stars.png" alt="Player Avatar" class="player-avatar"
+                <img src="/static/images/stars.png" alt="Player Avatar" class="player-avatar"
                      draggable="false">
                 <div class="player-info">
                     <span class="player-nickname">Player123</span>
@@ -105,12 +105,12 @@
      <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="progress-label" id="progressLabel"></div>
-        <!-- Иконка меню
+        <!--<div class="progress-label" id="progressLabel"></div>-->
+
       <div class="settings-icon">
           <img src="/static/images/menu.png" alt="Настройки" id="settings-icon">
       </div>
-      -->
+
         <!-- Модальное окно настроек -->
         <div class="settings-modal" id="settings-modal">
             <div class="settings-content">
@@ -774,21 +774,37 @@
         </div>
     </div>
 
-
-    <div class="page" id="quests" style="display:none;">
-        <div class="roulette-container">
-            <div class="roulette-text">Вы можете выиграть ценные призы!</div>
-            <canvas id="rouletteCanvas" width="350" height="350"></canvas>
-            <button id="spinButton" class="spin-button">Крутить</button>
-            <div id="rewardModal" class="reward-modal" style="display:none;">
-                <div class="reward-modal-content">
-                    <h2>Поздравляем!</h2>
-                    <p id="rewardText">Вы получили: [Награда]</p>
-                    <button id="closeModalButton" class="close-modal-button">Закрыть</button>
-                </div>
-            </div>
-        </div>
+ <!-- Страница рулетки -->
+<div class="page" id="quests">
+  <div class="roulette-container">
+    <div class="roulette-title">Рулетка Призов</div>
+    <div class="roulette-subtitle">Крути рулетку и выигрывай призы!</div>
+    <div class="prize-ticker">
+      <div class="prize-list" id="prizeList">
+        <!-- Призы будут добавлены через JavaScript -->
+      </div>
     </div>
+    <div class="bet-container">
+      <div class="bet-oval">
+        <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
+        <button class="bet-button" data-bet="10" data-cost="300">X10</button>
+        <button class="bet-button" data-bet="100" data-cost="500">X100</button>
+      </div>
+    </div>
+    <button id="spinButton" class="spin-button">
+      РАСКРУТИТЬ <span id="spinCost">150</span> <img src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin" style="width: 20px; height: 20px;">
+    </button>
+    <div id="rewardModal" class="reward-modal" style="display:none;">
+      <div class="reward-modal-content">
+        <h2 style="color: white;">Поздравляем!</h2>
+        <p id="rewardText">Вы получили: [Награда]</p>
+        <button id="closeModalButton" class="close-modal-button">Закрыть</button>
+      </div>
+    </div>
+  </div>
+  <!-- Подключение Lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</div>
 
     <!-- Мини-игры -->
     <div class="page" id="top" style="display:none;">
