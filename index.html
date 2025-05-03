@@ -143,7 +143,7 @@
                 <div class="gift gift6" data-friends="20"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 6"></div>
             </div>
         </div>
-        <button class="invite_button">invite Friends</button>
+        <button class="invite_button">Invite Friends</button>
     </div>
 </div>
 
@@ -385,46 +385,39 @@
         </div>
     </div>
 
- <div class="page" id="quests">
-    <div class="roulette-container">
-        <div class="roulette-title">Roulette of prizes</div>
-        <div class="roulette-subtitle">Spin the roulette wheel and win prizes!</div>
-        <div class="prize-ticker">
-            <div class="prize-list" id="prizeList">
-                <!-- Призы будут добавлены через JavaScript -->
+    <!-- Страница рулетки -->
+    <div class="page" id="quests">
+        <div class="roulette-container">
+            <div class="roulette-title">Roulette of prizes</div>
+            <div class="roulette-subtitle">Spin the roulette wheel and win prizes!</div>
+            <div class="prize-ticker">
+                <div class="prize-list" id="prizeList">
+                    <!-- Призы будут добавлены через JavaScript -->
+                </div>
+            </div>
+            <div class="bet-container">
+                <div class="bet-oval">
+                    <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
+                    <button class="bet-button" data-bet="10" data-cost="300">X10</button>
+                    <button class="bet-button" data-bet="100" data-cost="500">X100</button>
+                </div>
+            </div>
+            <button id="spinButton" class="spin-button">
+                Spin <span id="spinCost">150</span> <img
+                    src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin"
+                    style="width: 20px; height: 20px;">
+            </button>
+            <div id="rewardModal" class="reward-modal" style="display:none;">
+                <div class="reward-modal-content">
+                    <h2 style="color: white;">Congratulations!</h2>
+                    <p id="rewardText">You have received: [Reward]</p>
+                    <button id="closeModalButton" class="close-modal-button">Close</button>
+                </div>
             </div>
         </div>
-        <div class="bet-container">
-            <div class="bet-oval">
-                <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
-                <button class="bet-button" data-bet="10" data-cost="300">X10</button>
-                <button class="bet-button" data-bet="100" data-cost="500">X100</button>
-            </div>
-        </div>
-        <button id="spinButton" class="spin-button">
-            Spin <span id="spinCost">150</span> <img
-                src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin"
-                style="width: 20px; height: 20px;">
-        </button>
-        <div id="rewardModal" class="reward-modal" style="display:none;">
-            <div class="reward-modal-content">
-                <h2 style="color: white;">Congratulations!</h2>
-                <p id="rewardText">You have received: [Reward]</p>
-                <button id="closeModalButton" class="close-modal-button">Close</button>
-            </div>
-        </div>
-
-        <!-- Лента с подарками -->
-        <div class="gift-ticker">
-            <div class="gift-list" id="giftList">
-                <!-- Призы будут отображаться здесь -->
-            </div>
-        </div>
+        <!-- Подключение Lottie -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     </div>
-    <!-- Подключение Lottie -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-</div>
-
 
     <!-- Мини-игры -->
     <div class="page" id="top" style="display:none;">

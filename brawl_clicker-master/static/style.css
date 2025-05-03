@@ -637,34 +637,42 @@ canvas {
 }
 
 /* Расположение подарков */
-.gift1 { left: 50%; transform: translateX(-50%); bottom: -30px; }
-.gift2 { left: 40px; bottom: 30px; }
-.gift3 { right: 40px; bottom: 30px; }
-.gift4 { left: 0; bottom: 80px; }
-.gift5 { right: 0; bottom: 80px; }
-.gift6 { left: 50%; transform: translateX(-50%); bottom: 130px; }
+.gift1 { left: 40%; bottom: -10px; }
+.gift2 { left: 45px; bottom: 50px; }
+.gift3 { right: 50px; bottom: 90px; }
+.gift4 { left: 100px; bottom: 155px; }
+.gift5 { right: 100px; bottom: 190px; }
+.gift6 { left: 40%; bottom: 260px; }
 
-/* Кнопка приглашения */
-.invite_button {
+/* Кнопка приглашения с повышенной специфичностью */
+.page#friends .friends_container .invite_button {
     background: white;
     color: #2e2e3a;
-    border: 1px solid #ffd700;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 16px;
+    border: 2px solid #ffd700; /* Обводка остаётся */
+    padding: 20px 40px; /* Уменьшено с 25px 50px */
+    border-radius: 12px;
+    font-size: 20px; /* Уменьшено с 24px */
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 30px;
+    animation: pulse 2s infinite ease-in-out !important; /* Пульсация */
 }
 
-.invite_button:hover {
+/* Эффект пульсации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.page#friends .friends_container .invite_button:hover {
     background: #f0f0f0;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-.invite_button:active {
+.page#friends .friends_container .invite_button:active {
     transform: scale(0.95);
 }
 
@@ -682,71 +690,6 @@ canvas {
 @keyframes fadeOut {
     0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-}
-
-/* Медиа-запросы для адаптивности */
-@media (max-width: 768px) {
-    .friends_title {
-        font-size: 28px;
-    }
-    .friends_icon {
-        width: 350px;
-        height: 350px;
-    }
-    .friends_icon img {
-        width: 350px;
-        height: 350px;
-    }
-    .gift img {
-        width: 70px;
-        height: 70px;
-    }
-    .gift1 { bottom: -25px; }
-    .gift2 { left: 35px; bottom: 25px; }
-    .gift3 { right: 35px; bottom: 25px; }
-    .gift4 { left: 0; bottom: 70px; }
-    .gift5 { right: 0; bottom: 70px; }
-    .gift6 { bottom: 110px; }
-    .invite_button {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-    .click-effect {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-@media (max-width: 480px) {
-    .friends_title {
-        font-size: 24px;
-    }
-    .friends_icon {
-        width: 300px;
-        height: 300px;
-    }
-    .friends_icon img {
-        width: 300px;
-        height: 300px;
-    }
-    .gift img {
-        width: 60px;
-        height: 60px;
-    }
-    .gift1 { bottom: -20px; }
-    .gift2 { left: 30px; bottom: 20px; }
-    .gift3 { right: 30px; bottom: 20px; }
-    .gift4 { left: 0; bottom: 60px; }
-    .gift5 { right: 0; bottom: 60px; }
-    .gift6 { bottom: 90px; }
-    .invite_button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-    .click-effect {
-        width: 30px;
-        height: 30px;
-    }
 }
 
 
@@ -1204,6 +1147,8 @@ canvas {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-top: 150px;
+
 }
 
 .roulette-subtitle {

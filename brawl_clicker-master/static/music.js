@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // ==== НАСТРОЙКИ МУЗЫКИ И ЗВУКА ====
     const settingsIcon = document.getElementById('settings-icon');
@@ -295,27 +296,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // Пример списка подарков
-    const giftsList = [
-        { name: "Gift 1", imgSrc: "brawl_clicker-master/static/images/May1.json" },
-        { name: "Gift 2", imgSrc: "brawl_clicker-master/static/images/May1.json" },
-        { name: "Gift 3", imgSrc: "brawl_clicker-master/static/images/May1.json" },
-        { name: "Gift 4", imgSrc: "brawl_clicker-master/static/images/May1.json" }
-    ];
-
-    // Функция для создания элементов с подарками
-    function addGiftsToTicker() {
-        const giftList = document.getElementById('giftList');
-
-        giftsList.forEach(gift => {
-            const giftItem = document.createElement('div');
-            giftItem.classList.add('gift-item');
-            giftItem.innerHTML = `<img src="${gift.imgSrc}" alt="${gift.name}" class="gift-image">`;
-            giftList.appendChild(giftItem);
-        });
-    }
-
-    // Добавление элементов на страницу
-    addGiftsToTicker();
 });
+
