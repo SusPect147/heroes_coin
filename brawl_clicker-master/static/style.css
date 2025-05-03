@@ -36,20 +36,9 @@ canvas {
     overflow: clip;
 }
 
-
 #play {
     overflow: hidden;
-
 }
-
-#friends {}
-
-#shop {}
-
-#market {
-    height: 135vh;
-}
-#top {}
 
 .page {
     display: none;
@@ -554,6 +543,202 @@ canvas {
 
 
 
+
+/* Стили для страницы друзей */
+.page#friends {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #1e1b4b 0%, #3b1e6d 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* Магический фон с частицами */
+.page#friends::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/magic_particles.png') repeat;
+    opacity: 0.3;
+    animation: particles 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes particles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px); }
+}
+
+/* Контейнер друзей */
+.friends_container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow-y: auto;
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+/* Заголовок */
+.friends_title {
+    color: #ffd700;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Иконка (ёлка) */
+.friends_icon {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 30px; /* Отступ снизу перед кнопкой */
+}
+
+/* Ёлка */
+.friends_icon img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Анимация пульсации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Контейнер для подарков */
+.gifts_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Стили для подарков */
+.gift {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gift img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.gift:hover {
+    transform: scale(1.1);
+}
+
+/* Расположение подарков */
+.gift1 { left: 50%; transform: translateX(-50%); bottom: -20px; }
+.gift2 { left: 30px; bottom: 20px; }
+.gift3 { right: 30px; bottom: 20px; }
+.gift4 { left: 0; bottom: 60px; }
+.gift5 { right: 0; bottom: 60px; }
+.gift6 { left: 50%; transform: translateX(-50%); bottom: 100px; }
+
+/* Кнопка приглашения */
+.invite_button {
+    background: white;
+    color: #2e2e3a;
+    border: 1px solid #ffd700;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.invite_button:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.invite_button:active {
+    transform: scale(0.95);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .friends_title {
+        font-size: 28px;
+    }
+    .friends_icon {
+        width: 250px;
+        height: 250px;
+    }
+    .friends_icon img {
+        width: 250px;
+        height: 250px;
+    }
+    .gift img {
+        width: 50px;
+        height: 50px;
+    }
+    .gift1 { bottom: -15px; }
+    .gift2 { left: 20px; bottom: 15px; }
+    .gift3 { right: 20px; bottom: 15px; }
+    .gift4 { left: 0; bottom: 50px; }
+    .gift5 { right: 0; bottom: 50px; }
+    .gift6 { bottom: 80px; }
+    .invite_button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .friends_title {
+        font-size: 24px;
+    }
+    .friends_icon {
+        width: 200px;
+        height: 200px;
+    }
+    .friends_icon img {
+        width: 200px;
+        height: 200px;
+    }
+    .gift img {
+        width: 40px;
+        height: 40px;
+    }
+    .gift1 { bottom: -10px; }
+    .gift2 { left: 15px; bottom: 10px; }
+    .gift3 { right: 15px; bottom: 10px; }
+    .gift4 { left: 0; bottom: 40px; }
+    .gift5 { right: 0; bottom: 40px; }
+    .gift6 { bottom: 60px; }
+    .invite_button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
 /* Стили для страницы магазина */
 .page#shop {
     display: flex;
@@ -568,14 +753,17 @@ canvas {
 /* Стили для меню магазина */
 .shop_menu {
     width: 85%;
-    margin: 0px auto;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 30px; /* Отступ сверху — подними сколько надо, можно менять */
+    left: 50%; /* Центруем по горизонтали */
+    transform: translateX(-50%); /* Точное центрирование */
     background-color: #2e2e3a;
     border-radius: 10px;
     padding: 10px;
     border: 2px solid #d1a34a;
-    position: relative;
-    z-index: 1;
+    z-index: 10; /* Поднял слой, чтобы перекрывал другие элементы */
 }
+
 
 .shop_menu ul {
     list-style: none;
@@ -969,6 +1157,7 @@ canvas {
     }
     .heroes_title {
         font-size: 28px;
+         color: #ffffff; /* Белый цвет текста */
     }
 }
 

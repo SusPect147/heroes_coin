@@ -308,3 +308,38 @@ document.addEventListener('DOMContentLoaded', () => {
         heroesGrid.appendChild(card);
     });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const gifts = document.querySelectorAll('.gift');
+    const inviteButton = document.querySelector('.invite_button');
+
+    // Логика для подарков
+    gifts.forEach(gift => {
+        gift.addEventListener('click', () => {
+            const friendsNeeded = parseInt(gift.getAttribute('data-friends'));
+            alert(`Пригласите ${friendsNeeded} друга(ов), чтобы забрать награду!`);
+        });
+    });
+
+    // Логика для кнопки приглашения
+    inviteButton.addEventListener('click', () => {
+        // Получаем или генерируем userId
+        let userId = localStorage.getItem('userId');
+        if (!userId) {
+            userId = 'user_' + Math.random().toString(36).substr(2, 9); // Генерация случайного ID
+            localStorage.setItem('userId', userId);
+        }
+
+        // Реферальная ссылка
+        const referralLink = `https://yourgame.com/invite?ref=${userId}`;
+
+        // Копирование ссылки в буфер обмена
+        navigator.clipboard.writeText(referralLink).then(() => {
+            alert('Реферальная ссылка скопирована: ' + referralLink);
+        }).catch(err => {
+            alert('Ошибка копирования: ' + err);
+        });
+    });
+});

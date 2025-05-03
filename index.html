@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <title>Heroes</title>
-    <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
 <!-- Навигация -->
 <div class="navigation" id="menu">
-    <a href="#" class="nav-button" data-page="market">
+    <a href="#" class="nav-button" data-page="friends">
         <figure>
             <img src="https://em-content.zobj.net/source/telegram/386/television_1f4fa.webp" alt="Маркет" width="65"
                  height="65">
@@ -128,10 +128,24 @@
         </div>
     </div>
 
-    <!-- Маркет -->
-    <div class="page" id="market" style="display:none;">
-
+<!-- Друзья -->
+<div class="page" id="friends" style="display:none;">
+    <div class="friends_container">
+        <h1 class="friends_title">Приглашайте друзей!</h1>
+        <div class="friends_icon">
+            <img src="https://em-content.zobj.net/source/telegram/386/christmas-tree_1f384.webp" alt="Christmas Tree">
+            <div class="gifts_container">
+                <div class="gift gift1" data-friends="1"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 1"></div>
+                <div class="gift gift2" data-friends="3"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 2"></div>
+                <div class="gift gift3" data-friends="5"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 3"></div>
+                <div class="gift gift4" data-friends="10"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 4"></div>
+                <div class="gift gift5" data-friends="15"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 5"></div>
+                <div class="gift gift6" data-friends="20"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 6"></div>
+            </div>
+        </div>
+        <button class="invite_button">Пригласить друзей</button>
     </div>
+</div>
 
     <!-- Магазин -->
     <div class="page" id="shop" style="display:none;">
@@ -192,7 +206,7 @@
 <!-- Магазин героев -->
 <div id="heroes" class="content-section">
     <div class="heroes_container">
-        <h1 class="heroes_title">Ваши скины</h1>
+        <h1 class="heroes_title">Your Skins</h1>
         <div class="heroes_grid" id="heroes_grid">
             <!-- Карточки скинов будут добавлены через JavaScript -->
         </div>
@@ -536,17 +550,17 @@
 </div>
 
 
-<!--<script src="brawl_clicker-master/static/SCRIPT.js"></script>-->
-<script src="brawl_clicker-master/static/script_new.js"></script>
-<script src="brawl_clicker-master/static/script_main.js"></script>
-<script src="brawl_clicker-master/static/script_up.js"></script>
-<script src="brawl_clicker-master/static/script_up_energy.js"></script>
-<script src="brawl_clicker-master/static/script_up_recovery.js"></script>
-<script src="brawl_clicker-master/static/script_autoclicker.js"></script>
-<script src="brawl_clicker-master/static/script_heroes.js"></script>
-<script src="brawl_clicker-master/static/dragon.js"></script>
-<script src="brawl_clicker-master/static/boss.js"></script>
-<script src="brawl_clicker-master/static/music.js"></script>
-<script src="brawl_clicker-master/static/script_wheel.js"></script>
+
+<script src="/static/script_new.js"></script>
+<script src="/script_main.js"></script>
+<script src="/static/script_up.js"></script>
+<script src="/script_up_energy.js"></script>
+<script src="/script_up_recovery.js"></script>
+<script src="/static/script_autoclicker.js"></script>
+<script src="/script_heroes.js"></script>
+<script src="/static/dragon.js"></script>
+<script src="/static/boss.js"></script>
+<script src="/static/music.js"></script>
+<script src="/static/script_wheel.js"></script>
 </body>
 </html>
