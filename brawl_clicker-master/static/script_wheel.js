@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let spinCost = 150;
 
   const prizes = [
-    { type: 'gift', name: "Подарок 1", value: 150, animationPath: "brawl_clicker-master/static/static/images/May1.json" },
+    { type: 'gift', name: "Подарок 1", value: 150, animationPath: "brawl_clicker-master/static/images/May1.json" },
     { type: 'gift', name: "Подарок 2", value: 100, animationPath: "brawl_clicker-master/static/images/Kettle.json" },
     { type: 'gift', name: "Подарок 3", value: 1000, animationPath: "brawl_clicker-master/static/images/Tiffany.json" },
     { type: 'gift', name: "Подарок 4", value: 60, animationPath: "brawl_clicker-master/static/images/Pepe.json" },
