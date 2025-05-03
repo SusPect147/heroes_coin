@@ -216,3 +216,23 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(animate);
         }
         animate();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buyButton = document.querySelector('.buy_button');
+    const caseCost = 100;
+
+    buyButton.addEventListener('click', () => {
+        let score = parseInt(localStorage.getItem('currentScore')) || 0;
+
+        if (score < caseCost) {
+            alert('Недостаточно монет для покупки кейса!');
+            return;
+        }
+
+        score -= caseCost;
+        localStorage.setItem('currentScore', score);
+        alert('Эпический кейс куплен! Проверьте ваш инвентарь.');
+
+        // Здесь можно добавить логику для добавления кейса в инвентарь
+    });
+});
