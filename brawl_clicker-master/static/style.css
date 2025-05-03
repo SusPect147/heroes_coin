@@ -58,7 +58,7 @@ canvas {
     bottom: 150px;
     left: 35%;
     transform: translateX(-50%);
-    width: 280px;
+    width: 250px;
     height: 20px;
     background-color: #fffce6;
     border-radius: 10px;
@@ -70,7 +70,7 @@ canvas {
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #gray;
+    background-color: #ffd700;
     transition: width 0.3s;
 }
 
@@ -90,8 +90,8 @@ canvas {
 
 .energy-container {
     position: fixed;
-    bottom: 145px; /* Учитываем высоту навигации (примерно 100px) */
-    right: 3%;
+    bottom: 147px; /* Учитываем высоту навигации (примерно 100px) */
+    right: 1%;
     transform: translateX(-50%);
     z-index: 1001; /* Выше навигации */
 }
@@ -255,11 +255,11 @@ canvas {
     left: 50%; /* По центру слева направо */
     transform: translate(-50%, -50%); /* Центруем по обеим осям */
     transition: transform 0.3s ease;
-    width: 300px;
+    width: 250px;
     z-index: 1000;
 }
 #clickButton:active {
-    transform: translate(-50%, -50%) scale(1.1); /* Увеличиваем на 10% при нажатии */
+    transform: translate(-50%, -50%) scale(1.2); /* Увеличиваем на 10% при нажатии */
 }
 
 #coinContainer {
