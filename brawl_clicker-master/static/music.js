@@ -218,21 +218,93 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
 
 document.addEventListener('DOMContentLoaded', () => {
-    const buyButton = document.querySelector('.buy_button');
-    const caseCost = 100;
+    const buyStarsButton = document.querySelector('.buy_stars');
+    const buyCoinsButton = document.querySelector('.buy_coins');
+    const buyConfirmButton = document.querySelector('.buy_confirm');
+    const coinCost = 10000; // Стоимость в монетах
+    const starCost = 100;   // Стоимость в звёздах
+    let selectedCurrency = 'coins'; // По умолчанию выбраны монеты
 
-    buyButton.addEventListener('click', () => {
-        let score = parseInt(localStorage.getItem('currentScore')) || 0;
+    // Функция для переключения активной кнопки
+    function setActiveButton(activeButton, currency) {
+        [buyCoinsButton, buyStarsButton].forEach(button => {
+            button.classList.remove('active');
+        });
+        activeButton.classList.add('active');
+        selectedCurrency = currency;
+    }
 
-        if (score < caseCost) {
-            alert('Недостаточно монет для покупки кейса!');
-            return;
+    // Устанавливаем кнопку монет активной по умолчанию
+    setActiveButton(buyCoinsButton, 'coins');
+
+    // Обработчик для выбора звёзд
+    buyStarsButton.addEventListener('click', () => {
+        setActiveButton(buyStarsButton, 'stars');
+    });
+
+    // Обработчик для выбора монет
+    buyCoinsButton.addEventListener('click', () => {
+        setActiveButton(buyCoinsButton, 'coins');
+    });
+
+    // Обработчик для кнопки Купить
+    buyConfirmButton.addEventListener('click', () => {
+        if (selectedCurrency === 'coins') {
+            let score = parseInt(localStorage.getItem('currentScore')) || 0;
+            if (score < coinCost) {
+                alert('Недостаточно монет для покупки магического шара!');
+                return;
+            }
+            score -= coinCost;
+            localStorage.setItem('currentScore', score);
+            alert('Магический шар куплен за монеты! Проверьте ваш инвентарь.');
+        } else {
+            let stars = parseInt(localStorage.getItem('currentStars')) || 0;
+            if (stars < starCost) {
+                alert('Недостаточно звёзд для покупки магического шара!');
+                return;
+            }
+            stars -= starCost;
+            localStorage.setItem('currentStars', stars);
+            alert('Магический шар куплен за звёзды! Проверьте ваш инвентарь.');
         }
+    });
+});
 
-        score -= caseCost;
-        localStorage.setItem('currentScore', score);
-        alert('Эпический кейс куплен! Проверьте ваш инвентарь.');
+document.addEventListener('DOMContentLoaded', () => {
+    // Массив скинов на основе switch
+    const skins = [
+        { level: 0, name: 'Деревня', src: 'https://em-content.zobj.net/source/telegram/386/lion_1f981.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%)' },
+        { level: 1, name: 'Ледяной мир', src: 'https://em-content.zobj.net/source/telegram/386/automobile_1f697.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.2), transparent 70%)' },
+        { level: 2, name: 'Адский мир', src: 'https://em-content.zobj.net/source/telegram/386/locomotive_1f682.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2), transparent 70%)' },
+        { level: 3, name: 'Китай', src: 'https://em-content.zobj.net/source/telegram/386/airplane_2708-fe0f.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(135, 206, 235, 0.2), rgba(255, 255, 255, 0.1), transparent 70%)' },
+        { level: 4, name: 'Водный мир', src: 'https://em-content.zobj.net/source/telegram/386/rocket_1f680.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), rgba(30, 144, 255, 0.2), transparent 70%)' },
+        { level: 5, name: 'Мистика', src: 'https://em-content.zobj.net/source/telegram/386/moai_1f5ff.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(128, 128, 128, 0.2), transparent 70%)' },
+        { level: 6, name: 'Кубический мир', src: 'https://em-content.zobj.net/source/telegram/386/alien_1f47d.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(50, 205, 50, 0.2), transparent 70%)' },
+        { level: 7, name: 'Тьма', src: 'https://em-content.zobj.net/source/telegram/386/robot_1f916.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(70, 130, 180, 0.2), rgba(169, 169, 169, 0.2), transparent 70%)' },
+        { level: 8, name: 'Космос', src: 'https://em-content.zobj.net/source/telegram/386/hamster_1f439.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.2), transparent 70%)' },
+        { level: 9, name: 'Темнота', src: 'https://em-content.zobj.net/source/telegram/386/frog_1f438.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2), transparent 70%)' },
+        { level: 10, name: 'НЛО', src: 'https://em-content.zobj.net/source/telegram/386/airplane_2708-fe0f.webp', gradient: 'radial-gradient(circle at 50% 50%, rgba(135, 206, 235, 0.2), rgba(255, 255, 255, 0.1), transparent 70%)' }
+    ];
 
-        // Здесь можно добавить логику для добавления кейса в инвентарь
+    // Получаем контейнер сетки
+    const heroesGrid = document.getElementById('heroes_grid');
+
+    // Создаём карточки для каждого скина
+    skins.forEach(skin => {
+        const card = document.createElement('div');
+        card.classList.add('hero_card');
+        card.style.background = skin.gradient;
+
+        const img = document.createElement('img');
+        img.src = skin.src;
+        img.alt = skin.name;
+
+        const title = document.createElement('h3');
+        title.innerText = skin.name;
+
+        card.appendChild(img);
+        card.appendChild(title);
+        heroesGrid.appendChild(card);
     });
 });

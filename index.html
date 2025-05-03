@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <title>Heroes</title>
-     <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
+    <link rel="stylesheet" href="brawl_clicker-master/static/style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -101,14 +101,14 @@
             </div>
         </div>
 
-     <div class="progress-container">
+        <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
         <div class="progress-label" id="progressLabel"></div>
 
-      <div class="settings-icon">
-          <img src="brawl_clicker-master/static/images/menu.png" alt="Настройки" id="settings-icon">
-      </div>
+        <div class="settings-icon">
+            <img src="brawl_clicker-master/static/images/menu.png" alt="Настройки" id="settings-icon">
+        </div>
 
         <!-- Модальное окно настроек -->
         <div class="settings-modal" id="settings-modal">
@@ -130,317 +130,13 @@
 
     <!-- Маркет -->
     <div class="page" id="market" style="display:none;">
-        <div class="market-container">
-            <!-- Панель навигации -->
-            <div class="market-nav">
-                <button class="market-nav-button active" data-tab="available-skins">Available Skins</button>
-                <button class="market-nav-button" data-tab="skin-storage">Skin Storage</button>
-            </div>
 
-            <!-- Контейнер для Available Skins -->
-            <div class="market-tab-content active" id="available-skins">
-                <!-- Заголовок списка скинов -->
-                <div class="up_text">
-                    <p style="color: white;">Available Skins</p>
-                </div>
-
-                <!-- Список отдельных скинов -->
-                <div class="skin-list">
-                    <!-- Скин 1 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Croco Skin</span>
-                                <span class="skin-creator">DOGS OG</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/croco_skin.png" alt="Skin 1" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-
-                    <!-- Скин 7 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Fire Skin</span>
-                                <span class="skin-creator">Fire Legends</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 777</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 3 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 2</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 111</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/groot_skin2.png" alt="Skin 3" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 5 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 3</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 333</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/dark_skin.png" alt="Skin 5" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 4 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Croco Skin 2</span>
-                                <span class="skin-creator">DOGS OG</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 228</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/ananas_skin.png" alt="Skin 4" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 6 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 4</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 1111</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/fire_skin.png" alt="Skin 6" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 7 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Fire Skin</span>
-                                <span class="skin-creator">Fire Legends</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 777</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-
-                    <!-- Скин 8 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Water Skin</span>
-                                <span class="skin-creator">Aqua Clan Pro</span>
-                            </div>
-                            <button class="get-skin-button">GET FOR <span class="star-icon">★</span> 88</button>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/cat_skin2.png" alt="Skin 8" class="skin-preview">
-                        </div>
-                        <button class="buy-button">BUY</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Контейнер для Skin Storage -->
-            <div class="market-tab-content" id="skin-storage">
-                <!-- Заголовок хранилища скинов -->
-                <div class="up_text">
-                    <p style="color: white;">Skin Storage</p>
-                </div>
-
-                <!-- Список скинов в хранилище -->
-                <div class="skin-list storage-skins">
-                    <!-- Скин 1 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Croco Skin</span>
-                                <span class="skin-creator">DOGS OG</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/croco_skin.png" alt="Skin 1" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 2 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin</span>
-                                <span class="skin-creator">DOGS OG</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/groot_skin.png" alt="Skin 2" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 3 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 2</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/groot_skin2.png" alt="Skin 3" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 4 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Croco Skin 2</span>
-                                <span class="skin-creator">DOGS OG</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/ananas_skin.png" alt="Skin 4" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 5 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 3</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/dark_skin.png" alt="Skin 5" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 6 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Groot Skin 4</span>
-                                <span class="skin-creator">Catta Life</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/fire_skin.png" alt="Skin 6" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 7 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Fire Skin</span>
-                                <span class="skin-creator">Fire Legends</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/cat_skin.png" alt="Skin 7" class="skin-preview">
-                        </div>
-                    </div>
-
-                    <!-- Скин 8 -->
-                    <div class="skin-card">
-                        <div class="skin-header">
-                            <div class="skin-title">
-                                <span class="skin-name">Water Skin</span>
-                                <span class="skin-creator">Aqua Clan Pro</span>
-                            </div>
-                        </div>
-                        <div class="skin-preview-container">
-                            <img src="/static/images/cat_skin2.png" alt="Skin 8" class="skin-preview">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Элементы магазина -->
-    <div class="background">
-        <!-- Слой затемнения -->
-        <div class="overlay_box1" style="display: none;"></div>
-        <!-- Окно -->
-        <div class="container_box_1" style="display: none;">
-            <!-- Кнопка закрытия -->
-            <button class="close-button_box1">×</button>
-
-            <!-- Картинка сверху -->
-            <div class="top-image">
-                <img src="brawl_clicker-master/static/images/box_1.png" alt="Символ"/>
-            </div>
-
-            <div class="character_up_buy"></div>
-            <h1 class="title">Box of hero</h1>
-            <p class="description">
-                Здесь можно выбить <br>
-                нового перса
-            </p>
-            <div class="price_up_buy">
-                <!-- Картинка монеты -->
-                <img class="coin-icon" src="brawl_clicker-master/static/images/coin.png" alt="Монета"/>
-                <span class="coin_up_box1">2,000</span>
-            </div>
-            <button class="upgrade-button_box1">Buy</button>
-        </div>
-    </div>
-
-
-    <div class="background">
-        <div class="overlay_box1" style="display: none;"></div>
-        <!-- Окно для открытия коробки -->
-        <div class="container_box_11" style="display: none;">
-            <button class="close-button_box1">×</button>
-            <div class="character_up_buy"></div>
-            <h1 class="title">You got hero:</h1>
-            <div class="reward-image">
-                <img id="rewardImage" src="" alt="Герой"/>
-            </div>
-            <button class="close-reward-button">Close</button>
-        </div>
     </div>
 
     <!-- Магазин -->
-    <div class="page" id="shop" style="display:none;height: 1000px;">
+    <div class="page" id="shop" style="display:none;">
 
         <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
-            <div class="coin" style="margin-left: 10px;">
-                <img src="brawl_clicker-master/static/images/coin.png" alt="Монеты" width="80">
-            </div>
-            <p class="score" style="margin: 0; font-size: 20px;">
-                <span class="currentScore">0</span>
-            </p>
         </div>
 
         <nav class="shop_menu">
@@ -449,7 +145,7 @@
                     <a href="#" onclick="loadContent('special')">Special</a>
                 </li>
                 <li class="shop_menu-item">
-                    <a href="#" onclick="loadContent('heroes')">Heroes</a>
+                    <a href="#" onclick="loadContent('heroes')">Skins</a>
                 </li>
                 <li class="shop_menu-item">
                     <a href="#" onclick="loadContent('upgrades')">Upgrade</a>
@@ -457,107 +153,51 @@
             </ul>
         </nav>
 
-      <div id="contentContainer">
-    <div id="special" class="content-section">
-        <div class="shop_container">
-            <!-- Центральный кейс -->
-            <div class="epic_case_container">
-                <div class="epic_case">
-                    <div class="shop_discount">Эпический!</div>
-                    <div class="shop_icon epic_icon">
-                        <img src="brawl_clicker-master/static/images/box_1.png" alt="Эпический кейс">
-                    </div>
-                    <h1>Эпический кейс</h1>
-                    <h2>Содержит легендарный лут!</h2>
-                    <div class="shop_price">
-                        <img src="brawl_clicker-master/static/images/coin.png" alt="coin"> <span>10000</span>
-                    </div>
-                    <button class="buy_button">Купить</button>
-                </div>
-                <!-- Значок мутации -->
-                <div class="mutation_icon">
-                    <img src="brawl_clicker-master/static/images/minigames2.png" alt="Мутация">
-                    <div class="mutation_tooltip">
-                        Шанс 5% выбить мутированный скин!
+        <div id="contentContainer">
+            <div id="special" class="content-section">
+                <div class="shop_container">
+                    <!-- Центральный кейс -->
+                    <div class="epic_case_container">
+                        <div class="epic_case">
+                            <div class="shop_icon epic_icon">
+                                <img src="https://em-content.zobj.net/source/telegram/386/crystal-ball_1f52e.webp"
+                                     alt="Магический шар">
+                            </div>
+                            <h1>Magic ball</h1>
+                            <h2>Contains new skins!</h2>
+                            <div class="shop_prices">
+                            </div>
+                            <div class="buy_buttons_container">
+                                <button class="buy_button buy_stars"><img src="/static/images/stars.png" alt="star"
+                                                                          class="inline-icon"> 100
+                                </button>
+                                <button class="buy_button buy_coins active"><img src="/static/images/coin.png"
+                                                                                 alt="coin" class="inline-icon"> 10000
+                                </button>
+                            </div>
+                            <button class="buy_confirm">Buy</button>
+                            <!-- Значок мутации -->
+                            <div class="mutation_icon">
+                                <img src="/static/images/minigames2.png" alt="Мутация">
+                                <div class="mutation_tooltip">
+                                    5% chance of knocking out a mutated skin!
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+<!-- Магазин героев -->
+<div id="heroes" class="content-section">
+    <div class="heroes_container">
+        <h1 class="heroes_title">Ваши скины</h1>
+        <div class="heroes_grid" id="heroes_grid">
+            <!-- Карточки скинов будут добавлены через JavaScript -->
         </div>
     </div>
 </div>
-
-        <!-- Магазин героев -->
-        <div id="heroes" class="content-section">
-            <div class="character-preview">
-                <div class="preview" id="preview">
-                    <img src="/static/images/croco.png" alt="Preview">
-                </div>
-                <button id="select-button">Choose</button>
-                <div class="menu_char">
-                    <!-- Один шаблон, 15 персонажей -->
-                    <div class="character char-12" data-id="1" data-name="Croco" data-img="/static/images/croco.png">
-                        <img src="/static/images/croco.png" alt="Croco">
-                        <p>Croco</p>
-                    </div>
-                    <div class="character char-12" data-id="2" data-name="Ghost" data-img="/static/images/cot.png">
-                        <img src="/static/images/cot.png" alt="Ghost">
-                        <p>Ghost</p>
-                    </div>
-                    <div class="character char-12" data-id="3" data-name="Groot" data-img="/static/images/groot.png">
-                        <img src="/static/images/groot.png" alt="Groot">
-                        <p>Groot</p>
-                    </div>
-                    <div class="character char-12" data-id="4" data-name="Golem" data-img="/static/images/golem.png">
-                        <img src="/static/images/golem.png" alt="Golem">
-                        <p>Golem</p>
-                    </div>
-                    <div class="character char-12" data-id="5" data-name="Fire" data-img="/static/images/fire.png">
-                        <img src="/static/images/fire.png" alt="Fire">
-                        <p>Fire</p>
-                    </div>
-                    <div class="character char-12" data-id="6" data-name="Water" data-img="/static/images/water.png">
-                        <img src="/static/images/water.png" alt="Water">
-                        <p>Water</p>
-                    </div>
-                    <div class="character char-12" data-id="7" data-name="Thor" data-img="/static/images/tor.png">
-                        <img src="/static/images/tor.png" alt="Thor">
-                        <p>Thor</p>
-                    </div>
-                    <div class="character char-12" data-id="8" data-name="Witch" data-img="/static/images/witch.png">
-                        <img src="/static/images/witch.png" alt="Witch">
-                        <p>Witch</p>
-                    </div>
-                    <div class="character char-12" data-id="9" data-name="Queen" data-img="/static/images/angel.png">
-                        <img src="/static/images/angel.png" alt="Queen">
-                        <p>Queen</p>
-                    </div>
-                    <div class="character char-12" data-id="10" data-name="Ananas" data-img="/static/images/ananas.png">
-                        <img src="/static/images/ananas.png" alt="Ananas">
-                        <p>Ananas</p>
-                    </div>
-                    <div class="character char-12" data-id="11" data-name="Frog" data-img="/static/images/frog.png">
-                        <img src="/static/images/frog.png" alt="Frog">
-                        <p>Frog</p>
-                    </div>
-                    <div class="character char-12" data-id="12" data-name="Soldier" data-img="/static/images/leon.png">
-                        <img src="/static/images/leon.png" alt="Soldier">
-                        <p>Soldier</p>
-                    </div>
-                    <div class="character char-12" data-id="13" data-name="Syth" data-img="/static/images/syth.png">
-                        <img src="/static/images/syth.png" alt="Syth">
-                        <p>Syth</p>
-                    </div>
-                    <div class="character char-12" data-id="14" data-name="Cat" data-img="/static/images/cat.png">
-                        <img src="/static/images/cat.png" alt="Cat">
-                        <p>Cat</p>
-                    </div>
-                    <div class="character char-12" data-id="15" data-name="Minion" data-img="/static/images/minion.png">
-                        <img src="/static/images/minion.png" alt="Minion">
-                        <p>Minion</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Магазин улучшения -->
         <div id="upgrades" class="content-section" style="display:none;">
@@ -731,37 +371,39 @@
         </div>
     </div>
 
- <!-- Страница рулетки -->
-<div class="page" id="quests">
-  <div class="roulette-container">
-    <div class="roulette-title">Рулетка Призов</div>
-    <div class="roulette-subtitle">Крути рулетку и выигрывай призы!</div>
-    <div class="prize-ticker">
-      <div class="prize-list" id="prizeList">
-        <!-- Призы будут добавлены через JavaScript -->
-      </div>
+    <!-- Страница рулетки -->
+    <div class="page" id="quests">
+        <div class="roulette-container">
+            <div class="roulette-title">Roulette of prizes</div>
+            <div class="roulette-subtitle">Spin the roulette wheel and win prizes!</div>
+            <div class="prize-ticker">
+                <div class="prize-list" id="prizeList">
+                    <!-- Призы будут добавлены через JavaScript -->
+                </div>
+            </div>
+            <div class="bet-container">
+                <div class="bet-oval">
+                    <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
+                    <button class="bet-button" data-bet="10" data-cost="300">X10</button>
+                    <button class="bet-button" data-bet="100" data-cost="500">X100</button>
+                </div>
+            </div>
+            <button id="spinButton" class="spin-button">
+                Spin <span id="spinCost">150</span> <img
+                    src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin"
+                    style="width: 20px; height: 20px;">
+            </button>
+            <div id="rewardModal" class="reward-modal" style="display:none;">
+                <div class="reward-modal-content">
+                    <h2 style="color: white;">Congratulations!</h2>
+                    <p id="rewardText">You have received: [Reward]</p>
+                    <button id="closeModalButton" class="close-modal-button">Close</button>
+                </div>
+            </div>
+        </div>
+        <!-- Подключение Lottie -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     </div>
-    <div class="bet-container">
-      <div class="bet-oval">
-        <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
-        <button class="bet-button" data-bet="10" data-cost="300">X10</button>
-        <button class="bet-button" data-bet="100" data-cost="500">X100</button>
-      </div>
-    </div>
-    <button id="spinButton" class="spin-button">
-      РАСКРУТИТЬ <span id="spinCost">150</span> <img src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin" style="width: 20px; height: 20px;">
-    </button>
-    <div id="rewardModal" class="reward-modal" style="display:none;">
-      <div class="reward-modal-content">
-        <h2 style="color: white;">Поздравляем!</h2>
-        <p id="rewardText">Вы получили: [Награда]</p>
-        <button id="closeModalButton" class="close-modal-button">Закрыть</button>
-      </div>
-    </div>
-  </div>
-  <!-- Подключение Lottie -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-</div>
 
     <!-- Мини-игры -->
     <div class="page" id="top" style="display:none;">
