@@ -568,7 +568,7 @@ canvas {
 /* Стили для меню магазина */
 .shop_menu {
     width: 85%;
-    margin: 10px auto;
+    margin: 0px auto;
     background-color: #2e2e3a;
     border-radius: 10px;
     padding: 10px;
@@ -911,25 +911,20 @@ canvas {
 .heroes_container {
     width: 90%;
     max-width: 1200px;
-    margin: 150px auto 0;
+    margin: 60px auto 0;
     padding: 20px;
     text-align: center;
-}
-
-/* Заголовок */
-.heroes_title {
-    color: #ffd700;
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+    position: relative;
+    overflow-y: auto;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
 /* Сетка героев */
 .heroes_grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Всегда 3 столбца */
+    gap: 10px; /* Уменьшенный отступ для компактности */
     justify-items: center;
 }
 
@@ -938,54 +933,39 @@ canvas {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid #ffd700;
     border-radius: 15px;
-    padding: 20px;
+    padding: 10px; /* Уменьшенный внутренний отступ */
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-width: 300px;
-}
-
-.hero_card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    max-width: 180px; /* Уменьшена ширина карточки */
 }
 
 /* Изображение скина */
 .hero_card img {
-    width: 150px;
-    height: 150px;
+    width: 80px; /* Уменьшен размер изображения */
+    height: 80px;
     object-fit: contain;
     animation: pulse 2s ease-in-out infinite;
-}
-
-/* Анимация пульсации */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
 }
 
 /* Название уровня */
 .hero_card h3 {
     color: #ffd700;
-    font-size: 18px;
-    margin: 10px 0 0;
+    font-size: 12px; /* Уменьшен шрифт */
+    margin: 6px 0 0;
     text-transform: uppercase;
 }
 
 /* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
-    .heroes_grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
     .hero_card {
-        max-width: 250px;
+        max-width: 140px; /* Уменьшение на планшетах */
     }
     .hero_card img {
-        width: 120px;
-        height: 120px;
+        width: 70px;
+        height: 70px;
     }
     .heroes_title {
         font-size: 28px;
@@ -993,15 +973,12 @@ canvas {
 }
 
 @media (max-width: 480px) {
-    .heroes_grid {
-        grid-template-columns: 1fr;
-    }
     .hero_card {
-        max-width: 100%;
+        max-width: 100px; /* Уменьшение на мобильных */
     }
     .hero_card img {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
     }
     .heroes_title {
         font-size: 24px;
