@@ -131,7 +131,7 @@
 <!-- Друзья -->
 <div class="page" id="friends" style="display:none;">
     <div class="friends_container">
-        <h1 class="friends_title">Приглашайте друзей!</h1>
+        <h1 class="friends_title">Invite your friends and receive gifts</h1>
         <div class="friends_icon">
             <img src="https://em-content.zobj.net/source/telegram/386/christmas-tree_1f384.webp" alt="Christmas Tree">
             <div class="gifts_container">
@@ -143,7 +143,7 @@
                 <div class="gift gift6" data-friends="20"><img src="https://em-content.zobj.net/source/telegram/386/birthday-cake_1f382.webp" alt="Gift 6"></div>
             </div>
         </div>
-        <button class="invite_button">Пригласить друзей</button>
+        <button class="invite_button">invite Friends</button>
     </div>
 </div>
 
@@ -385,39 +385,46 @@
         </div>
     </div>
 
-    <!-- Страница рулетки -->
-    <div class="page" id="quests">
-        <div class="roulette-container">
-            <div class="roulette-title">Roulette of prizes</div>
-            <div class="roulette-subtitle">Spin the roulette wheel and win prizes!</div>
-            <div class="prize-ticker">
-                <div class="prize-list" id="prizeList">
-                    <!-- Призы будут добавлены через JavaScript -->
-                </div>
-            </div>
-            <div class="bet-container">
-                <div class="bet-oval">
-                    <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
-                    <button class="bet-button" data-bet="10" data-cost="300">X10</button>
-                    <button class="bet-button" data-bet="100" data-cost="500">X100</button>
-                </div>
-            </div>
-            <button id="spinButton" class="spin-button">
-                Spin <span id="spinCost">150</span> <img
-                    src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin"
-                    style="width: 20px; height: 20px;">
-            </button>
-            <div id="rewardModal" class="reward-modal" style="display:none;">
-                <div class="reward-modal-content">
-                    <h2 style="color: white;">Congratulations!</h2>
-                    <p id="rewardText">You have received: [Reward]</p>
-                    <button id="closeModalButton" class="close-modal-button">Close</button>
-                </div>
+ <div class="page" id="quests">
+    <div class="roulette-container">
+        <div class="roulette-title">Roulette of prizes</div>
+        <div class="roulette-subtitle">Spin the roulette wheel and win prizes!</div>
+        <div class="prize-ticker">
+            <div class="prize-list" id="prizeList">
+                <!-- Призы будут добавлены через JavaScript -->
             </div>
         </div>
-        <!-- Подключение Lottie -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+        <div class="bet-container">
+            <div class="bet-oval">
+                <button class="bet-button active" data-bet="1" data-cost="150">X1</button>
+                <button class="bet-button" data-bet="10" data-cost="300">X10</button>
+                <button class="bet-button" data-bet="100" data-cost="500">X100</button>
+            </div>
+        </div>
+        <button id="spinButton" class="spin-button">
+            Spin <span id="spinCost">150</span> <img
+                src="https://em-content.zobj.net/source/telegram/386/coin_1fa99.webp" alt="Coin"
+                style="width: 20px; height: 20px;">
+        </button>
+        <div id="rewardModal" class="reward-modal" style="display:none;">
+            <div class="reward-modal-content">
+                <h2 style="color: white;">Congratulations!</h2>
+                <p id="rewardText">You have received: [Reward]</p>
+                <button id="closeModalButton" class="close-modal-button">Close</button>
+            </div>
+        </div>
+
+        <!-- Лента с подарками -->
+        <div class="gift-ticker">
+            <div class="gift-list" id="giftList">
+                <!-- Призы будут отображаться здесь -->
+            </div>
+        </div>
     </div>
+    <!-- Подключение Lottie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</div>
+
 
     <!-- Мини-игры -->
     <div class="page" id="top" style="display:none;">
@@ -551,16 +558,17 @@
 
 
 
+<!--<script src="brawl_clicker-master/static/SCRIPT.js"></script>-->
 <script src="brawl_clicker-master/static/script_new.js"></script>
-<script src="brawl_clicker-master/script_main.js"></script>
-<script src="/static/script_up.js"></script>
-<script src="/script_up_energy.js"></script>
-<script src="/script_up_recovery.js"></script>
-<script src="/static/script_autoclicker.js"></script>
-<script src="/script_heroes.js"></script>
-<script src="/static/dragon.js"></script>
-<script src="/static/boss.js"></script>
-<script src="/static/music.js"></script>
-<script src="/static/script_wheel.js"></script>
+<script src="brawl_clicker-master/static/script_main.js"></script>
+<script src="brawl_clicker-master/static/script_up.js"></script>
+<script src="brawl_clicker-master/static/script_up_energy.js"></script>
+<script src="brawl_clicker-master/static/script_up_recovery.js"></script>
+<script src="brawl_clicker-master/static/script_autoclicker.js"></script>
+<script src="brawl_clicker-master/static/script_heroes.js"></script>
+<script src="brawl_clicker-master/static/dragon.js"></script>
+<script src="brawl_clicker-master/static/boss.js"></script>
+<script src="brawl_clicker-master/static/music.js"></script>
+<script src="brawl_clicker-master/static/script_wheel.js"></script>
 </body>
 </html>

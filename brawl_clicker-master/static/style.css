@@ -547,35 +547,20 @@ canvas {
 /* Стили для страницы друзей */
 .page#friends {
     width: 100vw;
-    min-height: 100vh;
+    min-height: 95vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     background: linear-gradient(135deg, #1e1b4b 0%, #3b1e6d 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: fixed;
     top: 0;
     left: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     z-index: 0;
-}
-
-/* Магический фон с частицами */
-.page#friends::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/images/magic_particles.png') repeat;
-    opacity: 0.3;
-    animation: particles 20s linear infinite;
-    z-index: -1;
-}
-
-@keyframes particles {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-1000px); }
 }
 
 /* Контейнер друзей */
@@ -587,7 +572,7 @@ canvas {
     text-align: center;
     position: relative;
     overflow-y: auto;
-    min-height: 100vh;
+    min-height: 95vh;
     max-height: 100vh;
 }
 
@@ -603,15 +588,15 @@ canvas {
 /* Иконка (ёлка) */
 .friends_icon {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto 30px; /* Отступ снизу перед кнопкой */
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 30px;
 }
 
 /* Ёлка */
 .friends_icon img {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
@@ -642,8 +627,8 @@ canvas {
 }
 
 .gift img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
@@ -652,12 +637,12 @@ canvas {
 }
 
 /* Расположение подарков */
-.gift1 { left: 50%; transform: translateX(-50%); bottom: -20px; }
-.gift2 { left: 30px; bottom: 20px; }
-.gift3 { right: 30px; bottom: 20px; }
-.gift4 { left: 0; bottom: 60px; }
-.gift5 { right: 0; bottom: 60px; }
-.gift6 { left: 50%; transform: translateX(-50%); bottom: 100px; }
+.gift1 { left: 50%; transform: translateX(-50%); bottom: -30px; }
+.gift2 { left: 40px; bottom: 30px; }
+.gift3 { right: 40px; bottom: 30px; }
+.gift4 { left: 0; bottom: 80px; }
+.gift5 { right: 0; bottom: 80px; }
+.gift6 { left: 50%; transform: translateX(-50%); bottom: 130px; }
 
 /* Кнопка приглашения */
 .invite_button {
@@ -683,32 +668,52 @@ canvas {
     transform: scale(0.95);
 }
 
+/* Эффект вспышки */
+.click-effect {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+}
+
 /* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
     .friends_title {
         font-size: 28px;
     }
     .friends_icon {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
     }
     .friends_icon img {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
     }
     .gift img {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
     }
-    .gift1 { bottom: -15px; }
-    .gift2 { left: 20px; bottom: 15px; }
-    .gift3 { right: 20px; bottom: 15px; }
-    .gift4 { left: 0; bottom: 50px; }
-    .gift5 { right: 0; bottom: 50px; }
-    .gift6 { bottom: 80px; }
+    .gift1 { bottom: -25px; }
+    .gift2 { left: 35px; bottom: 25px; }
+    .gift3 { right: 35px; bottom: 25px; }
+    .gift4 { left: 0; bottom: 70px; }
+    .gift5 { right: 0; bottom: 70px; }
+    .gift6 { bottom: 110px; }
     .invite_button {
         padding: 8px 16px;
         font-size: 14px;
+    }
+    .click-effect {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -717,28 +722,34 @@ canvas {
         font-size: 24px;
     }
     .friends_icon {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
     .friends_icon img {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
     .gift img {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
-    .gift1 { bottom: -10px; }
-    .gift2 { left: 15px; bottom: 10px; }
-    .gift3 { right: 15px; bottom: 10px; }
-    .gift4 { left: 0; bottom: 40px; }
-    .gift5 { right: 0; bottom: 40px; }
-    .gift6 { bottom: 60px; }
+    .gift1 { bottom: -20px; }
+    .gift2 { left: 30px; bottom: 20px; }
+    .gift3 { right: 30px; bottom: 20px; }
+    .gift4 { left: 0; bottom: 60px; }
+    .gift5 { right: 0; bottom: 60px; }
+    .gift6 { bottom: 90px; }
     .invite_button {
         padding: 6px 12px;
         font-size: 12px;
     }
+    .click-effect {
+        width: 30px;
+        height: 30px;
+    }
 }
+
+
 /* Стили для страницы магазина */
 .page#shop {
     display: flex;
@@ -1338,6 +1349,45 @@ canvas {
   background: linear-gradient(90deg, #FF6F91 0%, #FF9A8B 100%);
 }
 
+.gift-ticker {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift-list {
+    display: flex;
+    animation: scrollGift 10s linear infinite;
+}
+
+.gift-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.gift-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Анимация прокрутки */
+@keyframes scrollGift {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 
 /* Раздел улучшений */
